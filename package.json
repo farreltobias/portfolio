@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "slicemachine": "start-slicemachine"
+    "slicemachine": "start-slicemachine",
+    "email": "email dev",
+    "export": "email export"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.4.2",
@@ -23,6 +25,7 @@
     "@radix-ui/react-separator": "^1.0.3",
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-toast": "^1.1.5",
+    "@react-email/components": "0.0.19",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
@@ -37,6 +40,7 @@
     "react": "^18",
     "react-day-picker": "^8.10.1",
     "react-dom": "^18",
+    "react-email": "2.1.4",
     "react-hook-form": "^7.51.5",
     "resend": "^3.3.0",
     "sharp": "^0.33.4",

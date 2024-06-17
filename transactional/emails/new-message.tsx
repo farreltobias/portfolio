@@ -1,7 +1,5 @@
-import { Logo } from '@/src/components/logo'
-import '@/src/styles/globals.css'
-
-import config from '../tailwind.config'
+/* eslint-disable @next/next/no-page-custom-font */
+import * as React from 'react'
 
 import {
   Body,
@@ -17,7 +15,12 @@ import {
   Tailwind,
   Text,
 } from '@react-email/components'
-import * as React from 'react'
+
+import { Logo } from '@/src/components/logo'
+
+import config from '../tailwind.config'
+
+import '@/src/styles/globals.css'
 
 interface NewMessageProps {
   name?: string
@@ -57,7 +60,9 @@ export const NewMessage = ({ name, email, message }: NewMessageProps) => {
                   You have a new message from {name}
                 </Text>
 
-                <Text className="text-lg font-kalam">Here's what {name} wrote:</Text>
+                <Text className="text-lg font-kalam">
+                  Here&apos;s what {name} wrote:
+                </Text>
 
                 <Text className="text-lg p-6 bg-[hsl(260_24%_85%)] rounded-md">
                   {message}
