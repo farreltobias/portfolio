@@ -6,8 +6,12 @@ type FormValues = {
   message: string
 }
 
+const baseURL = process.env.VERCEL_URL
+  ? `https://${process.env.VERCEL_URL}`
+  : 'http://localhost:3000'
+
 export async function sendEmail(values: FormValues) {
-  await fetch(`${process.env.NEXT_PUBLIC_URL}/api/send`, {
+  await fetch(`${baseURL}/api/send`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

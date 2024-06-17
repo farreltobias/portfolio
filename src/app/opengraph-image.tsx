@@ -15,10 +15,6 @@ export default async function Image() {
     new URL('@/public/Kalam-Regular.ttf', import.meta.url),
   ).then((res) => res.arrayBuffer())
 
-  const KalamBold = fetch(
-    new URL('@/public/Kalam-Bold.ttf', import.meta.url),
-  ).then((res) => res.arrayBuffer())
-
   return new ImageResponse(
     (
       <div
@@ -45,12 +41,6 @@ export default async function Image() {
           data: await KalamRegular,
           style: 'normal',
           weight: 400,
-        },
-        {
-          name: 'Heebo Bold',
-          data: await KalamBold,
-          style: 'normal',
-          weight: 600,
         },
       ],
     },
