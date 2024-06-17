@@ -1,0 +1,26 @@
+{
+  "format": "page",
+  "id": "home",
+  "label": "Home",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "curriculum": {
+        "type": "Link",
+        "config": {
+          "label": "Curriculum Vitae",
+          "placeholder": "Add you Curriculum/Resume",
+          "select": "media"
+        }
+      },
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": {}
+        }
+      }
+    }
+  }
+}

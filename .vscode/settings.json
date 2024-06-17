@@ -1,0 +1,16 @@
+{
+  "i18n-ally.localesPaths": ["./messages"],
+  "i18n-ally.keystyle": "nested",
+  "i18n-ally.sourceLanguage": "en-us",
+  "i18n-ally.displayLanguage": "en-us",
+  "cSpell.words": [
+    "clsx",
+    "cmdk",
+    "devicon",
+    "heebo",
+    "kalam",
+    "linkedin",
+    "shadcn",
+    "Turbopack"
+  ]
+}

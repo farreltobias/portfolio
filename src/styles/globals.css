@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --primary-color-400: 268 76% 62%;
+    --primary-color-500: 268 68% 56%;
+    --highlight-color: 143 100% 75%;
+
+    --surface-background: 180 5% 96%;
+    --surface-primary: 0 0% 100%;
+    --surface-secondary: 180 6% 80%;
+    --surface-tertiary: 180 6% 72%;
+
+    --text-primary: 262 37% 10%;
+    --text-secondary: 260 15% 27%;
+
+    /* --- shadcn --- */
+
+    --background: var(--surface-background);
+    --foreground: var(--text-primary);
+
+    --card: var(--surface-primary);
+    --card-foreground: var(--text-primary);
+
+    --popover: var(--surface-background);
+    --popover-foreground: var(--text-primary);
+
+    --primary: var(--primary-color-500);
+    --primary-foreground: var(--surface-background);
+
+    --secondary: var(--surface-secondary);
+    --secondary-foreground: var(--text-primary);
+
+    --muted: var(--surface-tertiary);
+    --muted-foreground: var(--text-secondary);
+
+    --accent: var(--surface-primary);
+    --accent-foreground: var(--text-primary);
+
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: var(--surface-secondary);
+    --input: var(--surface-background);
+    --ring: var(--highlight-color);
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --surface-background: 262 37% 10%;
+    --surface-primary: 261 24% 19%;
+    --surface-secondary: 260 15% 27%;
+    --surface-tertiary: 258 18% 33%;
+
+    --text-primary: 180 5% 96%;
+    --text-secondary: 214 8% 82%;
+
+    /* --- shadcn --- */
+    --primary-foreground: var(--text-primary);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}

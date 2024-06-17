@@ -1,0 +1,104 @@
+{
+  "LocaleSwitch": {
+    "language": "EN"
+  },
+  "Manifest": {
+    "name": "Portfólio do Farrel | Full-stack developer and innovation enthusiast",
+    "short_name": "Portfólio do Farrel",
+    "description": "Com mais de 5 anos de experiência na indústria de tecnologia, Farrel é especialista na construção de aplicativos web e móveis inovadores usando tecnologias como React, React Native e Node.js."
+  },
+  "LocaleLayout": {
+    "home": {
+      "title": "Portfólio do Farrel | Farrel.tech",
+      "description": "Com mais de 5 anos de experiência na indústria de tecnologia, Farrel é especialista na construção de aplicativos web e móveis inovadores usando tecnologias como React, React Native e Node.js."
+    },
+    "projects": {
+      "title": "Projects",
+      "description": "Da uma olhada nos projetos técnicos do Farrel. Com mais de 5 anos de experiência na indústria de tecnologia, Farrel é especialista na construção de aplicativos web e móveis inovadores usando tecnologias como React, React Native e Node.js."
+    },
+    "applicationName": "Portfólio do Farrel",
+    "keywords": "farrel, portfólio, tech, tecnologia, fullstack, desenvolvedor, inovação, entusiasta, react, react, native, node.js, next.js, nest.js",
+    "locale": "pt_BR"
+  },
+  "Navbar": {
+    "home": "Início",
+    "about": "Sobre",
+    "projects": "Projetos",
+    "contact": "Contato"
+  },
+  "Home": {
+    "head": {
+      "sectionTitle": "Olá, sou o Farrel",
+      "title": "Desenvolvedor full-stack e entusiasta de inovação",
+      "paragraph": "Mais de 5 anos de experiência na indústria de tecnologia. Sou especialista na construção de aplicativos web e móveis inovadores usando tecnologias como React, React Native e Node.js.",
+      "contact": "Entre em contato"
+    },
+    "about": {
+      "sectionTitle": "Sobre mim",
+      "title": "Sou um desenvolvedor de software cativado, em busca da minha primeira oportunidade internacional",
+      "paragraph": "Além da programação, sou um entusiasta de Lego, um amante de cães e um designer autodidata que gosta de passar meu tempo livre aprendendo algo novo. Atualmente, estou buscando oportunidades para trazer minhas habilidades e entusiasmo para uma empresa de tecnologia nos Estados Unidos ou na Europa e estou animado com a perspectiva de me mudar para enfrentar novos desafios."
+    },
+    "contact": {
+      "sectionTitle": "Contato",
+      "title": "Gostou do meu trabalho? Vamos trabalhar juntos",
+      "paragraph1": "Estou sempre disponível para uma conversa. Manda um email para",
+      "paragraph2": "ou me chama nas redes sociais."
+    },
+    "form": {
+      "name": "Nome",
+      "email": "Email",
+      "message": "Sua mensagem",
+      "send": "Me envie uma mensagem",
+      "error": {
+        "name": "Por favor, insira seu nome",
+        "email": "Por favor, insira seu email",
+        "message": "Por favor, insira uma mensagem"
+      },
+      "toast": {
+        "successTitle": "Mensagem enviada com sucesso!",
+        "successDescription": "Vou entrar em contato o mais rápido possível.",
+        "errorTitle": "Ops, algo deu errado!",
+        "errorDescription": "Algo deu errado ao enviar sua mensagem. Por favor, tente novamente mais tarde."
+      },
+      "loading": "Enviando..."
+    },
+    "resume": "Meu currículo",
+    "projects": {
+      "sectionTitle": "Projetos",
+      "title": "Veja meus projetos em destaque",
+      "seeAll": "Ver todos"
+    }
+  },
+  "Footer": {
+    "paragraph1": "Layout baseado no modelo da",
+    "rocketseat": "Rocketseat",
+    "paragraph2": "."
+  },
+  "Projects": {
+    "search": "Pesquisar projetos...",
+    "filterByTechs": {
+      "placeholder": "{count, plural, =0 {Filtrar por tec...} =1 {# tec selecionado} other {# tec selecionados}}",
+      "search": "Pesquisar tec...",
+      "notFound": "tec não encontrada"
+    }
+  },
+  "Project": {
+    "aside": {
+      "title": "Da uma olhada nesse projeto",
+      "liveDemo": "Demonstração ao vivo",
+      "code": "Código"
+    },
+    "team": "Time",
+    "role": "Meu papel"
+  },
+  "NotFound": {
+    "title1": "Ops, esta página não",
+    "title2": "foi encontrada",
+    "paragraph1": "Parece que você se perdeu... Tente voltar",
+    "paragraph2": "para a página anterior ou acessar a home.",
+    "back": "Voltar",
+    "returnHome": "Ir para a Home",
+    "backgroundAlt": "Plano de fundo do espaço",
+    "numberFourAlt": "O número quatro"
+  }
+}

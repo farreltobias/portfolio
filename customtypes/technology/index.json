@@ -1,0 +1,56 @@
+{
+  "format": "custom",
+  "id": "technology",
+  "label": "Technology",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "isHighlight": {
+        "type": "Boolean",
+        "config": {
+          "label": "highlight",
+          "placeholder_false": "false",
+          "placeholder_true": "true",
+          "default_value": false
+        }
+      },
+      "uid": {
+        "config": {
+          "label": "UID"
+        },
+        "type": "UID"
+      },
+      "name": {
+        "type": "Text",
+        "config": {
+          "label": "Name",
+          "placeholder": "React"
+        }
+      },
+      "icon": {
+        "type": "Text",
+        "config": {
+          "label": "Icon Name (DevIcon)",
+          "placeholder": "devicon-react-original"
+        }
+      },
+      "theme": {
+        "type": "Color",
+        "config": {
+          "label": "Theme",
+          "placeholder": "#61dafb"
+        }
+      },
+      "filter": {
+        "type": "Boolean",
+        "config": {
+          "label": "Show in filter",
+          "placeholder_false": "false",
+          "placeholder_true": "true",
+          "default_value": true
+        }
+      }
+    }
+  }
+}

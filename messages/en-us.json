@@ -1,0 +1,104 @@
+{
+  "LocaleSwitch": {
+    "language": "PT"
+  },
+  "Manifest": {
+    "name": "Farrel's Portfolio | Full-stack developer and innovation enthusiast",
+    "short_name": "Farrel's Portfolio",
+    "description": "Over 5 years of experience in the tech industry. Farrel specializes in building innovative web and mobile applications using technologies such as React, React Native, and Node.js."
+  },
+  "LocaleLayout": {
+    "home": {
+      "title": "Farrel's Portfolio | Farrel.tech",
+      "description": "Over 5 years of experience in the tech industry. Farrel specializes in building innovative web and mobile applications using technologies such as React, React Native, and Node.js."
+    },
+    "projects": {
+      "title": "Projects",
+      "description": "Take a look at Farrel's tech projects like {projects}. Over 5 years of experience in the tech industry. Farrel specializes in building innovative web and mobile applications using technologies such as React, React Native, and Node.js."
+    },
+    "applicationName": "Farrel's Portfolio",
+    "keywords": "farrel, portfolio, tech, full-stack, developer, innovation, enthusiast, react, react, native, node.js, next.js, nest.js",
+    "locale": "en_US"
+  },
+  "Navbar": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "Home": {
+    "head": {
+      "sectionTitle": "Hi, I’m Farrel",
+      "title": "Full-stack developer and innovation enthusiast",
+      "paragraph": "Over 5 years of experience in the tech industry. I specialize in building innovative web and mobile applications using technologies such as React, React Native, and Node.js.",
+      "contact": "Get In Touch"
+    },
+    "about": {
+      "sectionTitle": "About Me",
+      "title": "I’m a passionate software developer looking for my first international opportunity",
+      "paragraph": "Beyond coding, I’m a Lego enthusiast, a dog lover, and a self-taught designer who enjoys spending my free time learning something new. I am currently seeking opportunities to bring my skills and enthusiasm to a tech company in the United States or Europe and am excited about the prospect of relocating to pursue new challenges."
+    },
+    "contact": {
+      "sectionTitle": "Contact",
+      "title": "Enjoyed my work? Let’s work together",
+      "paragraph1": "I’m always up for a chat. Pop me an email at",
+      "paragraph2": "or give me a shout on social media."
+    },
+    "form": {
+      "name": "Name",
+      "email": "E-mail",
+      "message": "Your message",
+      "send": "Send me a message",
+      "error": {
+        "name": "Please fill in your name",
+        "email": "Please fill in your email",
+        "message": "Please fill in your message"
+      },
+      "toast": {
+        "successTitle": "Your message has been sent!",
+        "successDescription": "I will get back to you as soon as possible.",
+        "errorTitle": "Uh oh! Something went wrong.",
+        "errorDescription": "There was a problem sending your message. Please try again later."
+      },
+      "loading": "Sending..."
+    },
+    "resume": "My resume",
+    "projects": {
+      "sectionTitle": "Projects",
+      "title": "Take a look at my highlighted projects",
+      "seeAll": "See all"
+    }
+  },
+  "Footer": {
+    "paragraph1": "Layout based on",
+    "rocketseat": "Rocketseat’s",
+    "paragraph2": " template."
+  },
+  "Projects": {
+    "search": "Search projects...",
+    "filterByTechs": {
+      "placeholder": "{count, plural, =0 {Filter by techs...} =1 {# tech selected} other {# techs selected}}",
+      "search": "Search tech...",
+      "notFound": "Tech not found"
+    }
+  },
+  "Project": {
+    "aside": {
+      "title": "Take a look at this project",
+      "liveDemo": "Live Demo",
+      "code": "Code"
+    },
+    "role": "My role",
+    "team": "Team"
+  },
+  "NotFound": {
+    "backgroundAlt": "Space background",
+    "numberFourAlt": "the number four",
+    "title1": "Ops, this page was",
+    "title2": "not found",
+    "paragraph1": "Looks like you got lost... Try going back",
+    "paragraph2": "to the last page or accessing home.",
+    "back": "Go back",
+    "returnHome": "Return Home"
+  }
+}

@@ -1,0 +1,174 @@
+{
+  "format": "page",
+  "id": "project",
+  "label": "Project",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "isHighlight": {
+        "type": "Boolean",
+        "config": {
+          "label": "Highlight",
+          "default_value": false,
+          "placeholder_true": "true",
+          "placeholder_false": "false"
+        }
+      },
+      "name": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Name",
+          "placeholder": "The Project name",
+          "allowTargetBlank": false,
+          "single": "heading1"
+        }
+      },
+      "cover": {
+        "type": "Image",
+        "config": {
+          "label": "Cover Image",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "uid": {
+        "config": {
+          "label": "UID"
+        },
+        "type": "UID"
+      },
+      "startDate": {
+        "type": "Date",
+        "config": {
+          "label": "Start Date",
+          "placeholder": ""
+        }
+      },
+      "endDate": {
+        "type": "Date",
+        "config": {
+          "label": "End Date",
+          "placeholder": ""
+        }
+      },
+      "description": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Description",
+          "placeholder": "A small description of the project",
+          "allowTargetBlank": false,
+          "single": "paragraph,strong,em"
+        }
+      },
+      "role": {
+        "type": "Text",
+        "config": {
+          "label": "My Role",
+          "placeholder": "Full-stack developer"
+        }
+      },
+      "team": {
+        "type": "Group",
+        "config": {
+          "label": "Team",
+          "repeat": true,
+          "fields": {
+            "name": {
+              "type": "Text",
+              "config": {
+                "label": "Member Name",
+                "placeholder": "Rocketseat"
+              }
+            },
+            "role": {
+              "type": "Text",
+              "config": {
+                "label": "Role",
+                "placeholder": "Ux/UI Designer"
+              }
+            }
+          }
+        }
+      },
+      "story": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Story",
+          "placeholder": "Tell more about the project, how it started, challenges and differences...",
+          "allowTargetBlank": true,
+          "multi": "paragraph,strong,em,hyperlink,embed,list-item,o-list-item"
+        }
+      },
+      "liveDemo": {
+        "type": "Link",
+        "config": {
+          "label": "Live demo",
+          "placeholder": "https://farrel.tech",
+          "allowTargetBlank": true,
+          "select": null
+        }
+      },
+      "github": {
+        "type": "Link",
+        "config": {
+          "label": "Github Repository",
+          "placeholder": "https://github.com/farreltobias/repo_name",
+          "allowTargetBlank": true,
+          "select": null
+        }
+      },
+      "techs": {
+        "type": "Group",
+        "config": {
+          "label": "Technologies",
+          "repeat": true,
+          "fields": {
+            "tech": {
+              "type": "Link",
+              "config": {
+                "label": "Technology",
+                "select": "document",
+                "customtypes": ["technology"]
+              }
+            }
+          }
+        }
+      },
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": {}
+        }
+      }
+    },
+    "SEO & Metadata": {
+      "meta_title": {
+        "config": {
+          "label": "Meta Title",
+          "placeholder": "A title of the page used for social media and search engines"
+        },
+        "type": "Text"
+      },
+      "meta_image": {
+        "config": {
+          "constraint": {
+            "height": 1260,
+            "width": 2400
+          },
+          "label": "Meta Image",
+          "thumbnails": []
+        },
+        "type": "Image"
+      },
+      "meta_description": {
+        "config": {
+          "label": "Meta Description",
+          "placeholder": "A brief summary of the page"
+        },
+        "type": "Text"
+      }
+    }
+  }
+}
