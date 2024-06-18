@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
-export const SEO: Metadata = {
-  metadataBase: new URL('https://farrel.tech'),
+export const defaultSEO: Metadata = {
+  metadataBase: new URL('https://www.farrel.tech'),
   generator: 'Next.js',
   referrer: 'origin-when-cross-origin',
 

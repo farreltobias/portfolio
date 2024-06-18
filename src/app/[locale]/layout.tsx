@@ -5,6 +5,9 @@ import {
   unstable_setRequestLocale as setRequestLocale,
 } from 'next-intl/server'
 
+import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
+
 import { cn } from '@/src/lib/utils'
 import { locales } from '@/src/locale-config'
 
@@ -13,7 +16,7 @@ import { Navbar } from '@/src/components/navbar'
 import { Toaster } from '@/src/components/ui/toaster'
 import { Providers } from '@/src/context/providers'
 
-import { SEO } from '../SEO'
+import { defaultSEO } from '../SEO'
 
 import '@/src/styles/globals.css'
 
@@ -44,7 +47,7 @@ export async function generateMetadata({
   const t = await getTranslations({ locale })
 
   return {
-    ...SEO,
+    ...defaultSEO,
 
     title: {
       template: '%s | Farrel.tech',
@@ -97,6 +100,8 @@ export default async function LocaleLayout({
           <Toaster />
           <Footer />
         </Providers>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )

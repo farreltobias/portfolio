@@ -1,8 +1,8 @@
 import { Pathnames } from 'next-intl/navigation'
 
 export const port = process.env.PORT || 3000
-export const host = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
+export const host = process.env.BASE_URL
+  ? `https://${process.env.BASE_URL}`
   : `http://localhost:${port}`
 
 export const locales = ['en-us', 'pt-br'] as const

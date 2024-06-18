@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 
 import { AnimatePresence, motion } from 'framer-motion'
 
@@ -73,22 +73,24 @@ export const List: React.FC<Props> = ({ projects: initialProjects }) => {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
             >
-              <Project.Root
-                uid={uid}
-                github={data.github}
-                liveDemo={data.liveDemo}
-              >
-                <Project.Header
-                  cover={data.cover}
-                  techs={data.techs}
-                  startDate={data.startDate}
-                  endDate={data.endDate}
-                />
-                <Project.Content
-                  name={data.name}
-                  description={data.description}
-                />
-              </Project.Root>
+              <Suspense fallback={<Project.Skeleton />}>
+                <Project.Root
+                  uid={uid}
+                  github={data.github}
+                  liveDemo={data.liveDemo}
+                >
+                  <Project.Header
+                    cover={data.cover}
+                    techs={data.techs}
+                    startDate={data.startDate}
+                    endDate={data.endDate}
+                  />
+                  <Project.Content
+                    name={data.name}
+                    description={data.description}
+                  />
+                </Project.Root>
+              </Suspense>
             </motion.li>
           ))}
       </AnimatePresence>

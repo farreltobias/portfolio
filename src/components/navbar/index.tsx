@@ -114,7 +114,7 @@ export const Navbar: React.FC = () => {
           initial="closed"
           animate={openNavbar ? 'open' : 'closed'}
           onTap={() => setOpenNavbar(false)}
-          className="absolute inset-0 h-screen backdrop-blur-sm bg-[rgba(0,0,0,0.2)]"
+          className="absolute inset-0 h-screen backdrop-blur-sm [-webkit-backdrop-filter:blur(4px)] bg-[rgba(0,0,0,0.2)]"
         />
         <motion.div
           variants={sidebarVariants}
