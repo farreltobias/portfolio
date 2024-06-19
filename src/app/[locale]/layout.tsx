@@ -18,6 +18,8 @@ import { Providers } from '@/src/context/providers'
 
 import { defaultSEO } from '../SEO'
 
+import { Icons } from './components/home/icons'
+
 import '@/src/styles/globals.css'
 
 const heebo = Heebo({
@@ -80,13 +82,7 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning className="scroll-smooth">
-      <head>
-        <link
-          rel="stylesheet"
-          type="text/css"
-          href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
-        />
-      </head>
+      <Icons />
       <body
         className={cn(
           'font-heebo flex flex-col min-h-screen',

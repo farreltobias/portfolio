@@ -27,21 +27,17 @@ export const Projects: React.FC = async () => {
     },
   })) as ProjectDocumentWithTechs[]
 
-  return (
-    <ul className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8 w-full">
-      {projects.map(({ uid, data }) => (
-        <li key={uid}>
-          <Project.Root uid={uid} github={data.github} liveDemo={data.liveDemo}>
-            <Project.Header
-              cover={data.cover}
-              techs={data.techs}
-              startDate={data.startDate}
-              endDate={data.endDate}
-            />
-            <Project.Content name={data.name} description={data.description} />
-          </Project.Root>
-        </li>
-      ))}
-    </ul>
-  )
+  return projects.map(({ uid, data }) => (
+    <li key={uid}>
+      <Project.Root uid={uid} github={data.github} liveDemo={data.liveDemo}>
+        <Project.Header
+          cover={data.cover}
+          techs={data.techs}
+          startDate={data.startDate}
+          endDate={data.endDate}
+        />
+        <Project.Content name={data.name} description={data.description} />
+      </Project.Root>
+    </li>
+  ))
 }

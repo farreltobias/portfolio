@@ -12,7 +12,10 @@ import { contacts } from '@/src/lib/contact'
 import { locales } from '@/src/locale-config'
 import { Link } from '@/src/navigation'
 
+import { Arrow } from '@/src/components/arrow'
 import { ImageWithBlur } from '@/src/components/image-with-blur'
+import { Shine } from '@/src/components/shine'
+import { Sparkle } from '@/src/components/sparkle'
 import { H2, HS, Paragraph, SectionTitle } from '@/src/components/typography'
 import { Button } from '@/src/components/ui/button'
 
@@ -32,7 +35,7 @@ export default function Home({ params: { locale } }: Props) {
 
   return (
     <main className="container md:px-8 mt-20">
-      <div id="start" className="pt-36 pb-12 -mt-24 md:py-24">
+      <div id="start" className="relative pt-36 pb-12 -mt-24 md:py-24">
         <section className="flex flex-col-reverse justify-between items-center gap-6 mx-6 md:flex-row md:gap-32 md:mx-[4.5rem]">
           <div className="flex flex-col gap-8 basis-1/2">
             <HS className="bg-gradient-to-r from-primary-light to-highlight">
@@ -42,7 +45,7 @@ export default function Home({ params: { locale } }: Props) {
               <H2>{t('head.title')}</H2>
               <Paragraph>{t('head.paragraph')}</Paragraph>
             </div>
-            <div className="flex gap-4 flex-wrap">
+            <div className="flex gap-2 md:gap-4 flex-wrap">
               <Suspense fallback={<Curriculum.Skeleton />}>
                 <Curriculum.Root variant="secondary" />
               </Suspense>
@@ -67,6 +70,7 @@ export default function Home({ params: { locale } }: Props) {
             />
           </div>
         </section>
+        <Arrow className="absolute rotate-[135deg] right-[20%] -bottom-8 md:right-[35%] md:bottom-4" />
       </div>
 
       <div id="about" className="pt-20 -mt-20">
@@ -100,16 +104,20 @@ export default function Home({ params: { locale } }: Props) {
         </section>
       </div>
 
-      <section className="flex flex-col justify-between items-center gap-10 my-12 mx-6 md:m-[4.5rem]">
+      <section className="overflow-hidden flex flex-col justify-between items-center gap-10 my-12 px-6 md:p-[4.5rem]">
         <header className="flex flex-col items-center text-center gap-2 w-full">
           <SectionTitle className="text-highlight">
             {t('projects.sectionTitle')}
           </SectionTitle>
           <H2>{t('projects.title')}</H2>
         </header>
-        <Suspense fallback={<Projects.Skeleton />}>
-          <Projects.Root />
-        </Suspense>
+        <ul className="relative grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8 w-full">
+          <Sparkle className="absolute -top-10 -left-10 md:-top-14 md:-left-12" />
+          <Suspense fallback={<Projects.Skeleton />}>
+            <Projects.Root />
+          </Suspense>
+          <Shine className="absolute rotate-[15deg] -bottom-16 -right-8 md:-bottom-32 md:-right-10" />
+        </ul>
         <Button asChild variant="secondary" className="gap-2">
           <Link href="/projects">
             {t('projects.seeAll')}

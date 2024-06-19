@@ -6,7 +6,7 @@
   :root {
     --primary-color-400: 268 76% 62%;
     --primary-color-500: 268 68% 56%;
-    --highlight-color: 143 100% 75%;
+    --highlight-color: 143 100% 18%;
 
     --surface-background: 180 5% 96%;
     --surface-primary: 0 0% 100%;
@@ -50,6 +50,8 @@
   }
 
   .dark {
+    --highlight-color: 143 100% 75%;
+
     --surface-background: 262 37% 10%;
     --surface-primary: 261 24% 19%;
     --surface-secondary: 260 15% 27%;
