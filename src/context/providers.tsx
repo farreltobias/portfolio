@@ -3,6 +3,7 @@ import { getMessages } from 'next-intl/server'
 
 import { PrismicPreview } from '@prismicio/next'
 
+import { DevIconsProvider } from './dev-icons-provider'
 import { ThemeProvider } from './theme-provider'
 
 import { repositoryName } from '@/prismicio'
@@ -20,7 +21,7 @@ export const Providers: React.FC<Props> = async ({ children }) => {
         enableSystem
         disableTransitionOnChange
       >
-        {children}
+        <DevIconsProvider>{children}</DevIconsProvider>
         <PrismicPreview repositoryName={repositoryName} />
       </ThemeProvider>
     </NextIntlClientProvider>

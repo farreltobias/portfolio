@@ -6,6 +6,7 @@ import { PrismicNextImage } from '@prismicio/next'
 import { formatProjectDate } from '@/src/lib/format-project-date'
 import type { TechInsideProject } from '@/src/lib/graph-queries'
 
+import { DevIcon } from '@/src/components/dev-icon'
 import { Paragraph } from '@/src/components/typography'
 import { AspectRatio } from '@/src/components/ui/aspect-ratio'
 
@@ -48,7 +49,7 @@ export const Header: React.FC<Props> = ({ techs, cover, ...dates }) => {
           </Paragraph>
           <div className="flex gap-4 text-primary text-2xl">
             {techs.map(({ tech }) => (
-              <i key={tech.uid} className={tech.data.icon?.toString()}></i>
+              <DevIcon key={tech.uid} className={tech.data.icon?.toString()} />
             ))}
           </div>
         </div>

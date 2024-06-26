@@ -3,6 +3,7 @@ import { useTranslations } from 'next-intl'
 import { ArrowUpRight, GlobeSimple } from '@phosphor-icons/react/dist/ssr'
 import { PrismicNextLink } from '@prismicio/next'
 
+import { DevIcon } from '@/src/components/dev-icon'
 import { H2 } from '@/src/components/typography'
 import { Button } from '@/src/components/ui/button'
 
@@ -31,7 +32,7 @@ export const Aside: React.FC<Props> = ({ github, liveDemo }) => {
           className="flex justify-between"
         >
           <PrismicNextLink field={github}>
-            <i className="devicon-github-original text-xl" />
+            <DevIcon className="devicon-github-original text-xl" />
             {t('aside.code')}
             <ArrowUpRight size={20} />
           </PrismicNextLink>

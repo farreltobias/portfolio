@@ -2,6 +2,8 @@ import { getLocale } from 'next-intl/server'
 
 import { filter } from '@prismicio/client'
 
+import { DevIcon } from '@/src/components/dev-icon'
+
 import { createClient } from '@/prismicio'
 
 export const Techs: React.FC = async () => {
@@ -21,7 +23,7 @@ export const Techs: React.FC = async () => {
   return (
     <div className="flex gap-6 text-primary text-2xl">
       {techs.map((tech) => (
-        <i key={tech.uid} className={tech.data.icon?.toString()}></i>
+        <DevIcon key={tech.uid} className={tech.data.icon?.toString()} />
       ))}
     </div>
   )
