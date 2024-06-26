@@ -3,12 +3,12 @@ import { getTranslations } from 'next-intl/server'
 
 export default async function manifest(): Promise<MetadataRoute.Manifest> {
   const locale = 'en-us'
-  const t = await getTranslations({ locale, namespace: 'Manifest' })
+  const t = await getTranslations({ locale })
 
   return {
-    name: t('name'),
-    short_name: t('short_name'),
-    description: t('description'),
+    name: t('Manifest.name'),
+    short_name: t('Manifest.short_name'),
+    description: t('Manifest.description'),
     start_url: '/',
     theme_color: '#171023',
     background_color: '#171023',

@@ -9,7 +9,11 @@ export const components: JSXMapSerializer = {
   heading2: ({ children }) => <H2>{children}</H2>,
   paragraph: ({ children }) => <Paragraph>{children}</Paragraph>,
   hyperlink: ({ children, node }) => (
-    <Button asChild className="text-muted-foreground p-0 h-min" variant="link">
+    <Button
+      asChild
+      className="text-muted-foreground p-0 md:p-0 h-min"
+      variant="link"
+    >
       <PrismicNextLink field={node.data}>{children}</PrismicNextLink>
     </Button>
   ),

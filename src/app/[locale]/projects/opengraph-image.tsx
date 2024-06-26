@@ -14,6 +14,8 @@ export const size = {
   height: 630,
 }
 
+export const metadataBase = new URL('https://www.farrel.tech')
+
 export const contentType = 'image/png'
 
 type Props = {
