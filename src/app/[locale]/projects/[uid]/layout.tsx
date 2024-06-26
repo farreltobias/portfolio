@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
 
 import * as prismicH from '@prismicio/helpers'
@@ -28,10 +29,17 @@ export async function generateMetadata({
 
   const client = createClient()
 
-  const project = await client.getByUID('project', uid, {
-    graphQuery: projectGraphQuery,
-    lang: locale,
-  })
+  let project
+
+  try {
+    project = await client.getByUID('project', uid, {
+      graphQuery: projectGraphQuery,
+      lang: locale,
+    })
+  } catch (error) {
+    console.error(error)
+    return notFound()
+  }
 
   const ogImageSrc = prismicH.asImageSrc(project.data.meta_image) as string
   const { dimensions: ogImageDimensions, alt: ogImageAlt } =
