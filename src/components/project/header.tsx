@@ -35,7 +35,7 @@ export const Header: React.FC<Props> = ({
           <PrismicNextImage
             fill
             field={cover}
-            sizes="(max-width: 768px) 100vw, 33vw"
+            sizes="(max-width: 768px) 100vw, 15vw"
             className="object-cover"
           />
         </div>

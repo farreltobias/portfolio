@@ -42,7 +42,6 @@ export async function generateMetadata({
       : names[0]
 
   return {
-    metadataBase: new URL('https://www.farrel.tech'),
     title: t('LocaleLayout.projects.title'),
     description: t('LocaleLayout.projects.description', {
       projects: namesString,

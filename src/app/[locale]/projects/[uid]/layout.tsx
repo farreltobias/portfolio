@@ -46,7 +46,6 @@ export async function generateMetadata({
     project.data.meta_image
 
   return {
-    metadataBase: new URL('https://www.farrel.tech'),
     title: project.data.meta_title,
     description: `${project.data.meta_description} ${t('LocaleLayout.home.description')}`,
     alternates: {

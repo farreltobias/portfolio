@@ -66,7 +66,7 @@ export default function Home({ params: { locale } }: Props) {
               image={computer}
               src="computer.svg"
               alt="programmer typing in computer"
-              sizes="(max-width: 768px) 100vw, 50vw"
+              sizes="(max-width: 768px) 25vw, 50vw"
             />
           </div>
         </section>

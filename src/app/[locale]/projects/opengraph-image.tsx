@@ -14,8 +14,6 @@ export const size = {
   height: 630,
 }
 
-export const metadataBase = new URL('https://www.farrel.tech')
-
 export const contentType = 'image/png'
 
 type Props = {
@@ -61,7 +59,7 @@ export default async function Image({ params: { locale } }: Props) {
       ...size,
       fonts: [
         {
-          name: 'Heebo',
+          name: 'Kalam',
           data: await Kalam,
           style: 'normal',
           weight: 400,
