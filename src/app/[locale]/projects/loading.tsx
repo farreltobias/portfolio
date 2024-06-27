@@ -9,7 +9,7 @@ export default function Loading() {
       <header className="flex flex-col gap-4">
         <div className="flex flex-col gap-3 md:flex-row md:gap-4">
           <Skeleton className="h-12 md:h-10 w-full" />
-          <Skeleton className="h-12 md:h-10 w-3/12" />
+          <Skeleton className="h-12 md:h-10 w-full md:w-3/12" />
         </div>
       </header>
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">

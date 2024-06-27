@@ -4,16 +4,14 @@ import { unstable_setRequestLocale as setRequestLocale } from 'next-intl/server'
 
 import { ArrowRight } from '@phosphor-icons/react/dist/ssr'
 
-import avatar from '@/public/avatar.svg'
-import computer from '@/public/computer.svg'
-import programming from '@/public/programming.svg'
-
 import { contacts } from '@/src/lib/contact'
 import { locales } from '@/src/locale-config'
 import { Link } from '@/src/navigation'
 
 import { Arrow } from '@/src/components/arrow'
-import { ImageWithBlur } from '@/src/components/image-with-blur'
+import { Avatar } from '@/src/components/avatar'
+import { Computer } from '@/src/components/computer'
+import { Programming } from '@/src/components/programming'
 import { Shine } from '@/src/components/shine'
 import { Sparkle } from '@/src/components/sparkle'
 import { H2, HS, Paragraph, SectionTitle } from '@/src/components/typography'
@@ -60,14 +58,7 @@ export default function Home({ params: { locale } }: Props) {
           </div>
 
           <div className="min-w-full relative md:min-w-0 md:basis-1/2">
-            <ImageWithBlur
-              priority
-              ratio={15 / 13}
-              image={computer}
-              src="computer.svg"
-              alt="programmer typing in computer"
-              sizes="(max-width: 768px) 25vw, 50vw"
-            />
+            <Computer />
           </div>
         </section>
         <Arrow className="absolute rotate-[135deg] right-[20%] -bottom-8 md:right-[35%] md:bottom-4" />
@@ -76,13 +67,7 @@ export default function Home({ params: { locale } }: Props) {
       <div id="about" className="pt-20 -mt-20">
         <section className="flex flex-col gap-10 bg-surface-primary py-12 px-6 md:flex-row md:gap-32 md:p-[4.5rem] md:my-10 md:rounded-2xl">
           <div className="flex flex-col my-auto min-w-full relative md:min-w-0 md:basis-1/2">
-            <ImageWithBlur
-              ratio={19 / 11}
-              image={programming}
-              src="programming.svg"
-              alt="a programmer coding on a computer committed"
-              sizes="(max-width: 768px) 100vw, 50vw"
-            />
+            <Programming />
           </div>
           <div className="flex flex-col gap-8 basis-1/2">
             <Suspense fallback={<Techs.Skeleton />}>
@@ -132,13 +117,7 @@ export default function Home({ params: { locale } }: Props) {
         <section className="flex flex-col gap-12 bg-surface-primary py-12 px-6 md:flex-row md:gap-32 md:p-[4.5rem] md:my-10 md:rounded-2xl">
           <div className="flex flex-col gap-10 basis-7/12">
             <div className="w-1/2 md:w-1/4">
-              <ImageWithBlur
-                ratio={1}
-                image={avatar}
-                src="avatar.svg"
-                alt="a avatar of Farrel"
-                sizes="(max-width: 768px) 50vw, 25vw"
-              />
+              <Avatar />
             </div>
             <div className="flex flex-col gap-4">
               <header className="flex flex-col gap-2">
