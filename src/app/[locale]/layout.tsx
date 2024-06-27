@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { Metadata } from 'next'
 import { Heebo, Kalam } from 'next/font/google'
 import {
@@ -55,13 +56,13 @@ export async function generateMetadata({
     },
     description: t('LocaleLayout.home.description'),
     alternates: {
-      canonical: '/',
+      canonical: `/${locale}`,
       languages: Object.fromEntries(
         locales.map((locale) => [locale, `/${locale}`]),
       ),
     },
     openGraph: {
-      url: '/',
+      url: '/en-us',
       siteName: 'Farrel.tech',
       locale: t('LocaleLayout.locale'),
       type: 'website',
@@ -88,7 +89,9 @@ export default async function LocaleLayout({
         )}
       >
         <Providers>
-          <Navbar />
+          <Suspense fallback={<Navbar.Skeleton />}>
+            <Navbar.Root />
+          </Suspense>
           {children}
           <Toaster />
           <Footer />
