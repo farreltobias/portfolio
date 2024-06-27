@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { useFormatter } from 'next-intl'
 
 import { PrismicNextImage } from '@prismicio/next'
@@ -9,11 +10,13 @@ import { TechInsideProject } from '@/src/lib/graph-queries'
 
 import { AspectRatio } from '../ui/aspect-ratio'
 import { CardHeader } from '../ui/card'
+import { Skeleton } from '../ui/skeleton'
 
 import { ProjectDocumentData } from '@/prismicio-types'
 
 type Props = Pick<ProjectDocumentData, 'startDate' | 'endDate' | 'cover'> & {
   techs: TechInsideProject[]
+  priorityImage?: boolean
 }
 
 export const Header: React.FC<Props> = ({
@@ -21,7 +24,10 @@ export const Header: React.FC<Props> = ({
   startDate,
   endDate,
   techs,
+  priorityImage = false,
 }) => {
+  const [isImageLoaded, setIsImageLoaded] = useState(false)
+
   const formatter = useFormatter()
   const formattedDate = formatProjectDate({ startDate, endDate, formatter })
 
@@ -31,12 +37,20 @@ export const Header: React.FC<Props> = ({
         ratio={25 / 10}
         className="flex justify-center items-center bg-gradient-to-r from-primary-light to-highlight rounded-t-2xl"
       >
-        <div className="relative w-full h-full">
+        <div className="relative w-full h-full flex items-end justify-center">
+          {!isImageLoaded && (
+            <Skeleton className="absolute left-1/2 -translate-x-1/2 w-5/6 h-5/6 rounded-none rounded-t-xl animate-pulse bg-muted bottom-0" />
+          )}
           <PrismicNextImage
             fill
+            priority={priorityImage}
             field={cover}
-            sizes="(max-width: 768px) 100vw, 25vw"
+            quality={75}
+            sizes="(max-width: 768px) 85vw, 20vw"
             className="object-cover"
+            onLoad={() => {
+              setIsImageLoaded(true)
+            }}
           />
         </div>
       </AspectRatio>

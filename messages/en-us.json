@@ -119,5 +119,10 @@
       "github": "Project code in Github",
       "live": "Live project"
     }
+  },
+  "Combobox": {
+    "aria": {
+      "icon": "Toggle combobox"
+    }
   }
 }

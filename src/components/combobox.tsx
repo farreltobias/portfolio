@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import { useTranslations } from 'next-intl'
 
 import type { KeyTextField } from '@prismicio/client'
 import { Check, ChevronsUpDown } from 'lucide-react'
@@ -39,6 +40,8 @@ export const Combobox: React.FC<Props> = ({
   searchPlaceholder,
   searchNotFound,
 }) => {
+  const t = useTranslations('Combobox')
+
   const [open, setOpen] = React.useState(false)
 
   return (
@@ -48,6 +51,7 @@ export const Combobox: React.FC<Props> = ({
           variant="outline"
           role="combobox"
           aria-expanded={open}
+          aria-label={t('aria.icon')}
           className="w-full px-3 md:w-52 justify-between border-surface-secondary h-12"
         >
           {placeholder}

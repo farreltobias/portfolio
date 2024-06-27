@@ -26,7 +26,7 @@ export const List: React.FC = () => {
         )}
 
         {projects.length > 0 &&
-          projects.map(({ uid, data }) => (
+          projects.map(({ uid, data }, index) => (
             <motion.li
               layout
               key={uid}
@@ -44,6 +44,7 @@ export const List: React.FC = () => {
                   techs={data.techs}
                   startDate={data.startDate}
                   endDate={data.endDate}
+                  priorityImage={index < 3}
                 />
                 <Project.Content
                   name={data.name}

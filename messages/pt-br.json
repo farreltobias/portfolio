@@ -119,5 +119,10 @@
       "github": "Código do Projeto no Github",
       "live": "Demonstração ao vivo do projeto"
     }
+  },
+  "Combobox": {
+    "aria": {
+      "icon": "Alternar caixa de combinação"
+    }
   }
 }
