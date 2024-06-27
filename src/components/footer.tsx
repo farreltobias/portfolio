@@ -42,6 +42,7 @@ export const Footer: React.FC = () => {
         <Button
           variant="outline"
           size="icon"
+          aria-label={t('aria.top_page')}
           onClick={() => {
             window.scrollTo({ top: 0, behavior: 'smooth' })
           }}

@@ -111,13 +111,15 @@ export default function Home({ params: { locale } }: Props) {
           </SectionTitle>
           <H2>{t('projects.title')}</H2>
         </header>
-        <ul className="relative grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8 w-full">
+        <div className="relative w-full">
           <Sparkle className="absolute -top-10 -left-10 md:-top-14 md:-left-12" />
-          <Suspense fallback={<Projects.Skeleton />}>
-            <Projects.Root />
-          </Suspense>
+          <ul className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
+            <Suspense fallback={<Projects.Skeleton />}>
+              <Projects.Root />
+            </Suspense>
+          </ul>
           <Shine className="absolute rotate-[15deg] -bottom-16 -right-8 md:-bottom-32 md:-right-10" />
-        </ul>
+        </div>
         <Button asChild variant="secondary" className="gap-2">
           <Link href="/projects">
             {t('projects.seeAll')}
@@ -164,7 +166,13 @@ export default function Home({ params: { locale } }: Props) {
               </Paragraph>
               <div className="flex gap-2">
                 {contacts.map(({ Icon, title, href }) => (
-                  <Button key={title} asChild variant="secondary" size="icon">
+                  <Button
+                    key={title}
+                    asChild
+                    variant="secondary"
+                    size="icon"
+                    aria-label={t('contact.aria.social', { social: title })}
+                  >
                     <a href={href} target="_blank" rel="noopener noreferrer">
                       <Icon size={20} />
                     </a>

@@ -6,17 +6,17 @@ import {
 
 export const contacts = [
   {
-    title: 'Github',
+    title: 'github',
     href: 'https://github.com/farreltobias/',
     Icon: GithubLogo,
   },
   {
-    title: 'LinkedIn',
+    title: 'linkedIn',
     href: 'https://linkedIn.com/in/farreltobias/',
     Icon: LinkedinLogo,
   },
   {
-    title: 'Instagram',
+    title: 'instagram',
     href: 'https://www.instagram.com/farrel.tobias/',
     Icon: InstagramLogo,
   },

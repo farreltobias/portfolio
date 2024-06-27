@@ -24,7 +24,11 @@
     "home": "Início",
     "about": "Sobre",
     "projects": "Projetos",
-    "contact": "Contato"
+    "contact": "Contato",
+    "aria": {
+      "logo": "Logo da página, ir para a página inicial",
+      "hamburger": "Alternar navegação"
+    }
   },
   "Home": {
     "head": {
@@ -42,7 +46,10 @@
       "sectionTitle": "Contato",
       "title": "Gostou do meu trabalho? Vamos trabalhar juntos",
       "paragraph1": "Estou sempre disponível para uma conversa. Manda um email para",
-      "paragraph2": "ou me chama nas redes sociais."
+      "paragraph2": "ou me chama nas redes sociais.",
+      "aria": {
+        "social": "Perfil do {social} do Farrel"
+      }
     },
     "form": {
       "name": "Nome",
@@ -72,7 +79,10 @@
   "Footer": {
     "paragraph1": "Layout baseado no modelo da",
     "rocketseat": "Rocketseat",
-    "paragraph2": "."
+    "paragraph2": ".",
+    "aria": {
+      "top_page": "Ir para o topo da página"
+    }
   },
   "Projects": {
     "search": "Pesquisar projetos...",
@@ -89,7 +99,10 @@
       "code": "Código"
     },
     "team": "Time",
-    "role": "Meu papel"
+    "role": "Meu papel",
+    "aria": {
+      "back": "Voltar à página anterior"
+    }
   },
   "NotFound": {
     "title1": "Ops, esta página não",
@@ -100,5 +113,11 @@
     "returnHome": "Ir para a Home",
     "backgroundAlt": "Plano de fundo do espaço",
     "numberFourAlt": "O número quatro"
+  },
+  "Card": {
+    "aria": {
+      "github": "Código do Projeto no Github",
+      "live": "Demonstração ao vivo do projeto"
+    }
   }
 }

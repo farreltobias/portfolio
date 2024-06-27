@@ -24,7 +24,11 @@
     "home": "Home",
     "about": "About",
     "projects": "Projects",
-    "contact": "Contact"
+    "contact": "Contact",
+    "aria": {
+      "logo": "Page logo, go to home page",
+      "hamburger": "Toggle navigation"
+    }
   },
   "Home": {
     "head": {
@@ -42,7 +46,10 @@
       "sectionTitle": "Contact",
       "title": "Enjoyed my work? Let’s work together",
       "paragraph1": "I’m always up for a chat. Pop me an email at",
-      "paragraph2": "or give me a shout on social media."
+      "paragraph2": "or give me a shout on social media.",
+      "aria": {
+        "social": "Farrel's {social} profile"
+      }
     },
     "form": {
       "name": "Name",
@@ -72,7 +79,10 @@
   "Footer": {
     "paragraph1": "Layout based on",
     "rocketseat": "Rocketseat’s",
-    "paragraph2": " template."
+    "paragraph2": " template.",
+    "aria": {
+      "top_page": "Go to the top of the page"
+    }
   },
   "Projects": {
     "search": "Search projects...",
@@ -89,7 +99,10 @@
       "code": "Code"
     },
     "role": "My role",
-    "team": "Team"
+    "team": "Team",
+    "aria": {
+      "back": "Return to previous page"
+    }
   },
   "NotFound": {
     "backgroundAlt": "Space background",
@@ -100,5 +113,11 @@
     "paragraph2": "to the last page or accessing home.",
     "back": "Go back",
     "returnHome": "Return Home"
+  },
+  "Card": {
+    "aria": {
+      "github": "Project code in Github",
+      "live": "Live project"
+    }
   }
 }

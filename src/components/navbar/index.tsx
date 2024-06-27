@@ -92,12 +92,16 @@ export const Navbar: React.FC = () => {
         )}
       >
         <div className="bg-background z-10 flex justify-between items-center p-4 md:p-0 w-full">
-          <Link href="/" className="p-2 rounded focus:outline-none">
+          <Link
+            href="/"
+            className="p-2 rounded focus:outline-none"
+            aria-label={t('aria.logo')}
+          >
             <Logo className="fill-foreground" />
           </Link>
 
           <Button
-            // aria-label
+            aria-label={t('aria.hamburger')}
             variant="ghost"
             size="icon"
             className="md:invisible flex flex-col items-center justify-center"
