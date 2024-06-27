@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { unstable_setRequestLocale as setRequestLocale } from 'next-intl/server'
 
 import { locales } from '@/src/locale-config'
@@ -23,7 +24,9 @@ export default async function Projects({ params }: Props) {
   return (
     <main className="container flex flex-col px-6 mt-28 pb-8 mb-auto gap-8 md:pb-24 md:mt-44 md:px-28">
       <Header techs={techs} />
-      <List />
+      <Suspense fallback={<List.Skeleton />}>
+        <List.Root />
+      </Suspense>
     </main>
   )
 }
