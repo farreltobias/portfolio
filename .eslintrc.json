@@ -1,5 +1,5 @@
 {
-  "extends": ["next/core-web-vitals", "@rocketseat/eslint-config/react"],
+  "extends": ["next/core-web-vitals", "@rocketseat/eslint-config/next"],
   "parserOptions": {
     "sourceType": "module",
     "ecmaVersion": "latest"
