@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "prismic": {
+      "source": "prismicio/skills",
+      "sourceType": "github",
+      "skillPath": "skills/prismic/SKILL.md",
+      "computedHash": "41bac5395e1ac275239a59ab2ac1c80c94767df2d7895901837a5a0a09b777a1"
+    }
+  }
+}
