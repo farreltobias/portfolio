@@ -11,7 +11,8 @@
     "preview": "astro preview",
     "check": "astro check && biome check .",
     "format": "biome format --write .",
-    "codegen": "prismic-ts-codegen"
+    "codegen": "prismic-ts-codegen",
+    "slicemachine": "start-slicemachine"
   },
   "dependencies": {
     "@astrojs/react": "^6.0.0",
@@ -26,8 +27,10 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
     "@biomejs/biome": "^2.5.1",
+    "@slicemachine/adapter-next": "^0.3.96",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
-    "prismic-ts-codegen": "^0.1.30"
+    "prismic-ts-codegen": "^0.1.30",
+    "slice-machine-ui": "^2.21.3"
   }
 }
