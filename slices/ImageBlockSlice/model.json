@@ -1,0 +1,32 @@
+{
+  "id": "image_block",
+  "type": "SharedSlice",
+  "name": "ImageBlockSlice",
+  "description": "A single image with an optional caption.",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "sktwi1xtmkfgx8626",
+      "description": "Default variation",
+      "primary": {
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "Image",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "caption": {
+          "type": "Text",
+          "config": {
+            "label": "Caption (optional)"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

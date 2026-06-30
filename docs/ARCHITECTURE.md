@@ -21,7 +21,7 @@
 | About | SSG | Changes infrequently |
 | Insights | SSG + ISR | List revalidates when new Insight published |
 | Insight Detail | SSG + ISR | Same as Case Study |
-| Contact | SSG | Contact info lives in Settings singleton |
+| Contact | SSG | Contact page content lives in the `contact` singleton |
 | 404 | SSG | Static error page |
 
 ISR (Incremental Static Regeneration) is triggered via Prismic webhook → Vercel deploy hook on content publish. No polling.
@@ -95,7 +95,7 @@ Prismic CMS
 src/prismicio/client.ts  (typed client)
     │
     ▼
-src/lib/prismic.ts  (query helpers with typed return values)
+src/prismicio/queries.ts  (query helpers with typed return values)
     │
     ▼
 src/pages/*.astro  (getStaticPaths / Astro.props)

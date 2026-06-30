@@ -286,7 +286,7 @@ Create a dedicated `navigation` singleton for all navigation configuration. Remo
 ### Consequences
 
 **Positive**:
-- Settings has a clear, bounded responsibility: SEO defaults and contact data.
+- Settings has a clear, bounded responsibility: SEO defaults and global social links.
 - Navigation has a clear, bounded responsibility: site routing and header/footer presentation.
 - Either document can grow independently without coupling.
 - Fetching navigation in the layout component is semantically cleaner — it queries a `navigation` document, not a `settings` document.
@@ -295,3 +295,66 @@ Create a dedicated `navigation` singleton for all navigation configuration. Remo
 - One additional Prismic query per page render (navigation + settings instead of settings alone). Cost is negligible — both are singleton fetches and can be parallelized with `Promise.all`.
 
 **Trade-off accepted**: The semantic clarity is worth the trivial added query cost.
+
+---
+
+## ADR-011: Contact as a standalone page singleton
+
+**Date**: 2026-06-30
+**Status**: Accepted
+
+### Context
+
+The original model stored contact page content (`contact_intro`) inside the `settings` singleton alongside global SEO defaults and social links. The Contact page had no dedicated Prismic document.
+
+This created a blurred responsibility: Settings was doing two different jobs — global site configuration and editorial content for a specific page. It also prevented the Contact page from having its own metadata, headline, availability items, and FAQ — content that has nothing to do with site-wide configuration.
+
+### Decision
+
+Create a `contact` singleton custom type to own all Contact page content. Move `contact_intro` out of Settings and replace it with a richer set of fields: `hero_headline`, `hero_intro`, `availability_intro`, `availability_items`, `faq_items`, and a CTA section.
+
+Global social links (`contact_email`, `linkedin_url`, `github_url`, `scheduling_url`) remain in Settings — they are used in the footer and Contact page alike.
+
+### Consequences
+
+**Positive**:
+- Settings is now pure global configuration: SEO defaults, social links, footer tagline.
+- Contact has its own document with proper SEO fields and richer editorial structure.
+- The Contact page can be previewed via Prismic preview like any other page document.
+- The `contact` type integrates cleanly into the route resolver (`/contact`) and `AllDocumentTypes` union.
+- Adds `getContact()` to the query layer.
+
+**Negative**:
+- One additional Prismic singleton document to maintain.
+
+**Trade-off accepted**: The added document is minimal. The clarity of having each page own its content outweighs the overhead.
+
+---
+
+## ADR-012: Navigation uses Content Relationships for primary nav items
+
+**Date**: 2026-06-30
+**Status**: Accepted
+
+### Context
+
+The original `nav_links` group used a generic `Link` field, which accepts internal URLs, external URLs, or media links. For a portfolio whose primary navigation points exclusively to internal Prismic page documents (Home, Work, About, Insights, Contact), this was unnecessarily permissive.
+
+### Decision
+
+Replace the generic `link` field in `nav_links` with a `page` Content Relationship field restricted to: `["home", "work", "about", "insights_page", "contact"]`.
+
+The `nav_cta_link` remains a generic Link because it may point to external destinations (Calendly, email, etc.) and does not need the same restriction.
+
+### Consequences
+
+**Positive**:
+- URL resolution is automatic via the route resolver — no hardcoded paths in the CMS.
+- Broken links to deleted documents become impossible.
+- The editor interface is cleaner — only page documents appear in the picker.
+- The field is renamed from `link` to `page`, which is semantically accurate.
+
+**Negative**:
+- If a future navigation item needs to link to an external URL (e.g. a podcast appearance), the `nav_links` group cannot accommodate it. A separate `external_links` group would be needed.
+
+**Trade-off accepted**: Primary navigation on a personal portfolio is intentionally CMS-page-driven. If external nav links are needed in future, they will be modeled explicitly rather than loosening the existing restriction.

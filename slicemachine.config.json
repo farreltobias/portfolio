@@ -1,0 +1,5 @@
+{
+  "repositoryName": "farrel-portfolio",
+  "libraries": ["./slices"],
+  "customTypesDir": "./customtypes"
+}

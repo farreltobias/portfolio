@@ -1,0 +1,64 @@
+{
+  "id": "about",
+  "label": "About",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "profile_image": {
+        "type": "Image",
+        "config": {
+          "label": "Profile Image",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "lead": {
+        "type": "StructuredText",
+        "config": {
+          "multi": "paragraph,strong,em,hyperlink",
+          "label": "Lead",
+          "placeholder": "Who Farrel is and what he cares about"
+        }
+      },
+      "engineering_philosophy": {
+        "type": "StructuredText",
+        "config": {
+          "multi": "paragraph,strong,em,hyperlink,list-item,o-list-item",
+          "label": "Engineering Philosophy"
+        }
+      },
+      "background": {
+        "type": "StructuredText",
+        "config": {
+          "multi": "paragraph,heading3,heading4,strong,em,hyperlink,list-item,o-list-item",
+          "label": "Background"
+        }
+      },
+      "beyond_work": {
+        "type": "StructuredText",
+        "config": {
+          "multi": "paragraph,strong,em,hyperlink",
+          "label": "Beyond Work"
+        }
+      }
+    },
+    "SEO": {
+      "meta_description": {
+        "type": "Text",
+        "config": {
+          "label": "Meta Description",
+          "placeholder": "120–160 characters"
+        }
+      },
+      "og_image": {
+        "type": "Image",
+        "config": {
+          "label": "OG Image",
+          "constraint": {},
+          "thumbnails": []
+        }
+      }
+    }
+  }
+}

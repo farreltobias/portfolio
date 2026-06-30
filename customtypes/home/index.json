@@ -1,0 +1,149 @@
+{
+  "id": "home",
+  "label": "Home",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Hero": {
+      "hero_headline": {
+        "type": "StructuredText",
+        "config": {
+          "single": "heading1",
+          "label": "Headline"
+        }
+      },
+      "hero_subheadline": {
+        "type": "StructuredText",
+        "config": {
+          "multi": "paragraph,strong,em,hyperlink",
+          "label": "Subheadline"
+        }
+      },
+      "hero_cta_label": {
+        "type": "Text",
+        "config": {
+          "label": "CTA Label",
+          "placeholder": "View my work"
+        }
+      },
+      "hero_cta_link": {
+        "type": "Link",
+        "config": {
+          "label": "CTA Link",
+          "allowTargetBlank": false
+        }
+      }
+    },
+    "Featured Work": {
+      "featured_work_eyebrow": {
+        "type": "Text",
+        "config": {
+          "label": "Eyebrow Label",
+          "placeholder": "Selected work"
+        }
+      },
+      "featured_case_studies": {
+        "type": "Group",
+        "config": {
+          "label": "Featured Case Studies",
+          "fields": {
+            "case_study": {
+              "type": "Link",
+              "config": {
+                "label": "Case Study",
+                "select": "document",
+                "customtypes": ["case_study"]
+              }
+            }
+          }
+        }
+      },
+      "featured_work_cta_label": {
+        "type": "Text",
+        "config": {
+          "label": "CTA Label",
+          "placeholder": "View all work"
+        }
+      }
+    },
+    "About Preview": {
+      "about_snippet": {
+        "type": "StructuredText",
+        "config": {
+          "multi": "paragraph,strong,em,hyperlink",
+          "label": "About Snippet"
+        }
+      },
+      "about_cta_label": {
+        "type": "Text",
+        "config": {
+          "label": "CTA Label",
+          "placeholder": "More about me"
+        }
+      }
+    },
+    "Insights Preview": {
+      "insights_eyebrow": {
+        "type": "Text",
+        "config": {
+          "label": "Eyebrow Label",
+          "placeholder": "Insights"
+        }
+      },
+      "insights_cta_label": {
+        "type": "Text",
+        "config": {
+          "label": "CTA Label",
+          "placeholder": "View all insights"
+        }
+      }
+    },
+    "CTA": {
+      "cta_headline": {
+        "type": "StructuredText",
+        "config": {
+          "single": "heading2",
+          "label": "Headline"
+        }
+      },
+      "cta_body": {
+        "type": "StructuredText",
+        "config": {
+          "multi": "paragraph,strong,em,hyperlink",
+          "label": "Body"
+        }
+      },
+      "cta_button_label": {
+        "type": "Text",
+        "config": {
+          "label": "Button Label",
+          "placeholder": "Get in touch"
+        }
+      },
+      "cta_button_link": {
+        "type": "Link",
+        "config": {
+          "label": "Button Link",
+          "allowTargetBlank": false
+        }
+      }
+    },
+    "SEO": {
+      "meta_description": {
+        "type": "Text",
+        "config": {
+          "label": "Meta Description",
+          "placeholder": "120–160 characters"
+        }
+      },
+      "og_image": {
+        "type": "Image",
+        "config": {
+          "label": "OG Image",
+          "constraint": {},
+          "thumbnails": []
+        }
+      }
+    }
+  }
+}

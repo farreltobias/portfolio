@@ -76,13 +76,13 @@ pnpm prismic-ts-codegen
 
 Commit the result in `src/prismicio/types.ts`. Never use `any` for Prismic data. If the generated type is wrong, the schema is wrong — fix the schema.
 
-### Queries belong in `src/lib/prismic.ts`
+### Queries belong in `src/prismicio/queries.ts`
 
-Do not write inline Prismic client calls in page files. All queries are defined as named, typed functions in `src/lib/prismic.ts` and imported by pages. This makes queries testable, readable, and consistently typed.
+Do not write inline Prismic client calls in page files. All queries are defined as named, typed functions in `src/prismicio/queries.ts` and imported by pages. This makes queries testable, readable, and consistently typed.
 
 ```typescript
 // Good
-import { getCaseStudy } from '@/lib/prismic'
+import { getCaseStudy } from '@/prismicio/queries'
 const caseStudy = await getCaseStudy(uid)
 
 // Bad
@@ -128,7 +128,7 @@ The shared `ImageBlock.astro` and `ArchitectureDiagram.astro` components in `com
 ### Pages are thin
 
 Pages (`src/pages/*.astro`) are responsible for:
-1. Fetching data (calling `src/lib/prismic.ts` functions)
+1. Fetching data (calling `src/prismicio/queries.ts` functions)
 2. Passing data to feature components
 3. Setting SEO metadata
 

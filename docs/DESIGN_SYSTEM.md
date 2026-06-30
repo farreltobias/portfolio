@@ -340,7 +340,7 @@ Slice renderers for the Case Study body. Each corresponds to a semantic slice in
 
 | Component | File | Description |
 |---|---|---|
-| `ContactInfo` | `ContactInfo.astro` | Renders contact intro, email, LinkedIn, GitHub, and optional scheduling link from Settings |
+| `ContactInfo` | `ContactInfo.astro` | Renders contact options (email, LinkedIn, GitHub, scheduling link) sourced from Settings singleton |
 
 ---
 

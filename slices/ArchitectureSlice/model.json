@@ -1,0 +1,40 @@
+{
+  "id": "architecture",
+  "type": "SharedSlice",
+  "name": "ArchitectureSlice",
+  "description": "The Architecture section of a Case Study — system design, technical decisions, trade-offs.",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "sktwi1xtmkfgx8626",
+      "description": "Default variation",
+      "primary": {
+        "content": {
+          "type": "StructuredText",
+          "config": {
+            "multi": "paragraph,heading3,heading4,strong,em,hyperlink,list-item,o-list-item",
+            "label": "Content",
+            "allowTargetBlank": true
+          }
+        },
+        "diagram": {
+          "type": "Image",
+          "config": {
+            "label": "Architecture Diagram",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "diagram_caption": {
+          "type": "Text",
+          "config": {
+            "label": "Diagram Caption"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

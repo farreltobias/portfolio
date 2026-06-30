@@ -1,0 +1,26 @@
+{
+  "id": "problem",
+  "type": "SharedSlice",
+  "name": "ProblemSlice",
+  "description": "The Problem section of a Case Study — what was broken, constrained, or missing.",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "sktwi1xtmkfgx8626",
+      "description": "Default variation",
+      "primary": {
+        "content": {
+          "type": "StructuredText",
+          "config": {
+            "multi": "paragraph,heading3,heading4,strong,em,hyperlink,list-item,o-list-item",
+            "label": "Content",
+            "allowTargetBlank": true
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

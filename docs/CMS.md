@@ -115,17 +115,37 @@ Slices: None. Insights page is driven by Insight documents queried at build time
 
 ---
 
+#### `contact` — Contact Page
+
+| Field | Type | Notes |
+|---|---|---|
+| `hero_headline` | Title | Page headline |
+| `hero_intro` | Rich Text | What Farrel is open to — roles, conversations, collaborations |
+| `availability_intro` | Rich Text | Optional lead-in for the availability list |
+| `availability_items` | Group | Repeatable: `label` (Text) — e.g. "Open to full-time roles" |
+| `faq_items` | Group | Repeatable: `question` (Text) + `answer` (Rich Text) |
+| `cta_headline` | Title | CTA section heading |
+| `cta_body` | Rich Text | CTA supporting text |
+| `cta_button_label` | Text | CTA button label |
+| `meta_description` | Text | SEO meta description |
+| `og_image` | Image | OG image override |
+
+Slices: None. Contact layout is fixed.
+
+Global contact links (email, LinkedIn, GitHub, scheduling URL) are sourced from the `settings` singleton and shared across the Contact page and footer.
+
+---
+
 #### `settings` — Global Settings
 
-Site-wide configuration. Not a page. Responsible for SEO defaults, contact information, and footer content. Navigation configuration lives in its own `navigation` singleton.
+Site-wide configuration. Not a page. Responsible for SEO defaults, global social links, and footer content. Contact page content lives in the `contact` singleton. Navigation configuration lives in the `navigation` singleton.
 
 | Field | Type | Notes |
 |---|---|---|
 | `site_name` | Text | Used in `<title>` suffix and OG tags |
 | `site_description` | Text | Default meta description (fallback for all pages) |
 | `og_image` | Image | Default OG/social share image (1200×630px) |
-| `contact_intro` | Rich Text | Text displayed on Contact page |
-| `contact_email` | Text | Public contact email address |
+| `contact_email` | Text | Public contact email — used in footer and Contact page |
 | `linkedin_url` | Link | LinkedIn profile URL |
 | `github_url` | Link | GitHub profile URL |
 | `scheduling_url` | Link | Optional: Calendly or equivalent |
@@ -135,14 +155,16 @@ Site-wide configuration. Not a page. Responsible for SEO defaults, contact infor
 
 #### `navigation` — Navigation
 
-Navigation configuration is a separate singleton from Settings. Settings handles SEO and contact data; Navigation handles routing and presentation. Mixing them in a single document violates single responsibility and makes Settings harder to maintain as either grows.
+Navigation configuration is a separate singleton from Settings. Settings handles global SEO and social links; Navigation handles routing and header/footer presentation.
 
 | Field | Type | Notes |
 |---|---|---|
 | `logo_text` | Text | Text or wordmark used in the site header |
-| `nav_links` | Group | Repeatable: `label` (Text) + `link` (Link) — ordered list of primary nav items |
+| `nav_links` | Group | Repeatable: `label` (Text) + `page` (Content Relationship) — ordered list of primary nav items |
 | `nav_cta_label` | Text | Optional CTA button in the header (e.g. "Get in touch") |
-| `nav_cta_link` | Link | Destination for header CTA |
+| `nav_cta_link` | Link | Destination for header CTA — generic Link to support external URLs (e.g. Calendly) |
+
+The `page` field inside `nav_links` is a Content Relationship restricted to: `home`, `work`, `about`, `insights_page`, `contact`. URLs resolve automatically through the route resolver — no hardcoded paths in the CMS. The `nav_cta_link` remains a generic Link because it may point to an external scheduling URL or any destination outside the primary page set.
 
 ---
 
@@ -238,7 +260,7 @@ Insights are short engineering notes (300–800 words). Imposing a rigid semanti
 ## Querying Patterns
 
 ```typescript
-// src/lib/prismic.ts
+// src/prismicio/queries.ts
 
 // Singleton pages
 const home = await client.getSingle('home')
@@ -270,6 +292,8 @@ const insight = await client.getByUID('insight', uid)
 
 Settings and Navigation are fetched once in the layout and passed down as props. They are not fetched per-page.
 
+Contact is fetched on the Contact page only — it is a singleton like the other page documents.
+
 ---
 
 ## Type Generation
@@ -277,7 +301,7 @@ Settings and Navigation are fetched once in the layout and passed down as props.
 After any schema change in Slice Machine or the Prismic dashboard:
 
 ```bash
-pnpm prismic-ts-codegen
+pnpm codegen
 ```
 
 Generated types live in `src/prismicio/types.ts`. Commit this file — it is the source of truth for Prismic document types in TypeScript. Do not edit it manually.

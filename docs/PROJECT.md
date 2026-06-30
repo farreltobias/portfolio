@@ -51,7 +51,7 @@ Secure international engineering opportunities in product-focused roles: Product
 - Work page with curated case studies
 - Insights section with short engineering notes
 - About page with professional narrative
-- Contact channel via Settings-driven contact info
+- Contact page with availability, FAQ, and global social links
 
 ### Out of scope
 

@@ -1,0 +1,26 @@
+{
+  "id": "prose",
+  "type": "SharedSlice",
+  "name": "ProseSlice",
+  "description": "The primary content block for Insights — rich text prose.",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "sktwi1xtmkfgx8626",
+      "description": "Default variation",
+      "primary": {
+        "content": {
+          "type": "StructuredText",
+          "config": {
+            "multi": "paragraph,preformatted,heading2,heading3,heading4,strong,em,hyperlink,image,embed,list-item,o-list-item",
+            "label": "Content",
+            "allowTargetBlank": true
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

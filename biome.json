@@ -9,7 +9,8 @@
       "!**/.vercel",
       "!**/.ai",
       "!**/.claude",
-      "!**/public"
+      "!**/public",
+      "!**/src/prismicio/types.ts"
     ]
   },
   "formatter": {

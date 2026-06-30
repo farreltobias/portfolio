@@ -1,0 +1,33 @@
+{
+  "id": "implementation",
+  "type": "SharedSlice",
+  "name": "ImplementationSlice",
+  "description": "The Implementation section of a Case Study — how it was built and key engineering choices.",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "sktwi1xtmkfgx8626",
+      "description": "Default variation",
+      "primary": {
+        "content": {
+          "type": "StructuredText",
+          "config": {
+            "multi": "paragraph,heading3,heading4,strong,em,hyperlink,list-item,o-list-item",
+            "label": "Content",
+            "allowTargetBlank": true
+          }
+        },
+        "code_snippet": {
+          "type": "StructuredText",
+          "config": {
+            "multi": "preformatted",
+            "label": "Code Snippet (optional)"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "id": "callout",
+  "type": "SharedSlice",
+  "name": "CalloutSlice",
+  "description": "A highlighted aside, note, or caveat — accent-bordered and visually distinguished from prose.",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "sktwi1xtmkfgx8626",
+      "description": "Default variation",
+      "primary": {
+        "content": {
+          "type": "StructuredText",
+          "config": {
+            "multi": "paragraph,strong,em,hyperlink,list-item,o-list-item",
+            "label": "Content"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

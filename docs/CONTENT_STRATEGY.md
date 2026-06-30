@@ -221,23 +221,33 @@ Footer
 
 ### Contact
 
-**Job**: Give the right people a clear, low-friction way to reach Farrel.
+**Job**: Give the right people a clear, low-friction way to reach Farrel. Communicate openness without being generic.
 
 ```
 Header
-  ↓ Short statement of what Farrel is open to
-    (roles, conversations, technical collaborations)
+  ↓ Headline (from contact.hero_headline)
+  ↓ Intro (from contact.hero_intro — what Farrel is open to)
+
+Availability
+  ↓ Intro text (from contact.availability_intro)
+  ↓ Availability items list (from contact.availability_items)
+
+FAQ (optional)
+  ↓ Question/answer pairs (from contact.faq_items)
 
 Contact options
-  ↓ Email address (primary)
-  ↓ LinkedIn link
-  ↓ GitHub link
-  ↓ Optional: Calendly or scheduling link
+  ↓ Email address (from settings.contact_email)
+  ↓ LinkedIn link (from settings.linkedin_url)
+  ↓ GitHub link (from settings.github_url)
+  ↓ Scheduling link (from settings.scheduling_url, optional)
 
-Tone note: Welcoming but specific.
-  Indicate what kinds of outreach are welcome.
-  Not "feel free to reach out for anything."
+CTA
+  ↓ Headline (from contact.cta_headline)
+  ↓ Body (from contact.cta_body)
+  ↓ Button (from contact.cta_button_label)
 ```
+
+**Content note:** Page-specific text (headline, intro, availability, FAQ) lives in the `contact` Prismic document. Global social links (email, LinkedIn, GitHub) live in `settings` and are shared with the footer.
 
 ---
 

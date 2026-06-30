@@ -1,0 +1,32 @@
+{
+  "id": "code_block",
+  "type": "SharedSlice",
+  "name": "CodeBlockSlice",
+  "description": "A syntax-highlighted code block with a language label. Highlighting is applied server-side.",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "sktwi1xtmkfgx8626",
+      "description": "Default variation",
+      "primary": {
+        "language": {
+          "type": "Text",
+          "config": {
+            "label": "Language",
+            "placeholder": "e.g. typescript, bash, sql"
+          }
+        },
+        "code": {
+          "type": "StructuredText",
+          "config": {
+            "multi": "preformatted",
+            "label": "Code"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

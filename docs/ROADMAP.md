@@ -36,7 +36,7 @@ The portfolio is built in focused phases, each shippable independently. No phase
 - Create all Custom Types in Prismic: `home`, `about`, `work`, `insights_page`, `settings`, `navigation`, `case_study`, `insight` — per `CMS.md`
 - Run `prismic-ts-codegen` and commit generated types to `src/prismicio/types.ts`
 - Build `src/prismicio/client.ts` — Prismic client instance
-- Build `src/lib/prismic.ts` — typed query helper functions
+- Build `src/prismicio/queries.ts` — typed query helper functions
 - Define design tokens in `src/styles/global.css`
 - Build `BaseLayout.astro` — HTML shell with SEO `<head>` (sourced from Settings and Navigation)
 - Build `PageLayout.astro` — wraps `BaseLayout` with Header and Footer
@@ -84,9 +84,10 @@ The portfolio is built in focused phases, each shippable independently. No phase
 - Build Insight slice renderers: `prose` (`RichText.astro` — reused), `CodeBlock.astro` (reused), `Callout.astro`, `ImageBlock.astro` (reused)
 - Build `src/pages/insights/[uid].astro` — Insight detail with `getStaticPaths`
 - Write and publish 3 initial Insights in Prismic
-- Build `ContactInfo.astro` feature component
-- Build `src/pages/contact.astro` — Contact page, sourced from `settings` singleton
-- Enter contact information in Settings singleton
+- Build `ContactInfo.astro` feature component (social links from Settings)
+- Build `src/pages/contact.astro` — Contact page, sourced from `contact` singleton + `settings` for social links
+- Enter contact page content in `contact` singleton
+- Enter social links and global config in `settings` singleton
 - Build `src/pages/404.astro`
 
 **Exit criteria**: 3 Insights published and readable. Contact page live with correct information. 404 page renders correctly. Lighthouse targets met on all new pages.

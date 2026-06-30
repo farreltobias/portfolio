@@ -1,0 +1,35 @@
+{
+  "id": "work",
+  "label": "Work",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "intro": {
+        "type": "StructuredText",
+        "config": {
+          "multi": "paragraph,strong,em,hyperlink",
+          "label": "Intro",
+          "placeholder": "Optional short intro above the case study list"
+        }
+      }
+    },
+    "SEO": {
+      "meta_description": {
+        "type": "Text",
+        "config": {
+          "label": "Meta Description",
+          "placeholder": "120–160 characters"
+        }
+      },
+      "og_image": {
+        "type": "Image",
+        "config": {
+          "label": "OG Image",
+          "constraint": {},
+          "thumbnails": []
+        }
+      }
+    }
+  }
+}
