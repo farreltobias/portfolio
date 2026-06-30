@@ -29,7 +29,7 @@ The portfolio is built in focused phases, each shippable independently. No phase
 **Goal**: Working Astro project connected to Prismic, with design tokens and layout shell — but no real page content.
 
 **Tasks**:
-- Configure Astro with `@astrojs/vercel` adapter (`output: 'hybrid'`)
+- Configure Astro with `@astrojs/vercel` adapter (`output: 'static'`)
 - Install and configure Tailwind CSS 4; wire design tokens from `global.css`
 - Set up TypeScript with `strict: true` and `@/*` path alias
 - Initialize Prismic repository and Slice Machine

@@ -131,7 +131,8 @@ Pages are responsible for fetching data. Feature components are responsible for 
 ## Deployment
 
 - **Host**: Vercel
-- **Adapter**: `@astrojs/vercel` with output mode `hybrid` (static default, ISR opt-in per page)
+- **Adapter**: `@astrojs/vercel` with `output: 'static'`
+- **Rendering**: all pages are statically generated at build time. Content changes are deployed through Vercel rebuilds — no polling, no on-demand rendering.
 - **Deploy triggers**: git push to `main`, Prismic publish webhook
 - **Preview deploys**: Vercel branch previews on all PRs
 - **Domain**: `portfolio.farrel.tech`

@@ -10,7 +10,11 @@ The goal of this document is that another engineer can reproduce the design syst
 
 ## Design Tokens
 
-All tokens are defined as CSS custom properties in `src/styles/global.css` and referenced in `tailwind.config.ts`. Tailwind utility classes map to these variables — never hardcode a hex value in a component.
+All tokens are defined as CSS custom properties in `src/styles/global.css`. Tailwind CSS v4 is CSS-first and does not use a `tailwind.config.ts` file.
+
+**Current strategy (Phase 1.1):** tokens are defined as plain `:root` CSS custom properties and are available throughout the project as CSS variables. Never hardcode a color, radius, or shadow value directly in a component — always reference a token.
+
+**Tailwind `@theme` mapping (Phase 2):** Tailwind v4's `@theme` directive generates utility classes (e.g. `bg-surface`, `text-accent`) from design tokens. This mapping is deferred to Phase 2, when the first real components are built and component needs can guide the final naming convention. Mapping too early risks generating awkward utility names (e.g. `text-text-primary`) that would need to be renamed once used in practice.
 
 ### Color Palette
 
