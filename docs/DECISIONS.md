@@ -27,7 +27,7 @@ Use Astro.
 - Astro ships zero JavaScript by default. The portfolio starts at the performance floor and pays only for what it explicitly opts into.
 - The islands architecture matches the actual interactivity model: one or two interactive components on a mostly-static site.
 - Astro's file-based routing and content collections align with the page structure.
-- The `@astrojs/vercel` adapter handles SSG and ISR without configuration overhead.
+- The `@astrojs/vercel` adapter handles SSG with webhook-triggered rebuilds without configuration overhead.
 
 **Negative**:
 - The Astro ecosystem is smaller than Next.js; some third-party component libraries are React-only and require island wrappers.

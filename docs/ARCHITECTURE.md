@@ -9,22 +9,25 @@
 | CMS | Prismic | Headless, TypeScript SDK, Type Builder, good DX for solo maintainers |
 | Styling | Tailwind CSS 4 | Utility-first, co-located styles, minimal runtime |
 | Language | TypeScript (strict) | Type-safe CMS queries and component contracts |
-| Deployment | Vercel | Zero-config Astro adapter, ISR support, analytics |
+| Deployment | Vercel | Zero-config Astro adapter, static deployment, analytics |
 
 ## Rendering Strategy
 
-| Page | Strategy | Rationale |
-|---|---|---|
-| Home | SSG | Static, rarely changes |
-| Work | SSG | Case Study list is build-time |
-| Case Study Detail | SSG + ISR | Content-driven; revalidate on Prismic webhook |
-| About | SSG | Changes infrequently |
-| Insights | SSG + ISR | List revalidates when new Insight published |
-| Insight Detail | SSG + ISR | Same as Case Study |
-| Contact | SSG | Contact page content lives in the `contact` singleton |
-| 404 | SSG | Static error page |
+All pages are statically generated at build time (`output: 'static'`). Content changes are reflected through a Vercel Deploy Hook triggered by a Prismic publish webhook — the full site rebuilds. No on-demand rendering, no polling.
 
-ISR (Incremental Static Regeneration) is triggered via Prismic webhook → Vercel deploy hook on content publish. No polling.
+| Page | Strategy |
+|---|---|
+| Home | SSG |
+| Work | SSG |
+| Case Study Detail | SSG |
+| About | SSG |
+| Insights | SSG |
+| Insight Detail | SSG |
+| Contact | SSG |
+| 404 | SSG |
+| `/api/preview` | Server (Vercel Function — `prerender = false`) |
+
+The preview endpoint is the only server-rendered route. It resolves a Prismic preview token and redirects to the target page.
 
 ## Project Structure
 
@@ -146,10 +149,26 @@ Content models are managed in the Prismic dashboard Type Builder. After any sche
 
 - **Host**: Vercel
 - **Adapter**: `@astrojs/vercel` with `output: 'static'`
-- **Rendering**: all pages are statically generated at build time. Content changes are deployed through Vercel rebuilds — no polling, no on-demand rendering.
-- **Deploy triggers**: git push to `main`, Prismic publish webhook
+- **Build command**: `pnpm build` (runs `astro check && astro build`)
+- **Output directory**: `.vercel/output` (managed by the adapter)
+- **Rendering**: all pages are statically generated at build time. Content changes are reflected through full static rebuilds — no on-demand rendering, no polling.
+- **Deploy triggers**: git push to `main`; Prismic publish webhook (to be configured in Phase 4)
 - **Preview deploys**: Vercel branch previews on all PRs
 - **Domain**: `portfolio.farrel.tech`
+
+### Content Rebuild Workflow (production)
+
+```
+Prismic publish
+    ↓
+Vercel Deploy Hook (webhook)
+    ↓
+Full static rebuild (pnpm build)
+    ↓
+Updated production site
+```
+
+The Deploy Hook is configured in Phase 4. Until then, production is updated by git push to `main`.
 
 ## Performance Targets
 

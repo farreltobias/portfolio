@@ -60,6 +60,7 @@ After any schema change:
 Full project documentation lives in `docs/`:
 
 - `ARCHITECTURE.md` — stack, structure, data flow
+- `DEPLOYMENT.md` — deployment workflow, Vercel config, content rebuild
 - `CMS.md` — Prismic content model reference
 - `ROADMAP.md` — phased implementation plan
 - `DECISIONS.md` — architecture decision records

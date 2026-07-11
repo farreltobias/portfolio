@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@astrojs/react": "^6.0.0",
+    "@astrojs/sitemap": "^3.7.3",
     "@astrojs/vercel": "^11.0.0",
     "@prismicio/client": "^7.21.8",
     "@tailwindcss/vite": "^4.3.1",
