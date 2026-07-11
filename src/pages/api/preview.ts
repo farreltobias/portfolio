@@ -4,32 +4,8 @@
 export const prerender = false;
 
 import type { APIRoute } from 'astro';
+import { linkResolver } from '@/lib/linkResolver';
 import { createClient } from '@/prismicio/client';
-
-/**
- * Link resolver — maps Prismic document types to URL paths.
- * Must match the route resolver in src/prismicio/client.ts.
- */
-const linkResolver = (document: { type: string; uid?: string }): string => {
-  switch (document.type) {
-    case 'home':
-      return '/';
-    case 'work':
-      return '/work';
-    case 'about':
-      return '/about';
-    case 'insights_page':
-      return '/insights';
-    case 'contact':
-      return '/contact';
-    case 'case_study':
-      return `/work/${document.uid}`;
-    case 'insight':
-      return `/insights/${document.uid}`;
-    default:
-      return '/';
-  }
-};
 
 export const GET: APIRoute = async ({ request }) => {
   const { searchParams, origin } = new URL(request.url);

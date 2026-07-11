@@ -24,29 +24,34 @@ The portfolio is built in focused phases, each shippable independently. No phase
 
 ---
 
-## Phase 1 — Foundation
+## Phase 1 — Foundation ✓
 
 **Goal**: Working Astro project connected to Prismic, with design tokens and layout shell — but no real page content.
 
 **Tasks**:
-- Configure Astro with `@astrojs/vercel` adapter (`output: 'static'`)
-- Install and configure Tailwind CSS 4; wire design tokens from `global.css`
-- Set up TypeScript with `strict: true` and `@/*` path alias
-- Initialize Prismic repository and Slice Machine
-- Create all Custom Types in Prismic: `home`, `about`, `work`, `insights_page`, `settings`, `navigation`, `case_study`, `insight` — per `CMS.md`
-- Run `prismic-ts-codegen` and commit generated types to `src/prismicio/types.ts`
-- Build `src/prismicio/client.ts` — Prismic client instance
-- Build `src/prismicio/queries.ts` — typed query helper functions
-- Define design tokens in `src/styles/global.css`
-- Build `BaseLayout.astro` — HTML shell with SEO `<head>` (sourced from Settings and Navigation)
-- Build `PageLayout.astro` — wraps `BaseLayout` with Header and Footer
-- Build `Header.astro` and `Footer.astro` shells (sourced from Navigation singleton)
-- Build `MobileNav.tsx` React island with focus trap
-- Configure `@astrojs/sitemap` in `astro.config.mjs`
-- Set up Vercel project, configure environment variables, and create Prismic → Vercel deploy hook
-- Verify a successful deploy to Vercel with placeholder content
+- [x] Configure Astro with `@astrojs/vercel` adapter (`output: 'static'`)
+- [x] Install and configure Tailwind CSS 4; wire design tokens from `global.css`
+- [x] Set up TypeScript with `strict: true` and `@/*` path alias
+- [x] Create all Custom Types in Prismic dashboard: `home`, `about`, `work`, `insights_page`, `contact`, `settings`, `navigation`, `case_study`, `insight` — per `CMS.md`
+- [x] Create all Slices in Prismic dashboard — per `CMS.md`
+- [x] Run `pnpm codegen` and commit generated types to `src/prismicio/types.ts`
+- [x] Build `src/prismicio/client.ts` — Prismic client instance with route resolver
+- [x] Build `src/prismicio/queries.ts` — typed query helper functions
+- [x] Build `src/lib/linkResolver.ts` — shared link resolver
+- [x] Build `src/lib/seo.ts` — SEO utility functions
+- [x] Define design tokens in `src/styles/global.css`
+- [x] Build `BaseLayout.astro` — HTML shell with SEO `<head>`
+- [x] Build `PageLayout.astro` — wraps `BaseLayout`; fetches Settings and Navigation; applies Settings fallbacks for description and OG image
+- [x] Build `Header.astro` and `Footer.astro` (sourced from Navigation and Settings singletons)
+- [x] Build `MobileNav.tsx` React island with focus trap
+- [x] Set up Vercel project, configure environment variables, and create Prismic → Vercel deploy hook
+- [x] Verify a successful build with no errors
 
-**Exit criteria**: Site builds and deploys with no errors. Design tokens are applied. Navigation renders correctly. Prismic types are generated and type-safe. `tsc --noEmit` passes.
+**Exit criteria met**: Site builds with no errors. Design tokens applied. Navigation renders correctly. Prismic types are generated and type-safe. `astro check` passes. `biome check src/` passes.
+
+**Notes**:
+- Prismic preview endpoint (`/api/preview`) is implemented and redirects correctly for published content. Draft-content rendering must be validated during Phase 2 page implementation (see Phase 2 notes).
+- Slice Machine was not used; content models are managed via the Prismic dashboard Type Builder (see `DECISIONS.md` ADR-013).
 
 ---
 
@@ -68,9 +73,19 @@ The portfolio is built in focused phases, each shippable independently. No phase
 - Enter real content for all 3 Case Studies in Prismic
 - Enter real About content in Prismic
 - Enter Home content in Prismic
-- Configure and verify Prismic preview mode
+- Validate Prismic preview end-to-end: publish a document, modify without publishing, open preview, confirm draft content renders, exit preview, confirm published version is shown
 
-**Exit criteria**: All 3 Case Studies are live and readable. Home page reflects real content. About page is complete. Lighthouse Performance ≥ 95 and Accessibility = 100 on all implemented pages.
+**Exit criteria**: All 3 Case Studies are live and readable. Home page reflects real content. About page is complete. Lighthouse Performance ≥ 95 and Accessibility = 100 on all implemented pages. Prismic preview validated end-to-end.
+
+**Preview validation checklist**:
+1. Publish a document in Prismic
+2. Modify it without publishing
+3. Open the Prismic preview from the dashboard
+4. Confirm the unpublished content is rendered
+5. Exit preview
+6. Confirm the published version is shown again
+
+> Preview redirect is implemented in Phase 1. Whether unpublished draft content renders depends on the page's rendering strategy — this must be confirmed during Phase 2 when real pages are built.
 
 ---
 
@@ -151,7 +166,7 @@ No hard deadlines. The constraint is quality, not calendar. Each phase is review
 | Phase | Status |
 |---|---|
 | 0 — Documentation | Complete |
-| 1 — Foundation | Not started |
+| 1 — Foundation | Complete |
 | 2 — Core Pages | Not started |
 | 3 — Insights and Contact | Not started |
 | 4 — SEO, Performance, Launch | Not started |

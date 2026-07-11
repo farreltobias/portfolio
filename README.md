@@ -1,46 +1,70 @@
-# Astro Starter Kit: Basics
+# Farrel — Portfolio
 
-```sh
-pnpm create astro@latest -- --template basics
+Personal portfolio for Guilherme Farrel, Product Engineer.
+
+**Live**: [portfolio.farrel.tech](https://portfolio.farrel.tech)
+
+## Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | Astro 5 |
+| Styling | Tailwind CSS 4 |
+| CMS | Prismic (Type Builder) |
+| Language | TypeScript (strict) |
+| Deployment | Vercel |
+
+## Commands
+
+| Command | Action |
+|---|---|
+| `pnpm dev` | Start dev server at `localhost:4321` |
+| `pnpm build` | Type-check and build for production |
+| `pnpm preview` | Preview production build locally |
+| `pnpm check` | Run `astro check` + Biome lint |
+| `pnpm format` | Format with Biome |
+| `pnpm codegen` | Regenerate Prismic TypeScript types from the dashboard |
+
+## Environment Variables
+
+Copy `.env.example` to `.env` and fill in the values:
+
+```env
+# Required — Prismic repository name
+PRISMIC_ENVIRONMENT=
+
+# Optional — required only if the Prismic repository is set to private
+PRISMIC_ACCESS_TOKEN=
+
+# Required for pnpm codegen — never exposed to client-side code
+PRISMIC_CUSTOM_TYPES_API_TOKEN=
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## CMS Workflow
 
-## 🚀 Project Structure
+Content models are managed in the [Prismic dashboard](https://prismic.io) Type Builder.
 
-Inside of your Astro project, you'll see the following folders and files:
+After any schema change:
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+1. Change the model in the Prismic dashboard
+2. Save/publish the model
+3. Run `pnpm codegen`
+4. Commit the updated `src/prismicio/types.ts`
+5. Update any affected queries or components
+6. Run `pnpm check` and `pnpm build`
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+`src/prismicio/types.ts` is generated — do not edit it manually.
 
-## 🧞 Commands
+## Documentation
 
-All commands are run from the root of the project, from a terminal:
+Full project documentation lives in `docs/`:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- `ARCHITECTURE.md` — stack, structure, data flow
+- `CMS.md` — Prismic content model reference
+- `ROADMAP.md` — phased implementation plan
+- `DECISIONS.md` — architecture decision records
+- `IMPLEMENTATION_GUIDE.md` — engineering conventions
+- `DESIGN_SYSTEM.md` — design tokens and component rules
+- `CONTENT_STRATEGY.md` — editorial guidelines
+- `SEO.md` — SEO implementation notes
+- `ENGINEERING_PRINCIPLES.md` — principles governing all decisions

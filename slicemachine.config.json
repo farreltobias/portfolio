@@ -1,6 +1,0 @@
-{
-  "repositoryName": "farrel-portfolio",
-  "adapter": "@slicemachine/adapter-next",
-  "libraries": ["./slices"],
-  "customTypesDir": "./customtypes"
-}

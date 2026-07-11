@@ -1,11 +1,16 @@
 import * as prismic from '@prismicio/client';
 
-export const repositoryName = import.meta.env.PRISMIC_ENVIRONMENT as string;
+const repositoryName = import.meta.env.PRISMIC_ENVIRONMENT as string;
 
-/**
- * Route resolver — maps Prismic document types to URL paths.
- * Used by PrismicLink and isFilled.link helpers to resolve internal links.
- */
+if (!repositoryName) {
+  throw new Error(
+    '[Prismic] PRISMIC_ENVIRONMENT is not set. Add it to your .env file — see .env.example.',
+  );
+}
+
+export { repositoryName };
+
+// Route resolver — maps document types to URL paths for asLink() and preview redirect.
 const routes: prismic.ClientConfig['routes'] = [
   { type: 'home', path: '/' },
   { type: 'work', path: '/work' },
@@ -19,5 +24,6 @@ const routes: prismic.ClientConfig['routes'] = [
 export const createClient = (config: prismic.ClientConfig = {}) =>
   prismic.createClient(repositoryName, {
     routes,
+    accessToken: import.meta.env.PRISMIC_ACCESS_TOKEN as string | undefined,
     ...config,
   });

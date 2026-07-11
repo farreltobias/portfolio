@@ -68,13 +68,13 @@ Not valid justifications:
 
 ### Always use generated types
 
-After any schema change, run:
+After any schema change in the Prismic dashboard, run:
 
 ```bash
-pnpm prismic-ts-codegen
+pnpm codegen
 ```
 
-Commit the result in `src/prismicio/types.ts`. Never use `any` for Prismic data. If the generated type is wrong, the schema is wrong — fix the schema.
+Commit the result in `src/prismicio/types.ts`. Never edit `src/prismicio/types.ts` manually — all changes must come from `pnpm codegen`. Never use `any` for Prismic data. If the generated type is wrong, the schema is wrong — fix the schema in the Prismic dashboard.
 
 ### Queries belong in `src/prismicio/queries.ts`
 
@@ -93,15 +93,17 @@ const caseStudy = await client.getByUID('case_study', uid)
 
 ### Settings and Navigation are fetched in the layout
 
-`settings` and `navigation` are fetched once in `PageLayout.astro` using `Promise.all`. They are passed as props to Header and Footer. Do not fetch them again inside page files or section components.
+`settings` and `navigation` are fetched once in `PageLayout.astro` using `Promise.allSettled`. They are passed as props to Header and Footer. Do not fetch them again inside page files or section components. Each fetch fails independently — a missing Navigation document does not prevent Settings from loading, and vice versa.
 
 ```typescript
 // In PageLayout.astro
-const [settings, navigation] = await Promise.all([
+const [settingsResult, navigationResult] = await Promise.allSettled([
   getSettings(),
   getNavigation(),
 ])
 ```
+
+Settings also provides global SEO fallbacks: `site_description` is used when a page does not supply its own `description`, and `og_image` is used when a page does not supply its own OG image.
 
 ### Prismic images use Astro's `<Image>` with Prismic's Imgix URL
 
@@ -153,7 +155,7 @@ export type Props = {
 
 ### SEO metadata is always present
 
-Every page must pass `title` and `description` to `BaseLayout`. No page renders without these. Source them from the Prismic document or the Settings singleton fallback — never hardcode them in the page file.
+Every page must pass `title` to `PageLayout`. `description` is optional — when omitted, `PageLayout` falls back to `settings.site_description`. Source the title from the Prismic document or `buildTitle()` in `src/lib/seo.ts`. Never hardcode meta values directly in page files.
 
 ---
 

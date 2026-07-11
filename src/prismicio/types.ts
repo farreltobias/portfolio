@@ -238,18 +238,6 @@ interface CaseStudyDocumentData {
 	cover_image: prismic.ImageField<never>;
 	
 	/**
-	 * Feature on Home Page field in *Case Study*
-	 *
-	 * - **Field Type**: Boolean
-	 * - **Placeholder**: *None*
-	 * - **Default Value**: false
-	 * - **API ID Path**: case_study.is_featured
-	 * - **Tab**: Main
-	 * - **Documentation**: https://prismic.io/docs/fields/boolean
-	 */
-	is_featured: prismic.BooleanField;
-	
-	/**
 	 * Sort Order field in *Case Study*
 	 *
 	 * - **Field Type**: Number

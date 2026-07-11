@@ -1,15 +1,19 @@
 ---
-// Phase 1.1 placeholder — layout and content implemented in Phase 2
+import PageLayout from '@/layouts/PageLayout.astro';
+import { buildCanonical, buildTitle } from '@/lib/seo';
+
+// Home title is just the brand; description falls back to settings.site_description.
+const title = buildTitle('');
+const canonical = buildCanonical('/');
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Guilherme Farrel — Product Engineer</title>
-  </head>
-  <body>
-    <p>Coming soon.</p>
-  </body>
-</html>
+<PageLayout title={title} canonical={canonical} ogType="website">
+  <div
+    class="mx-auto px-6 py-24 lg:px-16"
+    style="max-width: var(--container-xl);"
+  >
+    <p style="color: var(--color-text-muted); font-size: var(--text-sm);">
+      Phase 1 — Foundation. Implementation begins in Phase 2.
+    </p>
+  </div>
+</PageLayout>

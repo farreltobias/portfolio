@@ -56,7 +56,7 @@ Use Prismic.
 
 **Positive**:
 - Prismic provides a TypeScript SDK with generated types (`prismic-ts-codegen`), enabling type-safe CMS queries throughout the codebase.
-- Slice Machine enforces schema in version control.
+- The Type Builder (cloud-based) is the schema editor — no local tooling required.
 - The free tier is sufficient for this project's volume.
 - Prismic preview mode enables content review before publishing without a staging environment.
 
@@ -358,3 +358,34 @@ The `nav_cta_link` remains a generic Link because it may point to external desti
 - If a future navigation item needs to link to an external URL (e.g. a podcast appearance), the `nav_links` group cannot accommodate it. A separate `external_links` group would be needed.
 
 **Trade-off accepted**: Primary navigation on a personal portfolio is intentionally CMS-page-driven. If external nav links are needed in future, they will be modeled explicitly rather than loosening the existing restriction.
+
+---
+
+## ADR-013: Migrate from Slice Machine to Prismic Type Builder
+
+**Date**: 2026-07-11
+**Status**: Accepted
+
+### Context
+
+Slice Machine is being deprecated by Prismic in favour of the cloud-based Type Builder, built directly into the Prismic dashboard. The project was using `@slicemachine/adapter-next` and `slice-machine-ui` to manage Custom Types and Slices as local JSON files (`customtypes/*/index.json`, `slices/*/model.json`). These were committed to the repository and used as the source for `prismic-ts-codegen`.
+
+Prismic announced the deprecation with a migration path to the Type Builder, which serves the same schema-editing purpose without local tooling.
+
+### Decision
+
+Migrate fully to the Type Builder. Remove all Slice Machine packages and local schema files. Switch `prismic-ts-codegen` to fetch models directly from the Prismic Custom Types API.
+
+### Consequences
+
+**Positive**:
+- No deprecated tooling in the stack.
+- Simpler repository: no local JSON schema files to maintain or keep in sync.
+- Schema changes are made in the Prismic dashboard — the same place content is managed.
+- `pnpm codegen` regenerates types from the live API, always reflecting the actual schema.
+
+**Negative**:
+- Schema changes are no longer version-controlled as JSON files in the repository. The generated `src/prismicio/types.ts` is still committed, giving a TypeScript-level record of the schema shape.
+- `pnpm codegen` requires network access and `PRISMIC_CUSTOM_TYPES_API_TOKEN` to run.
+
+**Trade-off accepted**: For a solo-maintained personal portfolio, the operational simplicity of cloud-managed schemas outweighs the loss of JSON-level schema diffs in git. The TypeScript diff in `src/prismicio/types.ts` is sufficient as a schema change record.

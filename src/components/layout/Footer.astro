@@ -1,0 +1,129 @@
+---
+import * as prismic from '@prismicio/client';
+import { getPrismicLink } from '@/lib/linkResolver';
+import type { NavigationDocument, SettingsDocument } from '@/prismicio/types';
+
+export interface Props {
+  navigation: NavigationDocument | null;
+  settings: SettingsDocument | null;
+}
+
+const { navigation, settings } = Astro.props;
+const nav_links = navigation?.data?.nav_links ?? [];
+
+const navLinks = nav_links
+  .filter((item) => prismic.isFilled.contentRelationship(item.page))
+  .map((item) => ({
+    label: item.label ?? '',
+    href: getPrismicLink(item.page) ?? '/',
+  }));
+
+const {
+  contact_email,
+  linkedin_url,
+  github_url,
+  scheduling_url,
+  footer_tagline,
+} = settings?.data || {};
+
+const contactEmail = contact_email ?? null;
+const linkedinUrl = getPrismicLink(linkedin_url);
+const githubUrl = getPrismicLink(github_url);
+const schedulingUrl = getPrismicLink(scheduling_url);
+const footerTagline = footer_tagline ?? null;
+const currentYear = new Date().getFullYear();
+---
+
+<footer
+  style="border-top: 1px solid var(--color-border); background-color: var(--color-surface);"
+>
+  <div
+    class="mx-auto px-6 py-12 lg:px-16"
+    style="max-width: var(--container-xl);"
+  >
+    <div class="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
+      <!-- Tagline -->
+      <div>
+        {footerTagline && (
+          <p class="text-sm" style="color: var(--color-text-muted);">
+            {footerTagline}
+          </p>
+        )}
+      </div>
+
+      <!-- Nav links -->
+      {navLinks.length > 0 && (
+        <nav aria-label="Footer navigation">
+          <ul class="flex flex-wrap gap-x-6 gap-y-2" role="list">
+            {navLinks.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="text-sm transition-colors duration-150"
+                  style="color: var(--color-text-muted); text-decoration: none;"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
+
+      <!-- Social / contact links -->
+      <div class="flex items-center gap-4">
+        {contactEmail && (
+          <a
+            href={`mailto:${contactEmail}`}
+            class="text-sm transition-colors duration-150"
+            style="color: var(--color-text-muted); text-decoration: none;"
+            aria-label="Send an email"
+          >
+            Email
+          </a>
+        )}
+        {linkedinUrl && (
+          <a
+            href={linkedinUrl}
+            class="text-sm transition-colors duration-150"
+            style="color: var(--color-text-muted); text-decoration: none;"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            LinkedIn
+          </a>
+        )}
+        {githubUrl && (
+          <a
+            href={githubUrl}
+            class="text-sm transition-colors duration-150"
+            style="color: var(--color-text-muted); text-decoration: none;"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub
+          </a>
+        )}
+        {schedulingUrl && (
+          <a
+            href={schedulingUrl}
+            class="text-sm transition-colors duration-150"
+            style="color: var(--color-text-muted); text-decoration: none;"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Schedule a call
+          </a>
+        )}
+      </div>
+    </div>
+
+    <!-- Copyright -->
+    <p
+      class="mt-8 text-xs"
+      style="color: var(--color-text-muted); border-top: 1px solid var(--color-border); padding-top: 1.5rem;"
+    >
+      &copy; {currentYear} Guilherme Farrel. All rights reserved.
+    </p>
+  </div>
+</footer>

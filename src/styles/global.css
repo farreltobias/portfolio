@@ -1,5 +1,45 @@
 @import "tailwindcss";
 
+/* ─── Base ───────────────────────────────────────────────────────────────────── */
+
+html {
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+/* ─── Skip link ──────────────────────────────────────────────────────────────── */
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: calc(var(--z-sticky) + 1);
+  padding: 0.5rem 1rem;
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+  font-weight: var(--font-semibold);
+  font-size: var(--text-sm);
+  border-radius: var(--radius-base);
+  text-decoration: none;
+}
+
+.skip-link:focus-visible {
+  top: 1rem;
+}
+
 /*
   Design tokens are defined as CSS custom properties on :root.
 

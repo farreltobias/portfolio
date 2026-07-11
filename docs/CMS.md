@@ -38,7 +38,7 @@ Fields are grouped by section for CMS clarity.
 | Field | Type | Notes |
 |---|---|---|
 | `featured_work_eyebrow` | Text | Section eyebrow label |
-| `featured_case_studies` | Group | Repeatable: Link to Case Study document (max 3) |
+| `featured_case_studies` | Group | Repeatable: Content Relationship to Case Study document — editorial selection and ordering (max 3) |
 | `featured_work_cta_label` | Text | "View all work" link label |
 
 **About Preview section**
@@ -190,7 +190,6 @@ These have UIDs and can have multiple instances.
 | `tech_tags` | Group | Repeatable: `tag` (Text) |
 | `outcome_summary` | Text | One-line outcome — shown on cards and Work list |
 | `cover_image` | Image | Featured image for card and detail header |
-| `is_featured` | Boolean | Include in Home page Featured Work section |
 | `sort_order` | Number | Manual ordering for Work page list |
 
 **Slices (body) — semantic sections**
@@ -267,16 +266,15 @@ const home = await client.getSingle('home')
 const settings = await client.getSingle('settings')
 const navigation = await client.getSingle('navigation')
 
-// All Case Studies, manually sorted
+// All Case Studies, manually sorted (Work index page)
 const caseStudies = await client.getAllByType('case_study', {
   orderings: [{ field: 'my.case_study.sort_order', direction: 'asc' }],
 })
 
-// Featured Case Studies for Home page
-const featured = await client.getAllByType('case_study', {
-  filters: [filter.at('my.case_study.is_featured', true)],
-  orderings: [{ field: 'my.case_study.sort_order', direction: 'asc' }],
-})
+// Featured Case Studies for Home page: resolved from home.featured_case_studies
+// (a Group of Content Relationship fields — editorial selection and ordering)
+const home = await client.getSingle('home')
+// home.data.featured_case_studies is the authoritative list; no separate query needed.
 
 // Single Case Study by UID
 const caseStudy = await client.getByUID('case_study', uid)
@@ -298,13 +296,17 @@ Contact is fetched on the Contact page only — it is a singleton like the other
 
 ## Type Generation
 
-After any schema change in Slice Machine or the Prismic dashboard:
+Content models are managed in the Prismic dashboard Type Builder. After any schema change:
 
-```bash
-pnpm codegen
-```
+1. Change the model in the Prismic dashboard
+2. Save/publish the model
+3. Run `pnpm codegen`
+4. Review the generated diff in `src/prismicio/types.ts`
+5. Update queries/components if required
+6. Run `pnpm check`
+7. Run `pnpm build`
 
-Generated types live in `src/prismicio/types.ts`. Commit this file — it is the source of truth for Prismic document types in TypeScript. Do not edit it manually.
+Generated types live in `src/prismicio/types.ts`. This file is version-controlled and must be committed after every schema change. Do not edit it manually — all changes must come from `pnpm codegen`.
 
 ---
 
