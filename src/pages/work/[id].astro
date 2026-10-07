@@ -1,0 +1,25 @@
+---
+import { getCollection, render } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export const getStaticPaths = (async () => {
+  const projects = await getCollection("projects");
+  return projects.map((project) => ({
+    params: { id: project.id },
+    props: { project },
+  }));
+}) satisfies GetStaticPaths;
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+---
+
+<BaseLayout title={project.data.title} description={project.data.description}>
+  <article>
+    <h1>{project.data.title}</h1>
+    <p>{project.data.description}</p>
+    <p>{project.data.role} · {project.data.year}</p>
+    <Content />
+  </article>
+</BaseLayout>
