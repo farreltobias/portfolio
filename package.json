@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "format": "biome format --write .",
+    "lint": "biome lint .",
+    "check": "biome check ."
   },
   "keywords": [],
   "author": "",
@@ -17,6 +18,7 @@
     "astro": "^7.3.6"
   },
   "devDependencies": {
+    "typescript": "^7.0.2",
     "@biomejs/biome": "2.5.15"
   }
 }
