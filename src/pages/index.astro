@@ -1,8 +1,70 @@
 ---
+import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const selectedWork = (
+  await getCollection("projects", ({ data }) => data.featured)
+).sort((a, b) => b.data.year - a.data.year);
 ---
 
-<BaseLayout title="Farrel">
-  <h1>Farrel</h1>
-  <p>Placeholder home copy.</p>
+<BaseLayout
+  title="Farrel — Product Engineer"
+  description="Farrel is a Product Engineer who builds software that simplifies how products and operations run, from problem definition to shipped solution."
+>
+  <section>
+    <p>Farrel — Product Engineer</p>
+    <h1>I build software that simplifies how products and operations run.</h1>
+    <p>
+      I work on workflows with unnecessary manual work, operational
+      bottlenecks, slow internal processes, and marketplace or commerce
+      complexity.
+    </p>
+    <p>
+      I help understand the problem, define the scope, make the product and
+      technical decisions, and ship the solution, weighing each technical
+      decision by its impact on operational efficiency, cost, revenue, and
+      maintainability.
+    </p>
+  </section>
+
+  <section>
+    <h2>Selected work</h2>
+    <ul>
+      {
+        selectedWork.map((project) => (
+          <li>
+            <h3>
+              <a href={`/work/${project.id}`}>{project.data.title}</a>
+            </h3>
+            <p>{project.data.description}</p>
+            <p>
+              {project.data.role} · {project.data.year}
+            </p>
+          </li>
+        ))
+      }
+    </ul>
+    <a href="/work">See all work</a>
+  </section>
+
+  <section>
+    <h2>Background</h2>
+    <p>
+      Product Engineer with a backend and product-oriented mindset, across
+      marketplace products, operational software, internal tooling, and
+      automation.
+    </p>
+    <p>
+      Previous outcomes include bringing API response times down from several
+      seconds to around 500 ms, and cutting support requests from about four a
+      day to one or two a week.
+    </p>
+    <p>Based in Brazil, working remotely with international teams.</p>
+  </section>
+
+  <section>
+    <h2>Have a product or operations problem to solve?</h2>
+    <p>Open to Product Engineering roles and contract work.</p>
+    <a href="/contact">Let's talk</a>
+  </section>
 </BaseLayout>
