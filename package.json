@@ -1,8 +1,8 @@
 {
   "name": "portfolio",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "private": true,
+  "packageManager": "pnpm@10.33.1",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -10,15 +10,11 @@
     "lint": "biome lint .",
     "check": "biome check ."
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "packageManager": "pnpm@10.33.1",
   "dependencies": {
     "astro": "^7.3.6"
   },
   "devDependencies": {
-    "typescript": "^7.0.2",
-    "@biomejs/biome": "2.5.15"
+    "@biomejs/biome": "2.5.15",
+    "typescript": "^7.0.2"
   }
 }
