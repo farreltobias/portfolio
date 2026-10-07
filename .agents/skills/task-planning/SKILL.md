@@ -141,6 +141,48 @@ Prefer a smaller task when the same behavior can be specified without losing inf
 - New name persists everywhere.
 ```
 
+## Storage
+
+Each task must live in its own directory.
+
+Canonical structure:
+
+```text
+tasks/
+└── <task-id>-<task-name>/
+    └── TASK.md
+```
+
+`TASK.md` is the canonical task specification.
+
+Optional artifacts may be added only when they contain information that must remain independent from the task
+specification:
+
+```text
+tasks/
+└── <task-id>-<task-name>/
+    ├── TASK.md
+    ├── PLAN.md
+    └── REVIEW.md
+```
+
+### `PLAN.md`
+
+Use only when the implementation requires a non-trivial execution plan that must remain available independently from the
+task specification.
+
+### `REVIEW.md`
+
+Use only when review findings, validation results, risks, or follow-up decisions must be preserved independently.
+
+Each artifact must contain distinct information.
+
+Stable product context belongs in the canonical product docs.
+
+Implementation state belongs in the code and Git history.
+
+Optional artifacts must not be created solely to satisfy the directory structure.
+
 ## Chain of Density
 
 For every task:
@@ -154,9 +196,10 @@ For every task:
 
 ## Final Test
 
-For every line:
+For every line or task artifact:
 
-> Could removing this line cause a competent implementation agent to implement the task materially differently?
+> Could removing this information cause a competent implementation agent to implement the task materially differently or
+> lose information that must survive independently?
 
 - Yes: keep it.
 - No: remove it.

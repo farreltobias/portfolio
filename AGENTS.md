@@ -51,6 +51,8 @@ If yes, keep it. If no, remove it.
 ## Tasks
 
 - Tasks must describe only the current delta.
+- Store each task in its own directory with one canonical task specification.
+- Add optional task artifacts only when they contain distinct information that must survive independently.
 - Reference canonical product context instead of repeating it.
 - Use existing architecture and conventions as context instead of restating them.
 - Reference existing product rules instead of duplicating them.
