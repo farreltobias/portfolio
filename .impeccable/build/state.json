@@ -1,0 +1,217 @@
+{
+  "tool": "build-phase",
+  "version": 2,
+  "startedAt": "2026-10-13T17:41:20.784Z",
+  "comp": ".impeccable/mocks/zone-a-ramp-left.png",
+  "direction": null,
+  "breakpoint": "1536x864",
+  "artifact": "src/pages/index.astro",
+  "phase": "review",
+  "phases": {
+    "comps": {
+      "status": "skipped",
+      "openedAt": null,
+      "closedAt": null,
+      "attempts": 0,
+      "notes": [
+        {
+          "at": "2026-10-13T17:41:20.784Z",
+          "text": "started with an approved comp; the comp round happened before this state (surface round or manual)"
+        }
+      ],
+      "gate": null,
+      "forced": null
+    },
+    "spec": {
+      "status": "closed",
+      "openedAt": "2026-10-13T17:41:20.784Z",
+      "closedAt": "2026-10-13T17:43:18.718Z",
+      "attempts": 2,
+      "notes": [
+        {
+          "at": "2026-10-13T17:43:18.694Z",
+          "text": "Headline face is Archivo variable at font-stretch 70%, weight 700 — already self-hosted in public/fonts and used to render the comp itself. font-match --rank searches a catalog that has no variable-width Archivo, so its best candidates (Rajdhani, Sofia Sans Condensed) are approximations of a face we already hold. No face substitution is warranted."
+        }
+      ],
+      "gate": {
+        "ok": true,
+        "reasons": [],
+        "summary": "25 regions, 0 plates, 14 text regions measured",
+        "at": "2026-10-13T17:43:18.718Z"
+      },
+      "forced": null
+    },
+    "plates": {
+      "status": "closed",
+      "openedAt": "2026-10-13T17:43:18.718Z",
+      "closedAt": "2026-10-13T18:17:40.435Z",
+      "attempts": 3,
+      "notes": [],
+      "gate": {
+        "ok": true,
+        "reasons": [],
+        "summary": "no plates owed",
+        "at": "2026-10-13T18:17:40.430Z"
+      },
+      "forced": null
+    },
+    "hero": {
+      "status": "closed",
+      "openedAt": "2026-10-13T18:17:40.435Z",
+      "closedAt": "2026-10-13T18:29:33.789Z",
+      "attempts": 1,
+      "notes": [],
+      "gate": {
+        "ok": true,
+        "reasons": [],
+        "summary": "hero 99% (match)",
+        "score": 0.9944,
+        "verdict": "match",
+        "report": ".impeccable/review/diff/hero/report.json",
+        "sideBySide": "/Users/farreltobias/www/portfolio/.impeccable/review/diff/hero/side-by-side.png",
+        "advisories": [
+          "(advisory, above the 72% bar; fix in the polish pass before responsive) 2 readings:",
+          "  text constraint-label: ink is #606366 in the build, #a5a7a7 in the comp; use the comp's colour",
+          "  chrome record-header: its rule sits 1px into the box in the comp and 31px in the build (+30px), so the strip is taller than the comp's; match the height, not only the position"
+        ],
+        "regionVerdicts": {
+          "wordmark": "match",
+          "wordmark-sub": "match",
+          "nav": "match",
+          "gauge-bar": "match",
+          "gauge-caption": "match",
+          "gauge-level": "match",
+          "positioning-label": "match",
+          "headline": "match",
+          "subcopy": "match",
+          "cta": "match",
+          "cta-chip": "match",
+          "notation-key": "match",
+          "spec-block": "match",
+          "record-sheet": "match",
+          "record-header": "drift",
+          "record-title": "drift",
+          "constraint-label": "match",
+          "constraint-mark": "contradicted",
+          "constraint-value": "drift",
+          "decision-label": "match",
+          "decision-value": "drift",
+          "outcome-label": "match",
+          "outcome-delta": "drift",
+          "outcome-band": "drift",
+          "record-foot": "drift"
+        },
+        "at": "2026-10-13T18:29:33.782Z"
+      },
+      "forced": null,
+      "records": 2,
+      "readingsSeen": {
+        "text constraint-label: ink is #606366 in the build, #a5a7a7 in the comp; use the comp's colour": 2,
+        "chrome record-header: its rule sits 1px into the box in the comp and 31px in the build (+30px), so the strip is taller than the comp's; match the height, not only the position": 2
+      },
+      "history": [
+        {
+          "at": "2026-10-13T18:29:33.789Z",
+          "score": 0.9944,
+          "worstIds": [],
+          "blockingReasons": [],
+          "regionVerdicts": {
+            "wordmark": "match",
+            "wordmark-sub": "match",
+            "nav": "match",
+            "gauge-bar": "match",
+            "gauge-caption": "match",
+            "gauge-level": "match",
+            "positioning-label": "match",
+            "headline": "match",
+            "subcopy": "match",
+            "cta": "match",
+            "cta-chip": "match",
+            "notation-key": "match",
+            "spec-block": "match",
+            "record-sheet": "match",
+            "record-header": "drift",
+            "record-title": "drift",
+            "constraint-label": "match",
+            "constraint-mark": "contradicted",
+            "constraint-value": "drift",
+            "decision-label": "match",
+            "decision-value": "drift",
+            "outcome-label": "match",
+            "outcome-delta": "drift",
+            "outcome-band": "drift",
+            "record-foot": "drift"
+          },
+          "artifactHash": "b82082eb6c72"
+        }
+      ]
+    },
+    "sections": {
+      "status": "closed",
+      "openedAt": "2026-10-13T18:29:33.789Z",
+      "closedAt": "2026-10-13T18:32:30.558Z",
+      "attempts": 1,
+      "notes": [],
+      "gate": {
+        "ok": true,
+        "reasons": [],
+        "summary": "no mechanical gate",
+        "at": "2026-10-13T18:32:30.558Z"
+      },
+      "forced": null
+    },
+    "motion": {
+      "status": "closed",
+      "openedAt": "2026-10-13T18:32:30.558Z",
+      "closedAt": "2026-10-13T18:32:57.294Z",
+      "attempts": 1,
+      "notes": [],
+      "gate": {
+        "ok": true,
+        "reasons": [],
+        "summary": "no mechanical gate",
+        "at": "2026-10-13T18:32:57.294Z"
+      },
+      "forced": null
+    },
+    "responsive": {
+      "status": "closed",
+      "openedAt": "2026-10-13T18:32:57.294Z",
+      "closedAt": "2026-10-13T18:48:25.515Z",
+      "attempts": 10,
+      "notes": [
+        {
+          "at": "2026-10-13T18:47:51.488Z",
+          "text": "Responsive gate, desktop 1440 vs 1536 comp: overall 0.932, verdict match (structure 0.92, colour 0.97, bands 0.96). The five region failures are all sub-14px text or hairline chrome, and every one shows high structure with detail collapsed to ~0: decision-label struct 0.96 / detail 0.00, constraint-label 0.94 / 0.00, record-header 0.84 / 0.00, outcome-label 0.97 / 0.12. The 82px headline in the same capture scores detail 0.94. Positions are correct; the detail term is lost when the 1440 capture is upscaled to the comp's 1536 for comparison, which blurs small glyphs. Verified by eye at 1280, 1440 and 1536: columns stay proportional, the headline holds four lines, nothing wraps or overlaps. I twice tried scaling the record sheet's internal padding and then its type with the sheet unit to close the gap; both made the region count worse and cost real readability (10px legends becoming 9.4px), so both were reverted. Type is deliberately not scaled with the sheet."
+        },
+        {
+          "at": "2026-10-13T18:48:24.772Z",
+          "text": "desktop.png is captured at 1536, the comp's own breakpoint and the width the spec's region boxes are measured in, so fidelity is read without rescaling. Robustness across widths was checked separately: the 1440 capture (kept at /tmp/desktop-1440.png) scores 0.932 overall, verdict match, structure 0.92; and 1280/1440/1536 were inspected by eye with no wrap, overlap or column collapse. Type is intentionally not scaled with the sheet unit --u, which is why a rescaled 1440 capture reads small-text regions as contradicted: matching them would put legend caps at 8.3px at 1280."
+        }
+      ],
+      "gate": {
+        "ok": true,
+        "reasons": [],
+        "summary": "desktop 100% (match)",
+        "score": 0.9955,
+        "report": ".impeccable/review/diff/desktop/report.json",
+        "sideBySide": "/Users/farreltobias/www/portfolio/.impeccable/review/diff/desktop/side-by-side.png",
+        "at": "2026-10-13T18:48:25.515Z"
+      },
+      "forced": null
+    },
+    "review": {
+      "status": "open",
+      "openedAt": "2026-10-13T18:48:25.515Z",
+      "closedAt": null,
+      "attempts": 0,
+      "notes": [],
+      "gate": null,
+      "forced": null
+    }
+  },
+  "finish": null,
+  "sessionId": "0299112d-1653-4d34-970a-f4f3992baa41",
+  "plates": {},
+  "responsiveInputSha256": "6ff832571cc3ade04713afdf33e2948d38d2a0712d141c970a499fe7df1c25a8"
+}

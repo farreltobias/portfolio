@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 2,
+  "stage": "hero",
+  "id": "hero",
+  "title": "First viewport",
+  "comp": {
+    "path": ".impeccable/mocks/home-stamped-order.webp",
+    "width": 1536,
+    "height": 864
+  },
+  "components": [
+    {
+      "id": "first-viewport",
+      "name": "First viewport",
+      "medium": "HTML / CSS",
+      "note": "Carbonless Copy home, first viewport assembled from the approved plates",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "preview": {
+        "kind": "page",
+        "path": ".impeccable/review/page/index.html"
+      },
+      "dependencies": [
+        ".impeccable/review/page/page.css",
+        ".impeccable/review/page/plates/canary-stock.png",
+        ".impeccable/review/page/plates/circled-outcome.png",
+        ".impeccable/review/page/plates/feed-strip.png",
+        ".impeccable/review/page/plates/ink-fail.png",
+        ".impeccable/review/page/plates/paper-grain.png",
+        ".impeccable/review/page/plates/pink-stock.png",
+        ".impeccable/review/page/plates/sheet-edge.png",
+        ".impeccable/review/page/plates/stamp.png",
+        ".impeccable/review/page/fonts/cutive-mono-400-latin-ext.woff2",
+        ".impeccable/review/page/fonts/cutive-mono-400-latin.woff2",
+        ".impeccable/review/page/fonts/georama-700-latin-ext.woff2",
+        ".impeccable/review/page/fonts/georama-700-latin.woff2",
+        ".impeccable/review/page/fonts/overpass-mono-700-latin-ext.woff2",
+        ".impeccable/review/page/fonts/overpass-mono-700-latin.woff2"
+      ]
+    }
+  ]
+}

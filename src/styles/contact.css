@@ -1,0 +1,291 @@
+/* ================================================================ contact --
+   One more sheet off the Home's stack. Everything here is Home's vocabulary;
+   this file only places it. The address is the drawing: set in mono at the
+   size that fills the sheet, in ink, because magenta is kept for measured
+   change. */
+
+.contact-head {
+  display: grid;
+  grid-template-columns: 11.181% minmax(0, 1fr) 33.125%;
+  align-items: start;
+  margin-top: calc(55 * var(--u));
+}
+
+.contact-head .zone {
+  grid-column: 1;
+  padding-top: calc(14 * var(--u));
+  color: var(--ink-faint);
+}
+
+.contact-intro {
+  grid-column: 2;
+  margin-left: 7.356%;
+}
+
+.contact-title {
+  font-size: clamp(44px, 4.8vw, 74px);
+  margin-top: calc(6 * var(--u));
+}
+
+.contact-sub {
+  margin-top: 18px;
+  color: var(--ink-soft);
+  max-width: 60ch;
+  text-wrap: pretty;
+}
+
+.contact-head .spec {
+  grid-column: 3;
+  justify-self: end;
+}
+
+/* ------------------------------------------------------------------ sheet -- */
+.contact-body {
+  display: grid;
+  grid-template-columns: 11.181% minmax(0, 1fr) 33.125%;
+  margin-top: calc(72 * var(--u));
+}
+
+.contact-sheet {
+  --pad: 24px;
+  grid-column: 2 / span 2;
+  /* Aligned with the band bodies on Home, and short of the edge by the
+     stacked shadow's reach. */
+  margin-left: 4.613%;
+  width: calc(100% - 4.613% - 13px);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  box-shadow:
+    0 0 0 1px rgb(21 22 26 / 7%),
+    14px 16px 0 -1px rgb(21 22 26 / 5.5%);
+}
+
+.contact-sheet .rh {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 9px var(--pad);
+  border-bottom: 1px solid var(--rule);
+}
+
+.contact-sheet .rh h2 {
+  color: var(--ink);
+}
+
+.contact-sheet .sheet-no {
+  font-family: "Plex Mono", monospace;
+  font-size: var(--t-key);
+  color: var(--ink-faint);
+}
+
+/* The address fills the sheet's measure on one line: its size is the sheet's
+   width divided by its own length in mono advances. */
+.mail {
+  container-type: inline-size;
+  padding: 20px var(--pad) 28px;
+}
+
+.mail .k {
+  color: var(--ink-faint);
+}
+
+.address {
+  display: block;
+  margin-top: 16px;
+  font-family: "Plex Mono", monospace;
+  font-weight: 600;
+  /* 0.6em is Plex Mono's advance; tracking takes a little back, which is the
+     margin that keeps the last glyph off the sheet's edge. */
+  font-size: min(calc(100cqi / (var(--chars, 24) * 0.6)), 104px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.16em;
+  text-decoration-color: transparent;
+  transition: text-decoration-color 140ms linear;
+}
+
+@media (hover: hover) {
+  .address:hover {
+    text-decoration-color: var(--ink);
+  }
+}
+
+.mail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px 32px;
+  margin-top: 36px;
+}
+
+.mail-actions .control {
+  margin-top: 0;
+}
+
+/* Secondary to the bar, in the same lettering, carried by a hairline. On copy
+   the rule thickens and the words say so; nothing glows. */
+.copy {
+  appearance: none;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--ink);
+  padding: 15px 0 13px;
+  color: var(--ink);
+  cursor: pointer;
+  font-family: Archivo, sans-serif;
+  font-weight: 700;
+  font-stretch: 82%;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 14px;
+  transition: box-shadow 120ms linear;
+}
+
+.copy[data-state="done"] {
+  box-shadow: 0 1px 0 var(--ink);
+}
+
+.copy:focus-visible {
+  outline: 2px solid var(--mag);
+  outline-offset: 3px;
+}
+
+@media (hover: hover) {
+  .copy:hover {
+    box-shadow: 0 1px 0 var(--ink);
+  }
+}
+
+/* The other paths: the Home's title block, closing the sheet. */
+.contact-sheet .reach {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 0;
+  border-bottom: 0;
+}
+
+.contact-sheet .reach li a,
+.contact-sheet .reach li:first-child a {
+  padding: 16px var(--pad) 18px;
+}
+
+/* ----------------------------------------------------------------- footer -- */
+.contact-foot {
+  margin-top: 96px;
+  border-top: 1px solid var(--rule);
+  padding: 8px 0 64px;
+}
+
+.contact-foot .more-link {
+  margin-top: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .address,
+  .copy {
+    transition: none;
+  }
+}
+
+/* ============================================================= responsive -- */
+@media (max-width: 1279px) {
+  .contact-head {
+    grid-template-columns: minmax(0, 1fr) 280px;
+    column-gap: 56px;
+  }
+
+  /* The nav already marks where the visitor is. */
+  .contact-head .zone {
+    display: none;
+  }
+
+  .contact-intro {
+    grid-column: 1;
+    grid-row: 1;
+    margin-left: 0;
+  }
+
+  /* Placed here, overriding the Home's named-area placement for its spec. */
+  .contact-head .spec {
+    grid-area: 1 / 2;
+    margin-top: 0;
+  }
+
+  .contact-body {
+    grid-template-columns: minmax(0, 1fr);
+    margin-top: 56px;
+  }
+
+  .contact-sheet {
+    grid-column: 1;
+    margin-left: 0;
+    width: calc(100% - 5px);
+    box-shadow:
+      0 0 0 1px rgb(21 22 26 / 7%),
+      6px 7px 0 -1px rgb(21 22 26 / 5.5%);
+  }
+
+  /* Three cells still fit a tablet: undo the Home's two-by-two. */
+  .contact-sheet .reach {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  /* Undo the Home's two-by-two cell rules; keep row rules for the phone. */
+  .contact-sheet .reach li:nth-child(n) {
+    border-left: 0;
+  }
+
+  .contact-sheet .reach li:nth-child(n + 3) {
+    border-top: 0;
+  }
+
+  .contact-sheet .reach li:nth-child(n) + li {
+    border-left: 1px solid var(--rule-soft);
+  }
+}
+
+@media (max-width: 760px) {
+  .contact-head {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .contact-head .spec {
+    grid-area: 2 / 1;
+    margin-top: 32px;
+  }
+
+  .contact-body {
+    margin-top: 40px;
+  }
+
+  .contact-sheet {
+    --pad: 18px;
+  }
+
+  .address {
+    font-size: min(calc(100cqi / (var(--chars-split, 13) * 0.6)), 64px);
+    line-height: 1;
+  }
+
+  .address .addr-part {
+    display: block;
+  }
+
+  /* Stacked, as on the Home's closing band. */
+  .contact-sheet .reach {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .contact-sheet .reach li:nth-child(n) + li {
+    border-left: 0;
+    border-top: 1px solid var(--rule-soft);
+  }
+
+  .contact-foot {
+    margin-top: 64px;
+    padding-bottom: 44px;
+  }
+}

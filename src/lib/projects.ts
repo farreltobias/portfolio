@@ -1,0 +1,15 @@
+import type { CollectionEntry } from "astro:content";
+
+type Project = CollectionEntry<"projects">;
+
+/* One ordering for every list of projects. An explicit `order` wins, lowest
+   first, so Farrel decides what leads. Unordered projects follow, newest
+   first, and a title tiebreak keeps equal years from shuffling between
+   builds. */
+export function byProjectOrder(a: Project, b: Project): number {
+  const ao = a.data.order ?? Number.POSITIVE_INFINITY;
+  const bo = b.data.order ?? Number.POSITIVE_INFINITY;
+  if (ao !== bo) return ao - bo;
+  if (a.data.year !== b.data.year) return b.data.year - a.data.year;
+  return a.data.title.localeCompare(b.data.title);
+}

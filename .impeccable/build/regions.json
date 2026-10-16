@@ -1,0 +1,270 @@
+{
+ "regions": [
+  {
+   "id": "wordmark",
+   "kind": "chrome",
+   "pixelBox": {
+    "x": 48,
+    "y": 40,
+    "w": 130,
+    "h": 28
+   },
+   "note": "Wordmark, Archivo condensed caps in near-black on bone ground."
+  },
+  {
+   "id": "wordmark-sub",
+   "kind": "text",
+   "pixelBox": {
+    "x": 48,
+    "y": 75,
+    "w": 130,
+    "h": 10
+   },
+   "note": "Role line, tracked legend caps beneath the wordmark."
+  },
+  {
+   "id": "nav",
+   "kind": "control",
+   "pixelBox": {
+    "x": 1288,
+    "y": 75,
+    "w": 200,
+    "h": 10
+   },
+   "note": "Primary navigation, tracked legend caps, no underline rule."
+  },
+  {
+   "id": "gauge-bar",
+   "kind": "chrome",
+   "pixelBox": {
+    "x": 48,
+    "y": 140,
+    "w": 161,
+    "h": 590
+   },
+   "note": "Eleven-cell complexity gauge on a true 0-to-X ramp (near-paper at 0, black at X), inked from the base to the declared level; cells above the level stay empty. CSS only."
+  },
+  {
+   "id": "gauge-caption",
+   "kind": "text",
+   "pixelBox": {
+    "x": 48,
+    "y": 638,
+    "w": 161,
+    "h": 92
+   },
+   "note": "Gauge title block: hairline above, COMPLEXITY legend, level readout, declared-scale note."
+  },
+  {
+   "id": "gauge-level",
+   "kind": "text",
+   "pixelBox": {
+    "x": 48,
+    "y": 648,
+    "w": 161,
+    "h": 15
+   },
+   "note": "Level readout: COMPLEXITY legend against the roman level over ten."
+  },
+  {
+   "id": "headline",
+   "kind": "text",
+   "pixelBox": {
+    "x": 268,
+    "y": 172,
+    "w": 740,
+    "h": 302
+   },
+   "note": "Archivo variable, condensed caps at plan scale."
+  },
+  {
+   "id": "subcopy",
+   "kind": "text",
+   "pixelBox": {
+    "x": 268,
+    "y": 504,
+    "w": 600,
+    "h": 45
+   },
+   "note": "Supporting line, Plex Mono on cleared ground."
+  },
+  {
+   "id": "cta",
+   "kind": "control",
+   "pixelBox": {
+    "x": 268,
+    "y": 612,
+    "w": 225,
+    "h": 58
+   },
+   "note": "Primary control: solid near-black bar, legend caps, closed by a hatched chip."
+  },
+  {
+   "id": "cta-chip",
+   "kind": "chrome",
+   "pixelBox": {
+    "x": 409,
+    "y": 612,
+    "w": 84,
+    "h": 58
+   },
+   "note": "Hatched delta chip closing the primary control."
+  },
+  {
+   "id": "notation-key",
+   "kind": "chrome",
+   "pixelBox": {
+    "x": 268,
+    "y": 730,
+    "w": 470,
+    "h": 80
+   },
+   "note": "Three-mark legend: constraint, measured outcome, not yet measured."
+  },
+  {
+   "id": "spec-block",
+   "kind": "chrome",
+   "pixelBox": {
+    "x": 1202,
+    "y": 140,
+    "w": 286,
+    "h": 106
+   },
+   "note": "Specification table: ROLE, STATUS, LOCATION in legend caps against mono values, hairline rules sized to the content."
+  },
+  {
+   "id": "record-sheet",
+   "kind": "chrome",
+   "pixelBox": {
+    "x": 1012,
+    "y": 350,
+    "w": 477,
+    "h": 330
+   },
+   "note": "Work record sheet, bone ground inside a hairline border, set slightly askew over the field with a soft drop shadow."
+  },
+  {
+   "id": "record-header",
+   "kind": "chrome",
+   "pixelBox": {
+    "x": 1013,
+    "y": 351,
+    "w": 472,
+    "h": 38
+   },
+   "note": "Record sheet header strip: SELECTED WORK legend and sheet number, hairline below."
+  },
+  {
+   "id": "record-title",
+   "kind": "text",
+   "pixelBox": {
+    "x": 1014,
+    "y": 384,
+    "w": 472,
+    "h": 56
+   },
+   "note": "Project name in Archivo condensed caps."
+  },
+  {
+   "id": "constraint-label",
+   "kind": "text",
+   "pixelBox": {
+    "x": 1028,
+    "y": 446,
+    "w": 444,
+    "h": 14
+   },
+   "note": "Legend naming the constraint field."
+  },
+  {
+   "id": "constraint-mark",
+   "kind": "chrome",
+   "pixelBox": {
+    "x": 1029,
+    "y": 467,
+    "w": 26,
+    "h": 26
+   },
+   "note": "Crossed-hatch conflict mark. CSS repeating-linear-gradient, not a raster."
+  },
+  {
+   "id": "constraint-value",
+   "kind": "text",
+   "pixelBox": {
+    "x": 1066,
+    "y": 463,
+    "w": 265,
+    "h": 21
+   },
+   "note": "Constraint text in Plex Mono, set beside the conflict mark."
+  },
+  {
+   "id": "decision-label",
+   "kind": "text",
+   "pixelBox": {
+    "x": 1029,
+    "y": 510,
+    "w": 444,
+    "h": 14
+   },
+   "note": "Legend naming the decision field."
+  },
+  {
+   "id": "decision-value",
+   "kind": "text",
+   "pixelBox": {
+    "x": 1029,
+    "y": 526,
+    "w": 444,
+    "h": 23
+   },
+   "note": "Decision text in Plex Mono."
+  },
+  {
+   "id": "outcome-label",
+   "kind": "text",
+   "pixelBox": {
+    "x": 1030,
+    "y": 569,
+    "w": 444,
+    "h": 14
+   },
+   "note": "Legend naming the outcome field."
+  },
+  {
+   "id": "outcome-state",
+   "kind": "text",
+   "note": "Outcome field with the words Shipped, not yet measured, where a figure would otherwise go.",
+   "pixelBox": {
+    "x": 1030,
+    "y": 588,
+    "w": 444,
+    "h": 21
+   },
+   "codeDrawn": true
+  },
+  {
+   "id": "outcome-mask",
+   "kind": "chrome",
+   "note": "Two-step dot mask standing in for an outcome that has not been measured. CSS radial-gradient.",
+   "pixelBox": {
+    "x": 1030,
+    "y": 616,
+    "w": 444,
+    "h": 17
+   }
+  },
+  {
+   "id": "record-foot",
+   "kind": "text",
+   "pixelBox": {
+    "x": 1016,
+    "y": 644,
+    "w": 472,
+    "h": 36
+   },
+   "note": "Record sheet footer: role legend and year, hairline above."
+  }
+ ],
+ "allowUncovered": true
+}

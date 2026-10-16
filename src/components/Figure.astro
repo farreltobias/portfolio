@@ -1,0 +1,16 @@
+---
+/* A measured figure at collision scale. It may wrap at its spaces, around the
+   arrow or between words, but never inside a word: a word joiner after each
+   dash keeps "1–2/week" or "In-platform" whole. No part is set nowrap, so a
+   figure of any shape stays inside its column. */
+interface Props {
+  value: string;
+  class?: string;
+}
+
+const { value, class: className } = Astro.props;
+const WORD_JOINER = "\u2060";
+const text = value.replace(/([-–—/])/g, `$1${WORD_JOINER}`);
+---
+
+<p class={className}>{text}</p>

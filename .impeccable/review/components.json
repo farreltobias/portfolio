@@ -1,0 +1,367 @@
+{
+  "schemaVersion": 3,
+  "stage": "components",
+  "id": "components",
+  "title": "Plan and asset review · src/pages/index.astro",
+  "comp": {
+    "path": ".impeccable/mocks/zone-a-ramp-left.png",
+    "width": 1536,
+    "height": 864
+  },
+  "specSha256": "4f3107113c3db9d602758ac29148f9b52e410895409f5206565cb080ebe26ac6",
+  "components": [
+    {
+      "id": "outcome-state",
+      "name": "Outcome state",
+      "kind": "text",
+      "role": "plan",
+      "box": {
+        "x": 0.6706,
+        "y": 0.6806,
+        "w": 0.2891,
+        "h": 0.0243
+      },
+      "note": "Outcome field with the words Shipped, not yet measured, where a figure would otherwise go.",
+      "medium": "code",
+      "preview": {
+        "kind": "comp-crop"
+      },
+      "codeDrawn": true,
+      "dependencies": []
+    },
+    {
+      "id": "wordmark",
+      "name": "Wordmark",
+      "kind": "chrome",
+      "role": "plan",
+      "box": {
+        "x": 0.0313,
+        "y": 0.0463,
+        "w": 0.0846,
+        "h": 0.0324
+      },
+      "note": "Wordmark, Archivo condensed caps in near-black on bone ground.",
+      "medium": "code",
+      "preview": {
+        "kind": "comp-crop"
+      },
+      "codeDrawn": false,
+      "dependencies": []
+    },
+    {
+      "id": "gauge-bar",
+      "name": "Gauge bar",
+      "kind": "chrome",
+      "role": "plan",
+      "box": {
+        "x": 0.0313,
+        "y": 0.162,
+        "w": 0.1048,
+        "h": 0.6829
+      },
+      "note": "Eleven-cell complexity gauge on a true 0-to-X ramp (near-paper at 0, black at X), inked from the base to the declared level; cells above the level stay empty. CSS only.",
+      "medium": "code",
+      "preview": {
+        "kind": "comp-crop"
+      },
+      "codeDrawn": false,
+      "dependencies": []
+    },
+    {
+      "id": "cta-chip",
+      "name": "Cta chip",
+      "kind": "chrome",
+      "role": "plan",
+      "box": {
+        "x": 0.2663,
+        "y": 0.7083,
+        "w": 0.0547,
+        "h": 0.0671
+      },
+      "note": "Hatched delta chip closing the primary control.",
+      "medium": "code",
+      "preview": {
+        "kind": "comp-crop"
+      },
+      "codeDrawn": false,
+      "dependencies": []
+    },
+    {
+      "id": "notation-key",
+      "name": "Notation key",
+      "kind": "chrome",
+      "role": "plan",
+      "box": {
+        "x": 0.1745,
+        "y": 0.8449,
+        "w": 0.306,
+        "h": 0.0926
+      },
+      "note": "Three-mark legend: constraint, measured outcome, not yet measured.",
+      "medium": "code",
+      "preview": {
+        "kind": "comp-crop"
+      },
+      "codeDrawn": false,
+      "dependencies": []
+    },
+    {
+      "id": "spec-block",
+      "name": "Spec block",
+      "kind": "chrome",
+      "role": "plan",
+      "box": {
+        "x": 0.7826,
+        "y": 0.162,
+        "w": 0.1862,
+        "h": 0.1227
+      },
+      "note": "Specification table: ROLE, STATUS, LOCATION in legend caps against mono values, hairline rules sized to the content.",
+      "medium": "code",
+      "preview": {
+        "kind": "comp-crop"
+      },
+      "codeDrawn": false,
+      "dependencies": []
+    },
+    {
+      "id": "record-header",
+      "name": "Record header",
+      "kind": "chrome",
+      "role": "plan",
+      "box": {
+        "x": 0.6595,
+        "y": 0.4063,
+        "w": 0.3073,
+        "h": 0.044
+      },
+      "note": "Record sheet header strip: SELECTED WORK legend and sheet number, hairline below.",
+      "medium": "code",
+      "preview": {
+        "kind": "comp-crop"
+      },
+      "codeDrawn": false,
+      "dependencies": []
+    },
+    {
+      "id": "constraint-mark",
+      "name": "Constraint mark",
+      "kind": "chrome",
+      "role": "plan",
+      "box": {
+        "x": 0.6699,
+        "y": 0.5405,
+        "w": 0.0169,
+        "h": 0.0301
+      },
+      "note": "Crossed-hatch conflict mark. CSS repeating-linear-gradient, not a raster.",
+      "medium": "code",
+      "preview": {
+        "kind": "comp-crop"
+      },
+      "codeDrawn": false,
+      "dependencies": []
+    },
+    {
+      "id": "outcome-mask",
+      "name": "Outcome mask",
+      "kind": "chrome",
+      "role": "plan",
+      "box": {
+        "x": 0.6706,
+        "y": 0.713,
+        "w": 0.2891,
+        "h": 0.0197
+      },
+      "note": "Two-step dot mask standing in for an outcome that has not been measured. CSS radial-gradient.",
+      "medium": "code",
+      "preview": {
+        "kind": "comp-crop"
+      },
+      "codeDrawn": false,
+      "dependencies": []
+    }
+  ],
+  "codeRegions": [
+    {
+      "id": "wordmark-sub",
+      "name": "Wordmark sub",
+      "kind": "text",
+      "box": {
+        "x": 0.0313,
+        "y": 0.0868,
+        "w": 0.0846,
+        "h": 0.0116
+      },
+      "note": "Role line, tracked legend caps beneath the wordmark."
+    },
+    {
+      "id": "nav",
+      "name": "Nav",
+      "kind": "control",
+      "box": {
+        "x": 0.8385,
+        "y": 0.0868,
+        "w": 0.1302,
+        "h": 0.0116
+      },
+      "note": "Primary navigation, tracked legend caps, no underline rule."
+    },
+    {
+      "id": "gauge-caption",
+      "name": "Gauge caption",
+      "kind": "text",
+      "box": {
+        "x": 0.0313,
+        "y": 0.7384,
+        "w": 0.1048,
+        "h": 0.1065
+      },
+      "note": "Gauge title block: hairline above, COMPLEXITY legend, level readout, declared-scale note."
+    },
+    {
+      "id": "gauge-level",
+      "name": "Gauge level",
+      "kind": "text",
+      "box": {
+        "x": 0.0313,
+        "y": 0.75,
+        "w": 0.1048,
+        "h": 0.0174
+      },
+      "note": "Level readout: COMPLEXITY legend against the roman level over ten."
+    },
+    {
+      "id": "headline",
+      "name": "Headline",
+      "kind": "text",
+      "box": {
+        "x": 0.1745,
+        "y": 0.1991,
+        "w": 0.4818,
+        "h": 0.3495
+      },
+      "note": "Archivo variable, condensed caps at plan scale."
+    },
+    {
+      "id": "subcopy",
+      "name": "Subcopy",
+      "kind": "text",
+      "box": {
+        "x": 0.1745,
+        "y": 0.5833,
+        "w": 0.3906,
+        "h": 0.0521
+      },
+      "note": "Supporting line, Plex Mono on cleared ground."
+    },
+    {
+      "id": "cta",
+      "name": "Cta",
+      "kind": "control",
+      "box": {
+        "x": 0.1745,
+        "y": 0.7083,
+        "w": 0.1465,
+        "h": 0.0671
+      },
+      "note": "Primary control: solid near-black bar, legend caps, closed by a hatched chip."
+    },
+    {
+      "id": "record-sheet",
+      "name": "Record sheet",
+      "kind": "chrome",
+      "box": {
+        "x": 0.6589,
+        "y": 0.4051,
+        "w": 0.3105,
+        "h": 0.3819
+      },
+      "note": "Work record sheet, bone ground inside a hairline border, set slightly askew over the field with a soft drop shadow."
+    },
+    {
+      "id": "record-title",
+      "name": "Record title",
+      "kind": "text",
+      "box": {
+        "x": 0.6602,
+        "y": 0.4444,
+        "w": 0.3073,
+        "h": 0.0648
+      },
+      "note": "Project name in Archivo condensed caps."
+    },
+    {
+      "id": "constraint-label",
+      "name": "Constraint label",
+      "kind": "text",
+      "box": {
+        "x": 0.6693,
+        "y": 0.5162,
+        "w": 0.2891,
+        "h": 0.0162
+      },
+      "note": "Legend naming the constraint field."
+    },
+    {
+      "id": "constraint-value",
+      "name": "Constraint value",
+      "kind": "text",
+      "box": {
+        "x": 0.694,
+        "y": 0.5359,
+        "w": 0.1725,
+        "h": 0.0243
+      },
+      "note": "Constraint text in Plex Mono, set beside the conflict mark."
+    },
+    {
+      "id": "decision-label",
+      "name": "Decision label",
+      "kind": "text",
+      "box": {
+        "x": 0.6699,
+        "y": 0.5903,
+        "w": 0.2891,
+        "h": 0.0162
+      },
+      "note": "Legend naming the decision field."
+    },
+    {
+      "id": "decision-value",
+      "name": "Decision value",
+      "kind": "text",
+      "box": {
+        "x": 0.6699,
+        "y": 0.6088,
+        "w": 0.2891,
+        "h": 0.0266
+      },
+      "note": "Decision text in Plex Mono."
+    },
+    {
+      "id": "outcome-label",
+      "name": "Outcome label",
+      "kind": "text",
+      "box": {
+        "x": 0.6706,
+        "y": 0.6586,
+        "w": 0.2891,
+        "h": 0.0162
+      },
+      "note": "Legend naming the outcome field."
+    },
+    {
+      "id": "record-foot",
+      "name": "Record foot",
+      "kind": "text",
+      "box": {
+        "x": 0.6615,
+        "y": 0.7454,
+        "w": 0.3073,
+        "h": 0.0417
+      },
+      "note": "Record sheet footer: role legend and year, hairline above."
+    }
+  ]
+}
