@@ -1,0 +1,367 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-16T21:39:05+00:00",
+  "title": "Design System: Farrel — Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "g0": {
+        "role": "neutral",
+        "displayName": "Bone Field",
+        "canonical": "#f2f0ec",
+        "tonalRamp": [
+          "#15161a",
+          "#2e2e31",
+          "#5d5d5e",
+          "#757474",
+          "#a09f9e",
+          "#c8c7c3",
+          "#dfddd8",
+          "#f2f0ec"
+        ]
+      },
+      "g1": {
+        "role": "neutral",
+        "displayName": "Lifted Bone",
+        "canonical": "#dfddd8",
+        "tonalRamp": [
+          "#15161a",
+          "#2e2e31",
+          "#5d5d5e",
+          "#757474",
+          "#a09f9e",
+          "#c8c7c3",
+          "#dfddd8",
+          "#f2f0ec"
+        ]
+      },
+      "g2": {
+        "role": "neutral",
+        "displayName": "Soft Rule",
+        "canonical": "#c8c7c3",
+        "tonalRamp": [
+          "#15161a",
+          "#2e2e31",
+          "#5d5d5e",
+          "#757474",
+          "#a09f9e",
+          "#c8c7c3",
+          "#dfddd8",
+          "#f2f0ec"
+        ]
+      },
+      "g3": {
+        "role": "neutral",
+        "displayName": "Ramp III",
+        "canonical": "#b5b4b1",
+        "tonalRamp": [
+          "#15161a",
+          "#2e2e31",
+          "#5d5d5e",
+          "#757474",
+          "#a09f9e",
+          "#c8c7c3",
+          "#dfddd8",
+          "#f2f0ec"
+        ]
+      },
+      "g4": {
+        "role": "neutral",
+        "displayName": "Ramp IV",
+        "canonical": "#a09f9e",
+        "tonalRamp": [
+          "#15161a",
+          "#2e2e31",
+          "#5d5d5e",
+          "#757474",
+          "#a09f9e",
+          "#c8c7c3",
+          "#dfddd8",
+          "#f2f0ec"
+        ]
+      },
+      "g5": {
+        "role": "neutral",
+        "displayName": "Ramp V",
+        "canonical": "#8b8a89",
+        "tonalRamp": [
+          "#15161a",
+          "#2e2e31",
+          "#5d5d5e",
+          "#757474",
+          "#a09f9e",
+          "#c8c7c3",
+          "#dfddd8",
+          "#f2f0ec"
+        ]
+      },
+      "g6": {
+        "role": "neutral",
+        "displayName": "Scrollbar Grey",
+        "canonical": "#757474",
+        "tonalRamp": [
+          "#15161a",
+          "#2e2e31",
+          "#5d5d5e",
+          "#757474",
+          "#a09f9e",
+          "#c8c7c3",
+          "#dfddd8",
+          "#f2f0ec"
+        ]
+      },
+      "g7": {
+        "role": "neutral",
+        "displayName": "Label Grey",
+        "canonical": "#5d5d5e",
+        "tonalRamp": [
+          "#15161a",
+          "#2e2e31",
+          "#5d5d5e",
+          "#757474",
+          "#a09f9e",
+          "#c8c7c3",
+          "#dfddd8",
+          "#f2f0ec"
+        ]
+      },
+      "g8": {
+        "role": "neutral",
+        "displayName": "Ramp VIII",
+        "canonical": "#464648",
+        "tonalRamp": [
+          "#15161a",
+          "#2e2e31",
+          "#5d5d5e",
+          "#757474",
+          "#a09f9e",
+          "#c8c7c3",
+          "#dfddd8",
+          "#f2f0ec"
+        ]
+      },
+      "g9": {
+        "role": "neutral",
+        "displayName": "Prose Ink",
+        "canonical": "#2e2e31",
+        "tonalRamp": [
+          "#15161a",
+          "#2e2e31",
+          "#5d5d5e",
+          "#757474",
+          "#a09f9e",
+          "#c8c7c3",
+          "#dfddd8",
+          "#f2f0ec"
+        ]
+      },
+      "g10": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#15161a",
+        "tonalRamp": [
+          "#15161a",
+          "#2e2e31",
+          "#5d5d5e",
+          "#757474",
+          "#a09f9e",
+          "#c8c7c3",
+          "#dfddd8",
+          "#f2f0ec"
+        ]
+      },
+      "dichroic-magenta": {
+        "role": "primary",
+        "displayName": "Dichroic Magenta",
+        "canonical": "#e6007e",
+        "tonalRamp": [
+          "oklch(25% 0.09 355)",
+          "oklch(35% 0.14 355)",
+          "oklch(45% 0.19 355)",
+          "oklch(55% 0.23 355)",
+          "oklch(62% 0.25 355)",
+          "oklch(72% 0.18 355)",
+          "oklch(84% 0.10 355)",
+          "oklch(95% 0.03 355)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Home positioning line and page titles, condensed caps."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Band titles."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Project names on sheets and rows."
+      },
+      "figure": {
+        "displayName": "Figure",
+        "purpose": "Before → after figures, magenta, never below 24px."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Prose and narrative on cleared ground, max 64ch."
+      },
+      "field": {
+        "displayName": "Field",
+        "purpose": "The value a field carries, tabular."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Field names, nav, link labels; 11px floor."
+      },
+      "control": {
+        "displayName": "Control",
+        "purpose": "Primary bar and secondary link lettering."
+      }
+    },
+    "shadows": [
+      {
+        "name": "stacked-edge",
+        "value": "0 0 0 1px rgb(21 22 26 / 7%), 14px 16px 0 -1px rgb(21 22 26 / 5.5%)",
+        "purpose": "Record sheet lying on the field (6px 7px below 1280px)."
+      }
+    ],
+    "motion": [
+      {
+        "name": "state-swap",
+        "value": "140ms linear",
+        "purpose": "Control bar/chip swap, link underline colour."
+      },
+      {
+        "name": "hover-step",
+        "value": "120ms linear",
+        "purpose": "Sheet and row ground stepping to Lifted Bone."
+      },
+      {
+        "name": "rule-draw",
+        "value": "160ms cubic-bezier(0.2, 0, 0.1, 1)",
+        "purpose": "Nav hairline drawing under the word."
+      },
+      {
+        "name": "ink-in",
+        "value": "calc(240ms + step * 60ms) cubic-bezier(0.2, 0, 0, 1)",
+        "purpose": "Ramp key cells rising from a quarter height on load; off under reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "stack",
+        "value": "1279px"
+      },
+      {
+        "name": "phone",
+        "value": "760px"
+      },
+      {
+        "name": "comp",
+        "value": "1536px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Control",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one action a page exists for: an ink bar closed by a hatched chip; the pair swaps on hover.",
+      "html": "<a class=\"ds-control\" href=\"#\"><span class=\"ds-control-bar\">Let's talk</span><span class=\"ds-control-chip\" aria-hidden=\"true\"></span></a>",
+      "css": ":host{--paper:#f2f0ec;--ink:#15161a;--ink-faint:#5d5d5e;--rule-soft:#c8c7c3;--g1:#dfddd8;--mag:#e6007e}.ds-control{display:inline-flex;height:58px;text-decoration:none}.ds-control-bar{display:flex;align-items:center;padding:0 30px;background:var(--ink);color:var(--paper);font:700 14px/1 Archivo,sans-serif;font-stretch:82%;letter-spacing:.1em;text-transform:uppercase;transition:background-color 140ms linear,color 140ms linear}.ds-control-chip{width:84px;border:1px solid var(--ink);border-left:0;background-image:repeating-linear-gradient(45deg,var(--ink) 0 1px,transparent 1px 5px)}.ds-control:hover .ds-control-bar,.ds-control:focus-visible .ds-control-bar{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}.ds-control:hover .ds-control-chip,.ds-control:focus-visible .ds-control-chip{background:var(--ink)}.ds-control:focus-visible{outline:2px solid var(--mag);outline-offset:3px}"
+    },
+    {
+      "name": "Secondary Link",
+      "kind": "button",
+      "refersTo": "link-secondary",
+      "description": "A way out in the control's lettering, carried by a hairline, with a mono count.",
+      "html": "<a class=\"ds-more\" href=\"#\"><span class=\"ds-more-label\">See all work</span><span class=\"ds-more-count\">5 projects</span></a>",
+      "css": ":host{--paper:#f2f0ec;--ink:#15161a;--ink-faint:#5d5d5e;--rule-soft:#c8c7c3;--g1:#dfddd8;--mag:#e6007e}.ds-more{display:inline-flex;align-items:baseline;gap:18px;padding:15px 0 13px;border-bottom:1px solid var(--ink);color:var(--ink);text-decoration:none;transition:box-shadow 120ms linear}.ds-more-label{font:700 14px/1 Archivo,sans-serif;font-stretch:82%;letter-spacing:.1em;text-transform:uppercase}.ds-more-count{font:400 11px/1 'Plex Mono',monospace;color:var(--ink-faint)}.ds-more:hover{box-shadow:0 1px 0 var(--ink)}.ds-more:focus-visible{outline:2px solid var(--mag);outline-offset:2px}"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Tracked label links; a hairline draws under the word on hover and stays on the current page.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\" aria-current=\"page\">Work</a><a href=\"#\">About</a><a href=\"#\">Contact</a></nav>",
+      "css": ":host{--paper:#f2f0ec;--ink:#15161a;--ink-faint:#5d5d5e;--rule-soft:#c8c7c3;--g1:#dfddd8;--mag:#e6007e}.ds-nav{display:flex;gap:30px}.ds-nav a{position:relative;padding-bottom:4px;color:var(--ink);text-decoration:none;font:600 11px/1.25 Archivo,sans-serif;letter-spacing:.16em;text-transform:uppercase}.ds-nav a::after{content:'';position:absolute;inset-inline:0;bottom:0;height:1px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform 160ms cubic-bezier(.2,0,.1,1)}.ds-nav a:hover::after,.ds-nav a:focus-visible::after,.ds-nav a[aria-current=page]::after{transform:scaleX(1)}.ds-nav a:focus-visible{outline:2px solid var(--mag);outline-offset:2px}"
+    },
+    {
+      "name": "Record Sheet",
+      "kind": "card",
+      "refersTo": "record-sheet",
+      "description": "The unit of evidence: Constraint, Decision, Outcome on a bordered sheet with a stacked edge.",
+      "html": "<article class=\"ds-sheet\"><div class=\"ds-sheet-rh\">Sheet 001 / 005</div><h3 class=\"ds-sheet-title\">Customer Success Platform</h3><div class=\"ds-sheet-f\"><p class=\"ds-k\">Constraint</p><p class=\"ds-v\">Support workflows depended on engineering.</p></div><div class=\"ds-sheet-f\"><p class=\"ds-k\">Decision</p><p class=\"ds-v\">Move repeatable workflows into internal tooling.</p></div><div class=\"ds-sheet-out\"><p class=\"ds-k\">Outcome — Support requests</p><p class=\"ds-delta\">~4/day → 1–2/week</p><div class=\"ds-band\"></div></div></article>",
+      "css": ":host{--paper:#f2f0ec;--ink:#15161a;--ink-faint:#5d5d5e;--rule-soft:#c8c7c3;--g1:#dfddd8;--mag:#e6007e}.ds-sheet{max-width:440px;background:var(--paper);border:1px solid var(--ink);box-shadow:0 0 0 1px rgb(21 22 26/7%),14px 16px 0 -1px rgb(21 22 26/5.5%);transition:background-color 120ms linear}.ds-sheet:hover{background:var(--g1)}.ds-sheet-rh{padding:9px 14px;border-bottom:1px solid var(--ink);text-align:right;font:400 11px/1 'Plex Mono',monospace;color:var(--ink-faint)}.ds-sheet-title{margin:0;padding:13px 14px 11px;font:700 27px/1 Archivo,sans-serif;font-stretch:72%;text-transform:uppercase}.ds-sheet-f{padding:10px 14px;border-top:1px solid var(--rule-soft)}.ds-sheet-out{padding:13px 14px 15px;border-top:1px solid var(--ink)}.ds-k{margin:0 0 6px;font:600 11px/1.25 Archivo,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint)}.ds-v{margin:0;font:400 13px/1.45 'Plex Mono',monospace}.ds-delta{margin:9px 0 0;font:600 40px/1 'Plex Mono',monospace;letter-spacing:-.03em;color:var(--mag)}.ds-band{height:13px;margin-top:11px;background-image:repeating-linear-gradient(45deg,var(--mag) 0 1.5px,transparent 1.5px 4px)}"
+    },
+    {
+      "name": "Spec Block",
+      "kind": "custom",
+      "description": "Label/value rows ruled in soft rule under an ink top rule.",
+      "html": "<dl class=\"ds-spec\"><div><dt>Role</dt><dd>Product Engineer</dd></div><div><dt>Status</dt><dd>Available</dd></div><div><dt>Location</dt><dd>Brazil — remote</dd></div></dl>",
+      "css": ":host{--paper:#f2f0ec;--ink:#15161a;--ink-faint:#5d5d5e;--rule-soft:#c8c7c3;--g1:#dfddd8;--mag:#e6007e}.ds-spec{margin:0;max-width:270px;border-top:1px solid var(--ink)}.ds-spec div{display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:9px 0;border-bottom:1px solid var(--rule-soft)}.ds-spec dt{font:600 11px/1.25 Archivo,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint)}.ds-spec dd{margin:0;font:400 13px/1 'Plex Mono',monospace}"
+    },
+    {
+      "name": "Notation Key",
+      "kind": "custom",
+      "description": "Binds every mark to its meaning: crossed hatch, magenta hatch, dot mask.",
+      "html": "<section class=\"ds-key\"><p class=\"ds-key-h\">Notation</p><div><span class=\"ds-sw ds-cross\"></span>Constraint</div><div><span class=\"ds-sw ds-mag\"></span>Before → after</div><div><span class=\"ds-sw ds-dot\"></span>Not yet measured</div></section>",
+      "css": ":host{--paper:#f2f0ec;--ink:#15161a;--ink-faint:#5d5d5e;--rule-soft:#c8c7c3;--g1:#dfddd8;--mag:#e6007e}.ds-key{max-width:220px;border-top:1px solid var(--ink);padding-top:11px;font:400 11px/1.3 'Plex Mono',monospace;color:var(--ink-faint)}.ds-key-h{margin:0 0 12px;font:600 11px/1.25 Archivo,sans-serif;letter-spacing:.16em;text-transform:uppercase}.ds-key div{display:flex;align-items:center;gap:10px;margin-top:10px}.ds-sw{width:28px;height:16px;border:1px solid var(--rule-soft)}.ds-cross{background-image:repeating-linear-gradient(45deg,var(--ink) 0 1px,transparent 1px 7px),repeating-linear-gradient(-45deg,var(--ink) 0 1px,transparent 1px 7px)}.ds-mag{background-image:repeating-linear-gradient(45deg,var(--mag) 0 1.5px,transparent 1.5px 4px)}.ds-dot{background-image:radial-gradient(var(--ink) .9px,transparent 1px);background-size:5px 5px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Measured Plan",
+    "overview": "The portfolio is drawn as the plan behind the work, not a brochure about it. Every page is a sheet in one drawing set: a bone field divided by hairlines, a masthead, a numbered record sheet per project, a register that lists them all, and a title block at the foot. Claims sit on a declared scale and carry a legend; what has not been recorded is shown as visibly empty rather than filled in.\n\nThe character is exact, quiet and evidential. Density is moderate and ruled: tight groups of label and value, generous separation between bands. There is one colour, and it is spent on one kind of fact. Everything else is the eleven-step ramp. Decoration that carries no value is refused; hatch is notation with a key, never texture.",
+    "keyCharacteristics": [
+      "A bone field ruled by near-black and soft hairlines; no cards, no radius, no gradients.",
+      "One eleven-step ramp (0 field → X ink) as the only tonal vocabulary, named on the page by its key.",
+      "A single Dichroic Magenta reserved for before → after figures and keyboard focus.",
+      "Three type voices: condensed display caps, tracked label caps, tabular Plex Mono for every value and all prose.",
+      "Hatch and dot masks as notation, always explained by the Notation key.",
+      "The record sheet — Constraint, Decision, Outcome — as the unit of evidence on every surface."
+    ],
+    "rules": [
+      {
+        "name": "The One Ramp Rule",
+        "body": "Every tonal value on the page is a step of the ramp. A new grey that is not g0–g10 is a defect; name the step it uses in the key.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Job Rule",
+        "body": "Magenta marks a recorded before → after and keyboard focus. Never a link, a hover, a highlight, a selection or an accent.",
+        "section": "colors"
+      },
+      {
+        "name": "The Readable Floor Rule",
+        "body": "Reading and labelling roles never drop below 11px; on phones every role steps up one (label 11, key 12, note 13, field 14, body 15).",
+        "section": "typography"
+      },
+      {
+        "name": "The Mono Is Data Rule",
+        "body": "Mono carries values, figures and prose — never a \"technical\" costume for headings.",
+        "section": "typography"
+      },
+      {
+        "name": "The Paper Not Plastic Rule",
+        "body": "No blur shadows, glows or lifted cards. A sheet may tilt (-0.55°) only where field surrounds it; stacked layouts are squared.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** take every tone from the ramp and name new uses in the ramp key.",
+      "**Do** show missing evidence as the dot mask and \"Shipped — not yet measured\".",
+      "**Do** render a before → after figure only when both `outcomeFigure` and `outcomeMetric` exist, and keep figures ≤32 characters with an arrow.",
+      "**Do** keep labels and values at the readable floor (11px; one step up on phones) and touch targets at 44px.",
+      "**Do** reuse the record sheet, index row, spec block and strip before inventing a container."
+    ],
+    "donts": [
+      "**Don't** spend Dichroic Magenta on links, hovers, highlights, selection or decoration.",
+      "**Don't** use rounded corners, cards, gradients, glass, blur shadows or per-project raster images.",
+      "**Don't** use hatch as texture; every hatch must appear in the Notation key.",
+      "**Don't** add self-scored metrics (the former complexity gauge) or any figure that was not recorded.",
+      "**Don't** set magenta text below 24px."
+    ]
+  }
+}
