@@ -1,25 +1,146 @@
 ---
-import { getCollection, render } from "astro:content";
+import { render } from "astro:content";
 import type { GetStaticPaths } from "astro";
-import BaseLayout from "../../layouts/BaseLayout.astro";
+import Masthead from "../../components/Masthead.astro";
+import Outcome from "../../components/Outcome.astro";
+import { allProjects, sheetNo } from "../../lib/projects";
+import "../../styles/home.css";
+import "../../styles/work.css";
 
+/* One route per project, numbered and linked in the one ordering, so the
+   previous and next sheets are the neighbours on Work. */
 export const getStaticPaths = (async () => {
-  const projects = await getCollection("projects");
-  return projects.map((project) => ({
+  const projects = await allProjects();
+  return projects.map((project, i) => ({
     params: { id: project.id },
-    props: { project },
+    props: {
+      project,
+      number: sheetNo(i + 1),
+      total: sheetNo(projects.length),
+      count: projects.length,
+      prev: projects[i - 1] ?? null,
+      next: projects[i + 1] ?? null,
+      prevNumber: sheetNo(i),
+      nextNumber: sheetNo(i + 2),
+    },
   }));
 }) satisfies GetStaticPaths;
 
-const { project } = Astro.props;
+const { project, number, total, count, prev, next, prevNumber, nextNumber } =
+  Astro.props;
+const { data } = project;
 const { Content } = await render(project);
 ---
 
-<BaseLayout title={project.data.title} description={project.data.description}>
-  <article>
-    <h1>{project.data.title}</h1>
-    <p>{project.data.description}</p>
-    <p>{project.data.role} · {project.data.year}</p>
-    <Content />
-  </article>
-</BaseLayout>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{data.title} — Farrel</title>
+    <meta name="description" content={data.description} />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="sheet">
+      <Masthead current="work" />
+
+      <main id="main">
+        <article>
+          <header class="page-head">
+            <p class="leg zone">Sheet {number}</p>
+            <div class="page-intro">
+              <h1 class="disp page-title case-title">{data.title}</h1>
+              <p class="prose page-sub">{data.description}</p>
+            </div>
+            <dl class="spec">
+              <div class="row">
+                <dt class="leg">Sheet</dt>
+                <dd class="v">{number} / {total}</dd>
+              </div>
+              <div class="row">
+                <dt class="leg">Year</dt>
+                <dd class="v">{data.year}</dd>
+              </div>
+              <div class="row">
+                <dt class="leg">Role</dt>
+                <dd class="v">{data.role}</dd>
+              </div>
+            </dl>
+          </header>
+
+          <!-- The record: the three fields every sheet carries, as its title
+               block. -->
+          <section class="case-record" aria-label="Record">
+            <div class="case-record-body">
+              <div class="cell">
+                <p class="leg k">Constraint</p>
+                <div class="conflict">
+                  <span class="conflict-mark hatch-cross" aria-hidden="true"
+                  ></span>
+                  <p class="v">{data.constraint}</p>
+                </div>
+              </div>
+              <div class="cell">
+                <p class="leg k">Decision</p>
+                <p class="v">{data.decision}</p>
+              </div>
+              <div class="cell fo">
+                <Outcome project={data} />
+              </div>
+            </div>
+          </section>
+
+          <div class="narrative">
+            <Content />
+          </div>
+        </article>
+
+        <nav class="sheet-nav" aria-label="Other sheets">
+          <div class="sheet-nav-cell">
+            {
+              prev && (
+                <a class="sheet-nav-link" href={`/work/${prev.id}`}>
+                  <span class="leg">Previous · Sheet {prevNumber}</span>
+                  <span class="sheet-nav-title">{prev.data.title}</span>
+                </a>
+              )
+            }
+          </div>
+          <div class="sheet-nav-cell sheet-nav-all">
+            <a class="more-link" href="/work">
+              <span class="more-label">All work</span>
+              <span class="vh">, </span>
+              <span class="more-count">{count} {count === 1 ? "project" : "projects"}</span>
+            </a>
+          </div>
+          <div class="sheet-nav-cell sheet-nav-next">
+            {
+              next && (
+                <a class="sheet-nav-link" href={`/work/${next.id}`}>
+                  <span class="leg">Next · Sheet {nextNumber}</span>
+                  <span class="sheet-nav-title">{next.data.title}</span>
+                </a>
+              )
+            }
+          </div>
+        </nav>
+      </main>
+
+      <footer class="closing">
+        <div class="closing-head">
+          <div>
+            <h2>Have a product or operations problem to solve?</h2>
+            <p class="sub">
+              Open to Product Engineering roles and contract work.
+            </p>
+          </div>
+          <a class="control" href="/contact">
+            <span class="bar">Let's talk</span>
+            <span class="chip hatch" aria-hidden="true"></span>
+          </a>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

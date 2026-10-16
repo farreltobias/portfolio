@@ -1,23 +1,20 @@
 ---
-import { getCollection } from "astro:content";
+import IndexRow from "../components/IndexRow.astro";
 import Masthead from "../components/Masthead.astro";
+import Notation from "../components/Notation.astro";
 import Outcome from "../components/Outcome.astro";
 import { contactLinkAttrs, contactPaths } from "../lib/contact";
-import { byProjectOrder } from "../lib/projects";
+import { allProjects, sheetNo, sheetNumberOf } from "../lib/projects";
 import "../styles/home.css";
 
-/* Featured work in its declared order. The first viewport carries the lead
-   project as sheet 001; the index continues from sheet 002, so no project is
-   presented twice. */
-const projects = (
-  await getCollection("projects", ({ data }) => data.featured)
-).sort(byProjectOrder);
-
+/* The whole body of work in its one ordering; sheet numbers are taken from
+   it, so a project's number is the same here, on Work and on its own sheet.
+   Home shows the featured ones: the lead as a record sheet, the rest in the
+   index below, so no project is presented twice. */
+const all = await allProjects();
+const projects = all.filter((project) => project.data.featured);
 const [lead, ...rest] = projects;
-
-/* The whole body of work, featured or not: the index's way out says how much
-   is behind it. */
-const total = (await getCollection("projects")).length;
+const total = all.length;
 
 /* The tonal key, read in roman the way a plan scale is: every step of the
    ramp, declared once. It is the vocabulary, not a reading of anything. */
@@ -34,8 +31,6 @@ const ROLE: Record<number, string> = {
   1: "Hover",
   0: "Field",
 };
-
-const sheetNo = (n: number) => String(n).padStart(3, "0");
 
 /* Only the paths Farrel has filled in. */
 const reach = contactPaths.filter((path) => path.href);
@@ -96,7 +91,7 @@ const reach = contactPaths.filter((path) => path.href);
             <article class="record">
               <div class="rh">
                 <span class="sheet-no">
-                  Sheet {sheetNo(1)} / {sheetNo(projects.length)}
+                  Sheet {sheetNumberOf(all, lead.id)} / {sheetNo(all.length)}
                 </span>
               </div>
               <h2 class="rt">{lead.data.title}</h2>
@@ -142,23 +137,7 @@ const reach = contactPaths.filter((path) => path.href);
             ))
           }
           </div>
-          <section class="notation" aria-label="Notation key">
-            <p class="leg">Notation</p>
-            <div class="keys">
-              <div class="k">
-                <div class="sw hatch-cross" aria-hidden="true"></div>
-                <p class="kl">Constraint</p>
-              </div>
-              <div class="k">
-                <div class="sw hatch-mag" aria-hidden="true"></div>
-                <p class="kl">Measured outcome</p>
-              </div>
-              <div class="k">
-                <div class="sw mask-dot" aria-hidden="true"></div>
-                <p class="kl">Not yet measured</p>
-              </div>
-            </div>
-          </section>
+          <Notation />
         </aside>
       </div>
 
@@ -177,33 +156,11 @@ const reach = contactPaths.filter((path) => path.href);
             {rest.length > 0 && (
               <div class="index">
                 {
-                  rest.map((project, i) => (
-                    <article class="index-row">
-                      <div class="no">{sheetNo(i + 2)}</div>
-                      <div>
-                        <h3 class="ti">{project.data.title}</h3>
-                        <p class="yr">
-                          {project.data.year}
-                        </p>
-                        <a class="sheet-link leg" href={`/work/${project.id}`}>
-                          Read case study<span class="vh">: {project.data.title}</span>
-                        </a>
-                      </div>
-                      <div class="fl">
-                        <p class="leg k">Constraint</p>
-                        <div class="conflict">
-                          <span class="conflict-mark hatch-cross" aria-hidden="true" />
-                          <p class="v">{project.data.constraint}</p>
-                        </div>
-                        <p class="leg k">
-                          Decision
-                        </p>
-                        <p class="v">{project.data.decision}</p>
-                      </div>
-                      <div class="fo">
-                        <Outcome project={project.data} />
-                      </div>
-                    </article>
+                  rest.map((project) => (
+                    <IndexRow
+                      project={project}
+                      number={sheetNumberOf(all, project.id)}
+                    />
                   ))
                 }
               </div>

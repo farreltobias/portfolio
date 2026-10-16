@@ -13,3 +13,16 @@ export function byProjectOrder(a: Project, b: Project): number {
   if (a.data.year !== b.data.year) return b.data.year - a.data.year;
   return a.data.title.localeCompare(b.data.title);
 }
+
+/* Every project, in the one ordering. Sheet numbers come from this list, so a
+   project carries the same number on Home, on Work and on its own sheet. */
+export async function allProjects(): Promise<Project[]> {
+  const { getCollection } = await import("astro:content");
+  return (await getCollection("projects")).sort(byProjectOrder);
+}
+
+export const sheetNo = (n: number) => String(n).padStart(3, "0");
+
+export function sheetNumberOf(projects: Project[], id: string): string {
+  return sheetNo(projects.findIndex((project) => project.id === id) + 1);
+}

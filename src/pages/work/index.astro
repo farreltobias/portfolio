@@ -1,21 +1,85 @@
 ---
-import { getCollection } from "astro:content";
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import { byProjectOrder } from "../../lib/projects";
+import IndexRow from "../../components/IndexRow.astro";
+import Masthead from "../../components/Masthead.astro";
+import Notation from "../../components/Notation.astro";
+import { allProjects, sheetNo } from "../../lib/projects";
+import "../../styles/home.css";
+import "../../styles/work.css";
 
-const projects = (await getCollection("projects")).sort(byProjectOrder);
+/* The register: every project in the one ordering, each under its own sheet
+   number, in the same three fields as the Home's index. */
+const projects = await allProjects();
 ---
 
-<BaseLayout title="Work">
-  <h1>Work</h1>
-  <ul>
-    {
-      projects.map((project) => (
-        <li>
-          <a href={`/work/${project.id}`}>{project.data.title}</a>
-          <p>{project.data.description}</p>
-        </li>
-      ))
-    }
-  </ul>
-</BaseLayout>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Work — Farrel</title>
+    <meta
+      name="description"
+      content="Every project by Farrel, Product Engineer: the constraint, the decision and the outcome of each."
+    />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="sheet">
+      <Masthead current="work" />
+
+      <main id="main">
+        <section class="page-head" aria-labelledby="work-title">
+          <p class="leg zone">Register</p>
+          <div class="page-intro">
+            <h1 class="disp page-title" id="work-title">Work.</h1>
+            <p class="prose page-sub">
+              Every sheet carries the same three fields, so one can be read
+              against another.
+            </p>
+            <p class="page-count">
+              {`${projects.length} ${projects.length === 1 ? "project" : "projects"}`}
+            </p>
+          </div>
+          <div class="page-aside">
+            <Notation />
+          </div>
+        </section>
+
+        <div class="register">
+          <div class="register-body">
+            {
+              projects.length > 0 ? (
+                <div class="index">
+                  {projects.map((project, i) => (
+                    <IndexRow
+                      project={project}
+                      number={sheetNo(i + 1)}
+                      heading="h2"
+                    />
+                  ))}
+                </div>
+              ) : (
+                <p class="register-empty">No sheets published yet.</p>
+              )
+            }
+          </div>
+        </div>
+      </main>
+
+      <footer class="closing">
+        <div class="closing-head">
+          <div>
+            <h2>Have a product or operations problem to solve?</h2>
+            <p class="sub">
+              Open to Product Engineering roles and contract work.
+            </p>
+          </div>
+          <a class="control" href="/contact">
+            <span class="bar">Let's talk</span>
+            <span class="chip hatch" aria-hidden="true"></span>
+          </a>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

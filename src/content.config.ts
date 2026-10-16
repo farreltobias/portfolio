@@ -21,8 +21,9 @@ const projects = defineCollection({
       constraint: z.string(),
       decision: z.string(),
       outcome: z.string().optional(),
-      /* The measured change alone, short enough to set at collision scale, e.g.
-         "~4/day → 1–2/week". Only a measured result carries one; a qualitative
+      /* A verified before → after, short enough to set at collision scale, e.g.
+         "~4/day → 1–2/week". It renders only together with outcomeMetric;
+         record one only when the comparison is meaningful. A qualitative
          outcome stays a sentence and is never marked as measured. */
       outcomeFigure: z
         .string()
@@ -30,10 +31,14 @@ const projects = defineCollection({
           32,
           'outcomeFigure is set at collision scale: keep it to 32 characters, e.g. "~4/day → 1–2/week". Put the explanation in `outcome`.',
         )
+        .refine((value) => value.includes("→"), {
+          message:
+            'outcomeFigure is a before → after transformation: write it as "before → after".',
+        })
         .optional(),
       /* Names the quantity an outcomeFigure measures, e.g. "Support requests",
-         shown beside the Outcome label. Without a figure it is not shown: a
-         sentence names its own subject. */
+         shown beside the Outcome label. The figure renders only when both are
+         set; without a figure the metric is not shown. */
       outcomeMetric: z.string().optional(),
       /* Declared complexity, 0–10. Not rendered anywhere at present: the Home
          ramp became a pure tonal key and no longer reads a project's score.
