@@ -26,7 +26,10 @@ const projects = defineCollection({
          outcome stays a sentence and is never marked as measured. */
       outcomeFigure: z
         .string()
-        .max(32, "outcomeFigure is set at collision scale: keep it to 32 characters, e.g. \"~4/day → 1–2/week\". Put the explanation in `outcome`.")
+        .max(
+          32,
+          'outcomeFigure is set at collision scale: keep it to 32 characters, e.g. "~4/day → 1–2/week". Put the explanation in `outcome`.',
+        )
         .optional(),
       /* Names the quantity an outcomeFigure measures, e.g. "Support requests",
          shown beside the Outcome label. Without a figure it is not shown: a

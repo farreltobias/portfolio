@@ -565,7 +565,6 @@ a {
   margin-top: 9px;
 }
 
-
 /* No recorded result: the mask, never an invented figure. */
 .unmeasured {
   font-family: "Plex Mono", monospace;
@@ -840,7 +839,6 @@ a {
     background-color: var(--g1);
   }
 }
-
 
 /* ------------------------------------------------------------ sheet links --
    Each sheet opens its case study. The link is named in plain words and drawn

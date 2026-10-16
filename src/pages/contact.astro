@@ -15,7 +15,10 @@ const others = reach.filter((path) => path !== email);
 /* On a phone the address breaks before the @ and each half fills the line, so
    it keeps its scale instead of shrinking to fit one row. */
 const [local, domain] = email
-  ? [email.display.split("@")[0], `@${email.display.split("@").slice(1).join("@")}`]
+  ? [
+      email.display.split("@")[0],
+      `@${email.display.split("@").slice(1).join("@")}`,
+    ]
   : ["", ""];
 const splitChars = Math.max(local.length, domain.length);
 
