@@ -199,7 +199,7 @@ Square everywhere (`rounded.none`). Form comes from 1px rules: ink for structure
 
 ### Record sheet
 - **Structure:** bordered sheet on the field with the stacked edge; corner shows "Sheet 00N / 00T"; title; Constraint (crossed-hatch mark + value), Decision, Outcome; foot with "Read case study" and year.
-- **Outcome states:** before → after figure in magenta over a 13px hatch band (only with metric); qualitative sentence in ink; "Shipped — not yet measured" with a dot mask at full strength.
+- **Outcome states:** before → after figure in magenta over a 13px hatch band (only with metric); qualitative sentence in ink; "Shipped — not yet measured" or, for a project whose `stage` is `in-progress`, "In progress — not yet measured", with a dot mask at full strength.
 - **Interaction:** the whole sheet is the link target; hover steps the ground to Lifted Bone; keyboard focus outlines the whole sheet in magenta.
 
 ### Index row
@@ -214,6 +214,12 @@ Masthead: condensed wordmark (28px caps) over a tracked "Product Engineer" label
 ### Notation key and ramp key
 The ramp key lists the eleven steps (X → 0) with the role each used step plays (Ink, Prose, Labels, Rules, Hover, Field). The Notation key binds marks to meaning: crossed hatch = Constraint, magenta 45° hatch = Before → after, dot mask = Not yet measured.
 
+### Plan
+The case study's game plan, from an optional typed `plan` list (at most six moves) in a project's frontmatter: moves read top to bottom, each with a mark — crossed hatch = constraint, filled ink square = built, half-inked square = in progress, dashed square = planned, dashed diamond = decision, faint dashed square = possible — a condensed-caps title, and a mono note led by its status in words ("In progress · …"). The connector into a move is solid only when that move is built; everything else, in-progress included, is dashed, with a small arrowhead into each move. The key lists only the marks the plan uses. Desktop: its own column beside the notes, sticky only on screens at least 820px tall; narrower: after the context line, before the first section.
+
+### Sheet key and contents
+Every case study keys its own marks in one line under the record strip (crossed hatch = Constraint, plus Before → after or Not yet measured when the strip draws them), so a visitor arriving from a link never meets an unexplained mark. On desktop, a sheet without a plan uses the right column for a sticky Contents list of its sections (condensed caps, Soft Rule dividers); narrower, the list is omitted.
+
 ### Title-block strip
 Contact paths as one ruled strip: four cells on desktop (three inside the contact sheet), 2 × 2 on tablet, stacked on phones; label over value, the whole cell a link; external links open in a new tab.
 
@@ -225,6 +231,7 @@ Contact paths as one ruled strip: four cells on desktop (three inside the contac
 - **Do** render a before → after figure only when both `outcomeFigure` and `outcomeMetric` exist, and keep figures ≤32 characters with an arrow.
 - **Do** keep labels and values at the readable floor (11px; one step up on phones) and touch targets at 44px.
 - **Do** reuse the record sheet, index row, spec block and strip before inventing a container.
+- **Do** draw anything not yet built as dashed in a plan; solid is reserved for moves that exist.
 
 ### Don't:
 - **Don't** spend Dichroic Magenta on links, hovers, highlights, selection or decoration.

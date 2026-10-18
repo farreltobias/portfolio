@@ -354,7 +354,8 @@
       "**Do** show missing evidence as the dot mask and \"Shipped — not yet measured\".",
       "**Do** render a before → after figure only when both `outcomeFigure` and `outcomeMetric` exist, and keep figures ≤32 characters with an arrow.",
       "**Do** keep labels and values at the readable floor (11px; one step up on phones) and touch targets at 44px.",
-      "**Do** reuse the record sheet, index row, spec block and strip before inventing a container."
+      "**Do** reuse the record sheet, index row, spec block and strip before inventing a container.",
+      "**Do** draw anything not yet built as dashed in a plan; solid is reserved for moves that exist."
     ],
     "donts": [
       "**Don't** spend Dichroic Magenta on links, hovers, highlights, selection or decoration.",

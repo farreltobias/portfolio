@@ -3,6 +3,7 @@ import { render } from "astro:content";
 import type { GetStaticPaths } from "astro";
 import Masthead from "../../components/Masthead.astro";
 import Outcome from "../../components/Outcome.astro";
+import Plan from "../../components/Plan.astro";
 import { allProjects, sheetNo } from "../../lib/projects";
 import "../../styles/home.css";
 import "../../styles/work.css";
@@ -29,7 +30,17 @@ export const getStaticPaths = (async () => {
 const { project, number, total, count, prev, next, prevNumber, nextNumber } =
   Astro.props;
 const { data } = project;
-const { Content } = await render(project);
+const { Content, headings } = await render(project);
+
+/* The marks the record strip draws, so this sheet can key its own notation
+   for a visitor who arrives straight from a link. */
+const measured = Boolean(data.outcomeFigure && data.outcomeMetric);
+const unmeasured = !measured && !data.outcome;
+
+/* Without a plan, the right column carries the sheet's contents instead of
+   standing empty. */
+const sections = headings.filter((heading) => heading.depth === 2);
+const hasPlan = Boolean(data.plan && data.plan.length > 0);
 ---
 
 <!doctype html>
@@ -89,10 +100,58 @@ const { Content } = await render(project);
                 <Outcome project={data} />
               </div>
             </div>
+            <ul class="sheet-key" aria-label="Key to this sheet's marks">
+              <li>
+                <span class="sheet-key-sw hatch-cross" aria-hidden="true"
+                ></span>Constraint
+              </li>
+              {
+                measured && (
+                  <li>
+                    <span class="sheet-key-sw hatch-mag" aria-hidden="true" />
+                    Before → after
+                  </li>
+                )
+              }
+              {
+                unmeasured && (
+                  <li>
+                    <span class="sheet-key-sw mask-dot" aria-hidden="true" />
+                    Not yet measured
+                  </li>
+                )
+              }
+            </ul>
           </section>
 
           <div class="narrative">
-            <Content />
+            {
+              hasPlan && data.plan ? (
+                <aside class="plan-col">
+                  <Plan steps={data.plan} />
+                </aside>
+              ) : (
+                sections.length > 1 && (
+                  <aside class="plan-col toc-col">
+                    <nav class="toc" aria-labelledby="toc-title">
+                      <h2 class="plan-h" id="toc-title">
+                        Contents
+                      </h2>
+                      <ol>
+                        {sections.map((section) => (
+                          <li>
+                            <a href={`#${section.slug}`}>{section.text}</a>
+                          </li>
+                        ))}
+                      </ol>
+                    </nav>
+                  </aside>
+                )
+              )
+            }
+            <div class="notes">
+              <Content />
+            </div>
           </div>
         </article>
 

@@ -151,6 +151,39 @@
   margin-top: 10px;
 }
 
+/* The sheet's own key: one line under the record strip naming only the marks
+   the strip draws. */
+.sheet-key {
+  grid-column: 2 / span 2;
+  margin-left: 4.613%;
+  list-style: none;
+  padding: 10px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  font-family: "Plex Mono", monospace;
+  font-size: var(--t-key);
+  color: var(--ink-faint);
+}
+
+.sheet-key li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sheet-key-sw {
+  width: 24px;
+  height: 12px;
+  border: 1px solid var(--rule-soft);
+}
+
+.sheet-key-sw.hatch-cross {
+  background-image:
+    repeating-linear-gradient(45deg, var(--ink) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(-45deg, var(--ink) 0 1px, transparent 1px 4px);
+}
+
 /* -------------------------------------------------------------- narrative --
    The working notes, on cleared ground at a reading measure. Each section
    opens a ruled band, as the Home's sections do. */
@@ -164,22 +197,32 @@
   color: var(--ink-soft);
 }
 
-.narrative > * {
+/* The notes and the plan are separate columns, so a tall plan never
+   stretches the notes' rhythm. */
+.notes {
   grid-column: 2;
   margin-left: 7.356%;
+}
+
+.notes > * {
   max-width: 64ch;
 }
 
-/* The line before the first section names the kind of work. */
-.narrative > p:first-child {
+.notes > :first-child {
+  margin-top: 0;
+}
+
+/* The line before the first section names the kind of work: only when the
+   notes open with it, so a sheet that starts with a heading keeps its first
+   paragraph at full size. */
+.notes > p:first-child {
   font-size: var(--t-field);
   color: var(--ink-faint);
 }
 
 /* Same column and inset as the text, so heading and paragraphs share an
    edge; the rule runs the column's full width past the reading measure. */
-.narrative h2 {
-  grid-column: 2;
+.notes > h2 {
   max-width: none;
   margin-top: 56px;
   padding-top: 14px;
@@ -194,7 +237,7 @@
   color: var(--ink);
 }
 
-.narrative h3 {
+.notes > h3 {
   margin-top: 32px;
   font-family: Archivo, sans-serif;
   font-weight: 600;
@@ -205,35 +248,38 @@
   color: var(--ink);
 }
 
-.narrative p,
-.narrative ul,
-.narrative ol {
+/* Scoped to the notes' own blocks, so nothing leaks into the plan. */
+.notes > p,
+.notes > ul,
+.notes > ol {
   margin-top: 1em;
 }
 
-.narrative h2 + *,
-.narrative h3 + * {
+.notes > h2 + *,
+.notes > h3 + * {
   margin-top: 18px;
 }
 
-.narrative ul,
-.narrative ol {
+.notes > ul,
+.notes > ol {
   padding-left: 0;
   list-style: none;
 }
 
-.narrative li {
+.notes > ul > li,
+.notes > ol > li {
   position: relative;
   padding-left: 22px;
 }
 
-.narrative li + li {
+.notes > ul > li + li,
+.notes > ol > li + li {
   margin-top: 4px;
 }
 
 /* A short hairline for each item, drawn from the sheet's rules: not a bullet
    glyph, and not an empty square that would read as a checkbox. */
-.narrative ul > li::before {
+.notes > ul > li::before {
   content: "";
   position: absolute;
   left: 0;
@@ -243,11 +289,11 @@
   background: var(--ink-faint);
 }
 
-.narrative ol {
+.notes > ol {
   counter-reset: item;
 }
 
-.narrative ol > li::before {
+.notes > ol > li::before {
   counter-increment: item;
   content: counter(item);
   position: absolute;
@@ -256,22 +302,347 @@
   color: var(--ink-faint);
 }
 
-.narrative strong {
+.notes strong {
   font-weight: 600;
   color: var(--ink);
 }
 
-.narrative a {
+.notes a {
   color: var(--ink);
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
 }
 
-.narrative code {
+.notes code {
   font-size: 0.92em;
   background: var(--g1);
   padding: 0 4px;
+}
+
+/* ------------------------------------------------------------------- plan --
+   The game plan: the project's moves read top to bottom in the sheet's
+   notation. A solid connector runs only into a move that was made; anything
+   not built is dashed, so the drawing cannot overstate the work. On desktop
+   it stands in the right column beside the narrative; narrower, it opens
+   the notes, after the record strip. */
+.plan {
+  margin: 0;
+  border-top: 1px solid var(--rule);
+  padding-top: 11px;
+}
+
+.plan-h {
+  margin: 0;
+  font-family: Archivo, sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: var(--t-leg);
+  line-height: 1.25;
+  color: var(--ink-faint);
+}
+
+.plan-steps {
+  list-style: none;
+  margin-top: 20px;
+  padding: 0;
+}
+
+.plan-step {
+  --mark: 18px;
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--mark) minmax(0, 1fr);
+  column-gap: 14px;
+  padding-bottom: 30px;
+}
+
+.plan-step:last-child {
+  padding-bottom: 0;
+}
+
+/* The connector to the next move, down the centre of the mark column. */
+.plan-step.to-solid::after,
+.plan-step.to-dashed::after {
+  content: "";
+  position: absolute;
+  left: calc(var(--mark) / 2);
+  top: calc(var(--mark) + 6px);
+  bottom: 6px;
+  border-left: 1px solid var(--ink);
+}
+
+.plan-step.to-dashed::after {
+  border-left: 1px dashed var(--ink-faint);
+}
+
+/* The arrowhead closing each connector, above the move it leads to. */
+.plan-step + .plan-step .plan-mark::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -9px;
+  width: 6px;
+  height: 6px;
+  border-right: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.plan-step
+  + .plan-step:is(.is-in-progress, .is-planned, .is-decision, .is-possible)
+  .plan-mark::before {
+  border-color: var(--ink-faint);
+}
+
+.plan-mark {
+  position: relative;
+  width: var(--mark);
+  height: var(--mark);
+  margin-top: 1px;
+}
+
+.is-constraint .plan-mark {
+  border: 1px solid var(--ink);
+  background-image:
+    repeating-linear-gradient(45deg, var(--ink) 0 1px, transparent 1px 6px),
+    repeating-linear-gradient(-45deg, var(--ink) 0 1px, transparent 1px 6px);
+}
+
+.is-built .plan-mark {
+  background: var(--ink);
+}
+
+/* Under way: half inked, and reached by a dashed line like anything not yet
+   built. */
+.is-in-progress .plan-mark {
+  border: 1px solid var(--ink);
+  background: linear-gradient(to top, var(--ink) 50%, transparent 50%);
+}
+
+.is-planned .plan-mark,
+.is-possible .plan-mark {
+  border: 1px dashed var(--ink);
+}
+
+.is-possible .plan-mark {
+  border-color: var(--ink-faint);
+}
+
+/* A choice still to be taken: a dashed square turned on its corner, drawn
+   inside the mark so the arrowhead above it stays upright. */
+.is-decision .plan-mark::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border: 1px dashed var(--ink);
+  transform: rotate(45deg);
+}
+
+.plan-title {
+  font-family: Archivo, sans-serif;
+  font-weight: 700;
+  font-stretch: 72%;
+  text-transform: uppercase;
+  font-size: 20px;
+  line-height: 1.05;
+  color: var(--ink);
+}
+
+.is-possible .plan-title {
+  color: var(--ink-faint);
+}
+
+/* The move's status leads its note, in words, because the marks are only
+   drawn: "Built · Structured capture…". */
+.plan-tag {
+  color: var(--ink);
+}
+
+.plan-note {
+  margin-top: 6px;
+  font-family: "Plex Mono", monospace;
+  font-size: var(--t-note);
+  line-height: 1.45;
+  color: var(--ink-faint);
+}
+
+/* The key binds every mark and both line styles to a word. */
+.plan-key {
+  margin-top: 26px;
+  padding-top: 11px;
+  border-top: 1px solid var(--rule-soft);
+  font-family: "Plex Mono", monospace;
+  font-size: var(--t-key);
+  color: var(--ink-faint);
+}
+
+.plan-key ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+
+.plan-key-lines {
+  margin-top: 10px;
+}
+
+.plan-key-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.plan-key-item .plan-mark {
+  --mark: 12px;
+  width: 12px;
+  height: 12px;
+  margin-top: 0;
+}
+
+.plan-key-item.is-decision .plan-mark::after {
+  inset: 2px;
+}
+
+/* At key size the hatch is drawn finer, so it still reads as crossed hatch
+   rather than a single cross. */
+.plan-key-item.is-constraint .plan-mark {
+  background-image:
+    repeating-linear-gradient(45deg, var(--ink) 0 1px, transparent 1px 3.5px),
+    repeating-linear-gradient(-45deg, var(--ink) 0 1px, transparent 1px 3.5px);
+}
+
+/* Built carries both of its signs in one entry: the filled mark and the
+   solid line. Only "Not built" needs a line of its own. */
+.plan-key-item.is-built .plan-key-line {
+  width: 16px;
+  margin-left: -4px;
+}
+
+.plan-key-line {
+  width: 24px;
+  border-top: 1px solid var(--ink);
+}
+
+.plan-key-line.is-dashed {
+  border-top: 1px dashed var(--ink-faint);
+}
+
+/* Desktop: the plan has its own column beside the notes, and stays in view
+   while they are read on screens tall enough to hold it; on a short screen
+   it simply sits at the top of its column. */
+@media (min-width: 1280px) {
+  .plan-col {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end;
+    width: 59.96%;
+  }
+}
+
+@media (min-width: 1280px) and (min-height: 820px) {
+  .plan-col .plan {
+    position: sticky;
+    top: 32px;
+  }
+}
+
+/* Narrower, it is a band in the reading flow, after the line that names the
+   kind of work and before the first section. */
+@media (max-width: 1279px) {
+  .notes {
+    display: contents;
+  }
+
+  .notes > * {
+    order: 2;
+  }
+
+  .notes > p:first-child {
+    order: 0;
+  }
+
+  .plan-col {
+    order: 1;
+    margin-top: 32px;
+    max-width: 420px;
+  }
+
+  /* Three across, so five marks settle into rows of three and two. */
+  .plan-key .plan-key-marks {
+    display: grid;
+    grid-template-columns: repeat(3, max-content);
+  }
+}
+
+/* ---------------------------------------------------------------- contents --
+   On a sheet without a plan, the right column lists its sections. Desktop
+   only: narrower, the notes are one column and need no index. */
+.toc ol {
+  list-style: none;
+  margin-top: 16px;
+  padding: 0;
+  border-top: 1px solid var(--rule-soft);
+}
+
+.toc li {
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.toc a {
+  display: block;
+  padding: 12px 0 11px;
+  font-family: Archivo, sans-serif;
+  font-weight: 700;
+  font-stretch: 72%;
+  text-transform: uppercase;
+  font-size: 18px;
+  line-height: 1.05;
+  color: var(--ink);
+  transition: background-color 120ms linear;
+}
+
+@media (hover: hover) {
+  .toc a:hover {
+    background-color: var(--g1);
+  }
+}
+
+.toc a:focus-visible {
+  outline: 2px solid var(--mag);
+  outline-offset: 2px;
+}
+
+/* Section targets land clear of the top edge. */
+.notes > h2 {
+  scroll-margin-top: 32px;
+}
+
+@media (min-width: 1280px) and (min-height: 820px) {
+  .toc-col .toc {
+    position: sticky;
+    top: 32px;
+  }
+}
+
+@media (max-width: 1279px) {
+  .toc-col {
+    display: none;
+  }
+
+  .sheet-key {
+    grid-column: 1;
+    margin-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toc a {
+    transition: none;
+  }
 }
 
 /* -------------------------------------------------------------- sheet nav --
@@ -375,8 +746,8 @@
     margin-top: 56px;
   }
 
-  .narrative > *,
-  .narrative h2 {
+  .notes,
+  .notes > * {
     grid-column: 1;
     margin-left: 0;
   }
@@ -420,7 +791,7 @@
     margin-top: 40px;
   }
 
-  .narrative h2 {
+  .notes > h2 {
     margin-top: 44px;
     font-size: 24px;
   }

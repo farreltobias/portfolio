@@ -40,6 +40,31 @@ const projects = defineCollection({
          shown beside the Outcome label. The figure renders only when both are
          set; without a figure the metric is not shown. */
       outcomeMetric: z.string().optional(),
+      /* The case study's game plan: the project's moves, read top to bottom.
+         `built` is the only kind drawn solid; everything else, `in-progress`
+         included, is dashed, so what exists and what does not can never be
+         confused. At most six moves, so the drawing fits a screen. Optional:
+         a project without a plan shows no drawing. */
+      plan: z
+        .array(
+          z.object({
+            kind: z.enum([
+              "constraint",
+              "built",
+              "in-progress",
+              "planned",
+              "decision",
+              "possible",
+            ]),
+            title: z.string(),
+            note: z.string().optional(),
+          }),
+        )
+        .max(6, "A plan holds at most six moves; merge or drop the rest.")
+        .optional(),
+      /* Whether the work has shipped. A project still being built reads
+         "In progress — not yet measured" until it ships; never "Shipped". */
+      stage: z.enum(["in-progress", "shipped"]).default("shipped"),
       /* Declared complexity, 0–10. Not rendered anywhere at present: the Home
          ramp became a pure tonal key and no longer reads a project's score.
          Kept so existing frontmatter stays valid; remove with the values. */

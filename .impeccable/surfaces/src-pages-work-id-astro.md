@@ -13,7 +13,7 @@ Visitor mode: **Read**: the visitor understands one project — problem, approac
 
 Audience/job: an evaluator who opened one sheet from Home or Work and wants enough context to judge Farrel's decisions, then reach contact or the next sheet. Content: frontmatter (title, description, year, role, constraint, decision, outcome, outcomeMetric, outcomeFigure) and the Markdown narrative, whose sections vary per project. Nothing invented; confidentiality wording stays as written.
 
-Constraints: before → after figure only when outcomeMetric and outcomeFigure both exist; cover and tags optional and not rendered (no per-project rasters); no client JS.
+Plan: an optional typed `plan` list in frontmatter renders the game-plan drawing (solid only into built moves, dashed otherwise), sticky in the right column on desktop. Constraints: before → after figure only when outcomeMetric and outcomeFigure both exist; cover and tags optional and not rendered (no per-project rasters); no client JS.
 
 ## Direction contract
 

@@ -8,12 +8,13 @@ import Figure from "./Figure.astro";
      the quantity; the sentence stays on the case study, so the figure is
      never stated twice;
    - a qualitative result, stated in ink and never given the measured mark;
-   - nothing recorded, shown as the mask, never as an invented claim. */
+   - nothing recorded, shown as the mask, never as an invented claim; the
+     words say whether the work has shipped or is still in progress. */
 interface Props {
   project: CollectionEntry<"projects">["data"];
 }
 
-const { outcome, outcomeFigure, outcomeMetric } = Astro.props.project;
+const { outcome, outcomeFigure, outcomeMetric, stage } = Astro.props.project;
 const measured = Boolean(outcomeFigure && outcomeMetric);
 const label = measured ? `Outcome — ${outcomeMetric}` : "Outcome";
 ---
@@ -29,7 +30,9 @@ const label = measured ? `Outcome — ${outcomeMetric}` : "Outcome";
     <p class="outcome-text">{outcome}</p>
   ) : (
     <Fragment>
-      <p class="unmeasured">Shipped — not yet measured</p>
+      <p class="unmeasured">
+        {stage === "in-progress" ? "In progress" : "Shipped"} — not yet measured
+      </p>
       <div class="unmeasured-band mask-dot" aria-hidden="true" />
     </Fragment>
   )
