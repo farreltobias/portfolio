@@ -26,3 +26,7 @@ export const sheetNo = (n: number) => String(n).padStart(3, "0");
 export function sheetNumberOf(projects: Project[], id: string): string {
   return sheetNo(projects.findIndex((project) => project.id === id) + 1);
 }
+
+/* A display title with a non-breaking space before its dashes, so a wrapped
+   title never starts a line with "—" ("Rare Candy — Customer Success"). */
+export const displayTitle = (title: string) => title.replace(/ ([—–])/g, " $1");

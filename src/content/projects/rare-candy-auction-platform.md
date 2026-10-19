@@ -10,33 +10,54 @@ outcome: Planning and versioning moved into the platform.
 outcomeMetric: Planning
 outcomeFigure: External → In-platform
 complexity: 8
-order: 2
+order: 3
+plan:
+  - kind: constraint
+    title: Live auction state
+    note: Had to stay consistent while planning workflows changed
+  - kind: built
+    title: Explicit, versioned planning
+    note: Auction state made explicit; changes kept over time and managed before going live
+  - kind: built
+    title: Planning in the platform
+    note: Future auctions are now planned and versioned through the system
+
 ---
 
-Product engineering work on Rare Candy's auction platform.
+Product engineering work on Rare Candy's auction platform. Internal systems and marketplace rules are described in general terms only.
 
-## Problem
+## Planning is more than editing fields
 
-Auction systems combine product behavior with strict timing, ordering, state, and transactional requirements.
+An auction is not a form with a few values to fill in. Its state, timing, ordering and lifecycle all interact, and a change made to an auction that has not started yet can matter a great deal once it does.
 
-As auction workflows evolved, planning and managing them needed to become more structured and reliable without creating inconsistencies between drafts, future auctions, and live marketplace behavior.
+That made auction planning a product-system problem rather than a set of isolated features. Adding one more editable field at a time would not have made planning reliable; it would only have added more ways for parts of an auction to disagree with each other.
 
-## Approach
+## Planning versus live behavior
 
-The work treated auction planning as a product system rather than a collection of isolated features.
+Two things had to hold at once.
 
-The solution focused on making auction state explicit, preserving changes over time, and ensuring that planning decisions could be managed safely before an auction became active.
+- **Live auctions had to stay consistent.** Whatever happened in planning could not disturb an auction that was already running.
+- **Planning had to keep evolving.** Future auctions needed to be prepared and changed over time without that work leaking into live marketplace behavior.
 
-Product requirements and technical constraints were considered together throughout the implementation.
+As auction workflows grew, an informal way of planning made that separation harder to keep. Drafts, future auctions and live behavior needed a clear line between them.
 
-## Solution
+## The decision: make planning explicit and versioned
 
-A system for planning and versioning Rare Candy auctions.
+The decision was to make auction planning explicit and versioned, so that changes are settled in planning before they can affect live behavior.
 
-The platform supports the auction lifecycle through structured state, persistent planning data, and versioned changes, creating a reliable foundation for managing future auction configurations before they go live.
+- **Explicit state** means an auction's position in its lifecycle is represented directly, instead of being inferred from loose details.
+- **Versioning** means a change to a planned auction is represented as a change, kept over time, instead of overwriting what was there before. Planning stops depending on an informal workflow and becomes something the platform itself holds.
+
+Versioning here is not architecture for its own sake. It is what lets future auctions keep changing while the auctions that are live stay exactly as they are.
+
+## Designing product and integrity together
+
+My role was to shape both sides of that decision: how auction planning should behave as a product, and the technical structure that keeps it consistent.
+
+The two could not be designed separately. Product requirements decided what planning needed to allow; technical constraints decided what it could allow without risking live behavior. Both were worked out together throughout the implementation.
 
 ## Outcome
 
-Rare Candy auctions are now fully planned and versioned through the system.
+Rare Candy auctions are now planned and versioned through the platform.
 
-The auction workflow moved from less structured planning into a persistent product workflow where future auctions and their changes can be managed directly in the platform.
+Planning moved from a less structured workflow into a persistent product workflow, where future auctions and their changes are managed directly in the system. No performance metric is claimed for this change; the outcome is the change in how planning works.

@@ -4,7 +4,12 @@ import Masthead from "../components/Masthead.astro";
 import Notation from "../components/Notation.astro";
 import Outcome from "../components/Outcome.astro";
 import { contactLinkAttrs, contactPaths } from "../lib/contact";
-import { allProjects, sheetNo, sheetNumberOf } from "../lib/projects";
+import {
+  allProjects,
+  displayTitle,
+  sheetNo,
+  sheetNumberOf,
+} from "../lib/projects";
 import "../styles/home.css";
 
 /* The whole body of work in its one ordering; sheet numbers are taken from
@@ -94,7 +99,7 @@ const reach = contactPaths.filter((path) => path.href);
                   Sheet {sheetNumberOf(all, lead.id)} / {sheetNo(all.length)}
                 </span>
               </div>
-              <h2 class="rt">{lead.data.title}</h2>
+              <h2 class="rt">{displayTitle(lead.data.title)}</h2>
 
               <div class="f">
                 <p class="leg k">Constraint</p>

@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { displayTitle } from "../lib/projects";
 import Outcome from "./Outcome.astro";
 
 /* One sheet in the register: the same three fields wherever it appears, so a
@@ -18,7 +19,7 @@ const { data } = project;
 <article class="index-row">
   <div class="no">{number}</div>
   <div>
-    <Heading class="ti">{data.title}</Heading>
+    <Heading class="ti">{displayTitle(data.title)}</Heading>
     <p class="yr">{data.year}</p>
     <a class="sheet-link leg" href={`/work/${project.id}`}>
       Read case study<span class="vh">: {data.title}</span>

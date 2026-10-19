@@ -8,7 +8,7 @@ constraint: Game rules had to work inside fast-moving Slack.
 decision: Make Slack the interface and automate the referee.
 outcome: The game ran end to end without manual refereeing.
 complexity: 7
-order: 3
+order: 4
 ---
 
 Internal product experiment built for Howdy.

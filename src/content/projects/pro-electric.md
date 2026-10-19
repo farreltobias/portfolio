@@ -7,7 +7,7 @@ featured: true
 constraint: Operational notes were taken by hand.
 decision: Start with a bot-first MVP.
 complexity: 4
-order: 4
+order: 2
 stage: in-progress
 plan:
   - kind: constraint

@@ -16,7 +16,9 @@ interface Props {
 
 const { outcome, outcomeFigure, outcomeMetric, stage } = Astro.props.project;
 const measured = Boolean(outcomeFigure && outcomeMetric);
-const label = measured ? `Outcome — ${outcomeMetric}` : "Outcome";
+/* The dash stays with "Outcome", so a wrapped label breaks after it and
+   keeps the metric's words together on the next line. */
+const label = measured ? `Outcome\u00a0— ${outcomeMetric}` : "Outcome";
 ---
 
 <p class="leg k">{label}</p>

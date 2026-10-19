@@ -139,7 +139,9 @@
 .case-record .delta {
   font-family: "Plex Mono", monospace;
   font-weight: 600;
-  font-size: 30px;
+  /* Scales with the strip so a figure holds one line from 1024 up; never
+     below 24px, the floor for magenta text. */
+  font-size: clamp(24px, 2.3vw, 30px);
   color: var(--mag);
   line-height: 1;
   letter-spacing: -0.03em;
@@ -621,7 +623,9 @@
   scroll-margin-top: 32px;
 }
 
-@media (min-width: 1280px) and (min-height: 820px) {
+/* The contents list is short, so it can stay in view on a laptop screen
+   that is too short for the plan. */
+@media (min-width: 1280px) and (min-height: 560px) {
   .toc-col .toc {
     position: sticky;
     top: 32px;

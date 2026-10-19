@@ -4,7 +4,7 @@ import type { GetStaticPaths } from "astro";
 import Masthead from "../../components/Masthead.astro";
 import Outcome from "../../components/Outcome.astro";
 import Plan from "../../components/Plan.astro";
-import { allProjects, sheetNo } from "../../lib/projects";
+import { allProjects, displayTitle, sheetNo } from "../../lib/projects";
 import "../../styles/home.css";
 import "../../styles/work.css";
 
@@ -61,7 +61,7 @@ const hasPlan = Boolean(data.plan && data.plan.length > 0);
           <header class="page-head">
             <p class="leg zone">Sheet {number}</p>
             <div class="page-intro">
-              <h1 class="disp page-title case-title">{data.title}</h1>
+              <h1 class="disp page-title case-title">{displayTitle(data.title)}</h1>
               <p class="prose page-sub">{data.description}</p>
             </div>
             <dl class="spec">
@@ -161,7 +161,7 @@ const hasPlan = Boolean(data.plan && data.plan.length > 0);
               prev && (
                 <a class="sheet-nav-link" href={`/work/${prev.id}`}>
                   <span class="leg">Previous · Sheet {prevNumber}</span>
-                  <span class="sheet-nav-title">{prev.data.title}</span>
+                  <span class="sheet-nav-title">{displayTitle(prev.data.title)}</span>
                 </a>
               )
             }
@@ -178,7 +178,7 @@ const hasPlan = Boolean(data.plan && data.plan.length > 0);
               next && (
                 <a class="sheet-nav-link" href={`/work/${next.id}`}>
                   <span class="leg">Next · Sheet {nextNumber}</span>
-                  <span class="sheet-nav-title">{next.data.title}</span>
+                  <span class="sheet-nav-title">{displayTitle(next.data.title)}</span>
                 </a>
               )
             }
