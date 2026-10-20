@@ -866,6 +866,36 @@ a {
   margin-top: 14px;
 }
 
+/* ------------------------------------------------------------- crop marks --
+   A sheet printed for trimming carries a short stroke at each corner, out in
+   the margin. They mark the sheets as sheets; they never sit behind text. */
+.crop-marks,
+.record,
+.contact-sheet {
+  position: relative;
+}
+
+.crop-marks::before,
+.record::before,
+.contact-sheet::before {
+  --crop: var(--ink-faint);
+  --crop-len: 9px;
+  content: "";
+  position: absolute;
+  inset: -8px;
+  pointer-events: none;
+  background:
+    linear-gradient(var(--crop), var(--crop)) left top / var(--crop-len) 1px,
+    linear-gradient(var(--crop), var(--crop)) left top / 1px var(--crop-len),
+    linear-gradient(var(--crop), var(--crop)) right top / var(--crop-len) 1px,
+    linear-gradient(var(--crop), var(--crop)) right top / 1px var(--crop-len),
+    linear-gradient(var(--crop), var(--crop)) left bottom / var(--crop-len) 1px,
+    linear-gradient(var(--crop), var(--crop)) left bottom / 1px var(--crop-len),
+    linear-gradient(var(--crop), var(--crop)) right bottom / var(--crop-len) 1px,
+    linear-gradient(var(--crop), var(--crop)) right bottom / 1px var(--crop-len);
+  background-repeat: no-repeat;
+}
+
 /* Visible only to assistive technology. */
 .vh {
   position: absolute;

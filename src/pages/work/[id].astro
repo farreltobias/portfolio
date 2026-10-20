@@ -4,6 +4,8 @@ import type { GetStaticPaths } from "astro";
 import Masthead from "../../components/Masthead.astro";
 import Outcome from "../../components/Outcome.astro";
 import Plan from "../../components/Plan.astro";
+import Plate from "../../components/Plate.astro";
+import Structure from "../../components/Structure.astro";
 import { allProjects, displayTitle, sheetNo } from "../../lib/projects";
 import "../../styles/home.css";
 import "../../styles/work.css";
@@ -41,6 +43,9 @@ const unmeasured = !measured && !data.outcome;
    standing empty. */
 const sections = headings.filter((heading) => heading.depth === 2);
 const hasPlan = Boolean(data.plan && data.plan.length > 0);
+const plates = data.plates ?? [];
+const projectName = data.title.split(" — ")[0];
+const sourceHost = data.platesSource ? new URL(data.platesSource).host : null;
 ---
 
 <!doctype html>
@@ -124,11 +129,47 @@ const hasPlan = Boolean(data.plan && data.plan.length > 0);
             </ul>
           </section>
 
+          {
+            plates.length > 0 && (
+              <section class="plates" aria-label="Plates">
+                <div class="plates-body">
+                  <div class="plates-row">
+                    {plates.map((plate, i) => (
+                      <Plate
+                        image={plate.image}
+                        caption={plate.caption}
+                        view={plate.view}
+                        number={String(i + 1).padStart(2, "0")}
+                        project={projectName}
+                      />
+                    ))}
+                  </div>
+                  {data.platesSource && (
+                    <p class="plates-note">
+                      Captured from the reference copy at{" "}
+                      <a
+                        href={data.platesSource}
+                        target="_blank"
+                        rel="noopener"
+                      >
+                        {sourceHost}
+                      </a>
+                    </p>
+                  )}
+                </div>
+              </section>
+            )
+          }
+
           <div class="narrative">
             {
               hasPlan && data.plan ? (
                 <aside class="plan-col">
                   <Plan steps={data.plan} />
+                </aside>
+              ) : data.structure ? (
+                <aside class="plan-col">
+                  <Structure structure={data.structure} year={data.year} />
                 </aside>
               ) : (
                 sections.length > 1 && (

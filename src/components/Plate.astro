@@ -1,0 +1,42 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+/* A screenshot of delivered work, mounted as a plate in the drawing set: the
+   portfolio's frame and title block around the project's own identity. */
+interface Props {
+  image: ImageMetadata;
+  caption: string;
+  view: "desktop" | "mobile";
+  number: string;
+  project: string;
+}
+
+const { image, caption, view, number, project } = Astro.props;
+/* Phone screens are captured at twice their CSS width. */
+const viewport = view === "mobile" ? image.width / 2 : image.width;
+---
+
+<figure
+  class={`plate crop-marks is-${view}`}
+  style={`--ar: ${(image.width / image.height).toFixed(3)}`}
+>
+  <div class="plate-head">
+    <span class="leg">Plate {number}</span>
+    <span class="plate-view">
+      {view === "desktop" ? "Desktop" : "Mobile"} · {viewport}px
+    </span>
+  </div>
+  <Image
+    class="plate-img"
+    src={image}
+    alt={`Screenshot of the delivered ${project} website: ${caption}`}
+    widths={view === "mobile" ? [360, 720] : [640, 960, 1440]}
+    sizes={view === "mobile"
+      ? "(min-width: 1024px) 260px, 70vw"
+      : "(min-width: 1280px) 640px, (min-width: 761px) 66vw, 100vw"}
+    loading="lazy"
+    decoding="async"
+  />
+  <figcaption class="plate-caption">{caption}</figcaption>
+</figure>

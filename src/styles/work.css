@@ -186,6 +186,81 @@
     repeating-linear-gradient(-45deg, var(--ink) 0 1px, transparent 1px 4px);
 }
 
+/* ----------------------------------------------------------------- plates --
+   Screens of the delivered work, mounted as plates in the drawing set. Each
+   plate grows by its image's aspect ratio, so a row of desktop and mobile
+   screens shares one image height. */
+.plates {
+  display: grid;
+  grid-template-columns: 11.181% minmax(0, 1fr) 33.125%;
+  margin-top: calc(56 * var(--u));
+}
+
+.plates-body {
+  grid-column: 2 / span 2;
+  margin-left: 4.613%;
+}
+
+.plates-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 32px;
+  padding: 8px;
+}
+
+.plate {
+  flex: var(--ar) 1 0%;
+  min-width: 0;
+  margin: 0;
+}
+
+.plate-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2px 12px;
+  white-space: nowrap;
+  padding-bottom: 8px;
+  font-family: "Plex Mono", monospace;
+  font-size: var(--t-key);
+  color: var(--ink-faint);
+}
+
+.plate-head .leg {
+  color: var(--ink);
+}
+
+.plate-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--rule);
+  box-shadow: 0 0 0 1px rgb(21 22 26 / 7%);
+}
+
+.plate-caption {
+  margin-top: 10px;
+  font-family: "Plex Mono", monospace;
+  font-size: var(--t-note);
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.plates-note {
+  margin-top: 20px;
+  padding-top: 10px;
+  border-top: 1px solid var(--rule-soft);
+  font-family: "Plex Mono", monospace;
+  font-size: var(--t-key);
+  color: var(--ink-faint);
+}
+
+.plates-note a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 /* -------------------------------------------------------------- narrative --
    The working notes, on cleared ground at a reading measure. Each section
    opens a ruled band, as the Home's sections do. */
@@ -580,6 +655,122 @@
   }
 }
 
+/* --------------------------------------------------------------- structure --
+   A site plan of the delivered work: the root, and its branches hung from
+   one solid trunk, as the plan draws built work. */
+.structure {
+  margin: 0;
+  border-top: 1px solid var(--rule);
+  padding-top: 11px;
+}
+
+.st-root {
+  display: grid;
+  grid-template-columns: 12px minmax(0, 1fr);
+  column-gap: 14px;
+  margin-top: 20px;
+}
+
+.st-mark {
+  width: 12px;
+  height: 12px;
+  margin-top: 3px;
+  background: var(--ink);
+}
+
+.st-root-title {
+  font-family: Archivo, sans-serif;
+  font-weight: 700;
+  font-stretch: 72%;
+  text-transform: uppercase;
+  font-size: 18px;
+  line-height: 1.05;
+  color: var(--ink);
+}
+
+.st-note {
+  margin-top: 4px;
+  font-family: "Plex Mono", monospace;
+  font-size: var(--t-key);
+  line-height: 1.5;
+  color: var(--ink-faint);
+}
+
+.st-branches {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 5.5px;
+}
+
+.st-branch {
+  --tick: calc(14px + 0.62em);
+  position: relative;
+  padding: 14px 0 0 22px;
+  font-size: 15px;
+}
+
+/* The trunk runs down to each branch and stops at the last one. */
+.st-branch::before,
+.st-branch::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.st-branch::before {
+  top: var(--tick);
+  width: 14px;
+  border-top: 1px solid var(--ink);
+}
+
+.st-branch::after {
+  top: 0;
+  bottom: 0;
+  border-left: 1px solid var(--ink);
+}
+
+.st-branch:last-child::after {
+  bottom: auto;
+  height: var(--tick);
+}
+
+.st-title {
+  font-family: Archivo, sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.25;
+  color: var(--ink);
+}
+
+.st-items {
+  list-style: none;
+  margin-top: 4px;
+  padding: 0;
+  font-family: "Plex Mono", monospace;
+  font-size: var(--t-key);
+  line-height: 1.6;
+  color: var(--ink-faint);
+}
+
+.st-items li {
+  display: inline;
+}
+
+.st-items li + li::before {
+  content: " · ";
+}
+
+.structure .plan-key {
+  margin-top: 22px;
+}
+
+@media (min-width: 1280px) and (min-height: 820px) {
+  .plan-col .structure {
+    position: sticky;
+    top: 32px;
+  }
+}
+
 /* ---------------------------------------------------------------- contents --
    On a sheet without a plan, the right column lists its sections. Desktop
    only: narrower, the notes are one column and need no index. */
@@ -755,6 +946,41 @@
     grid-column: 1;
     margin-left: 0;
   }
+
+  .plates {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .plates-body {
+    grid-column: 1;
+    margin-left: 0;
+  }
+
+  /* Too narrow for one row: the desktop plates stack in a wide column and a
+     phone plate stands beside them at a phone's width. */
+  .plates-row {
+    flex-wrap: wrap;
+  }
+
+  .plate.is-desktop {
+    flex: 1 1 calc(50% - 16px);
+  }
+
+  .plates-row:has(.is-mobile) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 220px;
+    grid-auto-flow: row dense;
+    align-items: start;
+  }
+
+  .plates-row:has(.is-mobile) .plate.is-desktop {
+    grid-column: 1;
+  }
+
+  .plates-row:has(.is-mobile) .plate.is-mobile {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
 }
 
 @media (max-width: 760px) {
@@ -793,6 +1019,28 @@
 
   .narrative {
     margin-top: 40px;
+  }
+
+  .plates {
+    margin-top: 40px;
+  }
+
+  .plates-row {
+    gap: 28px;
+  }
+
+  .plates-row,
+  .plates-row:has(.is-mobile) {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .plates-row .plate.is-desktop {
+    width: 100%;
+  }
+
+  .plates-row .plate.is-mobile {
+    width: 62%;
   }
 
   .notes > h2 {

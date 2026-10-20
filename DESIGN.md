@@ -220,6 +220,15 @@ The case study's game plan, from an optional typed `plan` list (at most six move
 ### Sheet key and contents
 Every case study keys its own marks in one line under the record strip (crossed hatch = Constraint, plus Before → after or Not yet measured when the strip draws them), so a visitor arriving from a link never meets an unexplained mark. On desktop, a sheet without a plan uses the right column for a sticky Contents list of its sections (condensed caps, Soft Rule dividers); narrower, the list is omitted.
 
+### Plates
+Optional screenshots of delivered work, from a typed `plates` list (at most four; image, caption, `desktop` or `mobile` view) whose files live in `src/assets/projects/<id>/` with embedded provenance. They are used only where the screens are the evidence. The plates sit in a band after the record strip. Each plate has a title block ("Plate 01" in ink, view and capture width in faint mono), a hairline-framed image that keeps the project's own colours, a mono caption and crop marks. On desktop the plates share one row and grow by aspect ratio, so every image has the same height. On tablet the desktop plates stack, with a phone plate beside them at 220px. On phones everything stacks and the phone plate is 62% wide. An optional `platesSource` URL adds the line "Captured from the reference copy at …".
+
+### Structure
+An optional `structure` (one root, at most eight branches, each with optional note and items) draws the delivered work's information architecture as a site plan. The root is a filled ink square with a condensed-caps title. Branches hang from one solid ink trunk that stops at the last branch, because only built work is solid. Each branch has an Archivo title, and its items run inline in faint mono separated by middots. A figcaption names what the drawing is. The right column goes to the plan first, then structure, then contents. The structure takes the plan's placement and stickiness rules.
+
+### Crop marks
+Short 9px hairline strokes in Ink Faint at each corner, 8px outside the edge of the home record sheet, the contact sheet and every plate, drawn by a single non-interactive pseudo-element. They are marginal: never behind text, never on bands or the field.
+
 ### Title-block strip
 Contact paths as one ruled strip: four cells on desktop (three inside the contact sheet), 2 × 2 on tablet, stacked on phones; label over value, the whole cell a link; external links open in a new tab.
 
@@ -235,7 +244,8 @@ Contact paths as one ruled strip: four cells on desktop (three inside the contac
 
 ### Don't:
 - **Don't** spend Dichroic Magenta on links, hovers, highlights, selection or decoration.
-- **Don't** use rounded corners, cards, gradients, glass, blur shadows or per-project raster images.
+- **Don't** use rounded corners, cards, gradients, glass or blur shadows; raster images appear only as plates of delivered screens, each with provenance.
+- **Don't** lay grids, blueprints or rulers under text as background; the drawing-set language lives in components (plan, structure, crop marks).
 - **Don't** use hatch as texture; every hatch must appear in the Notation key.
 - **Don't** add self-scored metrics (the former complexity gauge) or any figure that was not recorded.
 - **Don't** set magenta text below 24px.

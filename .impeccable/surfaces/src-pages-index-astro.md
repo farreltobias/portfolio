@@ -19,7 +19,7 @@ Proof and content: positioning copy already written on the Home; one real projec
 
 Constraints: Astro-first, no client JS without a required interaction; English default with `/pt` later, so type must carry Portuguese diacritics and labels must tolerate ~20% longer strings; 1 project today growing to 3-4.
 
-**Maintenance constraint (binding, user-stated 2026-10-11):** the previous world was replaced because it was expensive to maintain and poor value for the work. This world is colour, type, rule and layout only. No per-project raster assets. A small fixed set of shared assets is permitted but must never grow with the content: adding a project is a markdown file and nothing else.
+**Maintenance constraint (binding, user-stated 2026-10-11):** the previous world was replaced because it was expensive to maintain and poor value for the work. This world is colour, type, rule and layout only. No per-project raster assets. A small fixed set of shared assets is permitted but must never grow with the content: adding a project is a markdown file and nothing else. **Amended by Farrel, 2026-10-20:** projects may carry optional screenshot plates (`plates` in frontmatter, files in `src/assets/projects/<id>/`, each with embedded provenance) where the screens are the evidence; a project without plates still needs nothing but its markdown file.
 
 Memorable moment: the outcome delta set at collision scale with its hatch band, read against the eleven-step ramp.
 

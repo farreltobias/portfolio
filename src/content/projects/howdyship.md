@@ -6,55 +6,53 @@ role: Product Engineer
 featured: true
 constraint: Game rules had to work inside fast-moving Slack.
 decision: Make Slack the interface and automate the referee.
-outcome: The game ran end to end without manual refereeing.
+outcome: A live 12-player game ran end to end with 0 referee actions.
 complexity: 7
 order: 4
 ---
 
-Internal product experiment built for Howdy.
+Internal product experience built for Howdy: a competitive team challenge played entirely inside Slack.
 
-## Problem
+## Why a game in Slack is hard
 
-Howdy wanted a competitive team challenge that could happen where people were already communicating: Slack.
+A multiplayer game usually leans on two things: a dedicated interface that shows the board, the turns and the score, and someone or something that enforces the rules as people play.
 
-A Battleship-style game normally depends on a dedicated interface to communicate board state, turns, valid actions, previous moves, scoring, and game progression.
+HowdyShip had neither. Howdy wanted the challenge to happen where the team already talked, in a busy Slack channel. A conversation has no board and no turn order. Several people can post at once, repeat a guess someone already made, go over their allowance, or type a coordinate that does not parse, all while the game keeps moving.
 
-Running that experience directly inside a busy Slack channel introduced an additional challenge: players could submit coordinates concurrently, repeat guesses, exceed limits, or send malformed input while the game continued in real time.
+That made it a product problem, not just a coding one: the game had to stay fair and understandable inside an interface that was never designed for it.
 
-## Approach
+## Messages became moves
 
-Instead of building a separate game interface, Slack became the interface.
+The decision was to make Slack the interface rather than build a separate game app.
 
-HowdyShip treated messages as player actions and kept the game rules, board state, validation, scoring, and progression in the underlying system.
+Every player message became a product input. The system read each submission as a move, and kept the parts a conversation cannot hold: the rules, the board, validation, scoring and progression. Players only had to do what they already do in Slack, which is post a message.
 
-The experience was designed to let players participate naturally through the channel while the software handled the operational complexity behind the game.
+## What the system had to handle
 
-## Solution
+Running a game this way meant the system had to answer every message correctly, in order, while several people played at once.
 
-A Slack-native Battleship experience with automated game-state management and coordinate processing.
+- **Checking every submission.** Malformed coordinates, duplicates, guesses outside a player's quota and other invalid moves were caught and rejected automatically.
+- **Running the game.** Hits and misses, each ship's state and sinking, bombs and treasures, and scoring were all tracked by the system.
+- **Moving the game forward.** Game state and progression were kept consistent as moves arrived, through to the end of the game.
 
-The system handled:
+## Replacing the referee
 
-- coordinate validation;
-- duplicate submissions;
-- malformed coordinates;
-- player quotas;
-- hits and misses;
-- ship state and sinking;
-- bombs and treasures;
-- scoring;
-- game completion.
+In a game like this, someone normally has to referee: check each guess, settle conflicts and keep score. In a fast Slack channel, that job would have been constant.
 
-This allowed the game to operate inside an active team conversation without requiring a separate application or a person to manually referee each action.
+HowdyShip automated it. Every submission was checked against the rules by the system, so no person had to step in to accept, reject or correct a move.
 
-## Outcome
+## My role
 
-A completed live game involved 12 players and reviewed 124 coordinate submissions.
+I took HowdyShip from a concept to a game that operated for real: deciding how it should behave inside Slack, and building the system that enforced its rules and ran it from start to finish.
+
+## The live game
+
+A completed live game involved 12 players, and the system reviewed 124 coordinate submissions.
 
 - 76 submissions were accepted.
-- 48 invalid or conflicting submissions were automatically rejected.
+- 48 invalid or conflicting submissions were rejected automatically.
 - 0 referee actions were required.
 
-The game successfully handled concurrent participation, rule enforcement, scoring, and completion through Slack.
+The zero is the point of the design. Every one of those 48 rejections, and every accepted move, was handled by the system's rule enforcement, not by a person watching the channel. The game ran end to end under real participation, through to completion, inside Slack.
 
-The challenge also generated strong engagement: participants asked for another round, and team feedback described HowdyShip among the best challenges run so far.
+The challenge also landed with the team: participants asked for another round, and team feedback described HowdyShip as one of the best challenges run so far.

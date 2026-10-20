@@ -62,6 +62,38 @@ const projects = defineCollection({
         )
         .max(6, "A plan holds at most six moves; merge or drop the rest.")
         .optional(),
+      /* Screenshots of the delivered work, for projects whose screens are the
+         evidence. Files live in src/assets/projects/<id>/ and carry their
+         provenance; a project without plates needs nothing but this file. */
+      plates: z
+        .array(
+          z.object({
+            image: image(),
+            caption: z.string(),
+            view: z.enum(["desktop", "mobile"]),
+          }),
+        )
+        .max(4, "At most four plates per project.")
+        .optional(),
+      /* Where the plates were captured from, shown under them. */
+      platesSource: z.string().url().optional(),
+      /* An information-architecture blueprint of what was delivered: a root
+         and its branches, drawn in the right column when there is no plan. */
+      structure: z
+        .object({
+          root: z.string(),
+          note: z.string().optional(),
+          branches: z
+            .array(
+              z.object({
+                title: z.string(),
+                note: z.string().optional(),
+                items: z.array(z.string()).optional(),
+              }),
+            )
+            .max(8, "At most eight branches; group the rest."),
+        })
+        .optional(),
       /* Whether the work has shipped. A project still being built reads
          "In progress — not yet measured" until it ships; never "Shipped". */
       stage: z.enum(["in-progress", "shipped"]).default("shipped"),
