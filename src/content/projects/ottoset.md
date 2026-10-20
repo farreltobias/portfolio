@@ -9,7 +9,7 @@ decision: Rebuild as a CMS-managed platform.
 outcome: Gave the business a complete, self-managed institutional web presence.
 outcomeMetric: Web presence
 outcomeFigure: Basic site → CMS platform
-order: 5
+order: 6
 plates:
   - image: ../../assets/projects/ottoset/home-desktop.jpg
     caption: Home, with the service areas as the main navigation.
