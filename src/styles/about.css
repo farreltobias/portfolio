@@ -1,0 +1,273 @@
+/* ================================================================== about --
+   The cover sheet. Everything is the Home's vocabulary; this file places the
+   habits, the scale and the phases. */
+
+/* ----------------------------------------------------------------- habits --
+   Ruled rows like the index: the habit, what it means, and the sheets that
+   show it. */
+.habits {
+  list-style: none;
+  margin-top: 26px;
+  padding: 0;
+  border-top: 1px solid var(--rule);
+}
+
+.habit {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.25fr) minmax(0, 0.85fr);
+  column-gap: 32px;
+  align-items: start;
+  padding: 22px 0 24px;
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.habit-title {
+  font-family: Archivo, sans-serif;
+  font-weight: 700;
+  font-stretch: 74%;
+  text-transform: uppercase;
+  font-size: 25px;
+  line-height: 1;
+  text-wrap: balance;
+}
+
+.habit-text {
+  font-family: "Plex Mono", monospace;
+  font-size: var(--t-body);
+  line-height: 1.62;
+  color: var(--ink-soft);
+  max-width: 52ch;
+  text-wrap: pretty;
+}
+
+.habit-ref {
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+}
+
+/* A cross-reference, drawn as the sheet link is: tracked number over title,
+   carried by a hairline. */
+.ref-link {
+  display: grid;
+  gap: 4px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--ink);
+  color: var(--ink);
+  transition: box-shadow 120ms linear;
+}
+
+.ref-no {
+  font-family: Archivo, sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: var(--t-leg);
+  line-height: 1.25;
+  color: var(--ink-faint);
+}
+
+.ref-title {
+  font-family: "Plex Mono", monospace;
+  font-size: var(--t-field);
+  line-height: 1.4;
+}
+
+@media (hover: hover) {
+  .ref-link:hover {
+    box-shadow: 0 1px 0 var(--ink);
+  }
+}
+
+/* ------------------------------------------------------------------ scale --
+   The career to scale: a ruled bar with a division per year, each phase
+   placed where it fell, current work filled. */
+.scale {
+  margin: 34px 0 0;
+}
+
+.scale-bar {
+  position: relative;
+  height: 22px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.scale-seg {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+}
+
+.scale-seg.is-current {
+  background: var(--ink);
+}
+
+/* Divisions hang below the baseline, clear of the phases above it. */
+.scale-tick {
+  position: absolute;
+  top: 100%;
+  height: 7px;
+  border-left: 1px solid var(--rule);
+}
+
+.scale-year {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  padding-top: 3px;
+  transform: translateX(-50%);
+  font-family: "Plex Mono", monospace;
+  font-size: var(--t-key);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-faint);
+}
+
+.scale-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin-top: 36px;
+  font-family: "Plex Mono", monospace;
+  font-size: var(--t-key);
+  color: var(--ink-faint);
+}
+
+.scale-key > span:first-child {
+  margin-right: auto;
+}
+
+.scale-key-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.scale-sw {
+  width: 24px;
+  height: 12px;
+  border: 1px solid var(--ink);
+}
+
+.scale-sw.is-current {
+  background: var(--ink);
+}
+
+/* ----------------------------------------------------------------- phases --
+   Newest first, so the current work leads and the earlier work sits beneath
+   it at a step down. */
+.phases {
+  margin-top: 30px;
+  border-top: 1px solid var(--rule);
+}
+
+.phase {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  column-gap: 32px;
+  padding: 22px 0 26px;
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.phase-years {
+  font-family: "Plex Mono", monospace;
+  font-size: var(--t-field);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-faint);
+  padding-top: 4px;
+}
+
+.phase-title {
+  font-family: Archivo, sans-serif;
+  font-weight: 700;
+  font-stretch: 74%;
+  text-transform: uppercase;
+  font-size: 25px;
+  line-height: 1;
+}
+
+.phase.is-current .phase-title {
+  font-size: 34px;
+}
+
+.phase.is-current .phase-years {
+  color: var(--ink);
+  padding-top: 8px;
+}
+
+.phase-body p {
+  margin-top: 14px;
+  max-width: 68ch;
+  font-family: "Plex Mono", monospace;
+  font-size: var(--t-body);
+  line-height: 1.62;
+  color: var(--ink-soft);
+  text-wrap: pretty;
+}
+
+.phase:not(.is-current) .phase-body p {
+  font-size: var(--t-field);
+  max-width: 72ch;
+}
+
+.phase-body a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ref-link {
+    transition: none;
+  }
+}
+
+/* ============================================================= responsive -- */
+@media (max-width: 1279px) {
+  .habit {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+    row-gap: 16px;
+  }
+
+  .habit-ref {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 760px) {
+  .habit {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 12px;
+  }
+
+  .habit-ref {
+    grid-column: 1;
+    margin-top: 4px;
+  }
+
+  .habit-title,
+  .phase-title {
+    font-size: 22px;
+  }
+
+  .phase.is-current .phase-title {
+    font-size: 28px;
+  }
+
+  .phase {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 8px;
+  }
+
+  .phase-years,
+  .phase.is-current .phase-years {
+    padding-top: 0;
+  }
+
+  /* Years crowd at phone width: label every other one. */
+  .scale-tick:nth-child(even of .scale-tick) .scale-year {
+    visibility: hidden;
+  }
+}

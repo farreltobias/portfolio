@@ -49,6 +49,8 @@ Ottoset Energy sells and maintains power generators, and its work reaches well b
 
 That breadth was the communication problem. The company needed a professional public presence that could present several quite different service areas without reading as a scattered list, and still make it obvious how to get in touch.
 
+Before this project, Ottoset had a basic site with no content workflow. The rebuild replaced it with a structured site whose projects and job listings Ottoset could manage itself.
+
 ## How the site was organized
 
 The delivered website brought everything into one structure:

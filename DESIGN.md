@@ -229,6 +229,12 @@ An optional `structure` (one root, at most eight branches, each with optional no
 ### Crop marks
 Short 9px hairline strokes in Ink Faint at each corner, 8px outside the edge of the home record sheet, the contact sheet and every plate, drawn by a single non-interactive pseudo-element. They are marginal: never behind text, never on bands or the field.
 
+### Scale bar
+On About, the career is drawn to scale as a single bar on the Rule baseline. The divisions are years, hanging 7px below the baseline with their year in faint mono. Each phase is a hairline-outlined segment placed where it fell, and the current phase is filled with Ink. A caption key reads "One division per year, from November 2020" and has swatches for both fills. Gaps between phases are real and are not closed up. Below 760px only every other year is labelled.
+
+### Habit rows
+On About, each working habit is a ruled row like the index row: a condensed-caps title, a mono sentence, and cross-references drawn as sheet links ("Sheet 001" in tracked caps over the project title, with a hairline underneath). They point to the evidence and don't retell it. Desktop has three columns, tablet two, phones one.
+
 ### Title-block strip
 Contact paths as one ruled strip: four cells on desktop (three inside the contact sheet), 2 × 2 on tablet, stacked on phones; label over value, the whole cell a link; external links open in a new tab.
 
