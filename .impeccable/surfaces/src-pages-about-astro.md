@@ -21,10 +21,10 @@ THESIS: The drawing set's cover sheet, the one that explains how the other sheet
 
 OWN-WORLD: the Home field, hairlines, condensed caps, tracked labels, mono prose, the spec block, sheet bands with zone labels, ruled rows and the closing. No magenta: the page records no before → after figure.
 
-STORY: the visitor reads the positioning, then four working habits, each cross-referenced to a sheet number that proves it, then the career drawn to scale (one division per year, current work filled) with three ruled phases from newest to oldest. They leave toward Work or Contact.
+STORY: the visitor reads the thesis, then four working habits, each with its strongest evidence (a sheet or a measured result). Then three phases, newest first, beside a career spine (one bar per phase (the current phase filled and open at the top), ending on "See the work". They leave toward Work or Contact through an About-specific closing.
 
-FIRST VIEWPORT: Masthead with About current. On the left, the zone label "Profile". In the centre, "Product Engineer." in display caps with a positioning paragraph. On the right, a spec block: Role, In software since, Base, Languages.
+FIRST VIEWPORT: Masthead with About current; it already names the role. On the left, the zone label "Profile". In the centre, the About-only thesis in display caps, "I decide what gets built, then build it.", with a lede on how the work starts before the ticket and is judged by its effect. On the right, a spec block: In software since, Base, Languages, Open to.
 
-FORM: Zone Sheets (inherited). A task-directed extension, so no seed roll. The one new component is the scale bar: a measured drawing of how the career divides over time, with a key. It shows data, not decoration.
+FORM: Zone Sheets (inherited). A task-directed extension, so no seed roll. The one new component is the career spine, one bar per phase down the left of the rows, with year ticks and a key. It is not drawn to one scale, by Farrel's choice, so rows keep their natural height. It shows data, not decoration.
 
 FINISH: unreviewed and undocumented is unfinished. The page ends with an inspection at desktop and mobile widths, DESIGN.md updated for the scale bar, and no client JS.

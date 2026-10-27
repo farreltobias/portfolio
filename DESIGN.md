@@ -157,7 +157,7 @@ A monochrome ramp from bone paper to near-black with one saturated magenta held 
 ### Hierarchy
 - **Display** (700, width 70%, `clamp(34px, 11.03cqi, 82px)`, line-height 0.92, caps): the Home positioning line; page titles use the same voice at `clamp(44px, 4.8vw, 74px)`.
 - **Headline** (700, width 72%, 34px, line-height 1, caps): band titles ("Selected work", "Background"); 27px on phones.
-- **Title** (700, width 72%, 27px, caps): project names on sheets; 25px in index rows.
+- **Title** (700, width 72%, 27px, caps): project names on sheets; 25px in index rows and in About's habit and phase rows, where the current phase steps up to the Headline size (34px). On phones, row titles and case-study section headings are 24px and the current phase is 28px.
 - **Figure** (Plex Mono 600, 40px on the lead sheet, 30px in rows, 24px on phones, tracking -0.03em): the before → after figure, in magenta.
 - **Body** (Plex Mono 400, 14px / 15px in narratives, line-height 1.62–1.7, max 64ch): prose on cleared ground.
 - **Field** (Plex Mono 400, 13px, tabular figures): the value a field carries.
@@ -170,7 +170,7 @@ A monochrome ramp from bone paper to near-black with one saturated magenta held 
 
 ## Layout
 
-The sheet is a fixed composition at 1536px wide (`max-width: 1536px`) with a side edge of 48px (20px on phones). Above 1280px the field runs on three tracks — key column `11.181%`, centre `1fr`, right `33.125%` — and one unit (`--u`, 1px at 1536 shrinking to 0.83px) keeps the first viewport's proportions as the window narrows. Bands below the fold reuse the same tracks: zone label in the left track, body spanning centre and right.
+The sheet is a fixed composition at 1536px wide (`max-width: 1536px`) with a side edge of 48px (20px on phones). Above 1280px the field runs on three tracks — key column `11.181%`, centre `1fr`, right `33.125%` — and one unit (`--u`, 1px at 1536 shrinking to 0.83px) keeps the first viewport's proportions as the window narrows. Bands below the fold reuse the same tracks: zone label in the left track, body spanning centre and right. Below 1280px the left track dissolves, and the zone labels (band and page alike) are hidden, because beside the heading they would only repeat it.
 
 Below 1280px the columns dissolve into named grid areas: headline full width, then subline and CTA beside a 280px column (spec, or the key beside the record sheet). At 760px and below everything is one column in reading order — positioning, action, the lead sheet, the spec, then the notation just before the index — and the ramp column is hidden; its notation stays.
 
@@ -229,11 +229,17 @@ An optional `structure` (one root, at most eight branches, each with optional no
 ### Crop marks
 Short 9px hairline strokes in Ink Faint at each corner, 8px outside the edge of the home record sheet, the contact sheet and every plate, drawn by a single non-interactive pseudo-element. They are marginal: never behind text, never on bands or the field.
 
-### Scale bar
-On About, the career is drawn to scale as a single bar on the Rule baseline. The divisions are years, hanging 7px below the baseline with their year in faint mono. Each phase is a hairline-outlined segment placed where it fell, and the current phase is filled with Ink. A caption key reads "One division per year, from November 2020" and has swatches for both fills. Gaps between phases are real and are not closed up. Below 760px only every other year is labelled.
+### Career spine
+On About, a spine runs down the left of the phase rows, newest at the top. Rows keep their natural height; the spine is not drawn to one scale.
+- **Bars:** each phase is a 13px Ink-outlined bar from its row's top rule down to 10px above the next, so the phases read as separate segments on one axis.
+- **Current phase:** filled with Ink and open at the top, with the axis carried on above it as a dashed line, the way a plan draws work still under way.
+- **Year ticks:** a hairline tick crosses each bar where a year begins, placed in proportion within that phase, with the year beside it in faint mono.
+- **Key:** one line above the rows: "Newest at the top. Each bar spans one phase, with a tick where each year begins. Filled: Product Engineering, still under way."
+- **Phones:** the spine becomes a 24px rail with the rows indented beside it, and the year labels drop.
+- **Assistive technology:** the spine is hidden from it, because each row states its years in text.
 
 ### Habit rows
-On About, each working habit is a ruled row like the index row: a condensed-caps title, a mono sentence, and cross-references drawn as sheet links ("Sheet 001" in tracked caps over the project title, with a hairline underneath). They point to the evidence and don't retell it. Desktop has three columns, tablet two, phones one.
+On About, each working habit is a ruled row like the index row: a condensed-caps title, a mono sentence, and one reference to its strongest evidence. A sheet reference is drawn as a sheet link ("Sheet 001" in tracked caps over the project title, with a hairline underneath). Evidence with no sheet (e.g. "At ZRP") uses the same lettering without the hairline, because there is nothing to open. References point to the work and never retell it. Desktop has three columns, tablet two, phones one.
 
 ### Title-block strip
 Contact paths as one ruled strip: four cells on desktop (three inside the contact sheet), 2 × 2 on tablet, stacked on phones; label over value, the whole cell a link; external links open in a new tab.

@@ -22,67 +22,72 @@ const sheet = (id: string) => {
 
 const habits = [
   {
-    title: "Start from the pattern, not the ticket",
-    text: "A request that keeps coming back usually points at a missing tool. I look at the pattern before solving the next instance of it.",
-    sheets: ["rare-candy-customer-success"],
+    title: "Fix the pattern, not the instance",
+    text: "When the same request keeps arriving, the missing piece is usually a tool. I solve the category, not the next case.",
+    sheet: sheet("rare-candy-customer-success"),
   },
   {
-    title: "Build the smallest thing that changes the work",
-    text: "A first version should remove the manual step people are stuck with, not reproduce a full product before anyone uses it.",
-    sheets: ["pro-electric"],
+    title: "Ship the smallest change to the workflow",
+    text: "The first version removes the manual step people are stuck with, and earns the next one.",
+    sheet: sheet("pro-electric"),
   },
   {
-    title: "Put the rules in the system",
-    text: "Where people were holding state or refereeing by hand, the product should hold it instead: explicit, versioned and enforced.",
-    sheets: ["rare-candy-auction-platform", "howdyship"],
+    title: "Make the system hold the rules",
+    text: "If people are tracking state or refereeing by hand, the product should do it, and say no when a move breaks the rules.",
+    sheet: sheet("howdyship"),
   },
   {
-    title: "Judge technical work by what it changes",
-    text: "Architecture, performance and refactors earn their place through their effect on the business or the operation. I report a result only where it was measured.",
-    sheets: [],
+    title: "Judge work by what it changes",
+    text: "Architecture, performance and refactors earn their place by their effect on the business or the operation. I report a result only when it was measured.",
+    evidence: {
+      where: "At ZRP",
+      what: "API response times from several seconds to around 500 ms",
+    },
   },
-].map((habit) => ({
-  ...habit,
-  sheets: habit.sheets.map(sheet).filter((entry) => entry !== null),
-}));
+];
 
-/* The career to scale, one division per year. Months are counted from the
-   start of the year, so a phase sits where it fell. */
+/* The career down a spine, newest at the top. Each phase's bar spans its
+   row, and the year ticks sit where each year begins within the phase, so a
+   bar reads its own years without the rows having to be drawn to one scale.
+   Months count from the start of the year, so a tick sits where it fell. */
 const at = (year: number, month: number) => year + (month - 1) / 12;
 const now = new Date();
 const today = at(now.getFullYear(), now.getMonth() + 1);
-const start = at(2020, 11);
-const span = today - start;
-const pos = (value: number) => ((value - start) / span) * 100;
 
-const phases = [
+const spans = [
   {
     from: at(2025, 3),
     to: today,
     years: "2025 – now",
     title: "Product Engineering",
-    current: true,
   },
   {
     from: at(2022, 9),
     to: at(2025, 3),
     years: "2022 – 2025",
     title: "Client platforms, backend depth",
-    current: false,
   },
   {
-    from: start,
+    from: at(2020, 11),
     to: at(2022, 7),
     years: "2020 – 2022",
     title: "Junior to technical lead",
-    current: false,
   },
 ];
 
-const ticks = Array.from(
-  { length: now.getFullYear() - 2020 },
-  (_, i) => 2021 + i,
-).map((year) => ({ year, left: pos(year) }));
+const phases = spans.map((phase) => {
+  const span = phase.to - phase.from;
+  const ticks: { year: number; at: string }[] = [];
+  for (let year = Math.floor(phase.to); year > phase.from; year--) {
+    if (year < phase.to) {
+      ticks.push({
+        year,
+        at: `${(((phase.to - year) / span) * 100).toFixed(2)}%`,
+      });
+    }
+  }
+  return { ...phase, ticks };
+});
 
 const [current, platforms, arbo] = phases;
 const work = sheet("ottoset");
@@ -96,7 +101,7 @@ const work = sheet("ottoset");
     <title>About — Farrel</title>
     <meta
       name="description"
-      content="Farrel is a Product Engineer in Brazil working remotely with international teams: from defining the problem to shipping the solution, on a backend foundation built since 2020."
+      content="Farrel, Product Engineer: deciding what gets built, then building it. How he works, and how the work grew from 2020 to now."
     />
   </head>
   <body>
@@ -108,20 +113,18 @@ const work = sheet("ottoset");
         <header class="page-head">
           <p class="leg zone">Profile</p>
           <div class="page-intro">
-            <h1 class="disp page-title">Product Engineer.</h1>
+            <h1 class="disp page-title">
+              I decide what gets built, then build it.
+            </h1>
             <p class="prose page-sub">
-              I'm Farrel. I define the problem, shape what the product should
-              do, make the technical decisions and carry the work into
-              production. My foundation is backend engineering; my focus is
-              software that simplifies how operations run, removing manual work
-              people should not have to do.
+              Most engineering work starts from a ticket. Mine starts earlier:
+              working out what the problem actually is, what should change and
+              what can wait. Then I make the technical decisions and ship it,
+              and I judge the result by what it changes in the operation, not
+              by how much was built.
             </p>
           </div>
           <dl class="spec">
-            <div class="row">
-              <dt class="leg">Role</dt>
-              <dd class="v">Product Engineer</dd>
-            </div>
             <div class="row">
               <dt class="leg">In software since</dt>
               <dd class="v">2020</dd>
@@ -134,6 +137,10 @@ const work = sheet("ottoset");
               <dt class="leg">Languages</dt>
               <dd class="v">English, Portuguese</dd>
             </div>
+            <div class="row">
+              <dt class="leg">Open to</dt>
+              <dd class="v">Roles, contract work</dd>
+            </div>
           </dl>
         </header>
 
@@ -144,7 +151,7 @@ const work = sheet("ottoset");
             <div class="sheet-band-body">
               <h2 class="sheet-band-title" id="approach-title">How I work</h2>
               <p class="sheet-band-note">
-                Four habits, each with the sheets that show it.
+                Four habits, each with the work that shows it.
               </p>
               <ol class="habits">
                 {
@@ -152,23 +159,22 @@ const work = sheet("ottoset");
                     <li class="habit">
                       <h3 class="habit-title">{habit.title}</h3>
                       <p class="habit-text">{habit.text}</p>
-                      <p class="habit-ref">
-                        {habit.sheets.length > 0 ? (
-                          habit.sheets.map((ref) => (
-                            <a class="ref-link" href={`/work/${ref.id}`}>
-                              <span class="ref-no">Sheet {ref.number}</span>
-                              <span class="ref-title">{ref.title}</span>
-                            </a>
-                          ))
-                        ) : (
-                          <a class="ref-link" href="/work">
-                            <span class="ref-no">Every sheet</span>
-                            <span class="ref-title">
-                              Outcome, or "not yet measured"
-                            </span>
+                      <div class="habit-ref">
+                        {habit.sheet && (
+                          <a class="ref-link" href={`/work/${habit.sheet.id}`}>
+                            <span class="ref-no">Sheet {habit.sheet.number}</span>
+                            <span class="vh">: </span>
+                            <span class="ref-title">{habit.sheet.title}</span>
                           </a>
                         )}
-                      </p>
+                        {habit.evidence && (
+                          <p class="ref-note">
+                            <span class="ref-no">{habit.evidence.where}</span>
+                            <span class="vh">: </span>
+                            <span class="ref-title">{habit.evidence.what}</span>
+                          </p>
+                        )}
+                      </div>
                     </li>
                   ))
                 }
@@ -189,72 +195,60 @@ const work = sheet("ottoset");
                 From implementation toward owning the product decisions.
               </p>
 
-              <figure class="scale">
-                <div class="scale-bar">
-                  {
-                    phases.map((phase) => (
-                      <span
-                        class:list={["scale-seg", { "is-current": phase.current }]}
-                        style={`left:${pos(phase.from)}%;width:${pos(phase.to) - pos(phase.from)}%`}
-                      />
-                    ))
-                  }
-                  {
-                    ticks.map((tick) => (
-                      <span class="scale-tick" style={`left:${tick.left}%`}>
-                        <span class="scale-year">{tick.year}</span>
-                      </span>
-                    ))
-                  }
-                </div>
-                <figcaption class="scale-key">
-                  <span>One division per year, from November 2020</span>
-                  <span class="scale-key-item">
-                    <span class="scale-sw is-current" aria-hidden="true"
-                    ></span>Product Engineering
-                  </span>
-                  <span class="scale-key-item">
-                    <span class="scale-sw" aria-hidden="true"></span>Earlier
-                    work
-                  </span>
-                </figcaption>
-              </figure>
+
+              <p class="spine-key">
+                Newest at the top. Each bar spans one phase, with a tick where
+                each year begins. Filled: Product Engineering, still under way.
+              </p>
 
               <div class="phases">
-                <article class="phase is-current">
+                <article
+                  class="phase is-current"
+                >
+                  <span class="phase-spine" aria-hidden="true">
+                    <span class="spine-bar">
+                      {current.ticks.map((tick) => (
+                      <span class="spine-tick" style={`--at:${tick.at}`}>
+                        <span class="spine-year">{tick.year}</span>
+                      </span>
+                    ))}
+                    </span>
+                  </span>
                   <p class="phase-years">{current.years}</p>
                   <div class="phase-body">
                     <h3 class="phase-title">{current.title}</h3>
                     <p>
-                      My work moved from implementing what was asked to deciding
-                      what should be built: defining the problem, shaping scope
-                      and product behaviour, making the technical decisions and
-                      carrying the solution through delivery.
-                    </p>
-                    <p>
-                      At Rare Candy, through Howdy, that has meant internal
-                      tooling, automation, marketplace systems and the auction
-                      platform, working remotely with an international team. Through
-                      Farrel.tech I also work directly with clients, such as
-                      Pro Electric, and build my own products, among them <a href="/work/ddd-toolkit"
-                        >DDD Toolkit</a
-                      >, an early-stage open-source toolkit for domain-driven
-                      design in TypeScript.
+                      The shift was from building what was asked to deciding
+                      what should be built, then building it. Today that happens
+                      in two places. At Rare Candy, where I work through Howdy, I
+                      do it inside a team. Through Farrel.tech, I do it directly
+                      with clients such as Pro Electric, and on my own products,
+                      such as <a href="/work/ddd-toolkit">DDD Toolkit</a>.
                     </p>
                   </div>
                 </article>
 
-                <article class="phase">
+                <article
+                  class="phase"
+                >
+                  <span class="phase-spine" aria-hidden="true">
+                    <span class="spine-bar">
+                      {platforms.ticks.map((tick) => (
+                      <span class="spine-tick" style={`--at:${tick.at}`}>
+                        <span class="spine-year">{tick.year}</span>
+                      </span>
+                    ))}
+                    </span>
+                  </span>
                   <p class="phase-years">{platforms.years}</p>
                   <div class="phase-body">
                     <h3 class="phase-title">{platforms.title}</h3>
                     <p>
-                      Client and product work across companies: institutional
-                      websites and CMS-backed platforms at Let's and DoroTech,
-                      a period working independently, then production systems
-                      at ZRP. Along the way the work went deeper into backend
-                      engineering, architecture, performance, authentication,
-                      CI/CD, integrations and modernizing older applications.
+                      Client and product work at Let's, DoroTech and ZRP, and a
+                      stretch working independently. Over those years the work
+                      moved from delivering sites toward the backend underneath
+                      them: the part that has to stay fast and correct in
+                      production.
                       {
                         work && (
                           <>
@@ -268,17 +262,26 @@ const work = sheet("ottoset");
                   </div>
                 </article>
 
-                <article class="phase">
+                <article
+                  class="phase"
+                >
+                  <span class="phase-spine" aria-hidden="true">
+                    <span class="spine-bar">
+                      {arbo.ticks.map((tick) => (
+                      <span class="spine-tick" style={`--at:${tick.at}`}>
+                        <span class="spine-year">{tick.year}</span>
+                      </span>
+                    ))}
+                    </span>
+                  </span>
                   <p class="phase-years">{arbo.years}</p>
                   <div class="phase-body">
                     <h3 class="phase-title">{arbo.title}</h3>
                     <p>
-                      I started professionally at Arbo, on a real estate
-                      platform, as a junior full stack engineer. I soon took on
-                      backend systems, integrations and automation, including
-                      the systems that distributed property listings to
-                      marketplaces and helped increase lead generation, and
-                      moved into the technical lead role.
+                      I started at Arbo as a junior full stack engineer on a
+                      real estate platform, and moved into the technical lead
+                      role after building the automation that distributed
+                      property listings to marketplaces.
                     </p>
                   </div>
                 </article>
@@ -299,10 +302,7 @@ const work = sheet("ottoset");
       <footer class="closing">
         <div class="closing-head">
           <div>
-            <h2>Have a product or operations problem to solve?</h2>
-            <p class="sub">
-              Open to Product Engineering roles and contract work.
-            </p>
+            <h2>Looking for someone who decides what to build, then builds it?</h2>
           </div>
           <a class="control" href="/contact">
             <span class="bar">Let's talk</span>

@@ -1127,26 +1127,19 @@ a:focus-visible {
     width: 36px;
   }
 
-  /* The zone label moves to the band's top corner, where a title block
-     carries it, instead of stacking over the heading. */
+  /* Without the left track the zone label would only repeat the band's
+     heading beside it, so it goes, as the page heads' zone labels do. */
   .sheet-band-grid {
-    position: relative;
     grid-template-columns: minmax(0, 1fr);
   }
 
   .sheet-band-grid > .leg {
-    position: absolute;
-    top: 4px;
-    right: 0;
+    display: none;
   }
 
   .sheet-band-body {
     grid-column: 1;
     margin-left: 0;
-  }
-
-  .sheet-band-title {
-    padding-right: 96px;
   }
 
   .index-row {
