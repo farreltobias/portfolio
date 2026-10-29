@@ -3,7 +3,8 @@
    marked for assistive technology and keeps its hairline drawn; away from
    Home, the wordmark leads back to it. */
 interface Props {
-  current?: "home" | "work" | "about" | "contact";
+  /* "none" for a sheet outside the set, such as the 404 page. */
+  current?: "home" | "work" | "about" | "contact" | "none";
 }
 
 const { current = "home" } = Astro.props;

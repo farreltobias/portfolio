@@ -7,7 +7,8 @@ featured: true
 constraint: Live auction state had to remain consistent.
 decision: Make auction planning explicit and versioned.
 outcome: Planning and versioning moved into the platform.
-outcomeMetric: Planning
+outcomeMetric: Auction planning
+outcomeKind: change
 outcomeFigure: External → In-platform
 complexity: 8
 order: 3

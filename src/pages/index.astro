@@ -3,7 +3,13 @@ import IndexRow from "../components/IndexRow.astro";
 import Masthead from "../components/Masthead.astro";
 import Notation from "../components/Notation.astro";
 import Outcome from "../components/Outcome.astro";
-import { contactLinkAttrs, contactPaths } from "../lib/contact";
+import TitleBlock from "../components/TitleBlock.astro";
+import {
+  contactLinkAttrs,
+  contactPaths,
+  NEW_TAB,
+  opensNewTab,
+} from "../lib/contact";
 import {
   allProjects,
   displayTitle,
@@ -45,6 +51,20 @@ const reach = contactPaths.filter((path) => path.href);
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <link
+      rel="preload"
+      href="/fonts/archivo-var-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/plex-mono-400-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Farrel — Product Engineer</title>
     <meta
@@ -99,7 +119,9 @@ const reach = contactPaths.filter((path) => path.href);
                   Sheet {sheetNumberOf(all, lead.id)} / {sheetNo(all.length)}
                 </span>
               </div>
-              <h2 class="rt">{displayTitle(lead.data.title)}</h2>
+              <h2 class="rt">
+                {displayTitle(lead.data.title)}
+              </h2>
 
               <div class="f">
                 <p class="leg k">Constraint</p>
@@ -193,14 +215,12 @@ const reach = contactPaths.filter((path) => path.href);
             <p>
               Product Engineer with a backend and product-oriented mindset,
               across marketplace products, operational software, internal
-              tooling, and automation.
+              tooling and automation. Based in Brazil, working remotely with
+              international teams.
             </p>
-            <p>
-              One result from earlier backend work at ZRP: API response times
-              on a product's hot paths, brought down from several seconds to
-              around 500 ms.
-            </p>
-            <p>Based in Brazil, working remotely with international teams.</p>
+            <a class="more-link" href="/about">
+              <span class="more-label">How I work</span>
+            </a>
           </div>
         </div>
       </section>
@@ -230,12 +250,14 @@ const reach = contactPaths.filter((path) => path.href);
                     <span class="leg">{path.label}</span>
                     <span class="vh">: </span>
                     <span class="reach-v">{path.display}</span>
+                        {opensNewTab(path.href) && <span class="vh">{NEW_TAB}</span>}
                   </a>
                 </li>
               ))}
             </ul>
           )
         }
+        <TitleBlock sheet="Home" />
       </footer>
     </div>
   </body>

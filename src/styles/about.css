@@ -163,6 +163,18 @@
   border-top: 0;
 }
 
+/* The current phase inks in once on arrival, from its open top down. */
+.phase.is-current .spine-bar {
+  transform-origin: top;
+  animation: draw-down 520ms cubic-bezier(0.2, 0, 0, 1) 200ms both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .phase.is-current .spine-bar {
+    animation: none;
+  }
+}
+
 .phase.is-current .spine-bar::before {
   content: "";
   position: absolute;

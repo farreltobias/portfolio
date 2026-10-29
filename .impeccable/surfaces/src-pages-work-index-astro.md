@@ -19,7 +19,7 @@ Constraints: rows render every outcome state (figure only with metric + figure; 
 
 THESIS: The register of the drawing set — every sheet listed once, in the same three fields, so projects read against each other. It refuses the card grid of thumbnails.
 
-OWN-WORLD: Home's field, hairlines, condensed caps, tracked labels, mono values, hatch notation and magenta-only-for-measured-delta (widened by Farrel, 2026-10-16: magenta marks any recorded before → after figure, keyed "Before → after", plus focus); Home's index row, unchanged.
+OWN-WORLD: Home's field, hairlines, condensed caps, tracked labels, mono values, hatch notation and magenta-only-for-measured-delta (widened by Farrel, 2026-10-16: magenta marks any recorded before → after figure, keyed "Before → after", plus focus); Narrowed by Farrel (2026-10-29): magenta marks only a measured before → after (`outcomeKind: measured`), keyed "Before → after, measured"; a recorded change of state is set in ink over an ink hatch, keyed "Before → after, changed". Home's index row, unchanged.
 
 STORY: The visitor sees how much work there is, compares constraints and outcomes down one ruled column, and opens the sheet that matches their problem.
 

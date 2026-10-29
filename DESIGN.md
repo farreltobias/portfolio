@@ -59,6 +59,71 @@ typography:
     fontWeight: 600
     lineHeight: 1.25
     letterSpacing: "0.16em"
+  display-window:
+    fontFamily: "Archivo, sans-serif"
+    fontSize: "clamp(38px, 7vw, 72px)"
+    fontWeight: 700
+    lineHeight: 0.92
+    fontVariation: "'wdth' 70"
+  page-title:
+    fontFamily: "Archivo, sans-serif"
+    fontSize: "clamp(44px, 4.8vw, 74px)"
+    fontWeight: 700
+    lineHeight: 0.92
+    fontVariation: "'wdth' 70"
+  case-title:
+    fontFamily: "Archivo, sans-serif"
+    fontSize: "clamp(36px, 4vw, 62px)"
+    fontWeight: 700
+    lineHeight: 0.92
+    fontVariation: "'wdth' 70"
+  closing:
+    fontFamily: "Archivo, sans-serif"
+    fontSize: "42px"
+    fontWeight: 700
+    lineHeight: 0.96
+    fontVariation: "'wdth' 72"
+  closing-phone:
+    fontFamily: "Archivo, sans-serif"
+    fontSize: "28px"
+    fontWeight: 700
+    lineHeight: 0.96
+    fontVariation: "'wdth' 72"
+  title-row:
+    fontFamily: "Archivo, sans-serif"
+    fontSize: "25px"
+    fontWeight: 700
+    lineHeight: 1
+    fontVariation: "'wdth' 74"
+  title-phone:
+    fontFamily: "Archivo, sans-serif"
+    fontSize: "24px"
+    fontWeight: 700
+    lineHeight: 1
+    fontVariation: "'wdth' 72"
+  minor-title:
+    fontFamily: "Archivo, sans-serif"
+    fontSize: "18px"
+    fontWeight: 700
+    lineHeight: 1.15
+    fontVariation: "'wdth' 72"
+  figure-row:
+    fontFamily: "Plex Mono, monospace"
+    fontSize: "30px"
+    fontWeight: 600
+    lineHeight: 1
+    letterSpacing: "-0.03em"
+  figure-strip:
+    fontFamily: "Plex Mono, monospace"
+    fontSize: "clamp(24px, 2.3vw, 30px)"
+    fontWeight: 600
+    lineHeight: 1
+    letterSpacing: "-0.03em"
+  narrative:
+    fontFamily: "Plex Mono, monospace"
+    fontSize: "15px"
+    fontWeight: 400
+    lineHeight: 1.7
   control:
     fontFamily: "Archivo, sans-serif"
     fontSize: "14px"
@@ -120,7 +185,7 @@ The character is exact, quiet and evidential. Density is moderate and ruled: tig
 **Key Characteristics:**
 - A bone field ruled by near-black and soft hairlines; no cards, no radius, no gradients.
 - One eleven-step ramp (0 field → X ink) as the only tonal vocabulary, named on the page by its key.
-- A single Dichroic Magenta reserved for before → after figures and keyboard focus.
+- A single Dichroic Magenta reserved for measured before → after figures and keyboard focus.
 - Three type voices: condensed display caps, tracked label caps, tabular Plex Mono for every value and all prose.
 - Hatch and dot masks as notation, always explained by the Notation key.
 - The record sheet — Constraint, Decision, Outcome — as the unit of evidence on every surface.
@@ -130,7 +195,7 @@ The character is exact, quiet and evidential. Density is moderate and ruled: tig
 A monochrome ramp from bone paper to near-black with one saturated magenta held in reserve.
 
 ### Primary
-- **Dichroic Magenta** (`dichroic-magenta`): the before → after figure (an `outcomeFigure` shown only together with its `outcomeMetric`), its 45° hatch band, the "Before → after" legend swatch, and the 2px focus ring. Contrast on the field is 3.95:1, so it is only ever set large and semibold (24px or more).
+- **Dichroic Magenta** (`dichroic-magenta`): the measured before → after figure (an `outcomeFigure` shown with its `outcomeMetric`, `outcomeKind: measured`), its 45° hatch band, the "Before → after, measured" legend swatch, and the 2px focus ring. Contrast on the field is 3.95:1, so it is only ever set large and semibold (24px or more).
 
 ### Neutral
 - **Bone Field** (`g0`): the page and every sheet's ground. Step 0 of the ramp.
@@ -144,7 +209,7 @@ A monochrome ramp from bone paper to near-black with one saturated magenta held 
 ### Named Rules
 **The One Ramp Rule.** Every tonal value on the page is a step of the ramp. A new grey that is not `g0`–`g10` is a defect; name the step it uses in the key.
 
-**The One Job Rule.** Magenta marks a recorded before → after and keyboard focus. Never a link, a hover, a highlight, a selection or an accent.
+**The One Job Rule.** Magenta marks a measured before → after and keyboard focus. A recorded change of state (`outcomeKind: change`) is set in Ink over an Ink hatch, so magenta always means a number was recorded. Never a link, a hover, a highlight, a selection or an accent.
 
 ## Typography
 
@@ -155,10 +220,12 @@ A monochrome ramp from bone paper to near-black with one saturated magenta held 
 **Character:** A tall condensed grotesk in caps states positions at plan scale; mono carries every quantity and every sentence, so the page reads as a working document rather than marketing copy.
 
 ### Hierarchy
-- **Display** (700, width 70%, `clamp(34px, 11.03cqi, 82px)`, line-height 0.92, caps): the Home positioning line; page titles use the same voice at `clamp(44px, 4.8vw, 74px)`.
+- **Display** (700, width 70%, `clamp(34px, 11.03cqi, 82px)`, line-height 0.92, caps): the Home positioning line. Below 1280px it is sized on the window at `clamp(38px, 7vw, 72px)`. Page titles use the same voice at `clamp(44px, 4.8vw, 74px)`, and case-study titles, which are longer, one step down at `clamp(36px, 4vw, 62px)`.
 - **Headline** (700, width 72%, 34px, line-height 1, caps): band titles ("Selected work", "Background"); 27px on phones.
+- **Closing** (700, width 72%, 42px, line-height 0.96, caps): the closing question above "Let's talk"; 28px on phones.
 - **Title** (700, width 72%, 27px, caps): project names on sheets; 25px in index rows and in About's habit and phase rows, where the current phase steps up to the Headline size (34px). On phones, row titles and case-study section headings are 24px and the current phase is 28px.
-- **Figure** (Plex Mono 600, 40px on the lead sheet, 30px in rows, 24px on phones, tracking -0.03em): the before → after figure, in magenta.
+- **Minor title** (700, width 72%, 18px, line-height 1.15, caps, balanced wrap): titles inside the side drawings, i.e. plan moves, the structure's root and the case-study contents list. One step for one role.
+- **Figure** (Plex Mono 600, 40px on the lead sheet, 30px in rows, 24px on phones, tracking -0.03em): the before → after figure: magenta when measured, Ink when it records a change of state.
 - **Body** (Plex Mono 400, 14px / 15px in narratives, line-height 1.62–1.7, max 64ch): prose on cleared ground.
 - **Field** (Plex Mono 400, 13px, tabular figures): the value a field carries.
 - **Label** (Archivo 600, 11px, tracking 0.16em, caps, line-height 1.25): field names, nav, "Read case study".
@@ -170,7 +237,7 @@ A monochrome ramp from bone paper to near-black with one saturated magenta held 
 
 ## Layout
 
-The sheet is a fixed composition at 1536px wide (`max-width: 1536px`) with a side edge of 48px (20px on phones). Above 1280px the field runs on three tracks — key column `11.181%`, centre `1fr`, right `33.125%` — and one unit (`--u`, 1px at 1536 shrinking to 0.83px) keeps the first viewport's proportions as the window narrows. Bands below the fold reuse the same tracks: zone label in the left track, body spanning centre and right. Below 1280px the left track dissolves, and the zone labels (band and page alike) are hidden, because beside the heading they would only repeat it.
+The sheet is a fixed composition at 1536px wide (`max-width: 1536px`) with a side edge of 48px (20px on phones). Above 1280px the field runs on three tracks — key column `11.181%`, centre `1fr`, right `33.125%` — and one unit (`--u`, 1px at 1536 shrinking to 0.83px) keeps the first viewport's proportions as the window narrows. Bands below the fold reuse the same tracks: zone label in the left track, body spanning centre and right. A band opens 24px under its Ink rule (20px on phones), with the zone label nudged 3px so its capitals align with the heading. Case-study section headings open 20px under theirs (16px on phones). The 14px field padding stays inside sheets, strips and spec blocks, so a band heading never sits tighter under its rule than the rows beneath it. Below 1280px the left track dissolves, and the zone labels (band and page alike) are hidden, because beside the heading they would only repeat it.
 
 Below 1280px the columns dissolve into named grid areas: headline full width, then subline and CTA beside a 280px column (spec, or the key beside the record sheet). At 760px and below everything is one column in reading order — positioning, action, the lead sheet, the spec, then the notation just before the index — and the ramp column is hidden; its notation stays.
 
@@ -199,7 +266,7 @@ Square everywhere (`rounded.none`). Form comes from 1px rules: ink for structure
 
 ### Record sheet
 - **Structure:** bordered sheet on the field with the stacked edge; corner shows "Sheet 00N / 00T"; title; Constraint (crossed-hatch mark + value), Decision, Outcome; foot with "Read case study" and year.
-- **Outcome states:** before → after figure in magenta over a 13px hatch band (only with metric); qualitative sentence in ink; "Shipped — not yet measured" or, for a project whose `stage` is `in-progress`, "In progress — not yet measured", with a dot mask at full strength.
+- **Outcome states:** a measured before → after figure in magenta over a 13px magenta hatch band; a changed before → after in Ink over an Ink hatch at the same scale (both only with a metric); qualitative sentence in ink; "Shipped — not yet measured" or, for a project whose `stage` is `in-progress`, "In progress — not yet measured", with a dot mask at full strength.
 - **Interaction:** the whole sheet is the link target; hover steps the ground to Lifted Bone; keyboard focus outlines the whole sheet in magenta.
 
 ### Index row
@@ -209,22 +276,22 @@ The register's line: number · title, year, "Read case study" · Constraint and 
 Label/value rows ruled in Soft Rule under an ink top rule (Role, Status, Location; Sheet, Year, Role on case studies).
 
 ### Navigation
-Masthead: condensed wordmark (28px caps) over a tracked "Product Engineer" label; nav links in label type with a hairline that draws under the word on hover and stays drawn on the current page (`aria-current`). Targets are 44px tall up to 1279px and on touch.
+Masthead: condensed wordmark (28px caps) over a tracked "Product Engineer" label; nav links in label type with a hairline that draws under the word on hover and stays drawn on the current page (`aria-current`). Targets, the wordmark back to Home included, are 44px tall up to 1279px and on touch.
 
 ### Notation key and ramp key
-The ramp key lists the eleven steps (X → 0) with the role each used step plays (Ink, Prose, Labels, Rules, Hover, Field). The Notation key binds marks to meaning: crossed hatch = Constraint, magenta 45° hatch = Before → after, dot mask = Not yet measured.
+The ramp key lists the eleven steps (X → 0) with the role each used step plays (Ink, Prose, Labels, Rules, Hover, Field). The Notation key binds marks to meaning: crossed hatch = Constraint, magenta 45° hatch = Before → after, measured; Ink 45° hatch = Before → after, changed; dot mask = Not yet measured.
 
 ### Plan
-The case study's game plan, from an optional typed `plan` list (at most six moves) in a project's frontmatter: moves read top to bottom, each with a mark — crossed hatch = constraint, filled ink square = built, half-inked square = in progress, dashed square = planned, dashed diamond = decision, faint dashed square = possible — a condensed-caps title, and a mono note led by its status in words ("In progress · …"). The connector into a move is solid only when that move is built; everything else, in-progress included, is dashed, with a small arrowhead into each move. The key lists only the marks the plan uses. Desktop: its own column beside the notes, sticky only on screens at least 820px tall; narrower: after the context line, before the first section.
+The case study's game plan, from an optional typed `plan` list (at most six moves) in a project's frontmatter: moves read top to bottom, each with a mark — crossed hatch = constraint, filled ink square = built, half-inked square = in progress, dashed square = planned, dashed diamond = decision, faint dashed square = possible — a condensed-caps title, and a mono note led by its status in words ("In progress · …"). The connector into a move is solid only when that move is built; everything else, in-progress included, is dashed, with a small arrowhead into each move. The key lists only the marks the plan uses. Desktop: its own column beside the notes, sticky only on screens at least 820px tall. Narrower: a band in the reading flow after the first section, so the reader meets the problem before the drawing (CSS order only). With a single section, it closes the notes.
 
 ### Sheet key and contents
-Every case study keys its own marks in one line under the record strip (crossed hatch = Constraint, plus Before → after or Not yet measured when the strip draws them), so a visitor arriving from a link never meets an unexplained mark. On desktop, a sheet without a plan uses the right column for a sticky Contents list of its sections (condensed caps, Soft Rule dividers); narrower, the list is omitted.
+Every case study keys its own marks in one line under the record strip (crossed hatch = Constraint, plus "Before → after, measured", "Before → after, changed" or "Not yet measured" when the strip draws them), so a visitor arriving from a link never meets an unexplained mark. On desktop, a sheet without a plan uses the right column for a sticky Contents list of its sections (condensed caps, Soft Rule dividers); narrower, the list is omitted.
 
 ### Plates
 Optional screenshots of delivered work, from a typed `plates` list (at most four; image, caption, `desktop` or `mobile` view) whose files live in `src/assets/projects/<id>/` with embedded provenance. They are used only where the screens are the evidence. The plates sit in a band after the record strip. Each plate has a title block ("Plate 01" in ink, view and capture width in faint mono), a hairline-framed image that keeps the project's own colours, a mono caption and crop marks. On desktop the plates share one row and grow by aspect ratio, so every image has the same height. On tablet the desktop plates stack, with a phone plate beside them at 220px. On phones everything stacks and the phone plate is 62% wide. An optional `platesSource` URL adds the line "Captured from the reference copy at …".
 
 ### Structure
-An optional `structure` (one root, at most eight branches, each with optional note and items) draws the delivered work's information architecture as a site plan. The root is a filled ink square with a condensed-caps title. Branches hang from one solid ink trunk that stops at the last branch, because only built work is solid. Each branch has an Archivo title, and its items run inline in faint mono separated by middots. A figcaption names what the drawing is. The right column goes to the plan first, then structure, then contents. The structure takes the plan's placement and stickiness rules.
+An optional `structure` (one root, at most eight branches, each with optional note and items) draws the delivered work's information architecture as a site plan. The root is a filled ink square with a condensed-caps title. Branches hang from one solid ink trunk that stops at the last branch, because only built work is solid. Each branch has an Archivo title, and its items run inline in faint mono separated by middots. A figcaption names what the drawing is. The right column goes to the plan first, then structure, then contents. The structure takes the plan's placement and stickiness rules, including its place after the first section on narrower screens.
 
 ### Crop marks
 Short 9px hairline strokes in Ink Faint at each corner, 8px outside the edge of the home record sheet, the contact sheet and every plate, drawn by a single non-interactive pseudo-element. They are marginal: never behind text, never on bands or the field.
@@ -241,8 +308,30 @@ On About, a spine runs down the left of the phase rows, newest at the top. Rows 
 ### Habit rows
 On About, each working habit is a ruled row like the index row: a condensed-caps title, a mono sentence, and one reference to its strongest evidence. A sheet reference is drawn as a sheet link ("Sheet 001" in tracked caps over the project title, with a hairline underneath). Evidence with no sheet (e.g. "At ZRP") uses the same lettering without the hairline, because there is nothing to open. References point to the work and never retell it. Desktop has three columns, tablet two, phones one.
 
-### Title-block strip
-Contact paths as one ruled strip: four cells on desktop (three inside the contact sheet), 2 × 2 on tablet, stacked on phones; label over value, the whole cell a link; external links open in a new tab.
+### Title block
+At the foot of every page there is a boxed 2 × 2 block, set at the bottom-right like a drawing's title block and up to 460px wide (full width on phones). Its cells are Drawing ("Farrel — Product Engineer"), Sheet (the page name, or "002 / 006" on a case study), Revised (the build date) and Language. It has an Ink outer border with Soft Rule dividers, and each cell is a label over a mono field value. It sits 56px under whatever closes the page (44px on phones). It deliberately differs from the full-width strip of contact paths, so the two never read as duplicates.
+
+### Not-found sheet
+The 404 page is a sheet outside the set. It has the masthead with no current page (the wordmark links Home), the zone label "Not found", the page title "Sheet not in this set.", one line saying the link isn't part of the portfolio or has moved, two secondary links (See the work with its count, Contact), and the title block with Sheet "404". It is marked `noindex`.
+
+### Contact strip
+Contact paths as one ruled strip: four cells on desktop (three inside the contact sheet), 2 × 2 on tablet, stacked on phones; label over value, the whole cell a link; external links open in a new tab and say so to assistive technology with a visually hidden "(opens in a new tab)", as every new-tab link on the site does.
+
+## Motion
+A plan drawing does not bounce. Motion is mechanical: things ink in, rules draw, the ground steps one notch.
+- **Between pages:** cross-document view transitions (`@view-transition { navigation: auto; }`), with no JavaScript.
+  - The masthead holds still.
+  - The old sheet lifts away (opacity, 140ms linear), and the next is laid down from the top edge (clip-path, 340ms, `cubic-bezier(0.2, 0, 0, 1)`).
+  - Between neighbouring case studies, the project titles carry across: the clicked previous/next title rises into the heading (`view-transition-name: sheet-<id>` on the case heading and the previous/next links only, class `sheet-title`). Home and Work rows carry no names, so going to a case study never sets other titles flying. The old title image leaves in 80ms, so the crisp new text carries the move.
+  - An element with nothing to pair with on the old page (a masthead scrolled out of view, a title arriving from Home) is laid down with the sheet instead of popping in.
+  - Browsers without support simply load the page.
+- **On arrival, once:**
+  - The Home ramp key inks in from its base.
+  - A plan's solid connectors draw downward (360ms each, 90ms apart; dashed ones stay still).
+  - About's current-phase bar inks down from its open top (520ms).
+- **State:** controls swap fill, rows step to Lifted Bone, and nav and link hairlines draw. 120–160ms, linear or `cubic-bezier(0.2, 0, 0.1, 1)`.
+- **Reduced motion:** page changes become a 120ms cross-fade with no movement, and every arrival draw is off.
+- **Never:** scroll reveals, section entrances, parallax, or bounce or elastic curves.
 
 ## Do's and Don'ts
 

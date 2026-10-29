@@ -3,10 +3,11 @@ import type { CollectionEntry } from "astro:content";
 import Figure from "./Figure.astro";
 
 /* The outcome field of a sheet, in one of three states:
-   - a measured before → after, only when both the figure and the quantity it
-     measures are recorded: set in magenta over its hatch band, labelled with
-     the quantity; the sentence stays on the case study, so the figure is
-     never stated twice;
+   - a before → after, only when both the figure and the quantity it
+     describes are recorded: a measurement in magenta over its hatch band, a
+     change of state in ink over an ink hatch, labelled with the quantity;
+     the sentence stays on the case study, so the figure is never stated
+     twice;
    - a qualitative result, stated in ink and never given the measured mark;
    - nothing recorded, shown as the mask, never as an invented claim; the
      words say whether the work has shipped or is still in progress. */
@@ -14,7 +15,9 @@ interface Props {
   project: CollectionEntry<"projects">["data"];
 }
 
-const { outcome, outcomeFigure, outcomeMetric, stage } = Astro.props.project;
+const { outcome, outcomeFigure, outcomeMetric, outcomeKind, stage } =
+  Astro.props.project;
+const change = outcomeKind === "change";
 const measured = Boolean(outcomeFigure && outcomeMetric);
 /* The dash stays with "Outcome", so a wrapped label breaks after it and
    keeps the metric's words together on the next line. */
@@ -25,8 +28,8 @@ const label = measured ? `Outcome\u00a0— ${outcomeMetric}` : "Outcome";
 {
   measured && outcomeFigure ? (
     <Fragment>
-      <Figure class="delta" value={outcomeFigure} />
-      <div class="band hatch-mag" aria-hidden="true" />
+      <Figure class={change ? "delta is-change" : "delta"} value={outcomeFigure} />
+      <div class={change ? "band hatch-ink" : "band hatch-mag"} aria-hidden="true" />
     </Fragment>
   ) : outcome ? (
     <p class="outcome-text">{outcome}</p>

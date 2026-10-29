@@ -1,7 +1,13 @@
 ---
 import { getCollection } from "astro:content";
 import Masthead from "../components/Masthead.astro";
-import { contactLinkAttrs, contactPaths } from "../lib/contact";
+import TitleBlock from "../components/TitleBlock.astro";
+import {
+  contactLinkAttrs,
+  contactPaths,
+  NEW_TAB,
+  opensNewTab,
+} from "../lib/contact";
 import "../styles/home.css";
 import "../styles/contact.css";
 
@@ -29,6 +35,20 @@ const total = (await getCollection("projects")).length;
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <link
+      rel="preload"
+      href="/fonts/archivo-var-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/plex-mono-400-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Contact — Farrel</title>
     <meta
@@ -70,7 +90,7 @@ const total = (await getCollection("projects")).length;
           <article class="contact-sheet" aria-labelledby="direct-title">
             <div class="rh">
               <h2 class="leg" id="direct-title">Direct</h2>
-              <span class="sheet-no">Sheet 001 / 001</span>
+              <span class="sheet-no">Direct</span>
             </div>
 
             {
@@ -112,6 +132,7 @@ const total = (await getCollection("projects")).length;
                         <span class="leg">{path.label}</span>
                         <span class="vh">: </span>
                         <span class="reach-v">{path.display}</span>
+                        {opensNewTab(path.href) && <span class="vh">{NEW_TAB}</span>}
                       </a>
                     </li>
                   ))}
@@ -130,6 +151,7 @@ const total = (await getCollection("projects")).length;
             {total} {total === 1 ? "project" : "projects"}
           </span>
         </a>
+        <TitleBlock sheet="Contact" />
       </footer>
     </div>
 

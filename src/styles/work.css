@@ -66,6 +66,19 @@
   margin-top: 0;
 }
 
+/* ---------------------------------------------------------------- missing --
+   The 404 sheet: two ways back, side by side, then the title block. */
+.missing-ways {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 40px;
+}
+
+.missing-foot {
+  margin-top: calc(120 * var(--u));
+  padding: 0 0 64px;
+}
+
 /* --------------------------------------------------------------- register -- */
 .register {
   display: grid;
@@ -251,7 +264,7 @@
   padding-top: 10px;
   border-top: 1px solid var(--rule-soft);
   font-family: "Plex Mono", monospace;
-  font-size: var(--t-key);
+  font-size: var(--t-note);
   color: var(--ink-faint);
 }
 
@@ -302,7 +315,7 @@
 .notes > h2 {
   max-width: none;
   margin-top: 56px;
-  padding-top: 14px;
+  padding-top: 20px;
   border-top: 1px solid var(--rule);
   font-family: Archivo, sans-serif;
   font-weight: 700;
@@ -454,6 +467,20 @@
   border-left: 1px dashed var(--ink-faint);
 }
 
+/* Built work draws itself in once on arrival, connector after connector down
+   the plan; what is not built is already dashed and stays still. */
+.plan-step.to-solid::after {
+  transform-origin: top;
+  animation: draw-down 360ms cubic-bezier(0.2, 0, 0, 1) both;
+  animation-delay: calc(var(--step, 0) * 90ms + 200ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plan-step.to-solid::after {
+    animation: none;
+  }
+}
+
 /* The arrowhead closing each connector, above the move it leads to. */
 .plan-step + .plan-step .plan-mark::before {
   content: "";
@@ -517,13 +544,16 @@
   transform: rotate(45deg);
 }
 
+/* Titles inside the side drawings (plan moves, the structure's root, the
+   contents list) share one step: 18px condensed caps with room to wrap. */
 .plan-title {
   font-family: Archivo, sans-serif;
   font-weight: 700;
   font-stretch: 72%;
   text-transform: uppercase;
-  font-size: 20px;
-  line-height: 1.05;
+  font-size: 18px;
+  line-height: 1.15;
+  text-wrap: balance;
   color: var(--ink);
 }
 
@@ -627,24 +657,27 @@
   }
 }
 
-/* Narrower, it is a band in the reading flow, after the line that names the
-   kind of work and before the first section. */
+/* Narrower, it is a band in the reading flow after the first section: the
+   reader meets the problem first, then the plan drawn against it, instead
+   of a full drawing before a word of the case. With a single section, it
+   closes the notes. */
 @media (max-width: 1279px) {
   .notes {
     display: contents;
   }
 
   .notes > * {
-    order: 2;
+    order: 1;
   }
 
-  .notes > p:first-child {
-    order: 0;
+  .notes > h2:nth-of-type(2),
+  .notes > h2:nth-of-type(2) ~ * {
+    order: 3;
   }
 
   .plan-col {
-    order: 1;
-    margin-top: 32px;
+    order: 2;
+    margin-top: 44px;
     max-width: 420px;
   }
 
@@ -684,14 +717,15 @@
   font-stretch: 72%;
   text-transform: uppercase;
   font-size: 18px;
-  line-height: 1.05;
+  line-height: 1.15;
+  text-wrap: balance;
   color: var(--ink);
 }
 
 .st-note {
   margin-top: 4px;
   font-family: "Plex Mono", monospace;
-  font-size: var(--t-key);
+  font-size: var(--t-note);
   line-height: 1.5;
   color: var(--ink-faint);
 }
@@ -793,7 +827,8 @@
   font-stretch: 72%;
   text-transform: uppercase;
   font-size: 18px;
-  line-height: 1.05;
+  line-height: 1.15;
+  text-wrap: balance;
   color: var(--ink);
   transition: background-color 120ms linear;
 }
@@ -1045,6 +1080,7 @@
 
   .notes > h2 {
     margin-top: 44px;
+    padding-top: 16px;
     font-size: 24px;
   }
 

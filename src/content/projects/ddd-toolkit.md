@@ -26,7 +26,7 @@ plan:
     note: A future package
 ---
 
-A personal product, built and maintained on my own and open source on <a href="https://github.com/farreltobias/ddd-toolkit" target="_blank" rel="noopener">GitHub</a>. It is in early development.
+A personal product, built and maintained on my own and open source on <a href="https://github.com/farreltobias/ddd-toolkit" target="_blank" rel="noopener">GitHub<span class="vh"> (opens in a new tab)</span></a>. It is in early development.
 
 ## The same foundations, rebuilt
 

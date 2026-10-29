@@ -207,6 +207,15 @@ a {
   );
 }
 
+/* The same band in ink: a recorded change of state, not a measurement. */
+.hatch-ink {
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--ink) 0 1px,
+    transparent 1px var(--g, 4px)
+  );
+}
+
 /* Crossed at ninety degrees: the constraint, the thing that was in the way. */
 .hatch-cross {
   background-image:
@@ -535,6 +544,16 @@ a {
   overflow-wrap: anywhere;
 }
 
+/* A change of state keeps the figure's scale but not its colour: magenta is
+   reserved for a measured quantity. Placed after every figure rule so it
+   wins wherever the figure sits. */
+.delta.is-change,
+.record .delta.is-change,
+.index-row .delta.is-change,
+.case-record .delta.is-change {
+  color: var(--ink);
+}
+
 .record .delta {
   font-family: "Plex Mono", monospace;
   font-weight: 600;
@@ -590,16 +609,23 @@ a {
 
 /* ================================================================ sections --
    Everything below the first viewport, squared to the same field. */
+/* A band opens with more room under its rule than a field inside a sheet,
+   so the band heading never sits tighter than the rows beneath it. */
 .sheet-band {
   border-top: 1px solid var(--rule);
   margin-top: 96px;
-  padding-top: 14px;
+  padding-top: 24px;
 }
 
 .sheet-band-grid {
   display: grid;
   grid-template-columns: 11.181% minmax(0, 1fr) 33.125%;
   column-gap: 0;
+}
+
+/* The zone label's capitals align with the band heading's. */
+.sheet-band-grid > .leg {
+  padding-top: 3px;
 }
 
 .sheet-band-body {
@@ -767,6 +793,11 @@ a {
   transition: box-shadow 120ms linear;
 }
 
+/* Under the Background note, the way on to About sits closer. */
+.practice .more-link {
+  margin-top: 24px;
+}
+
 .more-label {
   font-family: Archivo, sans-serif;
   font-weight: 700;
@@ -866,6 +897,52 @@ a {
   margin-top: 14px;
 }
 
+/* ------------------------------------------------------------ title block --
+   The foot of every sheet, boxed in its bottom-right corner the way a
+   drawing carries its title block: label-over-value cells, two by two,
+   set apart from the full-width strip of ways to reach Farrel. */
+.title-block {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: min(100%, 460px);
+  margin: 56px 0 0 auto;
+  border: 1px solid var(--rule);
+}
+
+.tb-cell {
+  min-width: 0;
+  padding: 10px 14px 11px;
+}
+
+.tb-cell:nth-child(even) {
+  border-left: 1px solid var(--rule-soft);
+}
+
+.tb-cell:nth-child(n + 3) {
+  border-top: 1px solid var(--rule-soft);
+}
+
+.tb-cell dt {
+  color: var(--ink-faint);
+}
+
+.tb-cell dd {
+  margin: 5px 0 0;
+  font-family: "Plex Mono", monospace;
+  font-size: var(--t-field);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.4;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 760px) {
+  .title-block {
+    width: 100%;
+    margin-top: 44px;
+  }
+}
+
 /* ------------------------------------------------------------- crop marks --
    A sheet printed for trimming carries a short stroke at each corner, out in
    the margin. They mark the sheets as sheets; they never sit behind text. */
@@ -909,6 +986,93 @@ a {
 /* ================================================================== motion --
    A plan drawing does not bounce. Motion here is mechanical: things ink in,
    rules draw, ground steps one notch. Nothing eases in from nowhere. */
+
+/* -------------------------------------------------------- between sheets --
+   Moving between pages is moving between sheets of one set. The masthead
+   stays put. The sheet in hand lifts away quickly, and the next is laid
+   down from the top edge, the way a drawing is slid onto the table. Between
+   neighbouring case studies, the project titles carry across (the next
+   sheet's title rises into the heading), so you can see where you went.
+   Browsers without cross-document view transitions simply load the page. */
+@view-transition {
+  navigation: auto;
+}
+
+.masthead {
+  view-transition-name: masthead;
+}
+
+.sheet-title {
+  view-transition-class: sheet-title;
+}
+
+@keyframes sheet-lift {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes sheet-lay {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+}
+
+::view-transition-old(root) {
+  animation: sheet-lift 140ms linear both;
+}
+
+::view-transition-new(root) {
+  animation: sheet-lay 340ms cubic-bezier(0.2, 0, 0, 1) both;
+}
+
+/* The masthead holds still; only its current-page hairline changes. */
+::view-transition-group(masthead) {
+  animation: none;
+}
+
+::view-transition-old(masthead) {
+  animation: none;
+  opacity: 0;
+}
+
+::view-transition-new(masthead) {
+  animation: none;
+}
+
+/* A title glides to its new place at the pace of the sheet being laid. */
+::view-transition-group(*.sheet-title) {
+  animation-duration: 340ms;
+  animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+::view-transition-old(*.sheet-title),
+::view-transition-new(*.sheet-title) {
+  height: 100%;
+  object-fit: contain;
+  object-position: left top;
+}
+
+/* The old title is a scaled image; it leaves at once, so the crisp new text
+   carries the move instead of a blurred copy. */
+::view-transition-old(*.sheet-title) {
+  animation: sheet-lift 80ms linear both;
+}
+
+/* With nothing to hold on the old page (a masthead scrolled out of view, a
+   title arriving from Home or Work), the element is laid down with the rest
+   of the sheet instead of popping in. */
+::view-transition-new(*.sheet-title):only-child,
+::view-transition-new(masthead):only-child {
+  animation: sheet-lay 340ms cubic-bezier(0.2, 0, 0, 1) both;
+}
+
+/* A rule or connector drawn once on arrival, from its start. */
+@keyframes draw-down {
+  from {
+    transform: scaleY(0);
+  }
+}
 
 /* The signature: the key inks in from its base, one step at a time. */
 @keyframes ink-in {
@@ -1008,6 +1172,21 @@ a:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   .gauge-row .cell {
     animation: none;
+  }
+
+  /* Between sheets: a short cross-fade, no movement. */
+  ::view-transition-old(root),
+  ::view-transition-new(root),
+  ::view-transition-group(*.sheet-title) {
+    animation-duration: 120ms;
+  }
+
+  ::view-transition-new(root) {
+    animation-name: none;
+  }
+
+  ::view-transition-group(*.sheet-title) {
+    animation-name: none;
   }
 
   .nav a::after {
@@ -1268,6 +1447,7 @@ a:focus-visible {
 
   .sheet-band {
     margin-top: 64px;
+    padding-top: 20px;
   }
 
   .sheet-band-title {
@@ -1302,14 +1482,21 @@ a:focus-visible {
   }
 }
 
-/* Touch, or any width a tablet might be: the nav words keep their size, but
-   each carries a full 44px target.
+/* Touch, or any width a tablet might be: the nav words and the wordmark keep
+   their size, but each carries a full 44px target.
    The negative margin keeps the masthead where it was. */
 @media (pointer: coarse), (max-width: 1279px) {
   .nav a {
     display: inline-block;
     padding: 17px 6px;
     margin: -17px -6px;
+  }
+
+  /* The wordmark back to Home gets the same 44px target as the nav. */
+  a.mark {
+    display: inline-block;
+    padding: 8px 0;
+    margin: -8px 0;
   }
 
   .nav a::after {

@@ -40,6 +40,10 @@ const projects = defineCollection({
          shown beside the Outcome label. The figure renders only when both are
          set; without a figure the metric is not shown. */
       outcomeMetric: z.string().optional(),
+      /* Whether a figure is a measured quantity or a recorded change of state.
+         Only a measurement is set in magenta; a change of state is set in ink
+         with its own key, so magenta always means a number was recorded. */
+      outcomeKind: z.enum(["measured", "change"]).default("measured"),
       /* The case study's game plan: the project's moves, read top to bottom.
          `built` is the only kind drawn solid; everything else, `in-progress`
          included, is dashed, so what exists and what does not can never be

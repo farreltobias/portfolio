@@ -40,7 +40,7 @@ const anyUnbuilt = steps.some(
             : "to-dashed"
           : "";
         return (
-          <li class={`plan-step is-${step.kind} ${into}`}>
+          <li class={`plan-step is-${step.kind} ${into}`} style={`--step:${i}`}>
             <span class="plan-mark" aria-hidden="true" />
             <div class="plan-body">
               <p class="plan-title">{step.title}</p>

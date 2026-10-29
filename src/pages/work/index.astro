@@ -2,6 +2,7 @@
 import IndexRow from "../../components/IndexRow.astro";
 import Masthead from "../../components/Masthead.astro";
 import Notation from "../../components/Notation.astro";
+import TitleBlock from "../../components/TitleBlock.astro";
 import { allProjects, sheetNo } from "../../lib/projects";
 import "../../styles/home.css";
 import "../../styles/work.css";
@@ -15,6 +16,20 @@ const projects = await allProjects();
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <link
+      rel="preload"
+      href="/fonts/archivo-var-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/plex-mono-400-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Work — Farrel</title>
     <meta
@@ -79,6 +94,7 @@ const projects = await allProjects();
             <span class="chip hatch" aria-hidden="true"></span>
           </a>
         </div>
+        <TitleBlock sheet="Work" />
       </footer>
     </div>
   </body>

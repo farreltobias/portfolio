@@ -200,7 +200,7 @@
       },
       "figure": {
         "displayName": "Figure",
-        "purpose": "Before → after figures, magenta, never below 24px."
+        "purpose": "Measured before → after figures (outcomeKind: measured), magenta, never below 24px; a change of state is set in ink."
       },
       "body": {
         "displayName": "Body",
@@ -246,6 +246,21 @@
         "name": "ink-in",
         "value": "calc(240ms + step * 60ms) cubic-bezier(0.2, 0, 0, 1)",
         "purpose": "Ramp key cells rising from a quarter height on load; off under reduced motion."
+      },
+      {
+        "name": "sheet-lift",
+        "value": "140ms linear",
+        "purpose": "Old page fades out on navigation (cross-document view transition)."
+      },
+      {
+        "name": "sheet-lay",
+        "value": "340ms cubic-bezier(0.2, 0, 0, 1)",
+        "purpose": "New page revealed from the top edge by clip-path; project titles glide at the same pace."
+      },
+      {
+        "name": "draw-down",
+        "value": "360–520ms cubic-bezier(0.2, 0, 0, 1)",
+        "purpose": "Plan solid connectors and About's current-phase bar draw once on arrival; off under reduced motion."
       }
     ],
     "breakpoints": [
@@ -306,9 +321,9 @@
     {
       "name": "Notation Key",
       "kind": "custom",
-      "description": "Binds every mark to its meaning: crossed hatch, magenta hatch, dot mask.",
-      "html": "<section class=\"ds-key\"><p class=\"ds-key-h\">Notation</p><div><span class=\"ds-sw ds-cross\"></span>Constraint</div><div><span class=\"ds-sw ds-mag\"></span>Before → after</div><div><span class=\"ds-sw ds-dot\"></span>Not yet measured</div></section>",
-      "css": ":host{--paper:#f2f0ec;--ink:#15161a;--ink-faint:#5d5d5e;--rule-soft:#c8c7c3;--g1:#dfddd8;--mag:#e6007e}.ds-key{max-width:220px;border-top:1px solid var(--ink);padding-top:11px;font:400 11px/1.3 'Plex Mono',monospace;color:var(--ink-faint)}.ds-key-h{margin:0 0 12px;font:600 11px/1.25 Archivo,sans-serif;letter-spacing:.16em;text-transform:uppercase}.ds-key div{display:flex;align-items:center;gap:10px;margin-top:10px}.ds-sw{width:28px;height:16px;border:1px solid var(--rule-soft)}.ds-cross{background-image:repeating-linear-gradient(45deg,var(--ink) 0 1px,transparent 1px 7px),repeating-linear-gradient(-45deg,var(--ink) 0 1px,transparent 1px 7px)}.ds-mag{background-image:repeating-linear-gradient(45deg,var(--mag) 0 1.5px,transparent 1.5px 4px)}.ds-dot{background-image:radial-gradient(var(--ink) .9px,transparent 1px);background-size:5px 5px}"
+      "description": "Binds every mark to its meaning: crossed hatch, magenta hatch (measured), ink hatch (changed), dot mask.",
+      "html": "<section class=\"ds-key\"><p class=\"ds-key-h\">Notation</p><div><span class=\"ds-sw ds-cross\"></span>Constraint</div><div><span class=\"ds-sw ds-mag\"></span>Before → after, measured</div><div><span class=\"ds-sw ds-ink\"></span>Before → after, changed</div><div><span class=\"ds-sw ds-dot\"></span>Not yet measured</div></section>",
+      "css": ":host{--paper:#f2f0ec;--ink:#15161a;--ink-faint:#5d5d5e;--rule-soft:#c8c7c3;--g1:#dfddd8;--mag:#e6007e}.ds-key{max-width:220px;border-top:1px solid var(--ink);padding-top:11px;font:400 11px/1.3 'Plex Mono',monospace;color:var(--ink-faint)}.ds-key-h{margin:0 0 12px;font:600 11px/1.25 Archivo,sans-serif;letter-spacing:.16em;text-transform:uppercase}.ds-key div{display:flex;align-items:center;gap:10px;margin-top:10px}.ds-sw{width:28px;height:16px;border:1px solid var(--rule-soft)}.ds-cross{background-image:repeating-linear-gradient(45deg,var(--ink) 0 1px,transparent 1px 7px),repeating-linear-gradient(-45deg,var(--ink) 0 1px,transparent 1px 7px)}.ds-mag{background-image:repeating-linear-gradient(45deg,var(--mag) 0 1.5px,transparent 1.5px 4px)}.ds-ink{background-image:repeating-linear-gradient(45deg,var(--ink) 0 1px,transparent 1px 4px)}.ds-dot{background-image:radial-gradient(var(--ink) .9px,transparent 1px);background-size:5px 5px}"
     },
     {
       "name": "Plate",

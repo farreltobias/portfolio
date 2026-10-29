@@ -6,6 +6,8 @@ import Outcome from "../../components/Outcome.astro";
 import Plan from "../../components/Plan.astro";
 import Plate from "../../components/Plate.astro";
 import Structure from "../../components/Structure.astro";
+import TitleBlock from "../../components/TitleBlock.astro";
+import { NEW_TAB } from "../../lib/contact";
 import { allProjects, displayTitle, sheetNo } from "../../lib/projects";
 import "../../styles/home.css";
 import "../../styles/work.css";
@@ -52,6 +54,20 @@ const sourceHost = data.platesSource ? new URL(data.platesSource).host : null;
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <link
+      rel="preload"
+      href="/fonts/archivo-var-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/plex-mono-400-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{data.title} — Farrel</title>
     <meta name="description" content={data.description} />
@@ -66,7 +82,12 @@ const sourceHost = data.platesSource ? new URL(data.platesSource).host : null;
           <header class="page-head">
             <p class="leg zone">Sheet {number}</p>
             <div class="page-intro">
-              <h1 class="disp page-title case-title">{displayTitle(data.title)}</h1>
+              <h1
+                class="disp page-title case-title sheet-title"
+                style={`view-transition-name: sheet-${project.id}`}
+              >
+                {displayTitle(data.title)}
+              </h1>
               <p class="prose page-sub">{data.description}</p>
             </div>
             <dl class="spec">
@@ -113,8 +134,13 @@ const sourceHost = data.platesSource ? new URL(data.platesSource).host : null;
               {
                 measured && (
                   <li>
-                    <span class="sheet-key-sw hatch-mag" aria-hidden="true" />
-                    Before → after
+                    <span
+                      class={`sheet-key-sw ${data.outcomeKind === "change" ? "hatch-ink" : "hatch-mag"}`}
+                      aria-hidden="true"
+                    />
+                    {data.outcomeKind === "change"
+                      ? "Before → after, changed"
+                      : "Before → after, measured"}
                   </li>
                 )
               }
@@ -153,6 +179,7 @@ const sourceHost = data.platesSource ? new URL(data.platesSource).host : null;
                         rel="noopener"
                       >
                         {sourceHost}
+                        <span class="vh">{NEW_TAB}</span>
                       </a>
                     </p>
                   )}
@@ -202,7 +229,12 @@ const sourceHost = data.platesSource ? new URL(data.platesSource).host : null;
               prev && (
                 <a class="sheet-nav-link" href={`/work/${prev.id}`}>
                   <span class="leg">Previous · Sheet {prevNumber}</span>
-                  <span class="sheet-nav-title">{displayTitle(prev.data.title)}</span>
+                  <span
+                    class="sheet-nav-title sheet-title"
+                    style={`view-transition-name: sheet-${prev.id}`}
+                  >
+                    {displayTitle(prev.data.title)}
+                  </span>
                 </a>
               )
             }
@@ -219,7 +251,12 @@ const sourceHost = data.platesSource ? new URL(data.platesSource).host : null;
               next && (
                 <a class="sheet-nav-link" href={`/work/${next.id}`}>
                   <span class="leg">Next · Sheet {nextNumber}</span>
-                  <span class="sheet-nav-title">{displayTitle(next.data.title)}</span>
+                  <span
+                    class="sheet-nav-title sheet-title"
+                    style={`view-transition-name: sheet-${next.id}`}
+                  >
+                    {displayTitle(next.data.title)}
+                  </span>
                 </a>
               )
             }
@@ -240,6 +277,7 @@ const sourceHost = data.platesSource ? new URL(data.platesSource).host : null;
             <span class="chip hatch" aria-hidden="true"></span>
           </a>
         </div>
+        <TitleBlock sheet={`${number} / ${total}`} />
       </footer>
     </div>
   </body>

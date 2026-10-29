@@ -35,9 +35,16 @@ export const contactPaths: ContactPath[] = [
 ];
 
 /* Attributes for a contact link: profiles and chat open in a new tab and are
-   marked as Farrel's own; an email address opens the mail app in place. */
-export function contactLinkAttrs(href: string) {
-  return href.startsWith("http")
-    ? { target: "_blank", rel: "me noopener" }
-    : {};
+   marked as Farrel's own; an email address opens the mail app in place. A
+   link that opens a new tab says so to assistive technology (see NEW_TAB). */
+export function opensNewTab(href: string) {
+  return href.startsWith("http");
 }
+
+export function contactLinkAttrs(href: string) {
+  return opensNewTab(href) ? { target: "_blank", rel: "me noopener" } : {};
+}
+
+/* Spoken after a link that opens a new tab, so a screen-reader user is not
+   moved to another window without warning. */
+export const NEW_TAB = " (opens in a new tab)";

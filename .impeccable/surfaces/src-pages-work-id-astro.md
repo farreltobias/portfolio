@@ -19,7 +19,7 @@ Plan: an optional typed `plan` list in frontmatter renders the game-plan drawing
 
 THESIS: The full sheet behind the index row — the record's three fields as its title block, the narrative as the working notes. It refuses the blog-post template with a hero image.
 
-OWN-WORLD: Home's field and tokens; the record strip in Home's field language; narrative in Plex Mono on cleared ground at a reading measure, each section opening a ruled band; magenta only for a before → after figure and focus (widened by Farrel, 2026-10-16: magenta marks any recorded before → after figure, keyed "Before → after", plus focus).
+OWN-WORLD: Home's field and tokens; the record strip in Home's field language; narrative in Plex Mono on cleared ground at a reading measure, each section opening a ruled band; magenta only for a before → after figure and focus (widened by Farrel, 2026-10-16: magenta marks any recorded before → after figure, keyed "Before → after", plus focus). Narrowed by Farrel (2026-10-29): magenta marks only a measured before → after (`outcomeKind: measured`), keyed "Before → after, measured"; a recorded change of state is set in ink over an ink hatch, keyed "Before → after, changed".
 
 STORY: The visitor reads what was in the way, what was decided and what changed in three cells, then the reasoning in order, then moves to the next sheet or to contact.
 

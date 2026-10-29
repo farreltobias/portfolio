@@ -8,6 +8,7 @@ constraint: Basic site with no content workflow.
 decision: Rebuild as a CMS-managed platform.
 outcome: Gave the business a complete, self-managed institutional web presence.
 outcomeMetric: Web presence
+outcomeKind: change
 outcomeFigure: Basic site → CMS platform
 order: 6
 plates:
@@ -73,7 +74,7 @@ I built the site from that design: a responsive experience for desktop and mobil
 
 The website was completed and deployed to production for Ottoset.
 
-A reference copy of the version I delivered is hosted at <a href="https://energy.farrel.tech/" target="_blank" rel="noopener">energy.farrel.tech</a>. It is preserved as a record of that work; it is not Ottoset's current website, and it does not reflect any ongoing relationship. No traffic or business results are claimed for it.
+A reference copy of the version I delivered is hosted at <a href="https://energy.farrel.tech/" target="_blank" rel="noopener">energy.farrel.tech<span class="vh"> (opens in a new tab)</span></a>. It is preserved as a record of that work; it is not Ottoset's current website, and it does not reflect any ongoing relationship. No traffic or business results are claimed for it.
 
 ## Where it sits
 

@@ -1,5 +1,6 @@
 ---
 import Masthead from "../components/Masthead.astro";
+import TitleBlock from "../components/TitleBlock.astro";
 import { allProjects, displayTitle, sheetNumberOf } from "../lib/projects";
 import "../styles/home.css";
 import "../styles/work.css";
@@ -97,6 +98,20 @@ const work = sheet("ottoset");
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <link
+      rel="preload"
+      href="/fonts/archivo-var-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/plex-mono-400-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>About — Farrel</title>
     <meta
@@ -302,13 +317,14 @@ const work = sheet("ottoset");
       <footer class="closing">
         <div class="closing-head">
           <div>
-            <h2>Looking for someone who decides what to build, then builds it?</h2>
+            <h2>Have a problem that needs an owner, not just a builder?</h2>
           </div>
           <a class="control" href="/contact">
             <span class="bar">Let's talk</span>
             <span class="chip hatch" aria-hidden="true"></span>
           </a>
         </div>
+        <TitleBlock sheet="About" />
       </footer>
     </div>
   </body>
