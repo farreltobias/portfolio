@@ -176,7 +176,7 @@ const work = sheet("ottoset");
                       <p class="habit-text">{habit.text}</p>
                       <div class="habit-ref">
                         {habit.sheet && (
-                          <a class="ref-link" href={`/work/${habit.sheet.id}`}>
+                          <a class="ref-link" href={`/work/${habit.sheet.id}/`}>
                             <span class="ref-no">Sheet {habit.sheet.number}</span>
                             <span class="vh">: </span>
                             <span class="ref-title">{habit.sheet.title}</span>
@@ -238,7 +238,7 @@ const work = sheet("ottoset");
                       in two places. At Rare Candy, where I work through Howdy, I
                       do it inside a team. Through Farrel.tech, I do it directly
                       with clients such as Pro Electric, and on my own products,
-                      such as <a href="/work/ddd-toolkit">DDD Toolkit</a>.
+                      such as <a href="/work/ddd-toolkit/">DDD Toolkit</a>.
                     </p>
                   </div>
                 </article>
@@ -268,7 +268,7 @@ const work = sheet("ottoset");
                         work && (
                           <>
                             {" "}
-                            <a href={`/work/${work.id}`}>{work.title}</a> (Sheet{" "}
+                            <a href={`/work/${work.id}/`}>{work.title}</a> (Sheet{" "}
                             {work.number}) is from this period.
                           </>
                         )
@@ -302,8 +302,8 @@ const work = sheet("ottoset");
                 </article>
               </div>
 
-              <a class="more-link" href="/work">
-                <span class="more-label">See the work</span>
+              <a class="more-link" href="/work/">
+                <span class="more-label">See all work</span>
                 <span class="vh">, </span>
                 <span class="more-count">
                   {`${projects.length} ${projects.length === 1 ? "project" : "projects"}`}
@@ -319,7 +319,7 @@ const work = sheet("ottoset");
           <div>
             <h2>Have a problem that needs an owner, not just a builder?</h2>
           </div>
-          <a class="control" href="/contact">
+          <a class="control" href="/contact/">
             <span class="bar">Let's talk</span>
             <span class="chip hatch" aria-hidden="true"></span>
           </a>

@@ -261,6 +261,16 @@
         "name": "draw-down",
         "value": "360–520ms cubic-bezier(0.2, 0, 0, 1)",
         "purpose": "Plan solid connectors and About's current-phase bar draw once on arrival; off under reduced motion."
+      },
+      {
+        "name": "nav-rule-glide",
+        "value": "340ms cubic-bezier(0.2, 0, 0, 1)",
+        "purpose": "Current-page nav hairline slides to the new section's word on page change; off under reduced motion."
+      },
+      {
+        "name": "draw-across",
+        "value": "560ms cubic-bezier(0.2, 0, 0, 1)",
+        "purpose": "Measured figure's magenta band drawn in from the left on arrival; structure branch ticks; off under reduced motion."
       }
     ],
     "breakpoints": [

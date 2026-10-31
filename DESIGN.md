@@ -262,7 +262,7 @@ Square everywhere (`rounded.none`). Form comes from 1px rules: ink for structure
 ### Buttons
 - **Primary control:** a solid ink bar (58px tall, `0 30px` padding, control type) closed by an 84px hatched chip with a 1px ink border. Used for the one action a page exists for ("Let's talk").
 - **Hover / Focus:** the bar empties to an ink outline and the chip inks solid — the pair swaps state rather than glowing; focus adds the 2px magenta ring at 3px offset.
-- **Secondary link:** control lettering on a 1px ink underline, with a mono count beside it ("See all work · 5 projects"); the rule thickens to 2px on hover. 44px tall.
+- **Secondary link:** control lettering on a 1px ink underline, with a mono count beside it ("See all work · 6 projects"; every link to Work uses this one label); the rule thickens to 2px on hover. 44px tall.
 
 ### Record sheet
 - **Structure:** bordered sheet on the field with the stacked edge; corner shows "Sheet 00N / 00T"; title; Constraint (crossed-hatch mark + value), Decision, Outcome; foot with "Read case study" and year.
@@ -273,10 +273,10 @@ Square everywhere (`rounded.none`). Form comes from 1px rules: ink for structure
 The register's line: number · title, year, "Read case study" · Constraint and Decision · Outcome, on tracks `52px 236px 1fr 300px`. Same three fields and states as the record sheet; stacks to one column on phones.
 
 ### Spec block
-Label/value rows ruled in Soft Rule under an ink top rule (Role, Status, Location; Sheet, Year, Role on case studies).
+Label/value rows ruled in Soft Rule under an ink top rule (Role, Status, Location; Year, Role on case studies, whose sheet number lives in the zone label and the title block).
 
 ### Navigation
-Masthead: condensed wordmark (28px caps) over a tracked "Product Engineer" label; nav links in label type with a hairline that draws under the word on hover and stays drawn on the current page (`aria-current`). Targets, the wordmark back to Home included, are 44px tall up to 1279px and on touch.
+Masthead: condensed wordmark (28px caps) over a tracked "Product Engineer" label; nav links in label type with a hairline that draws under the word on hover and stays drawn on the current page (`aria-current`). Targets, the wordmark back to Home included, are 44px tall up to 1279px and on touch. At 480px and below the nav takes its own row under the wordmark, so the role label never reads as a fourth link.
 
 ### Notation key and ramp key
 The ramp key lists the eleven steps (X → 0) with the role each used step plays (Ink, Prose, Labels, Rules, Hover, Field). The Notation key binds marks to meaning: crossed hatch = Constraint, magenta 45° hatch = Before → after, measured; Ink 45° hatch = Before → after, changed; dot mask = Not yet measured.
@@ -285,7 +285,7 @@ The ramp key lists the eleven steps (X → 0) with the role each used step plays
 The case study's game plan, from an optional typed `plan` list (at most six moves) in a project's frontmatter: moves read top to bottom, each with a mark — crossed hatch = constraint, filled ink square = built, half-inked square = in progress, dashed square = planned, dashed diamond = decision, faint dashed square = possible — a condensed-caps title, and a mono note led by its status in words ("In progress · …"). The connector into a move is solid only when that move is built; everything else, in-progress included, is dashed, with a small arrowhead into each move. The key lists only the marks the plan uses. Desktop: its own column beside the notes, sticky only on screens at least 820px tall. Narrower: a band in the reading flow after the first section, so the reader meets the problem before the drawing (CSS order only). With a single section, it closes the notes.
 
 ### Sheet key and contents
-Every case study keys its own marks in one line under the record strip (crossed hatch = Constraint, plus "Before → after, measured", "Before → after, changed" or "Not yet measured" when the strip draws them), so a visitor arriving from a link never meets an unexplained mark. On desktop, a sheet without a plan uses the right column for a sticky Contents list of its sections (condensed caps, Soft Rule dividers); narrower, the list is omitted.
+Every case study keys its own marks in one line under the record strip (crossed hatch = Constraint, plus "Before → after, measured", "Before → after, changed" or "Not yet measured" when the strip draws them), so a visitor arriving from a link never meets an unexplained mark. On desktop, a sheet without a plan uses the right column for a sticky Contents list of its sections (condensed caps, Soft Rule dividers). Below 1280px, every case study with more than two sections lists them after the sheet key, at most 420px wide with 44px rows, and a "Contents ↑" secondary link closes each section (added to the rendered notes at build time), so a long case can be crossed on a phone in both directions. The sheet number is stated in the left zone label and the title block, not in the spec block (Year, Role).
 
 ### Plates
 Optional screenshots of delivered work, from a typed `plates` list (at most four; image, caption, `desktop` or `mobile` view) whose files live in `src/assets/projects/<id>/` with embedded provenance. They are used only where the screens are the evidence. The plates sit in a band after the record strip. Each plate has a title block ("Plate 01" in ink, view and capture width in faint mono), a hairline-framed image that keeps the project's own colours, a mono caption and crop marks. On desktop the plates share one row and grow by aspect ratio, so every image has the same height. On tablet the desktop plates stack, with a phone plate beside them at 220px. On phones everything stacks and the phone plate is 62% wide. An optional `platesSource` URL adds the line "Captured from the reference copy at …".
@@ -312,7 +312,7 @@ On About, each working habit is a ruled row like the index row: a condensed-caps
 At the foot of every page there is a boxed 2 × 2 block, set at the bottom-right like a drawing's title block and up to 460px wide (full width on phones). Its cells are Drawing ("Farrel — Product Engineer"), Sheet (the page name, or "002 / 006" on a case study), Revised (the build date) and Language. It has an Ink outer border with Soft Rule dividers, and each cell is a label over a mono field value. It sits 56px under whatever closes the page (44px on phones). It deliberately differs from the full-width strip of contact paths, so the two never read as duplicates.
 
 ### Not-found sheet
-The 404 page is a sheet outside the set. It has the masthead with no current page (the wordmark links Home), the zone label "Not found", the page title "Sheet not in this set.", one line saying the link isn't part of the portfolio or has moved, two secondary links (See the work with its count, Contact), and the title block with Sheet "404". It is marked `noindex`.
+The 404 page is a sheet outside the set. It has the masthead with no current page (the wordmark links Home), the zone label "Not found", the page title "Sheet not in this set.", one line saying the link isn't part of the portfolio or has moved, two secondary links (See all work with its count, Contact), and the title block with Sheet "404". It is marked `noindex`.
 
 ### Contact strip
 Contact paths as one ruled strip: four cells on desktop (three inside the contact sheet), 2 × 2 on tablet, stacked on phones; label over value, the whole cell a link; external links open in a new tab and say so to assistive technology with a visually hidden "(opens in a new tab)", as every new-tab link on the site does.
@@ -320,17 +320,19 @@ Contact paths as one ruled strip: four cells on desktop (three inside the contac
 ## Motion
 A plan drawing does not bounce. Motion is mechanical: things ink in, rules draw, the ground steps one notch.
 - **Between pages:** cross-document view transitions (`@view-transition { navigation: auto; }`), with no JavaScript.
-  - The masthead holds still.
+  - The masthead holds still. It sits on the bone ground, so laid over a page that had scrolled it out of view, it lands as a clean band. Its current-page hairline is a real element (`view-transition-name: nav-rule`) that glides from the old section's word to the new one at the sheet's pace.
   - The old sheet lifts away (opacity, 140ms linear), and the next is laid down from the top edge (clip-path, 340ms, `cubic-bezier(0.2, 0, 0, 1)`).
   - Between neighbouring case studies, the project titles carry across: the clicked previous/next title rises into the heading (`view-transition-name: sheet-<id>` on the case heading and the previous/next links only, class `sheet-title`). Home and Work rows carry no names, so going to a case study never sets other titles flying. The old title image leaves in 80ms, so the crisp new text carries the move.
-  - An element with nothing to pair with on the old page (a masthead scrolled out of view, a title arriving from Home) is laid down with the sheet instead of popping in.
+  - An element with nothing to pair with on the old page (a masthead scrolled out of view, a title arriving from Home) is laid down with the sheet instead of popping in. The new title image is never faded in, so crisp ink glides over the departing image.
   - Browsers without support simply load the page.
 - **On arrival, once:**
   - The Home ramp key inks in from its base.
   - A plan's solid connectors draw downward (360ms each, 90ms apart; dashed ones stay still).
   - About's current-phase bar inks down from its open top (520ms).
+  - A measured figure's magenta band draws in from the left (560ms). A change of state, in ink, stays still.
+  - A structure drawing's trunk runs down to each branch in turn, and each branch's tick reaches out to it (70ms apart).
 - **State:** controls swap fill, rows step to Lifted Bone, and nav and link hairlines draw. 120–160ms, linear or `cubic-bezier(0.2, 0, 0.1, 1)`.
-- **Reduced motion:** page changes become a 120ms cross-fade with no movement, and every arrival draw is off.
+- **Reduced motion:** page changes become a 120ms fade with no movement (no clip, no glide, no lay-down of unpaired elements; the old title image is hidden rather than squeezed), and every arrival draw is off.
 - **Never:** scroll reveals, section entrances, parallax, or bounce or elastic curves.
 
 ## Do's and Don'ts

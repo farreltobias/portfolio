@@ -9,9 +9,9 @@ interface Props {
 
 const { current = "home" } = Astro.props;
 const links = [
-  { id: "work", href: "/work", label: "Work" },
-  { id: "about", href: "/about", label: "About" },
-  { id: "contact", href: "/contact", label: "Contact" },
+  { id: "work", href: "/work/", label: "Work" },
+  { id: "about", href: "/about/", label: "About" },
+  { id: "contact", href: "/contact/", label: "Contact" },
 ] as const;
 ---
 
@@ -36,6 +36,7 @@ const links = [
           aria-current={current === link.id ? "page" : undefined}
         >
           {link.label}
+          {current === link.id && <span class="nav-rule" aria-hidden="true" />}
         </a>
       ))
     }

@@ -90,7 +90,6 @@ const total = (await getCollection("projects")).length;
           <article class="contact-sheet" aria-labelledby="direct-title">
             <div class="rh">
               <h2 class="leg" id="direct-title">Direct</h2>
-              <span class="sheet-no">Direct</span>
             </div>
 
             {
@@ -144,8 +143,8 @@ const total = (await getCollection("projects")).length;
       </main>
 
       <footer class="contact-foot">
-        <a class="more-link" href="/work">
-          <span class="more-label">See the work</span>
+        <a class="more-link" href="/work/">
+          <span class="more-label">See all work</span>
           <span class="vh">, </span>
           <span class="more-count">
             {total} {total === 1 ? "project" : "projects"}

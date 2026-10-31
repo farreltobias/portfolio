@@ -998,8 +998,12 @@ a {
   navigation: auto;
 }
 
+/* The masthead is captured on the bone ground, so when it is laid over a
+   page that had scrolled it out of view, it lands as a clean band rather
+   than lettering printed over the departing text. */
 .masthead {
   view-transition-name: masthead;
+  background: var(--paper);
 }
 
 .sheet-title {
@@ -1040,6 +1044,12 @@ a {
   animation: none;
 }
 
+/* The new title is not faded in: crisp ink glides over the old image, which
+   leaves at once, so the title never reads as a grey double mid-flight. */
+::view-transition-new(*.sheet-title) {
+  animation: none;
+}
+
 /* A title glides to its new place at the pace of the sheet being laid. */
 ::view-transition-group(*.sheet-title) {
   animation-duration: 340ms;
@@ -1067,11 +1077,30 @@ a {
   animation: sheet-lay 340ms cubic-bezier(0.2, 0, 0, 1) both;
 }
 
+/* The current-page hairline glides to its new word at the sheet's pace. */
+::view-transition-group(nav-rule) {
+  animation-duration: 340ms;
+  animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
 /* A rule or connector drawn once on arrival, from its start. */
 @keyframes draw-down {
   from {
     transform: scaleY(0);
   }
+}
+
+@keyframes draw-across {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+/* A measured figure's band is drawn in from the left once on arrival: the
+   measurement being recorded. A change of state, in ink, stays still. */
+.band.hatch-mag {
+  transform-origin: left;
+  animation: draw-across 560ms cubic-bezier(0.2, 0, 0, 1) 240ms both;
 }
 
 /* The signature: the key inks in from its base, one step at a time. */
@@ -1134,9 +1163,19 @@ a {
 }
 
 .nav a:hover::after,
-.nav a:focus-visible::after,
-.nav a[aria-current="page"]::after {
+.nav a:focus-visible::after {
   transform: scaleX(1);
+}
+
+/* The current page's hairline is a real element, so it can travel: on a
+   page change it slides from the old section's word to the new one. */
+.nav-rule {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--ink);
+  view-transition-name: nav-rule;
 }
 
 /* A sheet steps one notch up the ramp when pointed at: it is being picked up
@@ -1187,6 +1226,27 @@ a:focus-visible {
 
   ::view-transition-group(*.sheet-title) {
     animation-name: none;
+  }
+
+  ::view-transition-group(nav-rule) {
+    animation: none;
+  }
+
+  .band.hatch-mag {
+    animation: none;
+  }
+
+  /* With no glide, the old title image has nowhere to go: it is hidden
+     rather than squeezed into the new heading's box. */
+  ::view-transition-old(*.sheet-title) {
+    animation: none;
+    opacity: 0;
+  }
+
+  /* Nothing is laid down, not even what had no partner on the old page. */
+  ::view-transition-new(*.sheet-title):only-child,
+  ::view-transition-new(masthead):only-child {
+    animation: none;
   }
 
   .nav a::after {
@@ -1391,6 +1451,15 @@ a:focus-visible {
 
   .nav {
     gap: 18px;
+  }
+}
+
+/* A phone too narrow for the role label and the nav to read apart: the nav
+   takes its own row under the wordmark, so "Product Engineer" is never read
+   as a fourth link. */
+@media (max-width: 480px) {
+  .nav {
+    flex-basis: 100%;
   }
 
   .field {

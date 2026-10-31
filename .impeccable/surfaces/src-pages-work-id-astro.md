@@ -23,7 +23,7 @@ OWN-WORLD: Home's field and tokens; the record strip in Home's field language; n
 
 STORY: The visitor reads what was in the way, what was decided and what changed in three cells, then the reasoning in order, then moves to the next sheet or to contact.
 
-FIRST VIEWPORT: Masthead with Work current. Left zone label "Sheet 00N"; centre the project title in condensed caps with its description; right a spec of Sheet, Year, Role. Below, the three-cell record strip (Constraint with crossed hatch, Decision, Outcome in its honest state), then the narrative begins.
+FIRST VIEWPORT: Masthead with Work current. Left zone label "Sheet 00N"; centre the project title in condensed caps with its description; right a spec of Year and Role (the sheet number lives in the zone label and the title block). Below 1280px a Contents list follows the sheet key on cases with more than two sections. Below, the three-cell record strip (Constraint with crossed hatch, Decision, Outcome in its honest state), then the narrative begins.
 
 FORM: Zone Sheets record sheet (inherited). Seed key: n/a (task-directed extension, no roll).
 

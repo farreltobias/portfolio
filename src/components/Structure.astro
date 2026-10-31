@@ -24,8 +24,8 @@ const { structure, year } = Astro.props;
   </div>
   <ul class="st-branches">
     {
-      structure.branches.map((branch) => (
-        <li class="st-branch">
+      structure.branches.map((branch, i) => (
+        <li class="st-branch" style={`--i:${i}`}>
           <p class="st-title">{branch.title}</p>
           {branch.note && <p class="st-note">{branch.note}</p>}
           {branch.items && branch.items.length > 0 && (

@@ -44,6 +44,28 @@ const unmeasured = !measured && !data.outcome;
 /* Without a plan, the right column carries the sheet's contents instead of
    standing empty. */
 const sections = headings.filter((heading) => heading.depth === 2);
+
+/* On narrow screens a long case gets a way back up after every section: a
+   "Contents" link before each section heading after the first, and one at
+   the end. Added to the rendered notes at build time, so no script runs. */
+const hasContents = sections.length > 2;
+const contentsReturn =
+  '<p class="toc-return"><a href="#toc-narrow-title">Contents ↑</a></p>';
+const notesHtml =
+  hasContents && project.rendered?.html
+    ? (() => {
+        let first = true;
+        return (
+          project.rendered.html.replace(/<h2\b/g, (tag) => {
+            if (first) {
+              first = false;
+              return tag;
+            }
+            return contentsReturn + tag;
+          }) + contentsReturn
+        );
+      })()
+    : null;
 const hasPlan = Boolean(data.plan && data.plan.length > 0);
 const plates = data.plates ?? [];
 const projectName = data.title.split(" — ")[0];
@@ -91,10 +113,6 @@ const sourceHost = data.platesSource ? new URL(data.platesSource).host : null;
               <p class="prose page-sub">{data.description}</p>
             </div>
             <dl class="spec">
-              <div class="row">
-                <dt class="leg">Sheet</dt>
-                <dd class="v">{number} / {total}</dd>
-              </div>
               <div class="row">
                 <dt class="leg">Year</dt>
                 <dd class="v">{data.year}</dd>
@@ -188,6 +206,26 @@ const sourceHost = data.platesSource ? new URL(data.platesSource).host : null;
             )
           }
 
+          {
+            /* On narrow screens, where the right column is gone, the sheet's
+               sections are listed before the notes so a long case can be
+               crossed in one tap. */
+            hasContents && (
+              <nav class="toc toc-narrow" aria-labelledby="toc-narrow-title">
+                <h2 class="plan-h" id="toc-narrow-title">
+                  Contents
+                </h2>
+                <ol>
+                  {sections.map((section) => (
+                    <li>
+                      <a href={`#${section.slug}`}>{section.text}</a>
+                    </li>
+                  ))}
+                </ol>
+              </nav>
+            )
+          }
+
           <div class="narrative">
             {
               hasPlan && data.plan ? (
@@ -217,9 +255,15 @@ const sourceHost = data.platesSource ? new URL(data.platesSource).host : null;
                 )
               )
             }
-            <div class="notes">
-              <Content />
-            </div>
+            {
+              notesHtml ? (
+                <div class="notes" set:html={notesHtml} />
+              ) : (
+                <div class="notes">
+                  <Content />
+                </div>
+              )
+            }
           </div>
         </article>
 
@@ -227,7 +271,7 @@ const sourceHost = data.platesSource ? new URL(data.platesSource).host : null;
           <div class="sheet-nav-cell">
             {
               prev && (
-                <a class="sheet-nav-link" href={`/work/${prev.id}`}>
+                <a class="sheet-nav-link" href={`/work/${prev.id}/`}>
                   <span class="leg">Previous · Sheet {prevNumber}</span>
                   <span
                     class="sheet-nav-title sheet-title"
@@ -240,8 +284,8 @@ const sourceHost = data.platesSource ? new URL(data.platesSource).host : null;
             }
           </div>
           <div class="sheet-nav-cell sheet-nav-all">
-            <a class="more-link" href="/work">
-              <span class="more-label">All work</span>
+            <a class="more-link" href="/work/">
+              <span class="more-label">See all work</span>
               <span class="vh">, </span>
               <span class="more-count">{count} {count === 1 ? "project" : "projects"}</span>
             </a>
@@ -249,7 +293,7 @@ const sourceHost = data.platesSource ? new URL(data.platesSource).host : null;
           <div class="sheet-nav-cell sheet-nav-next">
             {
               next && (
-                <a class="sheet-nav-link" href={`/work/${next.id}`}>
+                <a class="sheet-nav-link" href={`/work/${next.id}/`}>
                   <span class="leg">Next · Sheet {nextNumber}</span>
                   <span
                     class="sheet-nav-title sheet-title"
@@ -272,7 +316,7 @@ const sourceHost = data.platesSource ? new URL(data.platesSource).host : null;
               Open to Product Engineering roles and contract work.
             </p>
           </div>
-          <a class="control" href="/contact">
+          <a class="control" href="/contact/">
             <span class="bar">Let's talk</span>
             <span class="chip hatch" aria-hidden="true"></span>
           </a>

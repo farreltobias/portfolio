@@ -23,7 +23,7 @@ OWN-WORLD: Home's field and tokens unchanged; one record sheet with Home's stack
 
 STORY: The visitor sees the address immediately, at a size that says "this is the way in", writes or copies it in one action, or takes another path from the strip below.
 
-FIRST VIEWPORT: Masthead with Contact marked current. Left column zone label "Contact"; centre "Let's talk." in condensed caps with the open-to line; right the Role/Status/Location spec. Below, squared to the field, the contact sheet spanning centre and right: corner "Sheet 001 / 001", the email address sized to fill the sheet's width on one line, then "Write an email" (black bar + chip) and a ruled "Copy address" control, then the strip LinkedIn · GitHub · WhatsApp.
+FIRST VIEWPORT: Masthead with Contact marked current. Left column zone label "Contact"; centre "Let's talk." in condensed caps with the open-to line; right the Role/Status/Location spec. Below, squared to the field, the contact sheet spanning centre and right: header "Direct" (no corner number since 2026-10-30: the title block carries Sheet: Contact), the email address sized to fill the sheet's width on one line, then "Write an email" (black bar + chip) and a ruled "Copy address" control, then the strip LinkedIn · GitHub · WhatsApp.
 
 FORM: Zone Sheets record sheet (inherited from Home); A "one contact sheet" with C "address as hero", chosen by the user. Seed key: n/a (user-directed extension, no roll).
 

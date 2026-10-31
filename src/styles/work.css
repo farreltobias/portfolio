@@ -763,6 +763,27 @@
   border-left: 1px solid var(--ink);
 }
 
+/* Built work draws itself in once on arrival: the trunk runs down to each
+   branch in turn, then the branch's tick reaches out to it. */
+.st-branch::after {
+  transform-origin: top;
+  animation: draw-down 200ms linear both;
+  animation-delay: calc(var(--i, 0) * 70ms + 200ms);
+}
+
+.st-branch::before {
+  transform-origin: left;
+  animation: draw-across 160ms cubic-bezier(0.2, 0, 0, 1) both;
+  animation-delay: calc(var(--i, 0) * 70ms + 340ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .st-branch::before,
+  .st-branch::after {
+    animation: none;
+  }
+}
+
 .st-branch:last-child::after {
   bottom: auto;
   height: var(--tick);
@@ -858,9 +879,43 @@
   }
 }
 
+/* The narrow-screen contents: the same list, after the sheet key, so a long
+   case can be crossed on a phone. Hidden where the right column holds it. */
+.toc-narrow,
+.notes > .toc-return {
+  display: none;
+}
+
+.notes > .toc-return {
+  margin-top: 28px;
+  font-family: Archivo, sans-serif;
+  font-weight: 700;
+  font-stretch: 82%;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 13px;
+}
+
+.toc-return a {
+  display: inline-block;
+  padding: 12px 0 10px;
+  border-bottom: 1px solid var(--ink);
+  color: var(--ink);
+}
+
 @media (max-width: 1279px) {
   .toc-col {
     display: none;
+  }
+
+  .notes > .toc-return {
+    display: block;
+  }
+
+  .toc-narrow {
+    display: block;
+    max-width: 420px;
+    margin-top: 40px;
   }
 
   .sheet-key {

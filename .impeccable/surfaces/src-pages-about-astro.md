@@ -21,7 +21,7 @@ THESIS: The drawing set's cover sheet, the one that explains how the other sheet
 
 OWN-WORLD: the Home field, hairlines, condensed caps, tracked labels, mono prose, the spec block, sheet bands with zone labels, ruled rows and the closing. No magenta: the page records no before → after figure.
 
-STORY: the visitor reads the thesis, then four working habits, each with its strongest evidence (a sheet or a measured result). Then three phases, newest first, beside a career spine (one bar per phase (the current phase filled and open at the top), ending on "See the work". They leave toward Work or Contact through an About-specific closing.
+STORY: the visitor reads the thesis, then four working habits, each with its strongest evidence (a sheet or a measured result). Then three phases, newest first, beside a career spine (one bar per phase, the current phase filled and open at the top), ending on "See all work". They leave toward Work or Contact through an About-specific closing.
 
 FIRST VIEWPORT: Masthead with About current; it already names the role. On the left, the zone label "Profile". In the centre, the About-only thesis in display caps, "I decide what gets built, then build it.", with a lede on how the work starts before the ticket and is judged by its effect. On the right, a spec block: In software since, Base, Languages, Open to.
 
