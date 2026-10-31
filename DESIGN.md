@@ -270,7 +270,7 @@ Square everywhere (`rounded.none`). Form comes from 1px rules: ink for structure
 - **Interaction:** the whole sheet is the link target; hover steps the ground to Lifted Bone; keyboard focus outlines the whole sheet in magenta.
 
 ### Index row
-The register's line: number · title, year, "Read case study" · Constraint and Decision · Outcome, on tracks `52px 236px 1fr 300px`. Same three fields and states as the record sheet. From 761 to 1279px it stays a register: number, then title over Constraint and Decision, then Outcome in its own 280px column, so outcomes still align down the list. It stacks to one column only on phones (760px and below). The title cell keeps a 24px gutter before the Constraint column, so a long title wraps a word earlier instead of meeting the next field.
+The register's line: number · title, year, "Read case study" · Constraint and Decision · Outcome, on tracks `52px 236px 1fr 300px`. Same three fields and states as the record sheet. From 761 to 1279px it stays a register: number, then title over Constraint and Decision, then Outcome in its own 280px column, so outcomes still align down the list. It stacks to one column only on phones (760px and below). Wherever Outcome has its own column, its label always holds two lines, so a long metric never drops its figure below the others. The title cell keeps a 24px gutter before the Constraint column, so a long title wraps a word earlier instead of meeting the next field.
 
 ### Spec block
 Label/value rows ruled in Soft Rule under an ink top rule (Role, Status, Location; Year, Role on case studies, whose sheet number lives in the zone label and the title block).

@@ -985,11 +985,17 @@
 .sheet-nav {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-  align-items: end;
+  /* The two sheet labels read as a pair, so they share a top line even when
+     one title wraps; the way back to the register sits on the baseline. */
+  align-items: start;
   gap: 32px;
   margin-top: 96px;
   padding-top: 20px;
   border-top: 1px solid var(--rule);
+}
+
+.sheet-nav-all {
+  align-self: end;
 }
 
 .sheet-nav-all .more-link {

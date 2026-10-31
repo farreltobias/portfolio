@@ -719,6 +719,15 @@ a {
   margin-top: 0;
 }
 
+/* Where Outcome has its own column, its label always holds two lines, so a
+   long metric ("Outcome — CS requests to engineering") never drops its
+   figure below the figures in the other rows. */
+@media (min-width: 761px) {
+  .index-row .fo > .k:first-child {
+    min-height: 2.5em;
+  }
+}
+
 .index-row .conflict + .k {
   margin-top: 13px;
 }
