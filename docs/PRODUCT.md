@@ -47,7 +47,7 @@ relevance quickly.
 ## Capabilities and Constraints
 
 - Stack: Astro, TypeScript, Markdown via Astro Content Collections, CSS.
-- Domain: `portfolio.farrel.tech`. `farrel.tech` is reserved for the later business site.
+- Domain: `farrel.tech` for now (decided 2026-10-31). The portfolio lives there until the Farrel.tech business site exists; it is then expected to move to `portfolio.farrel.tech`. The address is set once, as `site` in `astro.config.mjs`.
 - Languages: Portuguese and English both required. English is the default at the root; Portuguese is served under a
   `/pt` prefix.
 - Projects are statically generated from Markdown content collections.
