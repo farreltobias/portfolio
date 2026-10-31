@@ -229,6 +229,18 @@ const sourceHost = data.platesSource ? new URL(data.platesSource).host : null;
           }
 
           <div class="narrative">
+            {/* The notes come first in the source, so a screen reader or keyboard
+                user meets the problem before the drawing; the grid places the
+                drawing in the right column on wider screens. */}
+            {
+              notesHtml ? (
+                <div class="notes" set:html={notesHtml} />
+              ) : (
+                <div class="notes">
+                  <Content />
+                </div>
+              )
+            }
             {
               hasPlan && data.plan ? (
                 <aside class="plan-col">
@@ -293,15 +305,6 @@ const sourceHost = data.platesSource ? new URL(data.platesSource).host : null;
                     </nav>
                   </aside>
                 )
-              )
-            }
-            {
-              notesHtml ? (
-                <div class="notes" set:html={notesHtml} />
-              ) : (
-                <div class="notes">
-                  <Content />
-                </div>
               )
             }
           </div>

@@ -291,6 +291,7 @@
    stretches the notes' rhythm. */
 .notes {
   grid-column: 2;
+  grid-row: 1;
   margin-left: 7.356%;
 }
 
@@ -653,7 +654,7 @@
 /* The drawing and its compact contents stay in view together, as one
    stack, on screens tall enough to hold both; on a shorter screen they sit
    at the top of their column. */
-@media (min-width: 1280px) and (min-height: 900px) {
+@media (min-width: 961px) and (min-height: 900px) {
   .plan-col .plan-stack {
     position: sticky;
     top: 32px;
@@ -696,7 +697,7 @@
   }
 }
 
-@media (max-width: 1279px) {
+@media (max-width: 960px) {
   .toc-compact {
     display: none;
   }
@@ -712,7 +713,7 @@
    reader meets the problem first, then the plan drawn against it, instead
    of a full drawing before a word of the case. With a single section, it
    closes the notes. */
-@media (max-width: 1279px) {
+@media (max-width: 960px) {
   .notes {
     display: contents;
   }
@@ -919,7 +920,7 @@
 
 /* The contents list is short, so it can stay in view on a laptop screen
    that is too short for the plan. */
-@media (min-width: 1280px) and (min-height: 560px) {
+@media (min-width: 961px) and (min-height: 560px) {
   .toc-col .toc {
     position: sticky;
     top: 32px;
@@ -951,6 +952,13 @@
 }
 
 @media (max-width: 1279px) {
+  .sheet-key {
+    grid-column: 1;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 960px) {
   .toc-col {
     display: none;
   }
@@ -963,11 +971,6 @@
     display: block;
     max-width: 420px;
     margin-top: 40px;
-  }
-
-  .sheet-key {
-    grid-column: 1;
-    margin-left: 0;
   }
 }
 
@@ -1117,6 +1120,27 @@
   .plates-row:has(.is-mobile) .plate.is-mobile {
     grid-column: 2;
     grid-row: 1 / span 2;
+  }
+}
+
+/* Laptop and tablet landscape: the case keeps its two columns, the notes at
+   a reading measure and the drawing (or contents) in a narrower right track,
+   so the sheet doesn't read as a strip with empty field beside it. The
+   drawing joins the reading flow only at 960px and below. */
+@media (min-width: 961px) and (max-width: 1279px) {
+  .narrative {
+    grid-template-columns: minmax(0, 1fr) 300px;
+    column-gap: 48px;
+  }
+
+  .notes {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .plan-col {
+    grid-column: 2;
+    grid-row: 1;
   }
 }
 

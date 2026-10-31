@@ -1391,15 +1391,35 @@ a:focus-visible {
     margin-left: 0;
   }
 
+  /* Tablet and laptop: still a register. The title sits over Constraint
+     and Decision in the middle, and the Outcome keeps its own column on the
+     right, so outcomes line up down the list and rows read against each
+     other. Rows stack fully only on phones. */
   .index-row {
-    grid-template-columns: 52px minmax(0, 1fr);
+    grid-template-columns: 52px minmax(0, 1fr) minmax(0, 280px);
+    column-gap: 24px;
     row-gap: 18px;
   }
 
-  .index-row .fl,
-  .index-row .fl + div {
+  .index-row .no {
+    grid-row: 1 / span 2;
+  }
+
+  .index-row .th {
     grid-column: 2;
+    grid-row: 1;
     padding-right: 0;
+  }
+
+  .index-row .fl {
+    grid-column: 2;
+    grid-row: 2;
+    padding-right: 0;
+  }
+
+  .index-row .fo {
+    grid-column: 3;
+    grid-row: 1 / span 2;
   }
 
   .closing-head {
@@ -1461,15 +1481,6 @@ a:focus-visible {
 
   .nav {
     gap: 18px;
-  }
-}
-
-/* A phone too narrow for the role label and the nav to read apart: the nav
-   takes its own row under the wordmark, so "Product Engineer" is never read
-   as a fourth link. */
-@media (max-width: 480px) {
-  .nav {
-    flex-basis: 100%;
   }
 
   .field {
@@ -1542,9 +1553,12 @@ a:focus-visible {
     padding-top: 0;
   }
 
+  .index-row .no,
+  .index-row .th,
   .index-row .fl,
-  .index-row .fl + div {
+  .index-row .fo {
     grid-column: 1;
+    grid-row: auto;
   }
 
   .index-row .delta {
@@ -1558,6 +1572,15 @@ a:focus-visible {
 
   .closing h2 {
     font-size: 28px;
+  }
+}
+
+/* A phone too narrow for the role label and the nav to read apart: the nav
+   takes its own row under the wordmark, so "Product Engineer" is never read
+   as a fourth link. */
+@media (max-width: 480px) {
+  .nav {
+    flex-basis: 100%;
   }
 }
 
