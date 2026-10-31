@@ -4,12 +4,15 @@
    application looks like the site it opens. */
 interface Props {
   title: string;
+  /* The link-preview title, when it should differ from the page title
+     (Home leads with its positioning line, not the site name twice). */
+  previewTitle?: string;
   description?: string;
   /* Off for pages outside the set, such as the 404. */
   canonical?: boolean;
 }
 
-const { title, description, canonical = true } = Astro.props;
+const { title, previewTitle, description, canonical = true } = Astro.props;
 const url = new URL(Astro.url.pathname, Astro.site);
 const image = new URL("/og.png", Astro.site);
 ---
@@ -17,7 +20,7 @@ const image = new URL("/og.png", Astro.site);
 {canonical && <link rel="canonical" href={url} />}
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Farrel — Product Engineer" />
-<meta property="og:title" content={title} />
+<meta property="og:title" content={previewTitle ?? title} />
 {description && <meta property="og:description" content={description} />}
 {canonical && <meta property="og:url" content={url} />}
 <meta property="og:image" content={image} />
@@ -28,3 +31,11 @@ const image = new URL("/og.png", Astro.site);
   content="Farrel, Product Engineer: I build software that simplifies how products and operations run."
 />
 <meta name="twitter:card" content="summary_large_image" />
+
+<!-- The site icon: the wordmark's F, bone on an ink square (scripts/icons.cjs). -->
+<link rel="icon" href="/favicon.ico" sizes="32x32" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/manifest.webmanifest" />
+<meta name="apple-mobile-web-app-title" content="Farrel" />
+<meta name="theme-color" content="#f2f0ec" />

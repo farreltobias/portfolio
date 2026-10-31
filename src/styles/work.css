@@ -650,10 +650,61 @@
   }
 }
 
-@media (min-width: 1280px) and (min-height: 820px) {
-  .plan-col .plan {
+/* The drawing and its compact contents stay in view together, as one
+   stack, on screens tall enough to hold both; on a shorter screen they sit
+   at the top of their column. */
+@media (min-width: 1280px) and (min-height: 900px) {
+  .plan-col .plan-stack {
     position: sticky;
     top: 32px;
+  }
+}
+
+/* -------------------------------------------------------- compact contents --
+   On desktop, a case whose right column holds a drawing lists its sections
+   under it: quiet mono links, so the drawing stays the column's subject.
+   Narrower, the narrow contents after the sheet key takes over. */
+.toc-compact {
+  margin-top: 30px;
+  padding-top: 11px;
+  border-top: 1px solid var(--rule-soft);
+}
+
+.toc-compact ol {
+  list-style: none;
+  margin-top: 10px;
+  padding: 0;
+}
+
+.toc-compact a {
+  display: block;
+  padding: 5px 0;
+  font-family: "Plex Mono", monospace;
+  font-size: var(--t-field);
+  line-height: 1.35;
+  color: var(--ink-soft);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
+  transition: text-decoration-color 120ms linear;
+}
+
+@media (hover: hover) {
+  .toc-compact a:hover {
+    color: var(--ink);
+    text-decoration-color: currentColor;
+  }
+}
+
+@media (max-width: 1279px) {
+  .toc-compact {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toc-compact a {
+    transition: none;
   }
 }
 
@@ -819,12 +870,7 @@
   margin-top: 22px;
 }
 
-@media (min-width: 1280px) and (min-height: 820px) {
-  .plan-col .structure {
-    position: sticky;
-    top: 32px;
-  }
-}
+/* The structure sticks with its contents as the plan's stack does (above). */
 
 /* ---------------------------------------------------------------- contents --
    On a sheet without a plan, the right column lists its sections. Desktop

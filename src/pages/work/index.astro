@@ -12,15 +12,32 @@ import "../../styles/work.css";
    number, in the same three fields as the Home's index. */
 const projects = await allProjects();
 
-/* How many sheets carry a recorded before → after, of each kind, counted
-   from the data so the line stays true as projects change. */
-const figured = projects.filter(
-  (p) => p.data.outcomeFigure && p.data.outcomeMetric,
-);
-const measuredCount = figured.filter(
-  (p) => p.data.outcomeKind !== "change",
-).length;
-const changedCount = figured.length - measuredCount;
+/* Every sheet's outcome state, counted from the data so the line stays
+   true as projects change: a measured or changed before → after, a result
+   stated in words, or nothing recorded yet. Empty states are left out. */
+const stateOf = (p: (typeof projects)[number]) => {
+  const d = p.data;
+  if (d.outcomeFigure && d.outcomeMetric) {
+    return d.outcomeKind === "change" ? "changed" : "measured";
+  }
+  if (d.outcome) return "stated";
+  return d.stage === "in-progress" ? "in progress" : "not yet measured";
+};
+const order = [
+  "measured",
+  "changed",
+  "stated",
+  "in progress",
+  "not yet measured",
+];
+const tally = order
+  .map((state) => ({
+    state,
+    n: projects.filter((p) => stateOf(p) === state).length,
+  }))
+  .filter(({ n }) => n > 0)
+  /* Each item is kept whole, so a narrow line breaks only between items. */
+  .map(({ state, n }) => `${n} ${state}`.replaceAll(" ", "\u00a0"));
 ---
 
 <!doctype html>
@@ -64,7 +81,10 @@ const changedCount = figured.length - measuredCount;
               against another.
             </p>
             <p class="page-count">
-              {`${projects.length} ${projects.length === 1 ? "project" : "projects"} · ${measuredCount} measured · ${changedCount} changed`}
+              {[
+                `${projects.length} ${projects.length === 1 ? "project" : "projects"}`,
+                ...tally,
+              ].join(" · ")}
             </p>
           </div>
           <div class="page-aside">

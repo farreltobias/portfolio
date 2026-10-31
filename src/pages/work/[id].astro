@@ -232,11 +232,49 @@ const sourceHost = data.platesSource ? new URL(data.platesSource).host : null;
             {
               hasPlan && data.plan ? (
                 <aside class="plan-col">
-                  <Plan steps={data.plan} />
+                  <div class="plan-stack">
+                    <Plan steps={data.plan} />
+                  {hasContents && (
+                    <nav
+                      class="toc-compact"
+                      aria-labelledby="toc-compact-title"
+                    >
+                      <h2 class="plan-h" id="toc-compact-title">
+                        Contents
+                      </h2>
+                      <ol>
+                        {sections.map((section) => (
+                          <li>
+                            <a href={`#${section.slug}`}>{section.text}</a>
+                          </li>
+                        ))}
+                      </ol>
+                    </nav>
+                  )}
+                  </div>
                 </aside>
               ) : data.structure ? (
                 <aside class="plan-col">
-                  <Structure structure={data.structure} year={data.year} />
+                  <div class="plan-stack">
+                    <Structure structure={data.structure} year={data.year} />
+                  {hasContents && (
+                    <nav
+                      class="toc-compact"
+                      aria-labelledby="toc-compact-title"
+                    >
+                      <h2 class="plan-h" id="toc-compact-title">
+                        Contents
+                      </h2>
+                      <ol>
+                        {sections.map((section) => (
+                          <li>
+                            <a href={`#${section.slug}`}>{section.text}</a>
+                          </li>
+                        ))}
+                      </ol>
+                    </nav>
+                  )}
+                  </div>
                 </aside>
               ) : (
                 sections.length > 1 && (
