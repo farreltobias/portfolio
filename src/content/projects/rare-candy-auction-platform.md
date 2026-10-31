@@ -1,5 +1,5 @@
 ---
-title: Rare Candy — Auction Platform
+title: Rare Candy / Auction Platform
 description: Product and engineering work on a marketplace auction system with complex planning, state, timing, and transaction requirements.
 year: 2025
 role: Product Engineer

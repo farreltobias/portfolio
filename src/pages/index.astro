@@ -1,6 +1,7 @@
 ---
 import IndexRow from "../components/IndexRow.astro";
 import Masthead from "../components/Masthead.astro";
+import Meta from "../components/Meta.astro";
 import Notation from "../components/Notation.astro";
 import Outcome from "../components/Outcome.astro";
 import TitleBlock from "../components/TitleBlock.astro";
@@ -71,6 +72,7 @@ const reach = contactPaths.filter((path) => path.href);
       name="description"
       content="Farrel is a Product Engineer who builds software that simplifies how products and operations run, from problem definition to shipped solution."
     />
+    <Meta title="Farrel — Product Engineer" description="Farrel is a Product Engineer who builds software that simplifies how products and operations run, from problem definition to shipped solution." />
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>

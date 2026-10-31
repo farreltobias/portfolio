@@ -6,11 +6,30 @@
 interface Props {
   value: string;
   class?: string;
+  /* What a screen reader hears before the figure, e.g. "Measured", since the
+     colour that tells measured from changed is not spoken. */
+  kind?: string;
 }
 
-const { value, class: className } = Astro.props;
+const { value, class: className, kind } = Astro.props;
 const WORD_JOINER = "\u2060";
 const text = value.replace(/([-–—/])/g, `$1${WORD_JOINER}`);
+
+/* The figure in words: "~4/day → 1–2/week" is read as "before about 4 per
+   day, after 1 to 2 per week", not "tilde … rightwards arrow". */
+const [before, after] = value.split("→").map((part) =>
+  part
+    .trim()
+    .replace(/^~\s*/, "about ")
+    .replace(/(\d)\s*[–-]\s*(\d)/g, "$1 to $2")
+    .replace(/\//g, " per "),
+);
+const spoken = after
+  ? `${kind ? `${kind}: ` : ""}before ${before}, after ${after}`
+  : `${kind ? `${kind}: ` : ""}${value}`;
 ---
 
-<p class={className}>{text}</p>
+<p class={className}>
+  <span class="vh">{spoken}</span>
+  <span aria-hidden="true">{text}</span>
+</p>

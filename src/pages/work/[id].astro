@@ -2,6 +2,7 @@
 import { render } from "astro:content";
 import type { GetStaticPaths } from "astro";
 import Masthead from "../../components/Masthead.astro";
+import Meta from "../../components/Meta.astro";
 import Outcome from "../../components/Outcome.astro";
 import Plan from "../../components/Plan.astro";
 import Plate from "../../components/Plate.astro";
@@ -68,7 +69,7 @@ const notesHtml =
     : null;
 const hasPlan = Boolean(data.plan && data.plan.length > 0);
 const plates = data.plates ?? [];
-const projectName = data.title.split(" — ")[0];
+const projectName = data.title.split(" / ")[0];
 const sourceHost = data.platesSource ? new URL(data.platesSource).host : null;
 ---
 
@@ -93,6 +94,7 @@ const sourceHost = data.platesSource ? new URL(data.platesSource).host : null;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{data.title} — Farrel</title>
     <meta name="description" content={data.description} />
+    <Meta title={`${data.title} — Farrel`} description={data.description} />
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>

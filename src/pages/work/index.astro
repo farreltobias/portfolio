@@ -1,6 +1,7 @@
 ---
 import IndexRow from "../../components/IndexRow.astro";
 import Masthead from "../../components/Masthead.astro";
+import Meta from "../../components/Meta.astro";
 import Notation from "../../components/Notation.astro";
 import TitleBlock from "../../components/TitleBlock.astro";
 import { allProjects, sheetNo } from "../../lib/projects";
@@ -10,6 +11,16 @@ import "../../styles/work.css";
 /* The register: every project in the one ordering, each under its own sheet
    number, in the same three fields as the Home's index. */
 const projects = await allProjects();
+
+/* How many sheets carry a recorded before → after, of each kind, counted
+   from the data so the line stays true as projects change. */
+const figured = projects.filter(
+  (p) => p.data.outcomeFigure && p.data.outcomeMetric,
+);
+const measuredCount = figured.filter(
+  (p) => p.data.outcomeKind !== "change",
+).length;
+const changedCount = figured.length - measuredCount;
 ---
 
 <!doctype html>
@@ -36,6 +47,7 @@ const projects = await allProjects();
       name="description"
       content="Every project by Farrel, Product Engineer: the constraint, the decision and the outcome of each."
     />
+    <Meta title="Work — Farrel" description="Every project by Farrel, Product Engineer: the constraint, the decision and the outcome of each." />
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
@@ -52,7 +64,7 @@ const projects = await allProjects();
               against another.
             </p>
             <p class="page-count">
-              {`${projects.length} ${projects.length === 1 ? "project" : "projects"}`}
+              {`${projects.length} ${projects.length === 1 ? "project" : "projects"} · ${measuredCount} measured · ${changedCount} changed`}
             </p>
           </div>
           <div class="page-aside">

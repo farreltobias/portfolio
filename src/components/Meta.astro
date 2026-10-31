@@ -1,0 +1,30 @@
+---
+/* What a shared link shows: the canonical address and one fixed preview
+   card, drawn as a sheet of the set, so a link pasted into a message or an
+   application looks like the site it opens. */
+interface Props {
+  title: string;
+  description?: string;
+  /* Off for pages outside the set, such as the 404. */
+  canonical?: boolean;
+}
+
+const { title, description, canonical = true } = Astro.props;
+const url = new URL(Astro.url.pathname, Astro.site);
+const image = new URL("/og.png", Astro.site);
+---
+
+{canonical && <link rel="canonical" href={url} />}
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Farrel — Product Engineer" />
+<meta property="og:title" content={title} />
+{description && <meta property="og:description" content={description} />}
+{canonical && <meta property="og:url" content={url} />}
+<meta property="og:image" content={image} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta
+  property="og:image:alt"
+  content="Farrel, Product Engineer: I build software that simplifies how products and operations run."
+/>
+<meta name="twitter:card" content="summary_large_image" />

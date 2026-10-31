@@ -866,7 +866,8 @@
 }
 
 /* Section targets land clear of the top edge. */
-.notes > h2 {
+.notes > h2,
+.toc-narrow .plan-h {
   scroll-margin-top: 32px;
 }
 

@@ -1,5 +1,6 @@
 ---
 import Masthead from "../components/Masthead.astro";
+import Meta from "../components/Meta.astro";
 import TitleBlock from "../components/TitleBlock.astro";
 import { allProjects } from "../lib/projects";
 import "../styles/home.css";
@@ -31,6 +32,7 @@ const count = (await allProjects()).length;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Sheet not in this set — Farrel</title>
     <meta name="robots" content="noindex" />
+    <Meta title="Sheet not in this set — Farrel" canonical={false} />
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>

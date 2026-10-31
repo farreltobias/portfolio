@@ -1,5 +1,5 @@
 ---
-title: Ottoset Energy — Institutional Website
+title: Ottoset Energy / Institutional Website
 description: An institutional website for an energy services company, built and deployed to production as client work in 2022.
 year: 2022
 role: Full Stack Developer

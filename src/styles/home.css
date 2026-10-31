@@ -698,6 +698,13 @@ a {
   padding-right: 30px;
 }
 
+/* The title keeps a gutter before the Constraint column, so a long title
+   wraps a word earlier instead of running into the next field. */
+.index-row .th {
+  min-width: 0;
+  padding-right: 24px;
+}
+
 .index-row .fo {
   min-width: 0;
 }
@@ -1176,6 +1183,9 @@ a {
   height: 1px;
   background: var(--ink);
   view-transition-name: nav-rule;
+  /* Moves in masthead space: it glides between sections, and holds still
+     when the page moves within one, even from a scrolled page. */
+  view-transition-group: nearest;
 }
 
 /* A sheet steps one notch up the ramp when pointed at: it is being picked up
@@ -1559,6 +1569,13 @@ a:focus-visible {
     display: inline-block;
     padding: 17px 6px;
     margin: -17px -6px;
+  }
+
+  /* The hairline stays under the word, not under the padded target. */
+  .nav a::after,
+  .nav-rule {
+    inset-inline: 6px;
+    bottom: 13px;
   }
 
   /* The wordmark back to Home gets the same 44px target as the nav. */

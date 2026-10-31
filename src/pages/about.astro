@@ -1,5 +1,6 @@
 ---
 import Masthead from "../components/Masthead.astro";
+import Meta from "../components/Meta.astro";
 import TitleBlock from "../components/TitleBlock.astro";
 import { allProjects, displayTitle, sheetNumberOf } from "../lib/projects";
 import "../styles/home.css";
@@ -116,8 +117,9 @@ const work = sheet("ottoset");
     <title>About — Farrel</title>
     <meta
       name="description"
-      content="Farrel, Product Engineer: deciding what gets built, then building it. How he works, and how the work grew from 2020 to now."
+      content="Farrel, Product Engineer: deciding what gets built, then building it. How Farrel works, and how the work grew from 2020 to now."
     />
+    <Meta title="About — Farrel" description="Farrel, Product Engineer: deciding what gets built, then building it. How Farrel works, and how the work grew from 2020 to now." />
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>

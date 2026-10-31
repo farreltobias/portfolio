@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Masthead from "../components/Masthead.astro";
+import Meta from "../components/Meta.astro";
 import TitleBlock from "../components/TitleBlock.astro";
 import {
   contactLinkAttrs,
@@ -55,6 +56,7 @@ const total = (await getCollection("projects")).length;
       name="description"
       content="Reach Farrel, Product Engineer, by email, LinkedIn, GitHub or WhatsApp. Open to Product Engineering roles and contract work."
     />
+    <Meta title="Contact — Farrel" description="Reach Farrel, Product Engineer, by email, LinkedIn, GitHub or WhatsApp. Open to Product Engineering roles and contract work." />
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>

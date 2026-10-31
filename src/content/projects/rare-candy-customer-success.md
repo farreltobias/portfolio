@@ -1,5 +1,5 @@
 ---
-title: Rare Candy — Customer Success Platform
+title: Rare Candy / Customer Success Platform
 description: Internal tooling that reduced repetitive engineering support work and gave the Customer Success team more autonomy.
 year: 2026
 role: Product Engineer

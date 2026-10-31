@@ -128,8 +128,10 @@
   grid-column: 3;
 }
 
+/* The year labels sit on the left of the axis, like a scale's numbers, so
+   they never read as a second date beside the phase's own years. */
 .phase-spine {
-  --axis: 16px;
+  --axis: 52px;
   position: absolute;
   inset: 0 auto 0 0;
   width: 72px;
@@ -195,7 +197,7 @@
 
 .spine-year {
   position: absolute;
-  left: calc(100% + 8px);
+  right: calc(100% + 6px);
   top: 0;
   transform: translateY(-50%);
   font-family: "Plex Mono", monospace;

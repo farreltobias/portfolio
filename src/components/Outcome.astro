@@ -28,7 +28,11 @@ const label = measured ? `Outcome\u00a0— ${outcomeMetric}` : "Outcome";
 {
   measured && outcomeFigure ? (
     <Fragment>
-      <Figure class={change ? "delta is-change" : "delta"} value={outcomeFigure} />
+      <Figure
+        class={change ? "delta is-change" : "delta"}
+        value={outcomeFigure}
+        kind={change ? "Recorded change" : "Measured"}
+      />
       <div class={change ? "band hatch-ink" : "band hatch-mag"} aria-hidden="true" />
     </Fragment>
   ) : outcome ? (
