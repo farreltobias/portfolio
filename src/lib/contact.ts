@@ -1,23 +1,50 @@
-import {
-  GithubLogo,
-  InstagramLogo,
-  LinkedinLogo,
-} from '@phosphor-icons/react/dist/ssr'
+/* Direct contact paths, shown in the Home's closing band beside "Let's talk".
+   Fill in the real values: a path with an empty `href` is not rendered, so
+   nothing appears until it is filled, and nothing is ever a placeholder.
 
-export const contacts = [
+   href     the link itself: "mailto:…", "https://www.linkedin.com/in/…",
+            "https://github.com/…", "https://wa.me/<number, digits only>"
+   display  what the page shows: the address or handle, e.g. "in/farrel" */
+export interface ContactPath {
+  label: string;
+  href: string;
+  display: string;
+}
+
+export const contactPaths: ContactPath[] = [
   {
-    title: 'github',
-    href: 'https://github.com/farreltobias/',
-    Icon: GithubLogo,
+    label: "Email",
+    href: "mailto:garcia.farrel@gmail.com",
+    display: "garcia.farrel@gmail.com",
   },
   {
-    title: 'linkedIn',
-    href: 'https://linkedIn.com/in/farreltobias/',
-    Icon: LinkedinLogo,
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/farreltobias",
+    display: "in/farrel",
   },
   {
-    title: 'instagram',
-    href: 'https://www.instagram.com/farrel.tobias/',
-    Icon: InstagramLogo,
+    label: "GitHub",
+    href: "https://github.com/farreltobias",
+    display: "farreltobias",
   },
-] as const
+  {
+    label: "WhatsApp",
+    href: "https://wa.me/5511964130624",
+    display: "+55 11 96413-0624",
+  },
+];
+
+/* Attributes for a contact link: profiles and chat open in a new tab and are
+   marked as Farrel's own; an email address opens the mail app in place. A
+   link that opens a new tab says so to assistive technology (see NEW_TAB). */
+export function opensNewTab(href: string) {
+  return href.startsWith("http");
+}
+
+export function contactLinkAttrs(href: string) {
+  return opensNewTab(href) ? { target: "_blank", rel: "me noopener" } : {};
+}
+
+/* Spoken after a link that opens a new tab, so a screen-reader user is not
+   moved to another window without warning. */
+export const NEW_TAB = " (opens in a new tab)";

@@ -1,0 +1,333 @@
+---
+import Masthead from "../components/Masthead.astro";
+import Meta from "../components/Meta.astro";
+import TitleBlock from "../components/TitleBlock.astro";
+import { allProjects, displayTitle, sheetNumberOf } from "../lib/projects";
+import "../styles/home.css";
+import "../styles/work.css";
+import "../styles/about.css";
+
+/* The cover sheet of the set: who Farrel is, how the work is done, and how it
+   grew. Each habit points at the sheets that show it, so the page frames the
+   evidence instead of retelling it. */
+const projects = await allProjects();
+const sheet = (id: string) => {
+  const project = projects.find((entry) => entry.id === id);
+  return project
+    ? {
+        id,
+        number: sheetNumberOf(projects, id),
+        title: displayTitle(project.data.title),
+      }
+    : null;
+};
+
+const habits = [
+  {
+    title: "Fix the pattern, not the instance",
+    text: "When the same request keeps arriving, the missing piece is usually a tool. I solve the category, not the next case.",
+    sheet: sheet("rare-candy-customer-success"),
+  },
+  {
+    title: "Ship the smallest change to the workflow",
+    text: "The first version removes the manual step people are stuck with, and earns the next one.",
+    sheet: sheet("pro-electric"),
+  },
+  {
+    title: "Make the system hold the rules",
+    text: "If people are tracking state or refereeing by hand, the product should do it, and say no when a move breaks the rules.",
+    sheet: sheet("howdyship"),
+  },
+  {
+    title: "Judge work by what it changes",
+    text: "Architecture, performance and refactors earn their place by their effect on the business or the operation. I report a result only when it was measured.",
+    evidence: {
+      where: "At ZRP",
+      what: "API response times from several seconds to around 500 ms",
+    },
+  },
+];
+
+/* The career down a spine, newest at the top. Each phase's bar spans its
+   row, and the year ticks sit where each year begins within the phase, so a
+   bar reads its own years without the rows having to be drawn to one scale.
+   Months count from the start of the year, so a tick sits where it fell. */
+const at = (year: number, month: number) => year + (month - 1) / 12;
+const now = new Date();
+const today = at(now.getFullYear(), now.getMonth() + 1);
+
+const spans = [
+  {
+    from: at(2025, 3),
+    to: today,
+    years: "2025 – now",
+    title: "Product Engineering",
+  },
+  {
+    from: at(2022, 9),
+    to: at(2025, 3),
+    years: "2022 – 2025",
+    title: "Client platforms, backend depth",
+  },
+  {
+    from: at(2020, 11),
+    to: at(2022, 7),
+    years: "2020 – 2022",
+    title: "Junior to technical lead",
+  },
+];
+
+const phases = spans.map((phase) => {
+  const span = phase.to - phase.from;
+  const ticks: { year: number; at: string }[] = [];
+  for (let year = Math.floor(phase.to); year > phase.from; year--) {
+    if (year < phase.to) {
+      ticks.push({
+        year,
+        at: `${(((phase.to - year) / span) * 100).toFixed(2)}%`,
+      });
+    }
+  }
+  return { ...phase, ticks };
+});
+
+const [current, platforms, arbo] = phases;
+const work = sheet("ottoset");
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link
+      rel="preload"
+      href="/fonts/archivo-var-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/plex-mono-400-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>About — Farrel</title>
+    <meta
+      name="description"
+      content="Farrel, Product Engineer: deciding what gets built, then building it. How Farrel works, and how the work grew from 2020 to now."
+    />
+    <Meta title="About — Farrel" description="Farrel, Product Engineer: deciding what gets built, then building it. How Farrel works, and how the work grew from 2020 to now." />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="sheet">
+      <Masthead current="about" />
+
+      <main id="main">
+        <header class="page-head">
+          <p class="leg zone">Profile</p>
+          <div class="page-intro">
+            <h1 class="disp page-title">
+              I decide what gets built, then build it.
+            </h1>
+            <p class="prose page-sub">
+              Most engineering work starts from a ticket. Mine starts earlier:
+              working out what the problem actually is, what should change and
+              what can wait. Then I make the technical decisions and ship it,
+              and I judge the result by what it changes in the operation, not
+              by how much was built.
+            </p>
+          </div>
+          <dl class="spec">
+            <div class="row">
+              <dt class="leg">In software since</dt>
+              <dd class="v">2020</dd>
+            </div>
+            <div class="row">
+              <dt class="leg">Base</dt>
+              <dd class="v">Brazil — remote</dd>
+            </div>
+            <div class="row">
+              <dt class="leg">Languages</dt>
+              <dd class="v">English, Portuguese</dd>
+            </div>
+            <div class="row">
+              <dt class="leg">Open to</dt>
+              <dd class="v">Roles, contract work</dd>
+            </div>
+          </dl>
+        </header>
+
+        <!-- ------------------------------------------------------ approach -- -->
+        <section class="sheet-band" aria-labelledby="approach-title">
+          <div class="sheet-band-grid">
+            <p class="leg">Approach</p>
+            <div class="sheet-band-body">
+              <h2 class="sheet-band-title" id="approach-title">How I work</h2>
+              <p class="sheet-band-note">
+                Four habits, each with the work that shows it.
+              </p>
+              <ol class="habits">
+                {
+                  habits.map((habit) => (
+                    <li class="habit">
+                      <h3 class="habit-title">{habit.title}</h3>
+                      <p class="habit-text">{habit.text}</p>
+                      <div class="habit-ref">
+                        {habit.sheet && (
+                          <a class="ref-link" href={`/work/${habit.sheet.id}/`}>
+                            <span class="ref-no">Sheet {habit.sheet.number}</span>
+                            <span class="vh">: </span>
+                            <span class="ref-title">{habit.sheet.title}</span>
+                          </a>
+                        )}
+                        {habit.evidence && (
+                          <p class="ref-note">
+                            <span class="ref-no">{habit.evidence.where}</span>
+                            <span class="vh">: </span>
+                            <span class="ref-title">{habit.evidence.what}</span>
+                          </p>
+                        )}
+                      </div>
+                    </li>
+                  ))
+                }
+              </ol>
+            </div>
+          </div>
+        </section>
+
+        <!-- --------------------------------------------------- progression -- -->
+        <section class="sheet-band" aria-labelledby="progression-title">
+          <div class="sheet-band-grid">
+            <p class="leg">Progression</p>
+            <div class="sheet-band-body">
+              <h2 class="sheet-band-title" id="progression-title">
+                How the work grew
+              </h2>
+              <p class="sheet-band-note">
+                From implementation toward owning the product decisions.
+              </p>
+
+
+              <p class="spine-key">
+                Newest at the top. Each bar spans one phase, with a tick where
+                each year begins. Filled: Product Engineering, still under way.
+              </p>
+
+              <div class="phases">
+                <article
+                  class="phase is-current"
+                >
+                  <span class="phase-spine" aria-hidden="true">
+                    <span class="spine-bar">
+                      {current.ticks.map((tick) => (
+                      <span class="spine-tick" style={`--at:${tick.at}`}>
+                        <span class="spine-year">{tick.year}</span>
+                      </span>
+                    ))}
+                    </span>
+                  </span>
+                  <p class="phase-years">{current.years}</p>
+                  <div class="phase-body">
+                    <h3 class="phase-title">{current.title}</h3>
+                    <p>
+                      The shift was from building what was asked to deciding
+                      what should be built, then building it. Today that happens
+                      in two places. At Rare Candy, where I work through Howdy, I
+                      do it inside a team. Through Farrel.tech, I do it directly
+                      with clients such as Pro Electric, and on my own products,
+                      such as <a href="/work/ddd-toolkit/">DDD Toolkit</a>.
+                    </p>
+                  </div>
+                </article>
+
+                <article
+                  class="phase"
+                >
+                  <span class="phase-spine" aria-hidden="true">
+                    <span class="spine-bar">
+                      {platforms.ticks.map((tick) => (
+                      <span class="spine-tick" style={`--at:${tick.at}`}>
+                        <span class="spine-year">{tick.year}</span>
+                      </span>
+                    ))}
+                    </span>
+                  </span>
+                  <p class="phase-years">{platforms.years}</p>
+                  <div class="phase-body">
+                    <h3 class="phase-title">{platforms.title}</h3>
+                    <p>
+                      Client and product work at Let's, DoroTech and ZRP, and a
+                      stretch working independently. Over those years the work
+                      moved from delivering sites toward the backend underneath
+                      them: the part that has to stay fast and correct in
+                      production.
+                      {
+                        work && (
+                          <>
+                            {" "}
+                            <a href={`/work/${work.id}/`}>{work.title}</a> (Sheet{" "}
+                            {work.number}) is from this period.
+                          </>
+                        )
+                      }
+                    </p>
+                  </div>
+                </article>
+
+                <article
+                  class="phase"
+                >
+                  <span class="phase-spine" aria-hidden="true">
+                    <span class="spine-bar">
+                      {arbo.ticks.map((tick) => (
+                      <span class="spine-tick" style={`--at:${tick.at}`}>
+                        <span class="spine-year">{tick.year}</span>
+                      </span>
+                    ))}
+                    </span>
+                  </span>
+                  <p class="phase-years">{arbo.years}</p>
+                  <div class="phase-body">
+                    <h3 class="phase-title">{arbo.title}</h3>
+                    <p>
+                      I started at Arbo as a junior full stack engineer on a
+                      real estate platform, and moved into the technical lead
+                      role after building the automation that distributed
+                      property listings to marketplaces.
+                    </p>
+                  </div>
+                </article>
+              </div>
+
+              <a class="more-link" href="/work/">
+                <span class="more-label">See all work</span>
+                <span class="vh">, </span>
+                <span class="more-count">
+                  {`${projects.length} ${projects.length === 1 ? "project" : "projects"}`}
+                </span>
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="closing">
+        <div class="closing-head">
+          <div>
+            <h2>Have a problem that needs an owner, not just a builder?</h2>
+          </div>
+          <a class="control" href="/contact/">
+            <span class="bar">Let's talk</span>
+            <span class="chip hatch" aria-hidden="true"></span>
+          </a>
+        </div>
+        <TitleBlock sheet="About" />
+      </footer>
+    </div>
+  </body>
+</html>

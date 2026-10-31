@@ -1,0 +1,44 @@
+---
+/* The sheet's masthead, shared by every page in the world. The current page is
+   marked for assistive technology and keeps its hairline drawn; away from
+   Home, the wordmark leads back to it. */
+interface Props {
+  /* "none" for a sheet outside the set, such as the 404 page. */
+  current?: "home" | "work" | "about" | "contact" | "none";
+}
+
+const { current = "home" } = Astro.props;
+const links = [
+  { id: "work", href: "/work/", label: "Work" },
+  { id: "about", href: "/about/", label: "About" },
+  { id: "contact", href: "/contact/", label: "Contact" },
+] as const;
+---
+
+<header class="masthead">
+  <div>
+    {
+      current === "home" ? (
+        <p class="mark">Farrel</p>
+      ) : (
+        <a class="mark" href="/">
+          Farrel
+        </a>
+      )
+    }
+    <p class="leg mark-sub">Product Engineer</p>
+  </div>
+  <nav class="nav leg" aria-label="Primary">
+    {
+      links.map((link) => (
+        <a
+          href={link.href}
+          aria-current={current === link.id ? "page" : undefined}
+        >
+          {link.label}
+          {current === link.id && <span class="nav-rule" aria-hidden="true" />}
+        </a>
+      ))
+    }
+  </nav>
+</header>

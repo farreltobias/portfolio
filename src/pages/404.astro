@@ -1,0 +1,74 @@
+---
+import Masthead from "../components/Masthead.astro";
+import Meta from "../components/Meta.astro";
+import TitleBlock from "../components/TitleBlock.astro";
+import { allProjects } from "../lib/projects";
+import "../styles/home.css";
+import "../styles/work.css";
+
+/* A link that points outside the set: say so plainly, and hand the visitor
+   back to the register and the way to reach Farrel. */
+const count = (await allProjects()).length;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link
+      rel="preload"
+      href="/fonts/archivo-var-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/plex-mono-400-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Not found — Farrel</title>
+    <meta name="robots" content="noindex" />
+    <Meta title="Not found — Farrel" canonical={false} />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="sheet">
+      <Masthead current="none" />
+
+      <main id="main">
+        <section class="page-head" aria-labelledby="missing-title">
+          <p class="leg zone">Not found</p>
+          <div class="page-intro">
+            <h1 class="disp page-title" id="missing-title">
+              Sheet not in this set.
+            </h1>
+            <p class="prose page-sub">
+              The page you followed isn't part of this portfolio, or it has
+              moved.
+            </p>
+            <div class="missing-ways">
+              <a class="more-link" href="/work/">
+                <span class="more-label">See all work</span>
+                <span class="vh">, </span>
+                <span class="more-count">
+                  {`${count} ${count === 1 ? "project" : "projects"}`}
+                </span>
+              </a>
+              <a class="more-link" href="/contact/">
+                <span class="more-label">Contact</span>
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="missing-foot">
+        <TitleBlock sheet="404" />
+      </footer>
+    </div>
+  </body>
+</html>

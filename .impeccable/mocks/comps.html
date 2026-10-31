@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Zone Sheets — comps</title>
+<style>
+@font-face{font-family:Archivo;font-weight:400 700;font-stretch:62% 125%;font-display:block;src:url(/fonts/archivo-var-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:Archivo;font-weight:400 700;font-stretch:62% 125%;font-display:block;src:url(/fonts/archivo-var-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Plex Mono';font-weight:400;font-display:block;src:url(/fonts/plex-mono-400-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Plex Mono';font-weight:400;font-display:block;src:url(/fonts/plex-mono-400-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Plex Mono';font-weight:600;font-display:block;src:url(/fonts/plex-mono-600-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Plex Mono';font-weight:600;font-display:block;src:url(/fonts/plex-mono-600-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+
+:root{
+  --paper:#F2F0EC; --ink:#15161A; --mag:#E6007E;
+  --z0:#15161A; --z1:#22242A; --z2:#32353C; --z3:#44474F; --z4:#585C64;
+  --z5:#6E727A; --z6:#868A92; --z7:#9FA3AA; --z8:#BABDC2; --z9:#D6D8DA; --z10:#F2F0EC;
+  --g0:#e8e6e1;
+  --g1:#dad8d4;
+  --g2:#c8c7c3;
+  --g3:#b5b4b1;
+  --g4:#a09f9e;
+  --g5:#8b8a89;
+  --g6:#757474;
+  --g7:#5d5d5e;
+  --g8:#464648;
+  --g9:#2e2e31;
+  --g10:#15161a;
+  --rule:#15161A; --rule-soft:#C6C4BF;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#7a7a78;font-family:Archivo,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.frame{position:relative;width:1536px;height:864px;background:var(--paper);color:var(--ink);overflow:hidden}
+
+/* ---- type voices ---- */
+.disp{font-family:Archivo;font-weight:700;font-stretch:70%;text-transform:uppercase;line-height:.92;letter-spacing:-0.005em}
+.leg{font-family:Archivo;font-weight:600;font-stretch:100%;text-transform:uppercase;letter-spacing:.16em;font-size:10px;line-height:1}
+.qty{font-family:'Plex Mono';font-weight:400;font-variant-numeric:tabular-nums;letter-spacing:-0.01em}
+.qty-b{font-family:'Plex Mono';font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-0.01em}
+.body{font-family:'Plex Mono';font-weight:400;font-size:14px;line-height:1.62;letter-spacing:-0.005em}
+
+/* ---- notation ---- */
+.hatch{background-image:repeating-linear-gradient(45deg,var(--ink) 0 1px,transparent 1px var(--g,6px))}
+.hatch-m{background-image:repeating-linear-gradient(45deg,var(--mag) 0 1.5px,transparent 1.5px var(--g,6px))}
+.hatch-x{background-image:repeating-linear-gradient(45deg,var(--ink) 0 1px,transparent 1px 7px),repeating-linear-gradient(-45deg,var(--ink) 0 1px,transparent 1px 7px)}
+.mask-dot{background-image:radial-gradient(var(--ink) .9px,transparent 1px);background-size:5px 5px}
+.hr{height:1px;background:var(--rule)}
+.hr-s{height:1px;background:var(--rule-soft)}
+.vr{width:1px;background:var(--rule)}
+
+.abs{position:absolute}
+a{color:inherit;text-decoration:none}
+
+/* ================= FRAME A — RAMP LEFT ================= */
+#A .top{position:absolute;left:48px;right:48px;top:40px;display:flex;align-items:flex-end;justify-content:space-between}
+#A .mark{font-family:Archivo;font-weight:700;font-stretch:70%;text-transform:uppercase;font-size:28px;letter-spacing:.02em;line-height:1}
+#A .marksub{margin-top:7px}
+#A nav{display:flex;gap:30px}
+#A .topline{position:absolute;left:48px;right:48px;top:96px;height:1px;background:var(--rule)}
+
+#A .gauge{position:absolute;left:48px;top:140px;width:161px}
+#A .gauge .row{display:flex;align-items:center;gap:9px;height:44px}
+#A .gauge .row .n{font-family:'Plex Mono';font-size:10px;width:26px;text-align:right;color:#8d8f93}
+#A .gauge .row.on .n{color:var(--ink)}
+#A .gauge .row .c{width:76px;height:44px;border:1px solid var(--rule-soft)}
+#A .gauge .row .c.off{border-color:var(--rule-soft)}
+#A .gauge .cap{margin-top:14px;width:161px;border-top:1px solid var(--rule);padding-top:9px}
+#A .gauge .cap .ch{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+#A .gauge .cap .lv{font-family:'Plex Mono';font-weight:600;font-size:12px}
+#A .gauge .cap p{font-family:'Plex Mono';font-size:10px;line-height:1.5;color:#55585e;margin-top:7px}
+
+#A .mid{position:absolute;left:268px;top:140px;width:740px}
+#A h1{font-size:82px;margin-top:32px}
+#A .sub{margin-top:30px;width:600px;color:#2c2e34}
+#A .cta{position:absolute;left:268px;top:612px;display:flex;align-items:stretch;height:58px}
+#A .cta .bar{background:var(--ink);color:var(--paper);display:flex;align-items:center;padding:0 30px;font-family:Archivo;font-weight:700;font-stretch:82%;text-transform:uppercase;letter-spacing:.1em;font-size:14px}
+#A .cta .chip{--g:5px;width:84px;border:1px solid var(--ink);border-left:0}
+
+#A .keys{position:absolute;left:268px;top:730px;width:470px;border-top:1px solid var(--rule);padding-top:11px}
+#A .keys .kr{display:flex;gap:18px;margin-top:11px}
+#A .keys .k{flex:1}
+#A .keys .sw{height:28px;border:1px solid var(--rule-soft)}
+#A .keys .kl{font-family:'Plex Mono';font-size:9px;color:#55585e;margin-top:6px;line-height:1.4}
+#A .spec{position:absolute;right:48px;top:140px;width:286px;border-top:1px solid var(--rule)}
+#A .spec .row{display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:9px 0;border-bottom:1px solid var(--rule-soft)}
+#A .spec .row .v{font-family:'Plex Mono';font-size:12.5px}
+
+#A .rec{position:absolute;left:1014px;top:352px;width:474px;background:var(--paper);border:1px solid var(--rule);transform:rotate(-0.55deg);box-shadow:0 0 0 1px rgba(21,22,26,.07),14px 16px 0 -1px rgba(21,22,26,.055)}
+#A .rec .rh{display:flex;justify-content:space-between;align-items:center;padding:9px 14px;border-bottom:1px solid var(--rule)}
+#A .rec .rt{font-family:Archivo;font-weight:700;font-stretch:72%;text-transform:uppercase;font-size:27px;padding:13px 14px 11px;line-height:1}
+#A .rec .f{padding:10px 14px;border-top:1px solid var(--rule-soft)}
+#A .rec .f .k{color:#55585e;margin-bottom:6px}
+#A .rec .f .v{font-family:'Plex Mono';font-size:13px;line-height:1.45}
+#A .rec .conf{display:flex;gap:11px;align-items:flex-start}
+#A .rec .confmark{width:26px;height:26px;border:1px solid var(--ink);flex:none;margin-top:1px}
+#A .rec .out{padding:13px 14px 15px;border-top:1px solid var(--rule)}
+#A .rec .delta{font-family:'Plex Mono';font-weight:600;font-size:40px;color:var(--mag);line-height:1;letter-spacing:-.03em;margin-top:9px}
+#A .rec .band{--g:4px;height:13px;margin-top:11px}
+#A .rec .unmeasured{font-family:'Plex Mono';font-size:13px;color:#55585e;margin-top:9px}
+#A .rec .unmeasured-band{height:13px;margin-top:11px;opacity:.5}
+#A .rec .foot{display:flex;justify-content:space-between;padding:8px 14px;border-top:1px solid var(--rule-soft);color:#55585e}
+
+/* ================= FRAME B — TITLE BLOCK SHEET ================= */
+#B .sht{position:absolute;inset:26px;border:1px solid var(--ink)}
+#B .sht:before{content:"";position:absolute;inset:7px;border:1px solid var(--rule-soft)}
+#B .tick{position:absolute;background:var(--ink)}
+#B .mark{position:absolute;left:60px;top:58px;font-family:Archivo;font-weight:700;font-stretch:70%;text-transform:uppercase;font-size:26px;line-height:1;letter-spacing:.02em}
+#B nav{position:absolute;right:62px;top:62px;display:flex;gap:28px}
+#B .idx{position:absolute;left:60px;top:150px;width:150px;border-top:1px solid var(--rule)}
+#B .idx .e{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--rule-soft);align-items:baseline}
+#B .idx .e .no{font-family:'Plex Mono';font-size:11px;color:#55585e}
+#B .idx .e.on .no{color:var(--mag)}
+#B h1{position:absolute;left:252px;top:144px;width:800px;font-size:80px}
+#B .sub{position:absolute;left:254px;top:470px;width:560px;color:#2c2e34}
+#B .cta{position:absolute;left:254px;top:556px;display:flex;height:56px}
+#B .cta .bar{background:var(--ink);color:var(--paper);display:flex;align-items:center;padding:0 28px;font-family:Archivo;font-weight:700;font-stretch:82%;text-transform:uppercase;letter-spacing:.1em;font-size:14px}
+#B .cta .chip{--g:5px;width:78px;border:1px solid var(--ink);border-left:0}
+#B .draw{position:absolute;left:1092px;top:150px;width:382px}
+#B .draw .k{color:#55585e;padding-bottom:8px;border-bottom:1px solid var(--rule)}
+#B .draw .rt{font-family:Archivo;font-weight:700;font-stretch:72%;text-transform:uppercase;font-size:30px;line-height:1;padding-top:13px}
+#B .draw .f{padding:11px 0;border-top:1px solid var(--rule-soft)}
+#B .draw .f .kk{color:#55585e;margin-bottom:6px}
+#B .draw .f .v{font-family:'Plex Mono';font-size:13px;line-height:1.45}
+#B .draw .conf{display:flex;gap:10px}
+#B .draw .confmark{width:24px;height:24px;border:1px solid var(--ink);flex:none}
+#B .draw .delta{font-family:'Plex Mono';font-weight:600;font-size:38px;color:var(--mag);line-height:1;letter-spacing:-.03em;margin-top:8px}
+#B .draw .band{--g:4px;height:12px;margin-top:10px}
+#B .bramp{position:absolute;left:60px;bottom:150px;display:flex;align-items:flex-end}
+#B .bramp .s{width:46px;height:26px}
+#B .bramp .lab{font-family:'Plex Mono';font-size:9px;color:#55585e;text-align:center;width:46px;padding-top:5px}
+#B .tb{position:absolute;right:34px;bottom:34px;width:620px;border:1px solid var(--ink);border-right:0;border-bottom:0;display:grid;grid-template-columns:repeat(4,1fr)}
+#B .tb .c{border-right:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:9px 11px 11px}
+#B .tb .c .kk{color:#55585e;font-size:9px}
+#B .tb .c .v{font-family:'Plex Mono';font-size:13px;margin-top:7px}
+#B .tb .wide{grid-column:span 4;border-bottom:1px solid var(--ink)}
+#B .tb .wide .v{font-family:Archivo;font-weight:700;font-stretch:76%;text-transform:uppercase;font-size:20px;letter-spacing:.01em}
+
+/* ================= FRAME C — SPLIT REGISTER ================= */
+#C .split{position:absolute;left:470px;top:0;bottom:0;width:1px;background:var(--rule)}
+#C .L{position:absolute;left:52px;top:46px;width:364px}
+#C .mark{font-family:Archivo;font-weight:700;font-stretch:70%;text-transform:uppercase;font-size:27px;line-height:1;letter-spacing:.02em}
+#C .blk{margin-top:30px;border-top:1px solid var(--rule);padding-top:11px}
+#C .blk .row{display:flex;justify-content:space-between;align-items:baseline;padding:7px 0;border-bottom:1px solid var(--rule-soft)}
+#C .blk .row .v{font-family:'Plex Mono';font-size:12px}
+#C .cramp{display:flex;margin-top:12px}
+#C .cramp .s{width:33px;height:34px}
+#C .cramp .l{font-family:'Plex Mono';font-size:9px;color:#55585e;width:33px;text-align:center;padding-top:5px}
+#C .keys{display:flex;gap:16px;margin-top:14px}
+#C .keys .k{flex:1}
+#C .keys .sw{height:30px;border:1px solid var(--rule-soft)}
+#C .keys .kl{font-family:'Plex Mono';font-size:9px;color:#55585e;margin-top:6px;line-height:1.4}
+#C .R{position:absolute;left:522px;right:52px;top:46px}
+#C nav{display:flex;gap:28px;justify-content:flex-end}
+#C h1{font-size:72px;margin-top:40px;width:890px}
+#C .sub{margin-top:26px;width:620px;color:#2c2e34}
+#C .cta{margin-top:30px;display:flex;height:54px;width:fit-content}
+#C .cta .bar{background:var(--ink);color:var(--paper);display:flex;align-items:center;padding:0 28px;font-family:Archivo;font-weight:700;font-stretch:82%;text-transform:uppercase;letter-spacing:.1em;font-size:13px}
+#C .cta .chip{--g:5px;width:74px;border:1px solid var(--ink);border-left:0}
+#C .tbl{margin-top:40px;border-top:1px solid var(--ink)}
+#C .tbl .hd{display:grid;grid-template-columns:40px 190px 1fr 310px;padding:8px 0;border-bottom:1px solid var(--rule)}
+#C .tbl .r{display:grid;grid-template-columns:40px 190px 1fr 310px;padding:16px 0;border-bottom:1px solid var(--rule-soft);align-items:start}
+#C .tbl .no{font-family:'Plex Mono';font-size:11px;color:#55585e;padding-top:4px}
+#C .tbl .ti{font-family:Archivo;font-weight:700;font-stretch:74%;text-transform:uppercase;font-size:25px;line-height:1}
+#C .tbl .yr{font-family:'Plex Mono';font-size:10px;color:#55585e;margin-top:7px}
+#C .tbl .fl{padding-right:30px}
+#C .tbl .fl .k{color:#55585e;margin-bottom:5px}
+#C .tbl .fl .v{font-family:'Plex Mono';font-size:12.5px;line-height:1.5}
+#C .tbl .fl .v2{margin-top:11px}
+#C .tbl .conf{display:flex;gap:9px}
+#C .tbl .confmark{width:22px;height:22px;border:1px solid var(--ink);flex:none}
+#C .tbl .delta{white-space:nowrap;font-family:'Plex Mono';font-weight:600;font-size:32px;color:var(--mag);line-height:1;letter-spacing:-.03em;margin-top:7px}
+#C .tbl .band{--g:4px;height:11px;margin-top:9px}
+</style></head><body>
+
+<!-- =========================== A =========================== -->
+<section class="frame" id="A">
+  <div class="top">
+    <div><div class="mark">Farrel</div><div class="leg marksub">Product Engineer</div></div>
+    <nav class="leg"><a>Work</a><a>About</a><a>Contact</a></nav>
+  </div>
+  
+
+  <div class="gauge">
+    <div class="row"><span class="n">X</span><span class="c off"></span></div>
+    <div class="row"><span class="n">IX</span><span class="c off"></span></div>
+    <div class="row on"><span class="n">VIII</span><span class="c" style="background:var(--g8)"></span></div>
+    <div class="row on"><span class="n">VII</span><span class="c" style="background:var(--g7)"></span></div>
+    <div class="row on"><span class="n">VI</span><span class="c" style="background:var(--g6)"></span></div>
+    <div class="row on"><span class="n">V</span><span class="c" style="background:var(--g5)"></span></div>
+    <div class="row on"><span class="n">IV</span><span class="c" style="background:var(--g4)"></span></div>
+    <div class="row on"><span class="n">III</span><span class="c" style="background:var(--g3)"></span></div>
+    <div class="row on"><span class="n">II</span><span class="c" style="background:var(--g2)"></span></div>
+    <div class="row on"><span class="n">I</span><span class="c" style="background:var(--g1)"></span></div>
+    <div class="row on"><span class="n">0</span><span class="c" style="background:var(--g0)"></span></div>
+    <div class="cap">
+      <div class="ch"><span class="leg">Complexity</span><span class="lv">VIII<span style="color:#8d8f93">/X</span></span></div>
+      <p>Declared scale, eleven steps. Scope, integrations and operational load carried by the system.</p>
+    </div>
+  </div>
+
+  <div class="mid">
+    <h1 class="disp">I build software that simplifies how products and operations run.</h1>
+    <p class="sub body">Problem definition to shipped solution. Operational bottlenecks, internal processes, marketplace complexity.</p>
+  </div>
+  <div class="cta"><span class="bar">Let's talk</span><span class="chip hatch"></span></div>
+
+  <div class="keys">
+    <div class="leg" style="color:#55585e">Notation</div>
+    <div class="kr">
+      <div class="k"><div class="sw hatch-x"></div><div class="kl">Constraint</div></div>
+      <div class="k"><div class="sw hatch-m" style="--g:4px"></div><div class="kl">Measured outcome</div></div>
+      <div class="k"><div class="sw mask-dot"></div><div class="kl">Not yet measured</div></div>
+    </div>
+  </div>
+
+  <div class="spec">
+    <div class="row"><span class="leg" style="color:#55585e">Role</span><span class="v">Product Engineer</span></div>
+    <div class="row"><span class="leg" style="color:#55585e">Status</span><span class="v">Available</span></div>
+    <div class="row"><span class="leg" style="color:#55585e">Location</span><span class="v">Brazil — remote</span></div>
+  </div>
+
+  <article class="rec">
+    <div class="rh"><span class="leg">Selected work</span><span class="qty" style="font-size:11px;color:#55585e">Sheet 001 / 001</span></div>
+    <div class="rt">Pro Electric</div>
+    <div class="f"><div class="leg k">Constraint</div><div class="conf"><span class="confmark hatch-x"></span><span class="v">Manual scheduling and dispatching.</span></div></div>
+    <div class="f"><div class="leg k">Decision</div><div class="v">Built a custom operations tool.</div></div>
+    <div class="out"><div class="leg k" style="color:#55585e">Outcome</div><div class="unmeasured">Shipped &mdash; not yet measured</div><div class="unmeasured-band mask-dot"></div></div>
+    <div class="foot"><span class="leg">Product Engineer</span><span class="qty" style="font-size:11px">2026</span></div>
+  </article>
+</section>
+
+<!-- =========================== B =========================== -->
+<section class="frame" id="B">
+  <div class="sht"></div>
+  <div class="mark">Farrel</div>
+  <div class="leg" style="position:absolute;left:60px;top:91px;color:#55585e">Product Engineer</div>
+  <nav class="leg"><a>Work</a><a>About</a><a>Contact</a></nav>
+
+  <div class="idx">
+    <div class="leg" style="color:#55585e;padding:9px 0;border-bottom:1px solid var(--rule-soft)">Sheet index</div>
+    <div class="e on"><span class="no">001</span><span class="leg">Pro Electric</span></div>
+    <div class="e"><span class="no">—</span><span class="leg" style="color:#9a9892">In progress</span></div>
+  </div>
+
+  <h1 class="disp">I build software that simplifies how products and operations run.</h1>
+  <p class="sub body">Problem definition to shipped solution. Operational bottlenecks, internal processes, marketplace complexity.</p>
+  <div class="cta"><span class="bar">Let's talk</span><span class="chip hatch"></span></div>
+
+  <div class="draw">
+    <div class="leg k">Sheet 001 — work record</div>
+    <div class="rt">Pro Electric</div>
+    <div class="f" style="border-top:0;padding-top:14px"><div class="leg kk">Constraint</div><div class="conf"><span class="confmark hatch-x"></span><span class="v">Manual scheduling and dispatching.</span></div></div>
+    <div class="f"><div class="leg kk">Decision</div><div class="v">Built a custom operations tool.</div></div>
+    <div class="f" style="border-top:1px solid var(--rule)"><div class="leg kk" style="color:#55585e">Outcome — support requests</div><div class="delta">4/day → 1–2/wk</div><div class="band hatch-m"></div></div>
+  </div>
+
+  <div class="bramp">
+    <div><div class="s" style="background:var(--z0)"></div><div class="lab">0</div></div>
+    <div><div class="s" style="background:var(--z1)"></div><div class="lab">I</div></div>
+    <div><div class="s" style="background:var(--z2)"></div><div class="lab">II</div></div>
+    <div><div class="s" style="background:var(--z3)"></div><div class="lab">III</div></div>
+    <div><div class="s" style="background:var(--z4)"></div><div class="lab">IV</div></div>
+    <div><div class="s" style="background:var(--z5)"></div><div class="lab">V</div></div>
+    <div><div class="s" style="background:var(--z6)"></div><div class="lab">VI</div></div>
+    <div><div class="s" style="background:var(--z7)"></div><div class="lab">VII</div></div>
+    <div><div class="s" style="background:var(--z8)"></div><div class="lab">VIII</div></div>
+    <div><div class="s" style="background:var(--z9)"></div><div class="lab">IX</div></div>
+    <div><div class="s" style="background:var(--z10);outline:1px solid var(--rule-soft);outline-offset:-1px"></div><div class="lab">X</div></div>
+    <div style="padding-left:16px"><div class="leg" style="color:#55585e;padding-bottom:7px">Scale</div></div>
+  </div>
+
+  <div class="tb">
+    <div class="c wide"><div class="leg kk">Drawing</div><div class="v">Home — portfolio.farrel.tech</div></div>
+    <div class="c"><div class="leg kk">Sheet</div><div class="v">001</div></div>
+    <div class="c"><div class="leg kk">Scale</div><div class="v">Zone 0–X</div></div>
+    <div class="c"><div class="leg kk">Status</div><div class="v">Available</div></div>
+    <div class="c"><div class="leg kk">Date</div><div class="v">2026</div></div>
+  </div>
+</section>
+
+<!-- =========================== C =========================== -->
+<section class="frame" id="C">
+  <div class="split"></div>
+  <div class="L">
+    <div class="mark">Farrel</div>
+    <div class="leg" style="color:#55585e;margin-top:7px">Product Engineer</div>
+
+    <div class="blk">
+      <div class="leg" style="color:#55585e">Specification</div>
+      <div class="row" style="margin-top:9px"><span class="leg">Role</span><span class="v">Product Engineer</span></div>
+      <div class="row"><span class="leg">Status</span><span class="v">Available</span></div>
+      <div class="row"><span class="leg">Location</span><span class="v">Brazil — remote</span></div>
+      <div class="row" style="border-bottom:0"><span class="leg">Languages</span><span class="v">EN / PT</span></div>
+    </div>
+
+    <div class="blk">
+      <div class="leg" style="color:#55585e">Scale — eleven steps</div>
+      <div class="cramp">
+        <div><div class="s" style="background:var(--z0)"></div><div class="l">0</div></div>
+        <div><div class="s" style="background:var(--z1)"></div><div class="l">I</div></div>
+        <div><div class="s" style="background:var(--z2)"></div><div class="l">II</div></div>
+        <div><div class="s" style="background:var(--z3)"></div><div class="l">III</div></div>
+        <div><div class="s" style="background:var(--z4)"></div><div class="l">IV</div></div>
+        <div><div class="s" style="background:var(--z5)"></div><div class="l">V</div></div>
+        <div><div class="s" style="background:var(--z6)"></div><div class="l">VI</div></div>
+        <div><div class="s" style="background:var(--z7)"></div><div class="l">VII</div></div>
+        <div><div class="s" style="background:var(--z8)"></div><div class="l">VIII</div></div>
+        <div><div class="s" style="background:var(--z9)"></div><div class="l">IX</div></div>
+        <div><div class="s" style="background:var(--z10);outline:1px solid var(--rule-soft);outline-offset:-1px"></div><div class="l">X</div></div>
+      </div>
+    </div>
+
+    <div class="blk">
+      <div class="leg" style="color:#55585e">Notation</div>
+      <div class="keys">
+        <div class="k"><div class="sw hatch-x"></div><div class="kl">Conflict —<br>the constraint</div></div>
+        <div class="k"><div class="sw hatch-m" style="--g:4px"></div><div class="kl">Measured<br>change</div></div>
+        <div class="k"><div class="sw mask-dot"></div><div class="kl">Held back —<br>not recorded</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="R">
+    <nav class="leg"><a>Work</a><a>About</a><a>Contact</a></nav>
+    <h1 class="disp">I build software that simplifies how products and operations run.</h1>
+    <p class="sub body">Problem definition to shipped solution. Operational bottlenecks, internal processes, marketplace complexity.</p>
+    <div class="cta"><span class="bar">Let's talk</span><span class="chip hatch"></span></div>
+
+    <div class="tbl">
+      <div class="hd leg" style="color:#55585e"><span>No.</span><span>Selected work</span><span>Constraint / Decision</span><span>Outcome</span></div>
+      <div class="r">
+        <div class="no">001</div>
+        <div><div class="ti">Pro Electric</div><div class="yr">2026 — Product Engineer</div></div>
+        <div class="fl">
+          <div class="leg k">Constraint</div>
+          <div class="conf"><span class="confmark hatch-x"></span><span class="v">Manual scheduling and dispatching.</span></div>
+          <div class="leg k v2" style="margin-top:13px">Decision</div>
+          <div class="v">Built a custom operations tool.</div>
+        </div>
+        <div>
+          <div class="leg" style="color:#55585e">Support requests</div>
+          <div class="delta">4/day → 1–2/wk</div>
+          <div class="band hatch-m"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</body></html>

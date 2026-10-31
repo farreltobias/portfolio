@@ -1,0 +1,80 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+/* The case study's game plan, drawn in the sheet's notation: an ordered list
+   of moves with a mark each. The connector into a move is solid only when
+   that move was built; anything not built is dashed. */
+type Step = NonNullable<CollectionEntry<"projects">["data"]["plan"]>[number];
+
+interface Props {
+  steps: Step[];
+}
+
+const { steps } = Astro.props;
+const STATUS: Record<Step["kind"], string> = {
+  constraint: "Constraint",
+  built: "Built",
+  "in-progress": "In progress",
+  planned: "Planned",
+  decision: "Decision",
+  possible: "Possible",
+};
+/* The key names only the marks this plan draws. */
+const used = (Object.keys(STATUS) as Step["kind"][]).filter((kind) =>
+  steps.some((step) => step.kind === kind),
+);
+const anyUnbuilt = steps.some(
+  (step) => step.kind !== "built" && step.kind !== "constraint",
+);
+---
+
+<figure class="plan" aria-labelledby="plan-title">
+  <h2 class="plan-h" id="plan-title">Plan</h2>
+  <ol class="plan-steps">
+    {
+      steps.map((step, i) => {
+        const next = steps[i + 1];
+        const into = next
+          ? next.kind === "built"
+            ? "to-solid"
+            : "to-dashed"
+          : "";
+        return (
+          <li class={`plan-step is-${step.kind} ${into}`} style={`--step:${i}`}>
+            <span class="plan-mark" aria-hidden="true" />
+            <div class="plan-body">
+              <p class="plan-title">{step.title}</p>
+              <p class="plan-note">
+                <span class="plan-tag">{STATUS[step.kind]}</span>
+                {step.note && <Fragment> · {step.note}</Fragment>}
+              </p>
+            </div>
+          </li>
+        );
+      })
+    }
+  </ol>
+  <figcaption class="plan-key">
+    <ul class="plan-key-marks">
+      {
+        used.map((kind) => (
+          <li class={`plan-key-item is-${kind}`}>
+            <span class="plan-mark" aria-hidden="true" />
+            {kind === "built" && (
+              <span class="plan-key-line is-solid" aria-hidden="true" />
+            )}
+            {STATUS[kind]}
+          </li>
+        ))
+      }
+    </ul>
+    {anyUnbuilt && (
+    <ul class="plan-key-lines">
+      <li class="plan-key-item">
+        <span class="plan-key-line is-dashed" aria-hidden="true"></span>Not
+        built
+      </li>
+    </ul>
+    )}
+  </figcaption>
+</figure>

@@ -1,0 +1,133 @@
+---
+import IndexRow from "../../components/IndexRow.astro";
+import Masthead from "../../components/Masthead.astro";
+import Meta from "../../components/Meta.astro";
+import Notation from "../../components/Notation.astro";
+import TitleBlock from "../../components/TitleBlock.astro";
+import { allProjects, sheetNo } from "../../lib/projects";
+import "../../styles/home.css";
+import "../../styles/work.css";
+
+/* The register: every project in the one ordering, each under its own sheet
+   number, in the same three fields as the Home's index. */
+const projects = await allProjects();
+
+/* Every sheet's outcome state, counted from the data so the line stays
+   true as projects change: a measured or changed before → after, a result
+   stated in words, or nothing recorded yet. Empty states are left out. */
+const stateOf = (p: (typeof projects)[number]) => {
+  const d = p.data;
+  if (d.outcomeFigure && d.outcomeMetric) {
+    return d.outcomeKind === "change" ? "changed" : "measured";
+  }
+  if (d.outcome) return "stated";
+  return d.stage === "in-progress" ? "in progress" : "not yet measured";
+};
+const order = [
+  "measured",
+  "changed",
+  "stated",
+  "in progress",
+  "not yet measured",
+];
+const tally = order
+  .map((state) => ({
+    state,
+    n: projects.filter((p) => stateOf(p) === state).length,
+  }))
+  .filter(({ n }) => n > 0)
+  /* Each item is kept whole, so a narrow line breaks only between items. */
+  .map(({ state, n }) => `${n} ${state}`.replaceAll(" ", "\u00a0"));
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link
+      rel="preload"
+      href="/fonts/archivo-var-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/plex-mono-400-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Work — Farrel</title>
+    <meta
+      name="description"
+      content="Every project by Farrel, Product Engineer: the constraint, the decision and the outcome of each."
+    />
+    <Meta title="Work — Farrel" description="Every project by Farrel, Product Engineer: the constraint, the decision and the outcome of each." />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="sheet">
+      <Masthead current="work" />
+
+      <main id="main">
+        <section class="page-head" aria-labelledby="work-title">
+          <p class="leg zone">Register</p>
+          <div class="page-intro">
+            <h1 class="disp page-title" id="work-title">Work.</h1>
+            <p class="prose page-sub">
+              Every sheet carries the same three fields, so one can be read
+              against another.
+            </p>
+            <p class="page-count">
+              {[
+                `${projects.length} ${projects.length === 1 ? "project" : "projects"}`,
+                ...tally,
+              ].join(" · ")}
+            </p>
+          </div>
+          <div class="page-aside">
+            <Notation />
+          </div>
+        </section>
+
+        <div class="register">
+          <div class="register-body">
+            {
+              projects.length > 0 ? (
+                <div class="index">
+                  {projects.map((project, i) => (
+                    <IndexRow
+                      project={project}
+                      number={sheetNo(i + 1)}
+                      heading="h2"
+                    />
+                  ))}
+                </div>
+              ) : (
+                <p class="register-empty">No sheets published yet.</p>
+              )
+            }
+          </div>
+        </div>
+      </main>
+
+      <footer class="closing">
+        <div class="closing-head">
+          <div>
+            <h2>Have a product or operations problem to solve?</h2>
+            <p class="sub">
+              Open to Product Engineering roles and contract work.
+            </p>
+          </div>
+          <a class="control" href="/contact/">
+            <span class="bar">Let's talk</span>
+            <span class="chip hatch" aria-hidden="true"></span>
+          </a>
+        </div>
+        <TitleBlock sheet="Work" />
+      </footer>
+    </div>
+  </body>
+</html>

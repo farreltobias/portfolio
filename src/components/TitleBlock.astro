@@ -1,0 +1,31 @@
+---
+/* The title block at the foot of every sheet, as a drawing carries one in
+   its corner: what the drawing is, which sheet this is, when the set was
+   last revised, and its language. The revision is the build date, so it
+   moves only when the site is rebuilt. */
+interface Props {
+  sheet: string;
+}
+
+const { sheet } = Astro.props;
+const revised = new Date().toISOString().slice(0, 10);
+---
+
+<dl class="title-block" aria-label="Title block">
+  <div class="tb-cell">
+    <dt class="leg">Drawing</dt>
+    <dd>Farrel — Product Engineer</dd>
+  </div>
+  <div class="tb-cell">
+    <dt class="leg">Sheet</dt>
+    <dd>{sheet}</dd>
+  </div>
+  <div class="tb-cell">
+    <dt class="leg">Revised</dt>
+    <dd><time datetime={revised}>{revised}</time></dd>
+  </div>
+  <div class="tb-cell">
+    <dt class="leg">Language</dt>
+    <dd>English</dd>
+  </div>
+</dl>

@@ -1,0 +1,1648 @@
+/* Zone Sheets — the measured plan behind the work.
+   Colour, type, rule and hatch only. No raster assets ship with this world:
+   adding a project is a markdown file and nothing else. */
+
+/* ---------------------------------------------------------------- faces --
+   Two families. Archivo is variable on both weight and width, so one file per
+   subset covers the condensed display caps and the tracked legend caps alike.
+   Each subset declares its real unicode-range: a latin-ext-only slice silently
+   excludes ASCII and every ordinary letter falls back while still looking
+   plausible, which is how this went wrong once already. */
+@font-face {
+  font-family: Archivo;
+  font-style: normal;
+  font-weight: 400 700;
+  font-stretch: 62% 125%;
+  font-display: swap;
+  src: url("/fonts/archivo-var-latin.woff2") format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: Archivo;
+  font-style: normal;
+  font-weight: 400 700;
+  font-stretch: 62% 125%;
+  font-display: swap;
+  src: url("/fonts/archivo-var-latin-ext.woff2") format("woff2");
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Plex Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/plex-mono-400-latin.woff2") format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191-2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Plex Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/plex-mono-400-latin-ext.woff2") format("woff2");
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Plex Mono";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/plex-mono-600-latin.woff2") format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191-2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Plex Mono";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/plex-mono-600-latin-ext.woff2") format("woff2");
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* ---------------------------------------------------------------- tokens -- */
+:root {
+  /* The one reserved colour, with two jobs only: the measured change, and the
+     active state (keyboard focus). Never a link, a hover, or an accent. */
+  --mag: #e6007e;
+
+  /* The tonal ramp: eleven distinct steps, the bone field at 0, black at X,
+     spaced on a slight curve so the middle does not bunch. It is the only
+     tonal vocabulary: every role below is one of its steps, and the key on
+     the page names the ones in use. */
+  --g0: #f2f0ec;
+  --g1: #dfddd8;
+  --g2: #c8c7c3;
+  --g3: #b5b4b1;
+  --g4: #a09f9e;
+  --g5: #8b8a89;
+  --g6: #757474;
+  --g7: #5d5d5e;
+  --g8: #464648;
+  --g9: #2e2e31;
+  --g10: #15161a;
+
+  --paper: var(--g0); /* field */
+  --rule-soft: var(--g2); /* hairlines between fields */
+  --ink-ghost: var(--g6); /* scrollbar thumb only: 4.0:1, not for text */
+  --ink-faint: var(--g7); /* labels: 5.8:1 on the field */
+  --ink-soft: var(--g9); /* prose */
+  --ink: var(--g10);
+  --rule: var(--g10);
+
+  /* One unit of the sheet. 1px at the comp's 1536, shrinking with the window
+     down to the unstack point, so the first viewport holds its proportions
+     instead of drifting as fixed padding meets a narrower field. Type is
+     deliberately NOT expressed in this unit: legends must stay readable. */
+  --u: clamp(0.8333px, 0.0651vw, 1px);
+
+  /* Text roles. Display and titles scale with the composition; these are the
+     reading and labelling roles, and they hold a readable floor instead. One
+     step up on a phone, where the page is read at arm's length in one hand. */
+  --t-leg: 11px; /* tracked caps that name a field or a link */
+  --t-key: 11px; /* legend keys and scale meta: single words, figures */
+  --t-note: 12px; /* short sentences in mono beside a field */
+  --t-field: 13px; /* the value a field carries */
+  --t-body: 14px; /* prose on cleared ground */
+  --edge: calc(48 * var(--u));
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Archivo, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ------------------------------------------------------------ type voices --
+   Four, and no more. Display caps carry headlines; legend caps name fields;
+   mono carries every quantity; body prose sits only on cleared ground. */
+.disp {
+  font-family: Archivo, sans-serif;
+  font-weight: 700;
+  font-stretch: 70%;
+  text-transform: uppercase;
+  line-height: 0.92;
+  letter-spacing: -0.005em;
+}
+
+.leg {
+  font-family: Archivo, sans-serif;
+  font-weight: 600;
+  font-stretch: 100%;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: var(--t-leg);
+  /* Room for a second line when a label wraps (Portuguese runs ~20% longer)
+     without the lines touching. */
+  line-height: 1.25;
+}
+
+/* A legend that names something beside it steps back to faint ink. */
+.notation > .leg,
+.spec dt,
+.record .out .k,
+.sheet-band-grid > .leg {
+  color: var(--ink-faint);
+}
+
+.qty {
+  font-family: "Plex Mono", monospace;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+.prose {
+  font-family: "Plex Mono", monospace;
+  font-weight: 400;
+  font-size: var(--t-body);
+  line-height: 1.62;
+  letter-spacing: -0.005em;
+}
+
+/* --------------------------------------------------------------- notation --
+   Hatch encodes a value against the legend. It is never texture. */
+.hatch {
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--ink) 0 1px,
+    transparent 1px var(--g, 6px)
+  );
+}
+
+.hatch-mag {
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--mag) 0 1.5px,
+    transparent 1.5px var(--g, 4px)
+  );
+}
+
+/* The same band in ink: a recorded change of state, not a measurement. */
+.hatch-ink {
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--ink) 0 1px,
+    transparent 1px var(--g, 4px)
+  );
+}
+
+/* Crossed at ninety degrees: the constraint, the thing that was in the way. */
+.hatch-cross {
+  background-image:
+    repeating-linear-gradient(45deg, var(--ink) 0 1px, transparent 1px 7px),
+    repeating-linear-gradient(-45deg, var(--ink) 0 1px, transparent 1px 7px);
+}
+
+/* A two-step dot: shipped, but no result recorded yet. */
+.mask-dot {
+  background-image: radial-gradient(var(--ink) 0.9px, transparent 1px);
+  background-size: 5px 5px;
+}
+
+/* The skip link waits off the sheet and comes in as a control when focused. */
+.skip {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 1;
+  padding: 12px 18px;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: Archivo, sans-serif;
+  font-weight: 700;
+  font-stretch: 82%;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 13px;
+  transform: translateY(calc(-100% - 24px));
+}
+
+.skip:focus-visible {
+  transform: none;
+}
+
+/* ------------------------------------------------------------------ sheet --
+   The comp is a 1536x864 contract, but the page is laid out in flow: the
+   masthead, the field and its three columns are real boxes with real margins,
+   so content that grows pushes rather than overlaps. */
+.sheet {
+  max-width: 1536px;
+  margin-inline: auto;
+  padding: calc(40 * var(--u)) var(--edge) 0;
+}
+
+.masthead {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.mark {
+  font-family: Archivo, sans-serif;
+  font-weight: 700;
+  font-stretch: 70%;
+  text-transform: uppercase;
+  font-size: 28px;
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+
+.mark-sub {
+  margin-top: calc(7 * var(--u));
+}
+
+.nav {
+  display: flex;
+  gap: 30px;
+}
+
+.field {
+  display: grid;
+  /* gauge | centre | record. The record column is the sheet's own width so it
+     lands flush with the right edge; the spec sits right-aligned inside it. */
+  grid-template-columns: 11.181% minmax(0, 1fr) 33.125%;
+  column-gap: 0;
+  margin-top: calc(55 * var(--u));
+}
+
+/* -------------------------------------------------------------------- key --
+   The ramp, declared once as a step wedge: eleven cells from paper at the base
+   to black at the top. It reads nothing; it is the scale every tone on the
+   sheet is taken from. The notation sits beneath it. */
+.gauge-row {
+  display: flex;
+  align-items: center;
+  gap: 5.59%;
+}
+
+.gauge-row .n {
+  font-family: "Plex Mono", monospace;
+  font-size: var(--t-key);
+  width: 20%;
+  flex: none;
+  text-align: right;
+  color: var(--ink-faint);
+}
+
+.gauge-row .cell {
+  flex: none;
+  width: 47.2%;
+  aspect-ratio: 76 / 44;
+  border: 1px solid var(--rule-soft);
+}
+
+/* The role a step plays on this sheet, set beside it; unused steps stay
+   unnamed. */
+.gauge-row .role {
+  flex: 1;
+  min-width: 0;
+  /* Borrows the gutter beside the column, and wraps at its spaces when a
+     longer translation needs two lines, so it never reaches the headline. */
+  margin-right: -44px;
+  font-family: "Plex Mono", monospace;
+  font-size: var(--t-key);
+  line-height: 1.15;
+  color: var(--ink-faint);
+}
+
+/* ----------------------------------------------------------------- centre -- */
+/* Placed, not flowed: the key comes last in the source so a screen reader
+   meets the positioning first, and is set back into the first column here. */
+.gauge {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.col-centre {
+  grid-column: 2;
+  grid-row: 1;
+  margin-left: 7.356%;
+  container-type: inline-size;
+}
+
+.headline {
+  /* 11.03cqi is 82px at the comp's 743px column, and stays proportional to the
+     column at every width below it. */
+  font-size: clamp(34px, 11.03cqi, 82px);
+  margin-top: calc(32 * var(--u));
+}
+
+.subcopy {
+  margin-top: calc(30 * var(--u));
+  width: 80.75%;
+  color: var(--ink-soft);
+}
+
+/* The primary control is part of the instrument: a solid bar closed by a
+   hatched chip, not a rounded button. */
+.control {
+  display: inline-flex;
+  align-items: stretch;
+  height: calc(58 * var(--u));
+  margin-top: calc(63 * var(--u));
+}
+
+.control .bar {
+  background: var(--ink);
+  color: var(--paper);
+  display: flex;
+  align-items: center;
+  padding: 0 30px;
+  font-family: Archivo, sans-serif;
+  font-weight: 700;
+  font-stretch: 82%;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 14px;
+}
+
+.control .chip {
+  --g: 5px;
+  width: 84px;
+  border: 1px solid var(--ink);
+  border-left: 0;
+}
+
+.notation {
+  margin-top: calc(28 * var(--u));
+  border-top: 1px solid var(--rule);
+  padding-top: 11px;
+}
+
+.notation .keys {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.notation .k {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.notation .sw {
+  width: 28px;
+  height: 16px;
+  flex: none;
+  border: 1px solid var(--rule-soft);
+}
+
+.notation .kl {
+  font-family: "Plex Mono", monospace;
+  font-size: var(--t-key);
+  line-height: 1.3;
+  color: var(--ink-faint);
+}
+
+/* ------------------------------------------------------------------ right -- */
+.col-right {
+  grid-column: 3;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  /* The track itself: 477px at the comp's 1536, and narrower with the window,
+     so the spec and the sheet stay flush with the masthead's right edge. */
+  min-width: 0;
+}
+
+.spec {
+  width: 59.96%;
+  border-top: 1px solid var(--rule);
+}
+
+.spec .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 20px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.spec .row .v {
+  font-family: "Plex Mono", monospace;
+  font-size: var(--t-field);
+}
+
+/* ------------------------------------------------------------------ record --
+   The work record sheet: a plan sheet laid over the field, squared to nothing,
+   with the measured delta as the largest numeral on the page. */
+.record {
+  /* Short of the track by the shadow's reach, so the stacked edge lands on
+     the masthead's right edge instead of past it. */
+  width: calc(100% - 13px);
+  margin-right: 13px;
+  margin-top: calc(104 * var(--u));
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  transform: rotate(-0.55deg);
+  box-shadow:
+    0 0 0 1px rgb(21 22 26 / 7%),
+    14px 16px 0 -1px rgb(21 22 26 / 5.5%);
+}
+
+/* The sheet's corner: its number, as a plan sheet carries it. The section
+   title below already names the work. */
+.record .rh {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.record .sheet-no,
+.record .foot .qty {
+  font-family: "Plex Mono", monospace;
+  font-size: var(--t-key);
+  color: var(--ink-faint);
+}
+
+.record .rt {
+  font-family: Archivo, sans-serif;
+  font-weight: 700;
+  font-stretch: 72%;
+  text-transform: uppercase;
+  font-size: 27px;
+  padding: 13px 14px 11px;
+  line-height: 1;
+}
+
+.record .f {
+  padding: 10px 14px;
+  border-top: 1px solid var(--rule-soft);
+}
+
+.record .f .k {
+  color: var(--ink-faint);
+  margin-bottom: 6px;
+}
+
+.record .f .v {
+  font-family: "Plex Mono", monospace;
+  font-size: var(--t-field);
+  line-height: 1.45;
+}
+
+/* The constraint, marked in crossed hatch beside its words: on the sheet and
+   in every index row alike. */
+.conflict {
+  display: flex;
+  gap: 11px;
+  align-items: flex-start;
+}
+
+.conflict-mark {
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--ink);
+  flex: none;
+  margin-top: 1px;
+}
+
+.record .out {
+  padding: 13px 14px 15px;
+  border-top: 1px solid var(--rule);
+}
+
+/* A figure breaks at its arrow and spaces; a run with neither may still break
+   anywhere rather than widen the page. */
+.delta {
+  overflow-wrap: anywhere;
+}
+
+/* A change of state keeps the figure's scale but not its colour: magenta is
+   reserved for a measured quantity. Placed after every figure rule so it
+   wins wherever the figure sits. */
+.delta.is-change,
+.record .delta.is-change,
+.index-row .delta.is-change,
+.case-record .delta.is-change {
+  color: var(--ink);
+}
+
+.record .delta {
+  font-family: "Plex Mono", monospace;
+  font-weight: 600;
+  font-size: 40px;
+  color: var(--mag);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-top: 9px;
+}
+
+/* The measured mark under a figure: on the sheet and in every index row. */
+.band {
+  height: 13px;
+  margin-top: 11px;
+}
+
+.index-row .band {
+  height: 11px;
+  margin-top: 10px;
+}
+
+/* The outcome in words, in ink: a qualitative result is stated plainly and
+   never borrows the measured mark. Under a figure it says what was measured. */
+.outcome-text {
+  font-family: "Plex Mono", monospace;
+  font-size: var(--t-field);
+  line-height: 1.45;
+  margin-top: 9px;
+}
+
+/* No recorded result: the mask, never an invented figure. */
+.unmeasured {
+  font-family: "Plex Mono", monospace;
+  font-size: var(--t-field);
+  color: var(--ink-faint);
+  margin-top: 9px;
+}
+
+/* Drawn at the strength of its legend swatch, so the row reads as the key
+   says: shipped, nothing measured yet. */
+.unmeasured-band {
+  height: 13px;
+  margin-top: 11px;
+}
+
+.record .foot {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 14px;
+  border-top: 1px solid var(--rule-soft);
+  color: var(--ink-faint);
+}
+
+/* ================================================================ sections --
+   Everything below the first viewport, squared to the same field. */
+/* A band opens with more room under its rule than a field inside a sheet,
+   so the band heading never sits tighter than the rows beneath it. */
+.sheet-band {
+  border-top: 1px solid var(--rule);
+  margin-top: 96px;
+  padding-top: 24px;
+}
+
+.sheet-band-grid {
+  display: grid;
+  grid-template-columns: 11.181% minmax(0, 1fr) 33.125%;
+  column-gap: 0;
+}
+
+/* The zone label's capitals align with the band heading's. */
+.sheet-band-grid > .leg {
+  padding-top: 3px;
+}
+
+.sheet-band-body {
+  grid-column: 2 / span 2;
+  margin-left: 4.613%;
+}
+
+.sheet-band-title {
+  font-family: Archivo, sans-serif;
+  font-weight: 700;
+  font-stretch: 72%;
+  text-transform: uppercase;
+  font-size: 34px;
+  line-height: 1;
+  letter-spacing: -0.005em;
+}
+
+.sheet-band-note {
+  font-family: "Plex Mono", monospace;
+  font-size: var(--t-note);
+  line-height: 1.5;
+  color: var(--ink-faint);
+  margin-top: 9px;
+}
+
+/* ------------------------------------------------------------ sheet index -- */
+.index {
+  margin-top: 26px;
+  border-top: 1px solid var(--rule);
+}
+
+/* Each row labels its own fields, as the lead sheet does, so the index needs
+   no column header. */
+.index-row {
+  display: grid;
+  /* Fixed tracks for the comp, but none may be pushed wider than the row. */
+  grid-template-columns: 52px 236px minmax(0, 1fr) minmax(0, 300px);
+  align-items: start;
+}
+
+.index-row {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.index-row .no {
+  font-family: "Plex Mono", monospace;
+  font-size: var(--t-key);
+  color: var(--ink-faint);
+  padding-top: 5px;
+}
+
+.index-row .ti {
+  font-family: Archivo, sans-serif;
+  font-weight: 700;
+  font-stretch: 74%;
+  text-transform: uppercase;
+  font-size: 25px;
+  line-height: 1;
+}
+
+.index-row .yr {
+  font-family: "Plex Mono", monospace;
+  font-size: var(--t-key);
+  color: var(--ink-faint);
+  margin-top: 8px;
+}
+
+.index-row .fl {
+  padding-right: 30px;
+}
+
+/* The title keeps a gutter before the Constraint column, so a long title
+   wraps a word earlier instead of running into the next field. */
+.index-row .th {
+  min-width: 0;
+  padding-right: 24px;
+}
+
+.index-row .fo {
+  min-width: 0;
+}
+
+.index-row .fl .k,
+.index-row .fo .k {
+  color: var(--ink-faint);
+  margin-bottom: 5px;
+}
+
+.index-row .fo .k + * {
+  margin-top: 0;
+}
+
+.index-row .conflict + .k {
+  margin-top: 13px;
+}
+
+.index-row .fl .v {
+  font-family: "Plex Mono", monospace;
+  font-size: var(--t-field);
+  line-height: 1.5;
+}
+
+.index-row .conflict-mark {
+  width: 22px;
+  height: 22px;
+}
+
+.index-row .delta {
+  font-family: "Plex Mono", monospace;
+  font-weight: 600;
+  font-size: 30px;
+  color: var(--mag);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-top: 7px;
+  text-wrap: balance;
+}
+
+/* --------------------------------------------------------------- practice -- */
+.practice p {
+  font-family: "Plex Mono", monospace;
+  font-size: var(--t-body);
+  line-height: 1.62;
+  color: var(--ink-soft);
+  max-width: 620px;
+  margin-top: 16px;
+}
+
+/* ---------------------------------------------------------------- closing -- */
+.closing {
+  margin-top: 96px;
+  border-top: 1px solid var(--rule);
+  padding: 30px 0 64px;
+}
+
+.closing-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 40px;
+}
+
+.closing h2 {
+  font-family: Archivo, sans-serif;
+  font-weight: 700;
+  font-stretch: 72%;
+  text-transform: uppercase;
+  font-size: 42px;
+  line-height: 0.96;
+  max-width: 760px;
+  letter-spacing: -0.005em;
+}
+
+.closing .sub {
+  font-family: "Plex Mono", monospace;
+  font-size: var(--t-field);
+  color: var(--ink-faint);
+  margin-top: 14px;
+}
+
+/* The index's way out. Set in the control's own lettering but carried by a
+   hairline instead of a filled bar, with the size of what lies behind it in
+   mono. The rule thickens on hover; nothing else moves. */
+.more-link {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 18px;
+  margin-top: 40px;
+  padding: 15px 0 13px;
+  border-bottom: 1px solid var(--ink);
+  transition: box-shadow 120ms linear;
+}
+
+/* Under the Background note, the way on to About sits closer. */
+.practice .more-link {
+  margin-top: 24px;
+}
+
+.more-label {
+  font-family: Archivo, sans-serif;
+  font-weight: 700;
+  font-stretch: 82%;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 14px;
+}
+
+.more-count {
+  font-family: "Plex Mono", monospace;
+  font-size: var(--t-key);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-faint);
+}
+
+@media (hover: hover) {
+  .more-link:hover {
+    box-shadow: 0 1px 0 var(--ink);
+  }
+}
+
+.closing .control {
+  margin-top: 0;
+  flex: none;
+}
+
+/* The ways to reach Farrel, set as the sheet's title block: one ruled strip
+   across the foot of the page, each cell a label over its value, read left to
+   right like the fields of a drawing's corner block. */
+.reach {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 44px;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.reach li + li {
+  border-left: 1px solid var(--rule-soft);
+}
+
+.reach a {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 44px;
+  height: 100%;
+  padding: 14px 16px 16px;
+  transition: background-color 120ms linear;
+}
+
+.reach li:first-child a {
+  padding-left: 0;
+}
+
+.reach .leg {
+  color: var(--ink-faint);
+}
+
+.reach-v {
+  font-family: "Plex Mono", monospace;
+  font-size: var(--t-field);
+  overflow-wrap: anywhere;
+}
+
+@media (hover: hover) {
+  .reach a:hover {
+    background-color: var(--g1);
+  }
+}
+
+/* ------------------------------------------------------------ sheet links --
+   Each sheet opens its case study. The link is named in plain words and drawn
+   in the nav's language, a hairline under tracked caps; its hit area is
+   stretched over the whole sheet so the sheet itself is the target. */
+.record,
+.index-row {
+  position: relative;
+}
+
+.sheet-link {
+  display: inline-block;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--ink);
+  color: var(--ink);
+}
+
+.sheet-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.index-row .sheet-link {
+  margin-top: 14px;
+}
+
+/* ------------------------------------------------------------ title block --
+   The foot of every sheet, boxed in its bottom-right corner the way a
+   drawing carries its title block: label-over-value cells, two by two,
+   set apart from the full-width strip of ways to reach Farrel. */
+.title-block {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: min(100%, 460px);
+  margin: 56px 0 0 auto;
+  border: 1px solid var(--rule);
+}
+
+.tb-cell {
+  min-width: 0;
+  padding: 10px 14px 11px;
+}
+
+.tb-cell:nth-child(even) {
+  border-left: 1px solid var(--rule-soft);
+}
+
+.tb-cell:nth-child(n + 3) {
+  border-top: 1px solid var(--rule-soft);
+}
+
+.tb-cell dt {
+  color: var(--ink-faint);
+}
+
+.tb-cell dd {
+  margin: 5px 0 0;
+  font-family: "Plex Mono", monospace;
+  font-size: var(--t-field);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.4;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 760px) {
+  .title-block {
+    width: 100%;
+    margin-top: 44px;
+  }
+}
+
+/* ------------------------------------------------------------- crop marks --
+   A sheet printed for trimming carries a short stroke at each corner, out in
+   the margin. They mark the sheets as sheets; they never sit behind text. */
+.crop-marks,
+.record,
+.contact-sheet {
+  position: relative;
+}
+
+.crop-marks::before,
+.record::before,
+.contact-sheet::before {
+  --crop: var(--ink-faint);
+  --crop-len: 9px;
+  content: "";
+  position: absolute;
+  inset: -8px;
+  pointer-events: none;
+  background:
+    linear-gradient(var(--crop), var(--crop)) left top / var(--crop-len) 1px,
+    linear-gradient(var(--crop), var(--crop)) left top / 1px var(--crop-len),
+    linear-gradient(var(--crop), var(--crop)) right top / var(--crop-len) 1px,
+    linear-gradient(var(--crop), var(--crop)) right top / 1px var(--crop-len),
+    linear-gradient(var(--crop), var(--crop)) left bottom / var(--crop-len) 1px,
+    linear-gradient(var(--crop), var(--crop)) left bottom / 1px var(--crop-len),
+    linear-gradient(var(--crop), var(--crop)) right bottom / var(--crop-len) 1px,
+    linear-gradient(var(--crop), var(--crop)) right bottom / 1px var(--crop-len);
+  background-repeat: no-repeat;
+}
+
+/* Visible only to assistive technology. */
+.vh {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ================================================================== motion --
+   A plan drawing does not bounce. Motion here is mechanical: things ink in,
+   rules draw, ground steps one notch. Nothing eases in from nowhere. */
+
+/* -------------------------------------------------------- between sheets --
+   Moving between pages is moving between sheets of one set. The masthead
+   stays put. The sheet in hand lifts away quickly, and the next is laid
+   down from the top edge, the way a drawing is slid onto the table. Between
+   neighbouring case studies, the project titles carry across (the next
+   sheet's title rises into the heading), so you can see where you went.
+   Browsers without cross-document view transitions simply load the page. */
+@view-transition {
+  navigation: auto;
+}
+
+/* The masthead is captured on the bone ground, so when it is laid over a
+   page that had scrolled it out of view, it lands as a clean band rather
+   than lettering printed over the departing text. */
+.masthead {
+  view-transition-name: masthead;
+  background: var(--paper);
+}
+
+.sheet-title {
+  view-transition-class: sheet-title;
+}
+
+@keyframes sheet-lift {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes sheet-lay {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+}
+
+::view-transition-old(root) {
+  animation: sheet-lift 140ms linear both;
+}
+
+::view-transition-new(root) {
+  animation: sheet-lay 340ms cubic-bezier(0.2, 0, 0, 1) both;
+}
+
+/* The masthead holds still; only its current-page hairline changes. */
+::view-transition-group(masthead) {
+  animation: none;
+}
+
+::view-transition-old(masthead) {
+  animation: none;
+  opacity: 0;
+}
+
+::view-transition-new(masthead) {
+  animation: none;
+}
+
+/* The new title is not faded in: crisp ink glides over the old image, which
+   leaves at once, so the title never reads as a grey double mid-flight. */
+::view-transition-new(*.sheet-title) {
+  animation: none;
+}
+
+/* A title glides to its new place at the pace of the sheet being laid. */
+::view-transition-group(*.sheet-title) {
+  animation-duration: 340ms;
+  animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+::view-transition-old(*.sheet-title),
+::view-transition-new(*.sheet-title) {
+  height: 100%;
+  object-fit: contain;
+  object-position: left top;
+}
+
+/* The old title is a scaled image; it leaves at once, so the crisp new text
+   carries the move instead of a blurred copy. */
+::view-transition-old(*.sheet-title) {
+  animation: sheet-lift 80ms linear both;
+}
+
+/* With nothing to hold on the old page (a masthead scrolled out of view, a
+   title arriving from Home or Work), the element is laid down with the rest
+   of the sheet instead of popping in. */
+::view-transition-new(*.sheet-title):only-child,
+::view-transition-new(masthead):only-child {
+  animation: sheet-lay 340ms cubic-bezier(0.2, 0, 0, 1) both;
+}
+
+/* The current-page hairline glides to its new word at the sheet's pace. */
+::view-transition-group(nav-rule) {
+  animation-duration: 340ms;
+  animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* A rule or connector drawn once on arrival, from its start. */
+@keyframes draw-down {
+  from {
+    transform: scaleY(0);
+  }
+}
+
+@keyframes draw-across {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+/* A measured figure's band is drawn in from the left once on arrival: the
+   measurement being recorded. A change of state, in ink, stays still. */
+.band.hatch-mag {
+  transform-origin: left;
+  animation: draw-across 560ms cubic-bezier(0.2, 0, 0, 1) 240ms both;
+}
+
+/* The signature: the key inks in from its base, one step at a time. */
+@keyframes ink-in {
+  from {
+    transform: scaleY(0.25);
+  }
+}
+
+/* Every cell is already drawn; each rises from a quarter of its height, the
+   darker steps taking longer, so the key fills from its base. */
+.gauge-row .cell {
+  transform-origin: bottom;
+  animation: ink-in calc(240ms + var(--i, 0) * 60ms) cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* Controls read as part of the instrument: the chip inks solid and the bar
+   gives up its fill, so the pair swaps state rather than glowing. */
+.control .bar,
+.control .chip {
+  transition:
+    background-color 140ms linear,
+    color 140ms linear;
+}
+
+.control:hover .bar,
+.control:focus-visible .bar {
+  background: transparent;
+  color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--ink);
+}
+
+.control:hover .chip,
+.control:focus-visible .chip {
+  background-color: var(--ink);
+  background-image: none;
+}
+
+.control:focus-visible {
+  outline: 2px solid var(--mag);
+  outline-offset: 3px;
+}
+
+/* Navigation: a hairline draws under the word, left to right. */
+.nav a {
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.nav a::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--ink);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 160ms cubic-bezier(0.2, 0, 0.1, 1);
+}
+
+.nav a:hover::after,
+.nav a:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* The current page's hairline is a real element, so it can travel: on a
+   page change it slides from the old section's word to the new one. */
+.nav-rule {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--ink);
+  view-transition-name: nav-rule;
+  /* Moves in masthead space: it glides between sections, and holds still
+     when the page moves within one, even from a scrolled page. */
+  view-transition-group: nearest;
+}
+
+/* A sheet steps one notch up the ramp when pointed at: it is being picked up
+   off the stack. The link keeps its hairline, so the affordance holds. */
+.index-row,
+.record {
+  transition: background-color 120ms linear;
+}
+
+@media (hover: hover) {
+  .index-row:hover,
+  .record:hover {
+    background-color: var(--g1);
+  }
+}
+
+/* Keyboard focus marks the whole sheet, not just the words that carry it. */
+.sheet-link:focus-visible {
+  outline: none;
+}
+
+.index-row:has(.sheet-link:focus-visible),
+.record:has(.sheet-link:focus-visible) {
+  outline: 2px solid var(--mag);
+  outline-offset: 2px;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--mag);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gauge-row .cell {
+    animation: none;
+  }
+
+  /* Between sheets: a short cross-fade, no movement. */
+  ::view-transition-old(root),
+  ::view-transition-new(root),
+  ::view-transition-group(*.sheet-title) {
+    animation-duration: 120ms;
+  }
+
+  ::view-transition-new(root) {
+    animation-name: none;
+  }
+
+  ::view-transition-group(*.sheet-title) {
+    animation-name: none;
+  }
+
+  ::view-transition-group(nav-rule) {
+    animation: none;
+  }
+
+  .band.hatch-mag {
+    animation: none;
+  }
+
+  /* With no glide, the old title image has nowhere to go: it is hidden
+     rather than squeezed into the new heading's box. */
+  ::view-transition-old(*.sheet-title) {
+    animation: none;
+    opacity: 0;
+  }
+
+  /* Nothing is laid down, not even what had no partner on the old page. */
+  ::view-transition-new(*.sheet-title):only-child,
+  ::view-transition-new(masthead):only-child {
+    animation: none;
+  }
+
+  .nav a::after {
+    transition: none;
+  }
+
+  .control .bar,
+  .control .chip,
+  .index-row,
+  .record,
+  .more-link,
+  .reach a {
+    transition: none;
+  }
+}
+
+/* ============================================================== responsive --
+   The comp is a contract at 1536, not a minimum. Below 1280 the three columns
+   no longer fit, so they dissolve into one field and their parts are dealt in
+   reading order: positioning, action, the work, the key that reads the work,
+   then the spec. Tablet keeps two tracks so each key sits beside its marks;
+   a phone reads the same order in one. */
+@media (max-width: 1279px) {
+  /* Unstacked, the sheet stops scaling and fixed spacing takes over. */
+  :root {
+    --u: 1px;
+  }
+
+  .col-centre,
+  .col-right {
+    display: contents;
+  }
+
+  /* Without its own column, the key moves in beside the work it reads: the
+     same object as on desktop, ramp over notation, dealt after the lead
+     sheet so the positioning and the evidence come first. */
+  .gauge {
+    grid-area: key;
+    margin-top: 56px;
+  }
+
+  .gauge-row {
+    gap: 14px;
+  }
+
+  .gauge-row .n {
+    width: 36px;
+  }
+
+  .gauge-row .cell {
+    width: 64px;
+    aspect-ratio: auto;
+    height: 20px;
+  }
+
+  .gauge-row .role {
+    margin-right: 0;
+  }
+
+  .field {
+    grid-template-columns: minmax(0, 1fr) 280px;
+    grid-template-areas:
+      "head head"
+      "sub spec"
+      "act spec"
+      "rec key";
+    column-gap: 56px;
+    align-items: start;
+  }
+
+  /* The column container is gone, so the headline is sized on the window. It
+     stays below its 1536 size at every width instead of overtaking it. */
+  .headline {
+    grid-area: head;
+    font-size: clamp(38px, 7vw, 72px);
+    margin-top: 0;
+    text-wrap: balance;
+  }
+
+  .subcopy {
+    grid-area: sub;
+    width: auto;
+    max-width: 600px;
+    margin-top: 28px;
+  }
+
+  .field .control {
+    grid-area: act;
+    justify-self: start;
+    margin-top: 36px;
+  }
+
+  .spec {
+    grid-area: spec;
+    width: 100%;
+    margin-top: 28px;
+  }
+
+  /* Squared to the field: a tilt only reads as laid-over when there is field
+     beside it to be laid over. */
+  .record {
+    grid-area: rec;
+    width: calc(100% - 5px);
+    margin-right: 0;
+    margin-top: 56px;
+    transform: none;
+    box-shadow:
+      0 0 0 1px rgb(21 22 26 / 7%),
+      6px 7px 0 -1px rgb(21 22 26 / 5.5%);
+  }
+
+  .notation {
+    margin-top: 28px;
+  }
+
+  .notation .sw {
+    width: 36px;
+  }
+
+  /* Without the left track the zone label would only repeat the band's
+     heading beside it, so it goes, as the page heads' zone labels do. */
+  .sheet-band-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sheet-band-grid > .leg {
+    display: none;
+  }
+
+  .sheet-band-body {
+    grid-column: 1;
+    margin-left: 0;
+  }
+
+  /* Tablet and laptop: still a register. The title sits over Constraint
+     and Decision in the middle, and the Outcome keeps its own column on the
+     right, so outcomes line up down the list and rows read against each
+     other. Rows stack fully only on phones. */
+  .index-row {
+    grid-template-columns: 52px minmax(0, 1fr) minmax(0, 280px);
+    column-gap: 24px;
+    row-gap: 18px;
+  }
+
+  .index-row .no {
+    grid-row: 1 / span 2;
+  }
+
+  .index-row .th {
+    grid-column: 2;
+    grid-row: 1;
+    padding-right: 0;
+  }
+
+  .index-row .fl {
+    grid-column: 2;
+    grid-row: 2;
+    padding-right: 0;
+  }
+
+  .index-row .fo {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+  }
+
+  .closing-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+  }
+
+  /* Four cells no longer fit an address: two rows of two. */
+  .reach {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .reach li + li {
+    border-left: 0;
+  }
+
+  .reach li:nth-child(even) {
+    border-left: 1px solid var(--rule-soft);
+  }
+
+  .reach li:nth-child(n + 3) {
+    border-top: 1px solid var(--rule-soft);
+  }
+
+  .reach li:nth-child(odd) a {
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 760px) {
+  :root {
+    --edge: 20px;
+    --t-key: 12px;
+    --t-note: 13px;
+    --t-field: 14px;
+    --t-body: 15px;
+  }
+
+  /* Larger caps need less air between letters to hold the same colour. */
+  .leg {
+    letter-spacing: 0.13em;
+  }
+
+  .sheet {
+    padding-top: 28px;
+  }
+
+  /* On the narrowest phones the nav takes its own line rather than breaking
+     the wordmark's subtitle. */
+  .masthead {
+    flex-wrap: wrap;
+    gap: 22px 20px;
+  }
+
+  .mark-sub {
+    white-space: nowrap;
+  }
+
+  .nav {
+    gap: 18px;
+  }
+
+  .field {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "head"
+      "sub"
+      "act"
+      "rec"
+      "spec"
+      "key";
+    margin-top: 36px;
+  }
+
+  .subcopy {
+    margin-top: 22px;
+  }
+
+  .field .control {
+    margin-top: 32px;
+  }
+
+  .record,
+  .gauge,
+  .spec {
+    margin-top: 40px;
+  }
+
+  /* On a phone the ramp is a long detour between the work and the rest of
+     it; the notation stays, dealt just before the index that uses it. */
+  .gauge-bar {
+    display: none;
+  }
+
+  .gauge .notation {
+    margin-top: 0;
+  }
+
+  .reach {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .reach li:nth-child(even) {
+    border-left: 0;
+  }
+
+  .reach li + li {
+    border-top: 1px solid var(--rule-soft);
+  }
+
+  .reach li a {
+    padding-left: 0;
+  }
+
+  .sheet-band {
+    margin-top: 64px;
+    padding-top: 20px;
+  }
+
+  .sheet-band-title {
+    font-size: 27px;
+  }
+
+  .index-row {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 14px;
+  }
+
+  .index-row .no {
+    padding-top: 0;
+  }
+
+  .index-row .no,
+  .index-row .th,
+  .index-row .fl,
+  .index-row .fo {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .index-row .delta {
+    font-size: 24px;
+  }
+
+  .closing {
+    margin-top: 64px;
+    padding-bottom: 44px;
+  }
+
+  .closing h2 {
+    font-size: 28px;
+  }
+}
+
+/* A phone too narrow for the role label and the nav to read apart: the nav
+   takes its own row under the wordmark, so "Product Engineer" is never read
+   as a fourth link. */
+@media (max-width: 480px) {
+  .nav {
+    flex-basis: 100%;
+  }
+}
+
+/* Touch, or any width a tablet might be: the nav words and the wordmark keep
+   their size, but each carries a full 44px target.
+   The negative margin keeps the masthead where it was. */
+@media (pointer: coarse), (max-width: 1279px) {
+  .nav a {
+    display: inline-block;
+    padding: 17px 6px;
+    margin: -17px -6px;
+  }
+
+  /* The hairline stays under the word, not under the padded target. */
+  .nav a::after,
+  .nav-rule {
+    inset-inline: 6px;
+    bottom: 13px;
+  }
+
+  /* The wordmark back to Home gets the same 44px target as the nav. */
+  a.mark {
+    display: inline-block;
+    padding: 8px 0;
+    margin: -8px 0;
+  }
+
+  .nav a::after {
+    inset-inline: 6px;
+    bottom: 13px;
+  }
+}
+
+/* ======================================================= browser surfaces --
+   The parts of the page the browser paints: they belong to the world too. */
+/* Selected text is inked, not marked: magenta stays reserved for a measured
+   change. */
+::selection {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+html {
+  caret-color: var(--ink);
+  scrollbar-color: var(--ink-ghost) var(--paper);
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+  width: 11px;
+  height: 11px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--paper);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--ink-ghost);
+  border: 3px solid var(--paper);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ink-faint);
+}

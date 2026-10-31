@@ -1,0 +1,371 @@
+---
+import { render } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import Masthead from "../../components/Masthead.astro";
+import Meta from "../../components/Meta.astro";
+import Outcome from "../../components/Outcome.astro";
+import Plan from "../../components/Plan.astro";
+import Plate from "../../components/Plate.astro";
+import Structure from "../../components/Structure.astro";
+import TitleBlock from "../../components/TitleBlock.astro";
+import { NEW_TAB } from "../../lib/contact";
+import { allProjects, displayTitle, sheetNo } from "../../lib/projects";
+import "../../styles/home.css";
+import "../../styles/work.css";
+
+/* One route per project, numbered and linked in the one ordering, so the
+   previous and next sheets are the neighbours on Work. */
+export const getStaticPaths = (async () => {
+  const projects = await allProjects();
+  return projects.map((project, i) => ({
+    params: { id: project.id },
+    props: {
+      project,
+      number: sheetNo(i + 1),
+      total: sheetNo(projects.length),
+      count: projects.length,
+      prev: projects[i - 1] ?? null,
+      next: projects[i + 1] ?? null,
+      prevNumber: sheetNo(i),
+      nextNumber: sheetNo(i + 2),
+    },
+  }));
+}) satisfies GetStaticPaths;
+
+const { project, number, total, count, prev, next, prevNumber, nextNumber } =
+  Astro.props;
+const { data } = project;
+const { Content, headings } = await render(project);
+
+/* The marks the record strip draws, so this sheet can key its own notation
+   for a visitor who arrives straight from a link. */
+const measured = Boolean(data.outcomeFigure && data.outcomeMetric);
+const unmeasured = !measured && !data.outcome;
+
+/* Without a plan, the right column carries the sheet's contents instead of
+   standing empty. */
+const sections = headings.filter((heading) => heading.depth === 2);
+
+/* On narrow screens a long case gets a way back up after every section: a
+   "Contents" link before each section heading after the first, and one at
+   the end. Added to the rendered notes at build time, so no script runs. */
+const hasContents = sections.length > 2;
+const contentsReturn =
+  '<p class="toc-return"><a href="#toc-narrow-title">Contents ↑</a></p>';
+const notesHtml =
+  hasContents && project.rendered?.html
+    ? (() => {
+        let first = true;
+        return (
+          project.rendered.html.replace(/<h2\b/g, (tag) => {
+            if (first) {
+              first = false;
+              return tag;
+            }
+            return contentsReturn + tag;
+          }) + contentsReturn
+        );
+      })()
+    : null;
+const hasPlan = Boolean(data.plan && data.plan.length > 0);
+const plates = data.plates ?? [];
+const projectName = data.title.split(" / ")[0];
+const sourceHost = data.platesSource ? new URL(data.platesSource).host : null;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link
+      rel="preload"
+      href="/fonts/archivo-var-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/plex-mono-400-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{data.title} — Farrel</title>
+    <meta name="description" content={data.description} />
+    <Meta title={`${data.title} — Farrel`} description={data.description} />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="sheet">
+      <Masthead current="work" />
+
+      <main id="main">
+        <article>
+          <header class="page-head">
+            <p class="leg zone">Sheet {number}</p>
+            <div class="page-intro">
+              <h1
+                class="disp page-title case-title sheet-title"
+                style={`view-transition-name: sheet-${project.id}`}
+              >
+                {displayTitle(data.title)}
+              </h1>
+              <p class="prose page-sub">{data.description}</p>
+            </div>
+            <dl class="spec">
+              <div class="row">
+                <dt class="leg">Year</dt>
+                <dd class="v">{data.year}</dd>
+              </div>
+              <div class="row">
+                <dt class="leg">Role</dt>
+                <dd class="v">{data.role}</dd>
+              </div>
+            </dl>
+          </header>
+
+          <!-- The record: the three fields every sheet carries, as its title
+               block. -->
+          <section class="case-record" aria-label="Record">
+            <div class="case-record-body">
+              <div class="cell">
+                <p class="leg k">Constraint</p>
+                <div class="conflict">
+                  <span class="conflict-mark hatch-cross" aria-hidden="true"
+                  ></span>
+                  <p class="v">{data.constraint}</p>
+                </div>
+              </div>
+              <div class="cell">
+                <p class="leg k">Decision</p>
+                <p class="v">{data.decision}</p>
+              </div>
+              <div class="cell fo">
+                <Outcome project={data} />
+              </div>
+            </div>
+            <ul class="sheet-key" aria-label="Key to this sheet's marks">
+              <li>
+                <span class="sheet-key-sw hatch-cross" aria-hidden="true"
+                ></span>Constraint
+              </li>
+              {
+                measured && (
+                  <li>
+                    <span
+                      class={`sheet-key-sw ${data.outcomeKind === "change" ? "hatch-ink" : "hatch-mag"}`}
+                      aria-hidden="true"
+                    />
+                    {data.outcomeKind === "change"
+                      ? "Before → after, changed"
+                      : "Before → after, measured"}
+                  </li>
+                )
+              }
+              {
+                unmeasured && (
+                  <li>
+                    <span class="sheet-key-sw mask-dot" aria-hidden="true" />
+                    Not yet measured
+                  </li>
+                )
+              }
+            </ul>
+          </section>
+
+          {
+            plates.length > 0 && (
+              <section class="plates" aria-label="Plates">
+                <div class="plates-body">
+                  <div class="plates-row">
+                    {plates.map((plate, i) => (
+                      <Plate
+                        image={plate.image}
+                        caption={plate.caption}
+                        view={plate.view}
+                        number={String(i + 1).padStart(2, "0")}
+                        project={projectName}
+                      />
+                    ))}
+                  </div>
+                  {data.platesSource && (
+                    <p class="plates-note">
+                      Captured from the reference copy at{" "}
+                      <a
+                        href={data.platesSource}
+                        target="_blank"
+                        rel="noopener"
+                      >
+                        {sourceHost}
+                        <span class="vh">{NEW_TAB}</span>
+                      </a>
+                    </p>
+                  )}
+                </div>
+              </section>
+            )
+          }
+
+          {
+            /* On narrow screens, where the right column is gone, the sheet's
+               sections are listed before the notes so a long case can be
+               crossed in one tap. */
+            hasContents && (
+              <nav class="toc toc-narrow" aria-labelledby="toc-narrow-title">
+                <h2 class="plan-h" id="toc-narrow-title">
+                  Contents
+                </h2>
+                <ol>
+                  {sections.map((section) => (
+                    <li>
+                      <a href={`#${section.slug}`}>{section.text}</a>
+                    </li>
+                  ))}
+                </ol>
+              </nav>
+            )
+          }
+
+          <div class="narrative">
+            {/* The notes come first in the source, so a screen reader or keyboard
+                user meets the problem before the drawing; the grid places the
+                drawing in the right column on wider screens. */}
+            {
+              notesHtml ? (
+                <div class="notes" set:html={notesHtml} />
+              ) : (
+                <div class="notes">
+                  <Content />
+                </div>
+              )
+            }
+            {
+              hasPlan && data.plan ? (
+                <aside class="plan-col">
+                  <div class="plan-stack">
+                    <Plan steps={data.plan} />
+                  {hasContents && (
+                    <nav
+                      class="toc-compact"
+                      aria-labelledby="toc-compact-title"
+                    >
+                      <h2 class="plan-h" id="toc-compact-title">
+                        Contents
+                      </h2>
+                      <ol>
+                        {sections.map((section) => (
+                          <li>
+                            <a href={`#${section.slug}`}>{section.text}</a>
+                          </li>
+                        ))}
+                      </ol>
+                    </nav>
+                  )}
+                  </div>
+                </aside>
+              ) : data.structure ? (
+                <aside class="plan-col">
+                  <div class="plan-stack">
+                    <Structure structure={data.structure} year={data.year} />
+                  {hasContents && (
+                    <nav
+                      class="toc-compact"
+                      aria-labelledby="toc-compact-title"
+                    >
+                      <h2 class="plan-h" id="toc-compact-title">
+                        Contents
+                      </h2>
+                      <ol>
+                        {sections.map((section) => (
+                          <li>
+                            <a href={`#${section.slug}`}>{section.text}</a>
+                          </li>
+                        ))}
+                      </ol>
+                    </nav>
+                  )}
+                  </div>
+                </aside>
+              ) : (
+                sections.length > 1 && (
+                  <aside class="plan-col toc-col">
+                    <nav class="toc" aria-labelledby="toc-title">
+                      <h2 class="plan-h" id="toc-title">
+                        Contents
+                      </h2>
+                      <ol>
+                        {sections.map((section) => (
+                          <li>
+                            <a href={`#${section.slug}`}>{section.text}</a>
+                          </li>
+                        ))}
+                      </ol>
+                    </nav>
+                  </aside>
+                )
+              )
+            }
+          </div>
+        </article>
+
+        <nav class="sheet-nav" aria-label="Other sheets">
+          <div class="sheet-nav-cell">
+            {
+              prev && (
+                <a class="sheet-nav-link" href={`/work/${prev.id}/`}>
+                  <span class="leg">Previous · Sheet {prevNumber}</span>
+                  <span
+                    class="sheet-nav-title sheet-title"
+                    style={`view-transition-name: sheet-${prev.id}`}
+                  >
+                    {displayTitle(prev.data.title)}
+                  </span>
+                </a>
+              )
+            }
+          </div>
+          <div class="sheet-nav-cell sheet-nav-all">
+            <a class="more-link" href="/work/">
+              <span class="more-label">See all work</span>
+              <span class="vh">, </span>
+              <span class="more-count">{count} {count === 1 ? "project" : "projects"}</span>
+            </a>
+          </div>
+          <div class="sheet-nav-cell sheet-nav-next">
+            {
+              next && (
+                <a class="sheet-nav-link" href={`/work/${next.id}/`}>
+                  <span class="leg">Next · Sheet {nextNumber}</span>
+                  <span
+                    class="sheet-nav-title sheet-title"
+                    style={`view-transition-name: sheet-${next.id}`}
+                  >
+                    {displayTitle(next.data.title)}
+                  </span>
+                </a>
+              )
+            }
+          </div>
+        </nav>
+      </main>
+
+      <footer class="closing">
+        <div class="closing-head">
+          <div>
+            <h2>Have a product or operations problem to solve?</h2>
+            <p class="sub">
+              Open to Product Engineering roles and contract work.
+            </p>
+          </div>
+          <a class="control" href="/contact/">
+            <span class="bar">Let's talk</span>
+            <span class="chip hatch" aria-hidden="true"></span>
+          </a>
+        </div>
+        <TitleBlock sheet={`${number} / ${total}`} />
+      </footer>
+    </div>
+  </body>
+</html>

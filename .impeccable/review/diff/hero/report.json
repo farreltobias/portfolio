@@ -1,0 +1,1050 @@
+{
+  "tool": "comp-diff",
+  "version": 1,
+  "createdAt": "2026-10-13T18:29:33.387Z",
+  "label": "hero",
+  "comp": ".impeccable/mocks/zone-a-ramp-left.png",
+  "build": ".impeccable/review/hero-repro.png",
+  "spec": ".impeccable/build/spec.json",
+  "compSize": "1536x864",
+  "buildSize": "1536x864",
+  "align": "top",
+  "overall": 0.9944,
+  "verdict": "match",
+  "scores": {
+    "overall": 0.9944,
+    "structure": 0.9906,
+    "color": 0.9995,
+    "colorIntersection": 0.999,
+    "paletteMatch": 0.9998,
+    "detail": 0.9911,
+    "detailRaw": 0.9911,
+    "detailAdded": 0,
+    "bands": 1
+  },
+  "palette": {
+    "comp": [
+      {
+        "hex": "#f8f8e8",
+        "coverage": 0.8986
+      },
+      {
+        "hex": "#181818",
+        "coverage": 0.0572
+      },
+      {
+        "hex": "#c3c3c1",
+        "coverage": 0.0185
+      },
+      {
+        "hex": "#8b8888",
+        "coverage": 0.0128
+      },
+      {
+        "hex": "#525252",
+        "coverage": 0.0086
+      },
+      {
+        "hex": "#e80878",
+        "coverage": 0.0042
+      }
+    ],
+    "build": [
+      {
+        "hex": "#f8f8e8",
+        "coverage": 0.8983
+      },
+      {
+        "hex": "#181818",
+        "coverage": 0.057
+      },
+      {
+        "hex": "#c4c4c1",
+        "coverage": 0.0187
+      },
+      {
+        "hex": "#8b8888",
+        "coverage": 0.0128
+      },
+      {
+        "hex": "#525252",
+        "coverage": 0.0087
+      },
+      {
+        "hex": "#e80878",
+        "coverage": 0.0044
+      }
+    ]
+  },
+  "regions": [
+    {
+      "id": "wordmark",
+      "x": 0.0313,
+      "y": 0.0463,
+      "w": 0.0846,
+      "h": 0.0324,
+      "kind": "chrome",
+      "score": {
+        "overall": 1,
+        "structure": 1,
+        "color": 1,
+        "colorIntersection": 1,
+        "paletteMatch": 1,
+        "detail": 1,
+        "detailRaw": 1,
+        "detailAdded": 0,
+        "bands": 1
+      },
+      "verdict": "match",
+      "inkBox": {
+        "comp": {
+          "x": 1,
+          "y": 3,
+          "w": 84,
+          "h": 20
+        },
+        "build": {
+          "x": 1,
+          "y": 3,
+          "w": 84,
+          "h": 20
+        }
+      },
+      "blocking": false,
+      "blockingReasons": [],
+      "rawVerdict": "match"
+    },
+    {
+      "id": "wordmark-sub",
+      "x": 0.0313,
+      "y": 0.0868,
+      "w": 0.0846,
+      "h": 0.0116,
+      "kind": "text",
+      "score": {
+        "overall": 1,
+        "structure": 1,
+        "color": 1,
+        "colorIntersection": 1,
+        "paletteMatch": 1,
+        "detail": 1,
+        "detailRaw": 1,
+        "detailAdded": 0,
+        "bands": 1
+      },
+      "verdict": "match",
+      "inkBox": {
+        "comp": {
+          "x": 0,
+          "y": 1,
+          "w": 128,
+          "h": 7
+        },
+        "build": {
+          "x": 0,
+          "y": 1,
+          "w": 128,
+          "h": 7
+        }
+      },
+      "blocking": false,
+      "blockingReasons": [],
+      "rawVerdict": "match"
+    },
+    {
+      "id": "nav",
+      "x": 0.8385,
+      "y": 0.0868,
+      "w": 0.1302,
+      "h": 0.0116,
+      "kind": "control",
+      "score": {
+        "overall": 1,
+        "structure": 1,
+        "color": 1,
+        "colorIntersection": 1,
+        "paletteMatch": 1,
+        "detail": 1,
+        "detailRaw": 1,
+        "detailAdded": 0,
+        "bands": 1
+      },
+      "verdict": "match",
+      "inkBox": {
+        "comp": {
+          "x": 0,
+          "y": 1,
+          "w": 198,
+          "h": 7
+        },
+        "build": {
+          "x": 0,
+          "y": 1,
+          "w": 198,
+          "h": 7
+        }
+      },
+      "blocking": false,
+      "blockingReasons": [],
+      "rawVerdict": "match"
+    },
+    {
+      "id": "gauge-bar",
+      "x": 0.0313,
+      "y": 0.162,
+      "w": 0.1048,
+      "h": 0.6829,
+      "kind": "chrome",
+      "score": {
+        "overall": 1,
+        "structure": 1,
+        "color": 1,
+        "colorIntersection": 1,
+        "paletteMatch": 1,
+        "detail": 1,
+        "detailRaw": 1,
+        "detailAdded": 0,
+        "bands": 1
+      },
+      "verdict": "match",
+      "inkBox": {
+        "comp": {
+          "x": 0,
+          "y": 19,
+          "w": 161,
+          "h": 569
+        },
+        "build": {
+          "x": 0,
+          "y": 19,
+          "w": 161,
+          "h": 569
+        }
+      },
+      "blocking": false,
+      "blockingReasons": [],
+      "rawVerdict": "match"
+    },
+    {
+      "id": "gauge-caption",
+      "x": 0.0313,
+      "y": 0.7384,
+      "w": 0.1048,
+      "h": 0.1065,
+      "kind": "text",
+      "score": {
+        "overall": 1,
+        "structure": 1,
+        "color": 1,
+        "colorIntersection": 1,
+        "paletteMatch": 1,
+        "detail": 1,
+        "detailRaw": 1,
+        "detailAdded": 0,
+        "bands": 1
+      },
+      "verdict": "match",
+      "inkBox": {
+        "comp": {
+          "x": 0,
+          "y": 0,
+          "w": 161,
+          "h": 90
+        },
+        "build": {
+          "x": 0,
+          "y": 0,
+          "w": 161,
+          "h": 90
+        }
+      },
+      "blocking": false,
+      "blockingReasons": [],
+      "rawVerdict": "match"
+    },
+    {
+      "id": "gauge-level",
+      "x": 0.0313,
+      "y": 0.75,
+      "w": 0.1048,
+      "h": 0.0174,
+      "kind": "text",
+      "score": {
+        "overall": 1,
+        "structure": 1,
+        "color": 1,
+        "colorIntersection": 1,
+        "paletteMatch": 1,
+        "detail": 1,
+        "detailRaw": 1,
+        "detailAdded": 0,
+        "bands": 1
+      },
+      "verdict": "match",
+      "inkBox": {
+        "comp": {
+          "x": 0,
+          "y": 3,
+          "w": 161,
+          "h": 11
+        },
+        "build": {
+          "x": 0,
+          "y": 3,
+          "w": 161,
+          "h": 11
+        }
+      },
+      "blocking": false,
+      "blockingReasons": [],
+      "rawVerdict": "match"
+    },
+    {
+      "id": "positioning-label",
+      "x": 0.1745,
+      "y": 0.162,
+      "w": 0.4818,
+      "h": 0.0116,
+      "kind": "text",
+      "score": {
+        "overall": 1,
+        "structure": 1,
+        "color": 1,
+        "colorIntersection": 1,
+        "paletteMatch": 1,
+        "detail": 1,
+        "detailRaw": 1,
+        "detailAdded": 0,
+        "bands": 1
+      },
+      "verdict": "match",
+      "inkBox": {
+        "comp": {
+          "x": 1,
+          "y": 1,
+          "w": 81,
+          "h": 7
+        },
+        "build": {
+          "x": 1,
+          "y": 1,
+          "w": 81,
+          "h": 7
+        }
+      },
+      "blocking": false,
+      "blockingReasons": [],
+      "rawVerdict": "match"
+    },
+    {
+      "id": "headline",
+      "x": 0.1745,
+      "y": 0.1991,
+      "w": 0.4818,
+      "h": 0.3495,
+      "kind": "text",
+      "score": {
+        "overall": 1,
+        "structure": 1,
+        "color": 1,
+        "colorIntersection": 1,
+        "paletteMatch": 1,
+        "detail": 1,
+        "detailRaw": 1,
+        "detailAdded": 0,
+        "bands": 1
+      },
+      "verdict": "match",
+      "inkBox": {
+        "comp": {
+          "x": 1,
+          "y": 7,
+          "w": 683,
+          "h": 285
+        },
+        "build": {
+          "x": 1,
+          "y": 7,
+          "w": 683,
+          "h": 285
+        }
+      },
+      "blocking": false,
+      "blockingReasons": [],
+      "rawVerdict": "match"
+    },
+    {
+      "id": "subcopy",
+      "x": 0.1745,
+      "y": 0.5833,
+      "w": 0.3906,
+      "h": 0.0521,
+      "kind": "text",
+      "score": {
+        "overall": 1,
+        "structure": 1,
+        "color": 1,
+        "colorIntersection": 1,
+        "paletteMatch": 1,
+        "detail": 1,
+        "detailRaw": 1,
+        "detailAdded": 0,
+        "bands": 1
+      },
+      "verdict": "match",
+      "inkBox": {
+        "comp": {
+          "x": 1,
+          "y": 5,
+          "w": 529,
+          "h": 36
+        },
+        "build": {
+          "x": 1,
+          "y": 5,
+          "w": 529,
+          "h": 36
+        }
+      },
+      "blocking": false,
+      "blockingReasons": [],
+      "rawVerdict": "match"
+    },
+    {
+      "id": "cta",
+      "x": 0.1745,
+      "y": 0.7083,
+      "w": 0.1465,
+      "h": 0.0671,
+      "kind": "control",
+      "score": {
+        "overall": 1,
+        "structure": 1,
+        "color": 1,
+        "colorIntersection": 1,
+        "paletteMatch": 1,
+        "detail": 1,
+        "detailRaw": 1,
+        "detailAdded": 0,
+        "bands": 1
+      },
+      "verdict": "match",
+      "inkBox": {
+        "comp": {
+          "x": 31,
+          "y": 1,
+          "w": 193,
+          "h": 56
+        },
+        "build": {
+          "x": 31,
+          "y": 1,
+          "w": 193,
+          "h": 56
+        }
+      },
+      "blocking": false,
+      "blockingReasons": [],
+      "rawVerdict": "match"
+    },
+    {
+      "id": "cta-chip",
+      "x": 0.2663,
+      "y": 0.7083,
+      "w": 0.0547,
+      "h": 0.0671,
+      "kind": "chrome",
+      "score": {
+        "overall": 1,
+        "structure": 1,
+        "color": 1,
+        "colorIntersection": 1,
+        "paletteMatch": 1,
+        "detail": 1,
+        "detailRaw": 1,
+        "detailAdded": 0,
+        "bands": 1
+      },
+      "verdict": "match",
+      "inkBox": {
+        "comp": {
+          "x": 0,
+          "y": 0,
+          "w": 84,
+          "h": 58
+        },
+        "build": {
+          "x": 0,
+          "y": 0,
+          "w": 84,
+          "h": 58
+        }
+      },
+      "blocking": false,
+      "blockingReasons": [],
+      "rawVerdict": "match"
+    },
+    {
+      "id": "notation-key",
+      "x": 0.1745,
+      "y": 0.8449,
+      "w": 0.306,
+      "h": 0.0926,
+      "kind": "chrome",
+      "score": {
+        "overall": 1,
+        "structure": 1,
+        "color": 1,
+        "colorIntersection": 1,
+        "paletteMatch": 1,
+        "detail": 1,
+        "detailRaw": 1,
+        "detailAdded": 0,
+        "bands": 1
+      },
+      "verdict": "match",
+      "inkBox": {
+        "comp": {
+          "x": 0,
+          "y": 0,
+          "w": 470,
+          "h": 78
+        },
+        "build": {
+          "x": 0,
+          "y": 0,
+          "w": 470,
+          "h": 78
+        }
+      },
+      "blocking": false,
+      "blockingReasons": [],
+      "rawVerdict": "match"
+    },
+    {
+      "id": "spec-block",
+      "x": 0.7826,
+      "y": 0.162,
+      "w": 0.1862,
+      "h": 0.1227,
+      "kind": "chrome",
+      "score": {
+        "overall": 1,
+        "structure": 1,
+        "color": 1,
+        "colorIntersection": 1,
+        "paletteMatch": 1,
+        "detail": 1,
+        "detailRaw": 1,
+        "detailAdded": 0,
+        "bands": 1
+      },
+      "verdict": "match",
+      "inkBox": {
+        "comp": {
+          "x": 0,
+          "y": 0,
+          "w": 286,
+          "h": 93
+        },
+        "build": {
+          "x": 0,
+          "y": 0,
+          "w": 286,
+          "h": 93
+        }
+      },
+      "blocking": false,
+      "blockingReasons": [],
+      "rawVerdict": "match"
+    },
+    {
+      "id": "record-sheet",
+      "x": 0.6589,
+      "y": 0.4051,
+      "w": 0.3105,
+      "h": 0.4086,
+      "kind": "chrome",
+      "score": {
+        "overall": 0.8979,
+        "structure": 0.8005,
+        "color": 0.9863,
+        "colorIntersection": 0.9916,
+        "paletteMatch": 0.9835,
+        "detail": 0.9259,
+        "detailRaw": 0.9311,
+        "detailAdded": 0.0104,
+        "bands": 0.9314
+      },
+      "verdict": "match",
+      "inkBox": {
+        "comp": {
+          "x": 0,
+          "y": 0,
+          "w": 477,
+          "h": 353
+        },
+        "build": {
+          "x": 0,
+          "y": 0,
+          "w": 477,
+          "h": 352
+        }
+      },
+      "blocking": false,
+      "blockingReasons": [],
+      "rawVerdict": "match"
+    },
+    {
+      "id": "record-header",
+      "x": 0.6595,
+      "y": 0.4063,
+      "w": 0.3073,
+      "h": 0.044,
+      "kind": "chrome",
+      "score": {
+        "overall": 0.6595,
+        "structure": 0.7434,
+        "color": 0.9652,
+        "colorIntersection": 0.9599,
+        "paletteMatch": 0.968,
+        "detail": 0.416,
+        "detailRaw": 0.5046,
+        "detailAdded": 0.1771,
+        "bands": 0.36
+      },
+      "verdict": "drift",
+      "inkBox": {
+        "comp": {
+          "x": 0,
+          "y": 0,
+          "w": 472,
+          "h": 38
+        },
+        "build": {
+          "x": 0,
+          "y": 0,
+          "w": 472,
+          "h": 36
+        }
+      },
+      "blocking": false,
+      "blockingReasons": [],
+      "rawVerdict": "drift"
+    },
+    {
+      "id": "record-title",
+      "x": 0.6602,
+      "y": 0.4444,
+      "w": 0.3073,
+      "h": 0.0648,
+      "kind": "text",
+      "score": {
+        "overall": 0.7926,
+        "structure": 0.7775,
+        "color": 0.9774,
+        "colorIntersection": 0.9849,
+        "paletteMatch": 0.9734,
+        "detail": 0.6229,
+        "detailRaw": 0.6646,
+        "detailAdded": 0.0833,
+        "bands": 0.66
+      },
+      "verdict": "drift",
+      "inkBox": {
+        "comp": {
+          "x": 0,
+          "y": 0,
+          "w": 472,
+          "h": 40
+        },
+        "build": {
+          "x": 0,
+          "y": 0,
+          "w": 472,
+          "h": 38
+        }
+      },
+      "blocking": false,
+      "blockingReasons": [],
+      "rawVerdict": "drift"
+    },
+    {
+      "id": "constraint-label",
+      "x": 0.6693,
+      "y": 0.5162,
+      "w": 0.2891,
+      "h": 0.0162,
+      "kind": "text",
+      "score": {
+        "overall": 0.9135,
+        "structure": 0.9641,
+        "color": 0.9872,
+        "colorIntersection": 0.9839,
+        "paletteMatch": 0.989,
+        "detail": 0.5645,
+        "detailRaw": 0.5958,
+        "detailAdded": 0.0625,
+        "bands": 1
+      },
+      "verdict": "match",
+      "inkBox": {
+        "comp": {
+          "x": 1,
+          "y": 4,
+          "w": 79,
+          "h": 8
+        },
+        "build": {
+          "x": 0,
+          "y": 2,
+          "w": 77,
+          "h": 8
+        }
+      },
+      "blocking": false,
+      "blockingReasons": [],
+      "rawVerdict": "match"
+    },
+    {
+      "id": "constraint-mark",
+      "x": 0.6693,
+      "y": 0.5405,
+      "w": 0.0169,
+      "h": 0.0301,
+      "kind": "chrome",
+      "score": {
+        "overall": 0.5552,
+        "structure": 0.3425,
+        "color": 0.7776,
+        "colorIntersection": 0.6568,
+        "paletteMatch": 0.8427,
+        "detail": 0.4436,
+        "detailRaw": 0.5478,
+        "detailAdded": 0.2083,
+        "bands": 0.8667
+      },
+      "verdict": "contradicted",
+      "inkBox": {
+        "comp": {
+          "x": 0,
+          "y": 0,
+          "w": 26,
+          "h": 26
+        },
+        "build": {
+          "x": 0,
+          "y": 0,
+          "w": 24,
+          "h": 25
+        }
+      },
+      "blocking": false,
+      "blockingReasons": [],
+      "rawVerdict": "contradicted"
+    },
+    {
+      "id": "constraint-value",
+      "x": 0.6934,
+      "y": 0.5359,
+      "w": 0.1725,
+      "h": 0.0243,
+      "kind": "text",
+      "score": {
+        "overall": 0.6922,
+        "structure": 0.6409,
+        "color": 0.9572,
+        "colorIntersection": 0.9522,
+        "paletteMatch": 0.9599,
+        "detail": 0.5448,
+        "detailRaw": 0.6542,
+        "detailAdded": 0.2188,
+        "bands": 0.5067
+      },
+      "verdict": "drift",
+      "inkBox": {
+        "comp": {
+          "x": 1,
+          "y": 4,
+          "w": 262,
+          "h": 13
+        },
+        "build": {
+          "x": 0,
+          "y": 2,
+          "w": 260,
+          "h": 13
+        }
+      },
+      "blocking": false,
+      "blockingReasons": [],
+      "rawVerdict": "drift"
+    },
+    {
+      "id": "decision-label",
+      "x": 0.6699,
+      "y": 0.5903,
+      "w": 0.2891,
+      "h": 0.0162,
+      "kind": "text",
+      "score": {
+        "overall": 0.9192,
+        "structure": 0.9684,
+        "color": 0.9882,
+        "colorIntersection": 0.9852,
+        "paletteMatch": 0.9898,
+        "detail": 0.586,
+        "detailRaw": 0.5965,
+        "detailAdded": 0.0208,
+        "bands": 1
+      },
+      "verdict": "match",
+      "inkBox": {
+        "comp": {
+          "x": 1,
+          "y": 5,
+          "w": 58,
+          "h": 7
+        },
+        "build": {
+          "x": 0,
+          "y": 3,
+          "w": 56,
+          "h": 7
+        }
+      },
+      "blocking": false,
+      "blockingReasons": [],
+      "rawVerdict": "match"
+    },
+    {
+      "id": "decision-value",
+      "x": 0.6699,
+      "y": 0.6088,
+      "w": 0.2891,
+      "h": 0.0266,
+      "kind": "text",
+      "score": {
+        "overall": 0.7918,
+        "structure": 0.9161,
+        "color": 0.9797,
+        "colorIntersection": 0.9827,
+        "paletteMatch": 0.9781,
+        "detail": 0.5918,
+        "detailRaw": 0.6387,
+        "detailAdded": 0.0938,
+        "bands": 0
+      },
+      "verdict": "drift",
+      "inkBox": {
+        "comp": {
+          "x": 1,
+          "y": 5,
+          "w": 238,
+          "h": 14
+        },
+        "build": {
+          "x": 0,
+          "y": 3,
+          "w": 236,
+          "h": 14
+        }
+      },
+      "blocking": false,
+      "blockingReasons": [],
+      "rawVerdict": "drift"
+    },
+    {
+      "id": "outcome-label",
+      "x": 0.6699,
+      "y": 0.6586,
+      "w": 0.2891,
+      "h": 0.0162,
+      "kind": "text",
+      "score": {
+        "overall": 0.8487,
+        "structure": 0.9092,
+        "color": 0.9803,
+        "colorIntersection": 0.9755,
+        "paletteMatch": 0.9829,
+        "detail": 0.5937,
+        "detailRaw": 0.651,
+        "detailAdded": 0.1146,
+        "bands": 0.6
+      },
+      "verdict": "match",
+      "inkBox": {
+        "comp": {
+          "x": 1,
+          "y": 3,
+          "w": 210,
+          "h": 9
+        },
+        "build": {
+          "x": 0,
+          "y": 1,
+          "w": 208,
+          "h": 9
+        }
+      },
+      "blocking": false,
+      "blockingReasons": [],
+      "rawVerdict": "match"
+    },
+    {
+      "id": "outcome-delta",
+      "x": 0.6706,
+      "y": 0.6806,
+      "w": 0.2891,
+      "h": 0.0509,
+      "kind": "text",
+      "score": {
+        "overall": 0.7086,
+        "structure": 0.6438,
+        "color": 0.9751,
+        "colorIntersection": 0.9605,
+        "paletteMatch": 0.983,
+        "detail": 0.6995,
+        "detailRaw": 0.7984,
+        "detailAdded": 0.1979,
+        "bands": 0.38
+      },
+      "verdict": "drift",
+      "inkBox": {
+        "comp": {
+          "x": 1,
+          "y": 6,
+          "w": 334,
+          "h": 38
+        },
+        "build": {
+          "x": 0,
+          "y": 4,
+          "w": 378,
+          "h": 40
+        }
+      },
+      "blocking": false,
+      "blockingReasons": [],
+      "rawVerdict": "drift"
+    },
+    {
+      "id": "outcome-band",
+      "x": 0.6706,
+      "y": 0.7396,
+      "w": 0.2891,
+      "h": 0.0197,
+      "kind": "chrome",
+      "score": {
+        "overall": 0.7616,
+        "structure": 0.735,
+        "color": 0.9907,
+        "colorIntersection": 0.985,
+        "paletteMatch": 0.9938,
+        "detail": 0.7628,
+        "detailRaw": 0.8045,
+        "detailAdded": 0.0833,
+        "bands": 0.44
+      },
+      "verdict": "drift",
+      "inkBox": {
+        "comp": {
+          "x": 0,
+          "y": 0,
+          "w": 444,
+          "h": 17
+        },
+        "build": {
+          "x": 0,
+          "y": 0,
+          "w": 444,
+          "h": 15
+        }
+      },
+      "blocking": false,
+      "blockingReasons": [],
+      "rawVerdict": "drift"
+    },
+    {
+      "id": "record-foot",
+      "x": 0.6615,
+      "y": 0.772,
+      "w": 0.3073,
+      "h": 0.0417,
+      "kind": "text",
+      "score": {
+        "overall": 0.7595,
+        "structure": 0.8392,
+        "color": 0.9685,
+        "colorIntersection": 0.9482,
+        "paletteMatch": 0.9794,
+        "detail": 0.465,
+        "detailRaw": 0.5223,
+        "detailAdded": 0.1146,
+        "bands": 0.28
+      },
+      "verdict": "drift",
+      "inkBox": {
+        "comp": {
+          "x": 0,
+          "y": 0,
+          "w": 472,
+          "h": 36
+        },
+        "build": {
+          "x": 0,
+          "y": 10,
+          "w": 472,
+          "h": 25
+        }
+      },
+      "blocking": false,
+      "blockingReasons": [],
+      "rawVerdict": "drift"
+    }
+  ],
+  "files": {
+    "sideBySide": "/Users/farreltobias/www/portfolio/.impeccable/review/diff/hero/side-by-side.png",
+    "heatmap": "/Users/farreltobias/www/portfolio/.impeccable/review/diff/hero/heatmap.png",
+    "regionFiles": [
+      "/Users/farreltobias/www/portfolio/.impeccable/review/diff/hero/regions/wordmark.png",
+      "/Users/farreltobias/www/portfolio/.impeccable/review/diff/hero/regions/wordmark-sub.png",
+      "/Users/farreltobias/www/portfolio/.impeccable/review/diff/hero/regions/nav.png",
+      "/Users/farreltobias/www/portfolio/.impeccable/review/diff/hero/regions/gauge-bar.png",
+      "/Users/farreltobias/www/portfolio/.impeccable/review/diff/hero/regions/gauge-caption.png",
+      "/Users/farreltobias/www/portfolio/.impeccable/review/diff/hero/regions/gauge-level.png",
+      "/Users/farreltobias/www/portfolio/.impeccable/review/diff/hero/regions/positioning-label.png",
+      "/Users/farreltobias/www/portfolio/.impeccable/review/diff/hero/regions/headline.png",
+      "/Users/farreltobias/www/portfolio/.impeccable/review/diff/hero/regions/subcopy.png",
+      "/Users/farreltobias/www/portfolio/.impeccable/review/diff/hero/regions/cta.png",
+      "/Users/farreltobias/www/portfolio/.impeccable/review/diff/hero/regions/cta-chip.png",
+      "/Users/farreltobias/www/portfolio/.impeccable/review/diff/hero/regions/notation-key.png",
+      "/Users/farreltobias/www/portfolio/.impeccable/review/diff/hero/regions/spec-block.png",
+      "/Users/farreltobias/www/portfolio/.impeccable/review/diff/hero/regions/record-sheet.png",
+      "/Users/farreltobias/www/portfolio/.impeccable/review/diff/hero/regions/record-header.png",
+      "/Users/farreltobias/www/portfolio/.impeccable/review/diff/hero/regions/record-title.png",
+      "/Users/farreltobias/www/portfolio/.impeccable/review/diff/hero/regions/constraint-label.png",
+      "/Users/farreltobias/www/portfolio/.impeccable/review/diff/hero/regions/constraint-mark.png",
+      "/Users/farreltobias/www/portfolio/.impeccable/review/diff/hero/regions/constraint-value.png",
+      "/Users/farreltobias/www/portfolio/.impeccable/review/diff/hero/regions/decision-label.png",
+      "/Users/farreltobias/www/portfolio/.impeccable/review/diff/hero/regions/decision-value.png",
+      "/Users/farreltobias/www/portfolio/.impeccable/review/diff/hero/regions/outcome-label.png",
+      "/Users/farreltobias/www/portfolio/.impeccable/review/diff/hero/regions/outcome-delta.png",
+      "/Users/farreltobias/www/portfolio/.impeccable/review/diff/hero/regions/outcome-band.png",
+      "/Users/farreltobias/www/portfolio/.impeccable/review/diff/hero/regions/record-foot.png"
+    ]
+  },
+  "interpretation": "hero-gate",
+  "measurementsAvailable": true,
+  "gate": {
+    "ok": true,
+    "reasons": [],
+    "advisories": [
+      "(advisory, above the 72% bar; fix in the polish pass before responsive) 2 readings:",
+      "  text constraint-label: ink is #606366 in the build, #a5a7a7 in the comp; use the comp's colour",
+      "  chrome record-header: its rule sits 1px into the box in the comp and 31px in the build (+30px), so the strip is taller than the comp's; match the height, not only the position"
+    ],
+    "unscopedReasons": []
+  },
+  "rawReport": ".impeccable/review/diff/hero/raw-report.json"
+}

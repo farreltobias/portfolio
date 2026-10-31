@@ -1,0 +1,42 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { displayTitle } from "../lib/projects";
+import Outcome from "./Outcome.astro";
+
+/* One sheet in the register: the same three fields wherever it appears, so a
+   project reads the same on Home and on Work. The whole row opens its case
+   study; the link names it in plain words. */
+interface Props {
+  project: CollectionEntry<"projects">;
+  number: string;
+  heading?: "h2" | "h3";
+}
+
+const { project, number, heading: Heading = "h3" } = Astro.props;
+const { data } = project;
+---
+
+<article class="index-row">
+  <div class="no">{number}</div>
+  <div class="th">
+    <Heading class="ti">
+      {displayTitle(data.title)}
+    </Heading>
+    <p class="yr">{data.year}</p>
+    <a class="sheet-link leg" href={`/work/${project.id}/`}>
+      Read case study<span class="vh">: {data.title}</span>
+    </a>
+  </div>
+  <div class="fl">
+    <p class="leg k">Constraint</p>
+    <div class="conflict">
+      <span class="conflict-mark hatch-cross" aria-hidden="true"></span>
+      <p class="v">{data.constraint}</p>
+    </div>
+    <p class="leg k">Decision</p>
+    <p class="v">{data.decision}</p>
+  </div>
+  <div class="fo">
+    <Outcome project={data} />
+  </div>
+</article>

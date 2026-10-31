@@ -1,0 +1,341 @@
+/* ================================================================== about --
+   The cover sheet. Everything is the Home's vocabulary; this file places the
+   habits and the phases with their duration bars. */
+
+/* ----------------------------------------------------------------- habits --
+   Ruled rows like the index: the habit, what it means, and the sheets that
+   show it. */
+.habits {
+  list-style: none;
+  margin-top: 26px;
+  padding: 0;
+  border-top: 1px solid var(--rule);
+}
+
+.habit {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.25fr) minmax(0, 0.85fr);
+  column-gap: 32px;
+  align-items: start;
+  padding: 22px 0 24px;
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.habit-title {
+  font-family: Archivo, sans-serif;
+  font-weight: 700;
+  font-stretch: 74%;
+  text-transform: uppercase;
+  font-size: 25px;
+  line-height: 1;
+  text-wrap: balance;
+}
+
+.habit-text {
+  font-family: "Plex Mono", monospace;
+  font-size: var(--t-body);
+  line-height: 1.62;
+  color: var(--ink-soft);
+  max-width: 52ch;
+  text-wrap: pretty;
+}
+
+.habit-ref {
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+}
+
+/* Evidence stated rather than linked: the reference's lettering without its
+   hairline, since there is nowhere to go. */
+.ref-note {
+  display: grid;
+  gap: 4px;
+  color: var(--ink);
+}
+
+/* A cross-reference, drawn as the sheet link is: tracked number over title,
+   carried by a hairline. */
+.ref-link {
+  display: grid;
+  gap: 4px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--ink);
+  color: var(--ink);
+  transition: box-shadow 120ms linear;
+}
+
+.ref-no {
+  font-family: Archivo, sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: var(--t-leg);
+  line-height: 1.25;
+  color: var(--ink-faint);
+}
+
+.ref-title {
+  font-family: "Plex Mono", monospace;
+  font-size: var(--t-field);
+  line-height: 1.4;
+}
+
+@media (hover: hover) {
+  .ref-link:hover {
+    box-shadow: 0 1px 0 var(--ink);
+  }
+}
+
+/* ----------------------------------------------------------------- phases --
+   Newest first, so the current work leads and the earlier work sits beneath
+   it at a step down. A spine runs down the left: each phase's bar spans its
+   row from the row's top rule, with a tick where each year begins, and a
+   short break before the next phase. */
+.spine-key {
+  margin-top: 26px;
+  font-family: "Plex Mono", monospace;
+  font-size: var(--t-note);
+  color: var(--ink-faint);
+}
+
+.phases {
+  margin-top: 14px;
+  border-top: 1px solid var(--rule);
+}
+
+.phase {
+  position: relative;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 72px 150px minmax(0, 1fr);
+  column-gap: 32px;
+  align-items: start;
+  padding: 22px 0 26px;
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.phase-years,
+.phase-body {
+  min-width: 0;
+}
+
+.phase-years {
+  grid-column: 2;
+}
+
+.phase-body {
+  grid-column: 3;
+}
+
+/* The year labels sit on the left of the axis, like a scale's numbers, so
+   they never read as a second date beside the phase's own years. */
+.phase-spine {
+  --axis: 52px;
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 72px;
+}
+
+/* The axis, continuous through every row. */
+.phase-spine::before {
+  content: "";
+  position: absolute;
+  left: var(--axis);
+  top: 0;
+  bottom: -1px;
+  border-left: 1px solid var(--rule-soft);
+}
+
+.spine-bar {
+  position: absolute;
+  top: 0;
+  left: calc(var(--axis) - 6px);
+  bottom: 10px;
+  width: 13px;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+}
+
+/* The current phase is still running: filled, its top left open, and the
+   axis carried on past it as a dashed line, the way a plan draws work
+   still under way. */
+.phase.is-current .spine-bar {
+  background: var(--ink);
+  border-top: 0;
+}
+
+/* The current phase inks in once on arrival, from its open top down. */
+.phase.is-current .spine-bar {
+  transform-origin: top;
+  animation: draw-down 520ms cubic-bezier(0.2, 0, 0, 1) 200ms both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .phase.is-current .spine-bar {
+    animation: none;
+  }
+}
+
+.phase.is-current .spine-bar::before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  bottom: 100%;
+  height: 14px;
+  border-left: 1px dashed var(--ink);
+}
+
+/* A year boundary at its true place on the axis, with the year beside it. */
+.spine-tick {
+  position: absolute;
+  top: var(--at);
+  left: -5px;
+  width: 21px;
+  border-top: 1px solid var(--ink);
+}
+
+.spine-year {
+  position: absolute;
+  right: calc(100% + 6px);
+  top: 0;
+  transform: translateY(-50%);
+  font-family: "Plex Mono", monospace;
+  font-size: var(--t-key);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  color: var(--ink-faint);
+}
+
+.phases + .more-link {
+  margin-top: 32px;
+}
+
+.phase-years {
+  font-family: "Plex Mono", monospace;
+  font-size: var(--t-field);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-faint);
+  padding-top: 4px;
+}
+
+.phase-title {
+  font-family: Archivo, sans-serif;
+  font-weight: 700;
+  font-stretch: 74%;
+  text-transform: uppercase;
+  font-size: 25px;
+  line-height: 1;
+}
+
+.phase.is-current .phase-title {
+  font-size: 34px;
+}
+
+.phase.is-current .phase-years {
+  color: var(--ink);
+  padding-top: 8px;
+}
+
+.phase-body p {
+  margin-top: 14px;
+  max-width: 68ch;
+  font-family: "Plex Mono", monospace;
+  font-size: var(--t-body);
+  line-height: 1.62;
+  color: var(--ink-soft);
+  text-wrap: pretty;
+}
+
+.phase:not(.is-current) .phase-body p {
+  font-size: var(--t-field);
+  max-width: 72ch;
+}
+
+.phase-body a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ref-link {
+    transition: none;
+  }
+}
+
+/* ============================================================= responsive -- */
+@media (max-width: 1279px) {
+  .habit {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+    row-gap: 16px;
+  }
+
+  .habit-ref {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 760px) {
+  .habit {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 12px;
+  }
+
+  .habit-ref {
+    grid-column: 1;
+    margin-top: 4px;
+  }
+
+  /* The case study's section heading on a phone: one size for one role. */
+  .habit-title,
+  .phase-title {
+    font-size: 24px;
+  }
+
+  .phase.is-current .phase-title {
+    font-size: 28px;
+  }
+
+  /* A thin rail down the left; the rows stack beside it, years over title.
+     The labels drop: each row states its years in text. */
+  .phase {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 8px;
+    padding-left: 36px;
+  }
+
+  .phase-years,
+  .phase-body {
+    grid-column: 1;
+  }
+
+  .phase-spine {
+    --axis: 11px;
+    width: 24px;
+  }
+
+  .spine-bar {
+    left: calc(var(--axis) - 5px);
+    width: 11px;
+  }
+
+  .phase.is-current .spine-bar::before {
+    left: 4px;
+  }
+
+  .spine-tick {
+    left: -4px;
+    width: 17px;
+  }
+
+  .spine-year {
+    display: none;
+  }
+
+  .phase-years,
+  .phase.is-current .phase-years {
+    padding-top: 0;
+  }
+}

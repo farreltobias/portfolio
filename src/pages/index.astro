@@ -1,0 +1,269 @@
+---
+import IndexRow from "../components/IndexRow.astro";
+import Masthead from "../components/Masthead.astro";
+import Meta from "../components/Meta.astro";
+import Notation from "../components/Notation.astro";
+import Outcome from "../components/Outcome.astro";
+import TitleBlock from "../components/TitleBlock.astro";
+import {
+  contactLinkAttrs,
+  contactPaths,
+  NEW_TAB,
+  opensNewTab,
+} from "../lib/contact";
+import {
+  allProjects,
+  displayTitle,
+  sheetNo,
+  sheetNumberOf,
+} from "../lib/projects";
+import "../styles/home.css";
+
+/* The whole body of work in its one ordering; sheet numbers are taken from
+   it, so a project's number is the same here, on Work and on its own sheet.
+   Home shows the featured ones: the lead as a record sheet, the rest in the
+   index below, so no project is presented twice. */
+const all = await allProjects();
+const projects = all.filter((project) => project.data.featured);
+const [lead, ...rest] = projects;
+const total = all.length;
+
+/* The tonal key, read in roman the way a plan scale is: every step of the
+   ramp, declared once. It is the vocabulary, not a reading of anything. */
+const ZONE = ["0", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
+const steps = [...ZONE.keys()].reverse(); // X at the top, 0 at the base
+
+/* The steps the page actually draws with. The key names them, so the ramp is
+   a legend for the sheet's tones rather than a picture of a scale. */
+const ROLE: Record<number, string> = {
+  10: "Ink",
+  9: "Prose",
+  7: "Labels",
+  2: "Rules",
+  1: "Hover",
+  0: "Field",
+};
+
+/* Only the paths Farrel has filled in. */
+const reach = contactPaths.filter((path) => path.href);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link
+      rel="preload"
+      href="/fonts/archivo-var-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/plex-mono-400-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Farrel — Product Engineer</title>
+    <meta
+      name="description"
+      content="Farrel is a Product Engineer who builds software that simplifies how products and operations run, from problem definition to shipped solution."
+    />
+    <Meta
+      title="Farrel — Product Engineer"
+      previewTitle="I build software that simplifies how products and operations run."
+      description="Farrel is a Product Engineer who builds software that simplifies how products and operations run, from problem definition to shipped solution." />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="sheet">
+      <Masthead current="home" />
+
+      <main id="main">
+      <div class="field">
+        <div class="col-centre">
+          <h1 class="disp headline">
+            I build software that simplifies how products and operations run.
+          </h1>
+          <p class="prose subcopy">
+            Problem definition to shipped solution. Operational bottlenecks,
+            internal processes, marketplace complexity.
+          </p>
+
+          <a class="control" href="/contact/">
+            <span class="bar">Let's talk</span>
+            <span class="chip hatch" aria-hidden="true"></span>
+          </a>
+
+        </div>
+
+        <div class="col-right">
+          <dl class="spec">
+            <div class="row">
+              <dt class="leg">Role</dt>
+              <dd class="v">Product Engineer</dd>
+            </div>
+            <div class="row">
+              <dt class="leg">Status</dt>
+              <dd class="v">Available</dd>
+            </div>
+            <div class="row">
+              <dt class="leg">Location</dt>
+              <dd class="v">Brazil — remote</dd>
+            </div>
+          </dl>
+
+          {/* Nothing featured yet: the field holds without a sheet. */}
+          {lead && (
+            <article class="record">
+              <div class="rh">
+                <span class="sheet-no">
+                  Sheet {sheetNumberOf(all, lead.id)} / {sheetNo(all.length)}
+                </span>
+              </div>
+              <h2 class="rt">
+                {displayTitle(lead.data.title)}
+              </h2>
+
+              <div class="f">
+                <p class="leg k">Constraint</p>
+                <div class="conflict">
+                  <span class="conflict-mark hatch-cross" aria-hidden="true"></span>
+                  <p class="v">{lead.data.constraint}</p>
+                </div>
+              </div>
+
+              <div class="f">
+                <p class="leg k">Decision</p>
+                <p class="v">{lead.data.decision}</p>
+              </div>
+
+              <div class="out">
+                <Outcome project={lead.data} />
+              </div>
+
+              <div class="foot">
+                <a class="sheet-link leg" href={`/work/${lead.id}/`}>
+                  Read case study<span class="vh">: {lead.data.title}</span>
+                </a>
+                <span class="qty">{lead.data.year}</span>
+              </div>
+            </article>
+          )}
+        </div>
+
+        <!-- The key: the ramp every tone on the page is drawn from, and the
+             notation every mark is read against. -->
+        <aside class="gauge" aria-label="Key">
+          <div class="gauge-bar" aria-hidden="true">
+          {
+            steps.map((i) => (
+              <div class="gauge-row">
+                <span class="n">{ZONE[i]}</span>
+                <span class="cell" style={`background:var(--g${i});--i:${i}`} />
+                <span class="role">{ROLE[i]}</span>
+              </div>
+            ))
+          }
+          </div>
+          <Notation />
+        </aside>
+      </div>
+
+      <!-- ---------------------------------------------------- sheet index -- -->
+      <section class="sheet-band" aria-labelledby="work-title">
+        <div class="sheet-band-grid">
+          <p class="leg">Index</p>
+          <div class="sheet-band-body">
+            <h2 class="sheet-band-title" id="work-title">Selected work</h2>
+            <p class="sheet-band-note">
+              Every sheet carries the same three fields, so one can be read
+              against another.
+            </p>
+
+            {/* With a single project the lead sheet is the whole index. */}
+            {rest.length > 0 && (
+              <div class="index">
+                {
+                  rest.map((project) => (
+                    <IndexRow
+                      project={project}
+                      number={sheetNumberOf(all, project.id)}
+                    />
+                  ))
+                }
+              </div>
+            )}
+
+            {/* Secondary: a ruled link, not a second instrument bar. The black
+                bar is kept for the one action the page exists for. */}
+            <a class="more-link" href="/work/">
+              <span class="more-label">See all work</span>
+              <span class="vh">, </span>
+              <span class="more-count">
+                {total} {total === 1 ? "project" : "projects"}
+              </span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ------------------------------------------------------- practice -- -->
+      <section class="sheet-band" aria-labelledby="background-title">
+        <div class="sheet-band-grid">
+          <p class="leg">Practice</p>
+          <div class="sheet-band-body practice">
+            <h2 class="sheet-band-title" id="background-title">Background</h2>
+            <p>
+              Product Engineer with a backend and product-oriented mindset,
+              across marketplace products, operational software, internal
+              tooling and automation. Based in Brazil, working remotely with
+              international teams.
+            </p>
+            <a class="more-link" href="/about/">
+              <span class="more-label">How I work</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      </main>
+
+      <!-- --------------------------------------------------------- closing -- -->
+      <footer class="closing">
+        <div class="closing-head">
+          <div>
+            <h2>Have a product or operations problem to solve?</h2>
+            <p class="sub">
+              Open to Product Engineering roles and contract work.
+            </p>
+          </div>
+          <a class="control" href="/contact/">
+            <span class="bar">Let's talk</span>
+            <span class="chip hatch" aria-hidden="true"></span>
+          </a>
+        </div>
+        {
+          reach.length > 0 && (
+            <ul class="reach" aria-label="Direct contact">
+              {reach.map((path) => (
+                <li>
+                  <a href={path.href} {...contactLinkAttrs(path.href)}>
+                    <span class="leg">{path.label}</span>
+                    <span class="vh">: </span>
+                    <span class="reach-v">{path.display}</span>
+                        {opensNewTab(path.href) && <span class="vh">{NEW_TAB}</span>}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )
+        }
+        <TitleBlock sheet="Home" />
+      </footer>
+    </div>
+  </body>
+</html>

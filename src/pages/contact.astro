@@ -1,0 +1,190 @@
+---
+import { getCollection } from "astro:content";
+import Masthead from "../components/Masthead.astro";
+import Meta from "../components/Meta.astro";
+import TitleBlock from "../components/TitleBlock.astro";
+import {
+  contactLinkAttrs,
+  contactPaths,
+  NEW_TAB,
+  opensNewTab,
+} from "../lib/contact";
+import "../styles/home.css";
+import "../styles/contact.css";
+
+/* One source for every way in, shared with the Home's closing band. The email
+   is the way most visitors take, so it leads at collision scale; the rest sit
+   in the title block beneath it. */
+const reach = contactPaths.filter((path) => path.href);
+const email = reach.find((path) => path.href.startsWith("mailto:"));
+const others = reach.filter((path) => path !== email);
+
+/* On a phone the address breaks before the @ and each half fills the line, so
+   it keeps its scale instead of shrinking to fit one row. */
+const [local, domain] = email
+  ? [
+      email.display.split("@")[0],
+      `@${email.display.split("@").slice(1).join("@")}`,
+    ]
+  : ["", ""];
+const splitChars = Math.max(local.length, domain.length);
+
+const total = (await getCollection("projects")).length;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link
+      rel="preload"
+      href="/fonts/archivo-var-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/plex-mono-400-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contact — Farrel</title>
+    <meta
+      name="description"
+      content="Reach Farrel, Product Engineer, by email, LinkedIn, GitHub or WhatsApp. Open to Product Engineering roles and contract work."
+    />
+    <Meta title="Contact — Farrel" description="Reach Farrel, Product Engineer, by email, LinkedIn, GitHub or WhatsApp. Open to Product Engineering roles and contract work." />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="sheet">
+      <Masthead current="contact" />
+
+      <main id="main">
+        <section class="contact-head" aria-labelledby="contact-title">
+          <p class="leg zone">Contact</p>
+          <div class="contact-intro">
+            <h1 class="disp contact-title" id="contact-title">Let's talk.</h1>
+            <p class="prose contact-sub">
+              Open to Product Engineering roles and contract work.
+            </p>
+          </div>
+          <dl class="spec">
+            <div class="row">
+              <dt class="leg">Role</dt>
+              <dd class="v">Product Engineer</dd>
+            </div>
+            <div class="row">
+              <dt class="leg">Status</dt>
+              <dd class="v">Available</dd>
+            </div>
+            <div class="row">
+              <dt class="leg">Location</dt>
+              <dd class="v">Brazil — remote</dd>
+            </div>
+          </dl>
+        </section>
+
+        <div class="contact-body">
+          <article class="contact-sheet" aria-labelledby="direct-title">
+            <div class="rh">
+              <h2 class="leg" id="direct-title">Direct</h2>
+            </div>
+
+            {
+              email && (
+                <div class="mail">
+                  <p class="leg k">Email</p>
+                  <a
+                    class="address"
+                    href={email.href}
+                    style={`--chars:${email.display.length};--chars-split:${splitChars}`}
+                  >
+                    <span class="addr-part">{local}</span><span class="addr-part">{domain}</span>
+                  </a>
+                  <div class="mail-actions">
+                    <a class="control" href={email.href}>
+                      <span class="bar">Write an email</span>
+                      <span class="chip hatch" aria-hidden="true" />
+                    </a>
+                    <button
+                      class="copy"
+                      type="button"
+                      data-copy={email.display}
+                      hidden
+                    >
+                      <span class="copy-label">Copy address</span>
+                    </button>
+                    <span class="vh" role="status" data-copy-status />
+                  </div>
+                </div>
+              )
+            }
+
+            {
+              others.length > 0 && (
+                <ul class="reach" aria-label="Other ways to reach Farrel">
+                  {others.map((path) => (
+                    <li>
+                      <a href={path.href} {...contactLinkAttrs(path.href)}>
+                        <span class="leg">{path.label}</span>
+                        <span class="vh">: </span>
+                        <span class="reach-v">{path.display}</span>
+                        {opensNewTab(path.href) && <span class="vh">{NEW_TAB}</span>}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )
+            }
+          </article>
+        </div>
+      </main>
+
+      <footer class="contact-foot">
+        <a class="more-link" href="/work/">
+          <span class="more-label">See all work</span>
+          <span class="vh">, </span>
+          <span class="more-count">
+            {total} {total === 1 ? "project" : "projects"}
+          </span>
+        </a>
+        <TitleBlock sheet="Contact" />
+      </footer>
+    </div>
+
+    <script>
+      /* Copy the address: the one interaction on this page. The control only
+         appears where the clipboard is available, and its result is spoken. */
+      const button = document.querySelector<HTMLButtonElement>("[data-copy]");
+      const status = document.querySelector("[data-copy-status]");
+      const label = button?.querySelector(".copy-label");
+
+      if (button && label && status && navigator.clipboard) {
+        button.hidden = false;
+        let reset: number | undefined;
+
+        button.addEventListener("click", async () => {
+          try {
+            await navigator.clipboard.writeText(button.dataset.copy ?? "");
+            button.dataset.state = "done";
+            label.textContent = "Copied";
+            status.textContent = "Email address copied";
+          } catch {
+            label.textContent = "Couldn't copy — select the address";
+            status.textContent = "Couldn't copy the address";
+          }
+          window.clearTimeout(reset);
+          reset = window.setTimeout(() => {
+            delete button.dataset.state;
+            label.textContent = "Copy address";
+            status.textContent = "";
+          }, 2400);
+        });
+      }
+    </script>
+  </body>
+</html>

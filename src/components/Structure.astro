@@ -1,0 +1,43 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+/* The delivered work's information architecture, drawn as a site plan: a
+   root and its branches on one trunk, in the sheet's hairline notation. */
+type Structure = NonNullable<CollectionEntry<"projects">["data"]["structure"]>;
+
+interface Props {
+  structure: Structure;
+  year: number;
+}
+
+const { structure, year } = Astro.props;
+---
+
+<figure class="structure" aria-labelledby="structure-title">
+  <h2 class="plan-h" id="structure-title">Structure</h2>
+  <div class="st-root">
+    <span class="st-mark" aria-hidden="true"></span>
+    <div>
+      <p class="st-root-title">{structure.root}</p>
+      {structure.note && <p class="st-note">{structure.note}</p>}
+    </div>
+  </div>
+  <ul class="st-branches">
+    {
+      structure.branches.map((branch, i) => (
+        <li class="st-branch" style={`--i:${i}`}>
+          <p class="st-title">{branch.title}</p>
+          {branch.note && <p class="st-note">{branch.note}</p>}
+          {branch.items && branch.items.length > 0 && (
+            <ul class="st-items">
+              {branch.items.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          )}
+        </li>
+      ))
+    }
+  </ul>
+  <figcaption class="plan-key">Site map of the delivered site, {year}</figcaption>
+</figure>
